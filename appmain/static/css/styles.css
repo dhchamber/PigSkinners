@@ -1,0 +1,427 @@
+BODY
+{
+    LEFT: 0px;
+    TOP: 0px;
+    FONT-FAMILY: Arial;
+}
+.left_nav
+{
+    BORDER-RIGHT: gold solid;
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.main_content
+{
+    BORDER-TOP: gold solid;
+    BORDER-BOTTOM: gold
+}
+.top_nav
+{
+    FONT-SIZE: larger;
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.top_nav_countdown
+{
+    FONT-SIZE: 9pt;
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+A:link
+{
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    COLOR: white;
+    TEXT-DECORATION: underline
+}
+.tdVisitorHeader
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: red
+}
+.tdHomeHeader
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: blue
+}
+.tdHomeContent
+{
+    FONT-WEIGHT: 600;
+    CURSOR: hand;
+    COLOR: blue
+}
+.tdVisitorContent
+{
+    FONT-WEIGHT: 600;
+    CURSOR: hand;
+    COLOR: red
+}
+.tdHidden
+{
+    VISIBILITY: hidden
+}
+.trPointsGame
+{
+    BACKGROUND-COLOR: silver
+}
+.home_content
+{
+}
+.tdViewSelected
+{
+    BORDER-RIGHT: black thin solid;
+    BORDER-TOP: black thin solid;
+    BORDER-LEFT: black thin solid;
+    BORDER-BOTTOM: black thin solid
+}
+.tdHeader_View
+{
+    FONT-WEIGHT: 600;
+    FONT-STYLE: italic
+}
+.txtVisitorScore
+{
+    WIDTH: 25px
+}
+.txtHomeScore
+{
+    WIDTH: 25px
+}
+.imgLogo
+{
+    BACKGROUND-COLOR: white
+}
+.divMenuLogo
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: gold;
+    FONT-FAMILY: Papyrus
+}
+.tblPointsGame
+{
+    FONT-SIZE: larger;
+    FONT-FAMILY: Papyrus
+}
+.tblWeeklyStats
+{
+    FONT-SIZE: 10pt
+}
+.tdWeeklyStatsTopRow
+{
+    BORDER-RIGHT: silver solid;
+    BORDER-TOP: silver solid;
+    BORDER-LEFT: silver solid;
+    COLOR: silver;
+    BORDER-BOTTOM: silver solid;
+    BACKGROUND-COLOR: red
+}
+.tblHomeContent
+{
+    FONT-SIZE: 14pt
+}
+.tblWinners
+{
+    BORDER-RIGHT: black thin solid;
+    BORDER-TOP: black thin solid;
+    BORDER-LEFT: black thin solid;
+    BORDER-BOTTOM: black thin solid;
+    BACKGROUND-COLOR: silver
+}
+.divWeekWinner
+{
+    BORDER-RIGHT: silver thin solid;
+    BORDER-TOP: silver thin solid;
+    BORDER-LEFT: silver thin solid;
+    BORDER-BOTTOM: silver thin solid
+}
+.tdNumGames
+{
+    BORDER-RIGHT: silver thin solid;
+    BORDER-TOP: silver thin solid;
+    BORDER-LEFT: silver thin solid;
+    BORDER-BOTTOM: silver thin solid
+}
+.tblOverallLeaders
+{
+    FONT-SIZE: 12pt
+}
+.left_nav2
+{
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.divLeftDynMenu
+{
+    CURSOR: hand
+}
+A.halloween:link
+{
+    COLOR: orange;
+    TEXT-DECORATION: none
+}
+A.halloween:visited
+{
+    COLOR: orange;
+    TEXT-DECORATION: none
+}
+A.halloween:hover
+{
+    COLOR: orange;
+    TEXT-DECORATION: underline
+}
+.left_nav_halloween
+{
+    BORDER-RIGHT: orange solid;
+    COLOR: orange;
+    BACKGROUND-COLOR: black
+}
+.left_nav2_halloween
+{
+    COLOR: orange;
+    BACKGROUND-COLOR: black
+}
+.divMenuLogo_halloween
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: orange;
+    FONT-FAMILY: Papyrus
+}
+.top_nav_halloween
+{
+    FONT-SIZE: larger;
+    COLOR: orange;
+    BACKGROUND-COLOR: black
+}
+.main_content_halloween
+{
+    BORDER-TOP: orange solid;
+    BORDER-BOTTOM: orange
+}
+A.christmas:link
+{
+    COLOR: #003300;
+    TEXT-DECORATION: none
+}
+A.christmas:visited
+{
+    COLOR: #003300;
+    TEXT-DECORATION: none
+}
+A.christmas:hover
+{
+    COLOR: #003300;
+    TEXT-DECORATION: underline
+}
+.left_nav_christmas
+{
+    BORDER-RIGHT: #003300 solid;
+    COLOR: #003300;
+    BACKGROUND-COLOR: #CC0000
+}
+.left_nav2_christmas
+{
+    COLOR: #003300;
+    BACKGROUND-COLOR: #CC0000
+}
+.divMenuLogo_christmas
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: #003300;
+    FONT-FAMILY: Papyrus
+}
+.top_nav_christmas
+{
+    FONT-SIZE: larger;
+    COLOR: #003300;
+    BACKGROUND-COLOR: #CC0000
+}
+.main_content_christmas
+{
+    BORDER-TOP: #003300 solid;
+    BORDER-BOTTOM: #003300
+}
+A.thanksgiving:link
+{
+    COLOR: orange;
+    TEXT-DECORATION: none
+}
+A.thanksgiving:visited
+{
+    COLOR: orange;
+    TEXT-DECORATION: none
+}
+A.thanksgiving:hover
+{
+    COLOR: orange;
+    TEXT-DECORATION: underline
+}
+.left_nav_thanksgiving
+{
+    BORDER-RIGHT: orange solid;
+    COLOR: orange;
+    BACKGROUND-COLOR: saddlebrown
+}
+.left_nav2_thanksgiving
+{
+    COLOR: orange;
+    BACKGROUND-COLOR: saddlebrown
+}
+.divMenuLogo_thanksgiving
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: orange;
+    FONT-FAMILY: Papyrus
+}
+.top_nav_thanksgiving
+{
+    FONT-SIZE: larger;
+    COLOR: orange;
+    BACKGROUND-COLOR: saddlebrown
+}
+.main_content_thanksgiving
+{
+    BORDER-TOP: orange solid;
+    BORDER-BOTTOM: orange
+}
+A.newyears:link
+{
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+A.newyears:visited
+{
+    COLOR: white;
+    TEXT-DECORATION: none
+}
+A.newyears:hover
+{
+    COLOR: white;
+    TEXT-DECORATION: underline
+}
+.left_nav_newyears
+{
+    BORDER-RIGHT: gold solid;
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.left_nav2_newyears
+{
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.divMenuLogo_newyears
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: larger;
+    COLOR: white;
+    FONT-FAMILY: Papyrus
+}
+.top_nav_newyears
+{
+    FONT-SIZE: larger;
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.main_content_newyears
+{
+    BORDER-TOP: gold solid;
+    BORDER-BOTTOM: gold
+}
+.borderedTable {
+	BORDER-RIGHT: #d7dfed 1px solid;
+    BORDER-TOP: #d7dfed 1px solid;
+    BORDER-LEFT: #d7dfed 1px solid;
+    BORDER-BOTTOM: #d7dfed 1px solid;
+}
+.borderTableHeader {
+ 	BACKGROUND-COLOR: #d7dfed;
+ 	TEXT-ALIGN: center;
+ 	FONT-WEIGHT: bolder;
+ 	FONT-SIZE: 12pt;
+}
+.top_nav_countdown_newyears
+{
+    FONT-SIZE: 9pt;
+    COLOR: white;
+    BACKGROUND-COLOR: darkgreen
+}
+.top_nav_countdown_thanksgiving
+{
+    FONT-SIZE: 9pt;
+    COLOR: orange;
+    BACKGROUND-COLOR: saddlebrown
+}
+.top_nav_countdown_christmas
+{
+    FONT-SIZE: 9pt;
+    COLOR: #003300;
+    BACKGROUND-COLOR: #CC0000
+}
+.top_nav_countdown_halloween
+{
+    FONT-SIZE: 9pt;
+    COLOR: orange;
+    BACKGROUND-COLOR: black
+}
+.countdown_clock
+{
+    BACKGROUND-COLOR: black;
+    BORDER-RIGHT: gold 2px solid;
+    BORDER-TOP: gold 2px solid;
+    BORDER-LEFT: gold 2px solid;
+    BORDER-BOTTOM: gold 2px solid;
+}
+.countdown_clock_newyears
+{
+    BACKGROUND-COLOR: black;
+    BORDER-RIGHT: gold 2px solid;
+    BORDER-TOP: gold 2px solid;
+    BORDER-LEFT: gold 2px solid;
+    BORDER-BOTTOM: gold 2px solid;
+}
+.countdown_clock_thanksgiving
+{
+    BACKGROUND-COLOR: black;
+    BORDER-RIGHT: orange 2px solid;
+    BORDER-TOP: orange 2px solid;
+    BORDER-LEFT: orange 2px solid;
+    BORDER-BOTTOM: orange 2px solid;
+}
+.countdown_clock_halloween
+{
+    BACKGROUND-COLOR: black;
+    BORDER-RIGHT: orange 2px solid;
+    BORDER-TOP: orange 2px solid;
+    BORDER-LEFT: orange 2px solid;
+    BORDER-BOTTOM: orange 2px solid;
+}
+.countdown_clock_christmas
+{
+    BACKGROUND-COLOR: black;
+    BORDER-RIGHT: #003300 2px solid;
+    BORDER-TOP: #003300 2px solid;
+    BORDER-LEFT: #003300 2px solid;
+    BORDER-BOTTOM: #003300 2px solid;
+}
+.countdown_clock_alert
+{
+    BACKGROUND-COLOR: black;
+    BORDER-RIGHT: red 2px solid;
+    BORDER-TOP: red 2px solid;
+    BORDER-LEFT: red 2px solid;
+    BORDER-BOTTOM: red 2px solid;
+}

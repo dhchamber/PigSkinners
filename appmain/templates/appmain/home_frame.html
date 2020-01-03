@@ -1,0 +1,113 @@
+{% load static %}
+<html>
+
+<head>
+    <meta NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+    <link rel="stylesheet" type="text/css" href="includes/styles.css" />
+    <title>Doug, Welcome to the Football Pool!</title>
+</head>
+
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="home_content" id="tblContent" name="tblContent">
+        <tr>
+            <td colspan="2" align="center"></td>
+            <tr>
+                <tr>
+                    <td width="15px">&nbsp;</td>
+                    <td align="center">
+                        <table cellpadding="0" cellspacing="0" border="0" bgcolor="white" width="100%">
+                            <tr>
+                                <td width="30%" align="center" valign="top">
+                                    <img src='images/blank.jpg' height='72px' border='0'>
+                                    <br>
+                                    <br>
+                                    <font size="+2"><b>Week 16</b></font>
+                                    <br>
+                                    <br>
+                                    <font size="+1">Pick Status: </font>
+                                    <font size="+2" color="green"><b>OPEN</b></font>
+                                </td>
+                                <td width="40%" align="center">
+                                    <font size=-1>All times are in Mountain Standard Time (MST)</font>
+                                    <br>
+                                    <img class="imgLogo" id="imgLogo" name="imgLogo" src="{% static 'blog/PigSkinners_Logo.gif' %}" WIDTH="367" HEIGHT="196">
+                                    <br>
+                                    <!--this is to make sure the gif is downloaded by the time we need it-->
+                                    <img id="hidExplode" name="hidExplode" width="0px" src="images/HomePage/explosion.gif" style="visibility:hidden">
+                                </td>
+                                <td width="30%" align="center" valign="top">
+                                    <img src='images/blank.jpg' height='72px' border='0'>
+                                    <br>
+                                    <br><font size=+1>This week's picks will be closed at: </font><font size=+2><br>Sunday 10:00 AM</font>&nbsp;
+                                    <div id="countdown" style="visibility: hidden">
+                                        <table cellpadding="0" cellspacing="0" class="countdown_clock_christmas">
+                                            <tr>
+                                                <td colspan="3">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5px">&nbsp;</td>
+                                                <td><img id="counter_day1" /><img id="counter_day2" /><img id="counter_divider1" src="images/counter/dgc.gif" /><img id="counter_hour1" /><img id="counter_hour2" /><img id="counter_divider2" src="images/counter/dgc.gif" /><img id="counter_minute1" /><img id="counter_minute2" /><img id="counter_divider3" src="images/counter/dgc.gif" /><img id="counter_second1" /><img id="counter_second2" /></td>
+                                                <td width="5px">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=3 align=center>
+                                    <table cellpadding=0 cellspacing=0 border=0 class='tblHomeContent'>
+                                        <tr>
+                                            <td align=center><b>Congratulations to last week's winner:</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td align=center>Heidi Lowe</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td align=center>
+                                                <table cellpadding=0 cellspacing=0 border=0 class=tblOverallLeaders>
+                                                    <tr>
+                                                        <td align=center><b>Current Overall Leader:<b></td></tr><tr><td align=center>Adrian Feijoo</td></tr></table></td></tr></table></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+
+<div id="divPointsGameText" name="divPointsGameText" STYLE="position:absolute;visibility:hidden;width=512px;-moz-opacity:1%;filter:alpha(opacity=1)">
+<table border="0" cellspacing="0" cellpadding="2" width="100%" class="tblPointsGame">
+	<tr>
+		<td align="center">
+			This Week's Points Game:
+		</td>
+	</tr>
+	<tr>
+		<td align="center"><font size="+1"><b>Green Bay Packers vs. Minnesota Vikings</b></font>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center">Monday 6:15 PM</td>
+                                                    </tr>
+                                                </table>
+                                                </div>
+
+                                                <div id="divHomeHelmet" name="divHomeHelment" STYLE="position:absolute;top:450px;left:812px;visibility:hidden;">
+                                                    <table border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td>
+                                                                <img src="images/Helmets/h_h_min.gif" alt border="0" onclick="javascript: playGraphics();">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+</body>
+
+</html>

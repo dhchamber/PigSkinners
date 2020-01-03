@@ -1,0 +1,35 @@
+<!-- templates/registration/login.html -->
+{% extends 'blog/base.html' %}
+{% block content %}
+	<div id="divLoginContent" name="divLoginContent">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td align="center"><b><font size="+3" face="garamond">Football Fun For The Whole Family!</font></b></td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="15px">&nbsp;</td>
+					<td width="450px" align="center">
+						<!--Page content-->
+                        <h2>Login</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Login</button>
+                        </form>
+					</td>
+        </table>
+	</div>
+{% endblock %}
