@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="" />
+    <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_revisions.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_revisions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/post_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1VduX9iEq4oNzIgjupVWEjJul4v" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,7 +35,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../ps2" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -51,6 +73,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="740" y="297" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578012097165" />
+    <state x="463" y="185" key="SettingsEditor" timestamp="1578101449512">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="463" y="185" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578101449512" />
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1578011416398">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

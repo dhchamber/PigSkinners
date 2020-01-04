@@ -5,24 +5,89 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+		<title>{% block title %}PigSkinners{% endblock title %}</title>
 	</head>
 	<body>
 		<header>
+ 			<div class = "container">
+				<div class = "row">
+					<div class = "col-3">
+			<!-- Just an image -->
+			  <a class="navbar-brand navbar-dark bg-primary" href="/"><img class="fit-picture" align="top" src="{% static 'appmain/logo/PigSkinners_Logo_sm.gif' %}" alt="PigSkinners Logo"></a>
+					</div>
+					<div class = "col">
+			<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+				  <li class="nav-item active">
+					<a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="picks/view">Picks</a>
+				  </li>
+				  <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Standings
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					  <a class="dropdown-item" href="picks/view">Weekly Standings</a>
+					  <a class="dropdown-item" href="picks/view">Season Standings</a>
+					  <a class="dropdown-item" href="picks/view">KOTH Standings</a>
+					  <a class="dropdown-item" href="picks/view">BATC Standings</a>
+					  <div class="dropdown-divider"></div>
+					  <a class="dropdown-item" href="picks/view">Post Season Standings</a>
+					</div>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="admin/" tabindex="-1" aria-disabled="true">Administration</a>
+				  </li>
+				</ul>
+				  <span class="navbar-text">
+					Current User: {{ user.username }}
+				  </span>
+				<form class="form-inline my-2 my-lg-0" method="post", action="{% url 'logout' %}">
+<!--				  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+					{% csrf_token %}
+				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+				</form>
+			  </div>
+			</nav>
+					</div>
+				</div>
+		  </div>
 		</header>
 
+<!--
+		<div id="divMenuLogo" name="divMenuLogo" class="divMenuLogo" STYLE="position:absolute;top:100px;left:5px;visibility:visible;">
+			<table>
+				<tr>
+					<td width="5px">&nbsp;</td>
+					<td align="center"><img alt border="0" src="{% static 'appmain/football_spinning_text.gif' %}"></td>
+				</tr>
+			</table>
+		</div>
+-->
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<section>
-   						{% block content %}
-    					{% endblock %}
+						{% block content %}
+						{% endblock %}
 					</section>
 				</div>
 			</div>
 		</div>
 
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>

@@ -1,9 +1,32 @@
 <!-- templates/home.html -->
 {% extends 'appmain/base.html' %}
+{% load static %}
 
 {% block content %}
     {% if user.is_authenticated %}
-      <br><font size=+1>This week's picks will be closed at: Hi {{ user.username }}!</font>
+		<div class="container">
+            {% for week in weeks %}
+		    <div class="row">
+                <div class="col-sm">
+                    <p>Week Number: {{ week.id }}</p>
+                    <p>Pick Status: {{ week.closed_by }}</p>
+                </div>
+                <div class="col-sm">
+                    This week's picks will be closed at: {{ week.forecast_date_closed }}
+                </div>
+            </div>
+            {% endfor %}
+		    <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <img id="counter_day1" /><img id="counter_day2" /><img id="counter_divider1" src="{% static 'appmain/counter/dgc.gif' %}" /><img id="counter_hour1" /><img id="counter_hour2" /><img id="counter_divider2" src="{% static 'appmain/counter/dgc.gif' %}" /><img id="counter_minute1" /><img id="counter_minute2" /><img id="counter_divider3" src="{% static 'appmain/counter/dgc.gif' %}" /><img id="counter_second1" /><img id="counter_second2" />
+                </div>
+            </div>
+		    <div class="row justify-content-md-center">
+                <div class="col-md-auto">
+                    <iframe id="frContent" name="frContent" src="http://www.pigskinners.com/Home.asp" width="100%" height="100%" frameborder="1" marginwidth="0" marginheight="0"></iframe>
+                </div>
+            </div>
+        </div>
     {% else %}
       <p>You are not logged in</p>
       <a href="{% url 'login' %}">login</a>
