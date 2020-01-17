@@ -1,0 +1,26 @@
+{% extends "appmain/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Make Picks{% endblock title %}
+
+{% block content %}
+    <h1>Make your picks for the week</h1>
+    {% if submitted %}
+        <p class="success">
+            Your pick was submitted successfully. Thank you.
+        </p>
+
+    {% else %}
+<!--        <form action="" method="post" novalidate>  &lt;!&ndash; why no action value?  novalidate ?&ndash;&gt;-->
+        <form action="" method="post" >  <!-- why no action value?  novalidate ?-->
+            <table>
+    <!--             {{ form|crispy }}-->
+                    {{ form }}
+                <tr>
+    <!--                <td>&nbsp;</td>-->
+                    <td><input type="submit" value="Save Picks"></td>
+                </tr>
+            </table>
+            {% csrf_token %}
+        </form>
+    {% endif %}
+{% endblock content %}

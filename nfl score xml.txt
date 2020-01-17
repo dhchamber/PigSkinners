@@ -1,0 +1,51 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+during SF MIN game.  no score shown   Why?
+<ss>
+<gms gd="0" w="19" y="2019" t="P">
+<g eid="2020011100" gsis="58160" d="Sat" t="4:35" q="P" k="" h="SF" hnn="49ers" hs="" v="MIN" vnn="vikings" vs="" p="" rz="" ga="" gt="DIV"/>
+<g eid="2020011101" gsis="58161" d="Sat" t="8:15" q="P" k="" h="BAL" hnn="ravens" hs="" v="TEN" vnn="titans" vs="" p="" rz="" ga="" gt="DIV"/>
+<g eid="2020011200" gsis="58162" d="Sun" t="3:05" q="P" k="" h="KC" hnn="chiefs" hs="" v="HOU" vnn="texans" vs="" p="" rz="" ga="" gt="DIV"/>
+<g eid="2020011201" gsis="58163" d="Sun" t="6:40" q="P" k="" h="GB" hnn="packers" hs="" v="SEA" vnn="seahawks" vs="" p="" rz="" ga="" gt="DIV"/>
+</gms>
+</ss>
+
+http://www.nfl.com/liveupdate/scorestrip/ss.xml
+
+http://www.nfl.com/liveupdate/scorestrip/postseason/ss.xml
+
+from post season live update during SF MIN game
+q = Quarter
+k = game clock
+p = possession
+n = NBC TV carrier
+rz=1 = red zone
+o=8 = ball on 8 ?
+ga = TD = score?
+
+hs and vs are up to date
+
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<ss>
+<gms w="19" y="2019" t="POST" gd="1" bf="1" bph="0">
+<g eid="2020010400" gsis="58156" d="Sat" t="4:35" q="FO" htn="Houston Texans" hnn="texans" h="HOU" hs="22" vtn="Buffalo Bills" vnn="bills" v="BUF" vs="19" n="ESPN" rz="0" ga="" o="1" gt="WC"/>
+<g eid="2020010401" gsis="58157" d="Sat" t="8:15" q="F" htn="New England Patriots" hnn="patriots" h="NE" hs="13" vtn="Tennessee Titans" vnn="titans" v="TEN" vs="20" n="CBS" rz="0" ga="" o="2" gt="WC"/>
+<g eid="2020011101" gsis="58161" d="Sat" t="8:15" q="P" htn="Baltimore Ravens" hnn="ravens" h="BAL" hs="0" vtn="Tennessee Titans" vnn="titans" v="TEN" vs="0" n="CBS" rz="0" ga="" o="3" gt="DIV"/>
+<g eid="2020011200" gsis="58162" d="Sun" t="3:05" q="P" htn="Kansas City Chiefs" hnn="chiefs" h="KC" hs="0" vtn="Houston Texans" vnn="texans" v="HOU" vs="0" n="CBS" rz="0" ga="" o="4" gt="DIV"/>
+<g eid="2020011900" gsis="58164" d="Jan 19" t="3:05" q="P" hnn="" h="TBD" hs="0" vnn="" v="TBD" vs="0" n="CBS" rz="0" ga="" o="5" gt="CON"/>
+<g eid="2020011901" gsis="58165" d="Jan 19" t="6:40" q="P" hnn="" h="TBD" hs="0" vnn="" v="TBD" vs="0" n="FOX" rz="0" ga="" o="6" gt="CON"/>
+<g eid="2020011201" gsis="58163" d="Sun" t="6:40" q="P" htn="Green Bay Packers" hnn="packers" h="GB" hs="0" vtn="Seattle Seahawks" vnn="seahawks" v="SEA" vs="0" n="FOX" rz="0" ga="" o="7" gt="DIV"/>
+<g eid="2020011100" gsis="58160" d="Sat" t="4:35" q="2" k="10:49" htn="San Francisco 49ers" hnn="49ers" h="SF" hs="7" vtn="Minnesota Vikings" vnn="vikings" v="MIN" vs="7" p="SF" n="NBC" rz="0" ga="" o="8" gt="DIV"/>
+<g eid="2020010501" gsis="58159" d="Sun" t="4:40" q="F" htn="Philadelphia Eagles" hnn="eagles" h="PHI" hs="9" vtn="Seattle Seahawks" vnn="seahawks" v="SEA" vs="17" n="NBC" rz="0" ga="" o="9" gt="WC"/>
+<g eid="2020010500" gsis="58158" d="Sun" t="1:05" q="FO" htn="New Orleans Saints" hnn="saints" h="NO" hs="20" vtn="Minnesota Vikings" vnn="vikings" v="MIN" vs="26" n="FOX" rz="0" ga="" o="10" gt="WC"/>
+<g eid="2020012600" gsis="58167" d="Jan 26" t="3:00" q="P" htn="AFC Pro Bowl Team" hnn="afc pro bowl" h="AFC" hs="0" vtn="NFC Pro Bowl Team" vnn="nfc pro bowl" v="NFC" vs="0" n="ESPN" rz="0" ga="" o="11" gt="PRO"/>
+<g eid="2020020200" gsis="58166" d="Feb 2" t="6:30" q="P" hnn="" h="TBD" hs="0" vnn="" v="TBD" vs="0" n="FOX" rz="0" ga="" o="12" gt="SB"/>
+</gms>
+<gds>
+<gd eid="2020010400" gsis="58156" h1q="0" h2q="0" h3q="8" h4q="11" hot="3" v1q="7" v2q="6" v3q="3" v4q="3" vot="0" htol="2" vtol="1"/>
+<gd eid="2020010401" gsis="58157" h1q="3" h2q="10" h3q="0" h4q="0" hot="0" v1q="7" v2q="7" v3q="0" v4q="6" vot="0" htol="0" vtol="0"/>
+<gd eid="2020011101" gsis="58161" h1q="0" h2q="0" h3q="0" h4q="0" hot="0" v1q="0" v2q="0" v3q="0" v4q="0" vot="0" htol="3" vtol="3"/>
+<gd eid="2020011100" gsis="58160" h1q="7" h2q="0" h3q="0" h4q="0" hot="0" v1q="7" v2q="0" v3q="0" v4q="0" vot="0" htol="2" vtol="3" dad="1st &amp; 10" yl="MIN 41"/>
+<gd eid="2020010501" gsis="58159" h1q="0" h2q="3" h3q="6" h4q="0" hot="0" v1q="3" v2q="7" v3q="7" v4q="0" vot="0" htol="0" vtol="2"/>
+<gd eid="2020010500" gsis="58158" h1q="3" h2q="7" h3q="0" h4q="10" hot="0" v1q="3" v2q="10" v3q="7" v4q="0" vot="6" htol="3" vtol="2"/>
+</gds>
+</ss>

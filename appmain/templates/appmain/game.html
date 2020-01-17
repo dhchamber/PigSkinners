@@ -1,0 +1,39 @@
+{# tutorial/templates/tutorial/people.html #}
+{% extends "appmain/base.html" %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+{% block title %}List of Games{% endblock title %}
+
+{% block content %}
+    <form action="#" method="POST">
+        {% csrf_token %}
+        <input type="text" value="2019" name="txtYear" size="1"/>
+        <input type="submit" class="btn" value="Load Season" name="btnLoadSeason">
+        <input type="submit" class="btn" value="Load Weeks" name="btnLoadWeek">
+        <input type="submit" class="btn" value="Load Live" name="btnLoadLive">
+    </form>
+
+<!--    {% if games %}-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">Date/Time</div>
+            <div class="col-sm-1">Home</div>
+            <div class="col-sm-1">Score</div>
+            <div class="col-sm-1">Visitor</div>
+            <div class="col-sm-1">Score</div>
+            <div class="col-sm-1">Status</div>
+        </div>
+        {% for game in games %}
+            <div class="row">
+                <div class="col-sm-3">{{ game.day }} {{ game.get_date }}</div>
+                <div class="col-sm-1">{{ game.home }}</div>
+                <div class="col-sm-1">{{ game.home_score }}</div>
+                <div class="col-sm-1">{{ game.visitor }}</div>
+                <div class="col-sm-1">{{ game.visitor_score }}</div>
+                <div class="col-sm-1">{{ game.status }}</div>
+            </div>
+        {% endfor %}
+    </div>
+<!--    {% else %}-->
+<!--        <p>There are no games for the week</p>-->
+<!--    {% endif %}-->
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'appmain/new_base.html' %}
+{% block content %}
+    <div class="container-fluid text-center">
+        <div class="row">
+            <div class="col-sm-3">Team Name</div>
+            <div class="col-sm-1">Short Name</div>
+            <div class="col-sm-1">Team Abbreviation</div>
+            <div class="col-sm-1">Division</div>
+            <div class="col-sm-1">Logo File Name</div>
+            <div class="col-sm-1">Logo</div>
+            <div class="col-sm-1">Wins</div>
+            <div class="col-sm-1">Losses</div>
+            <div class="col-sm-1">Ties</div>
+            <div class="col-sm-1">Conference</div>
+<!--            <div class="col-sm-1">City Name</div>-->
+<!--            <div class="col-sm-1">Web Address</div>-->
+        </div>
+        {% for team in teams %}
+            <div class="row">
+                <div class="col-sm-3">{{ team.team_name }}</div>
+                <div class="col-sm-1">{{ team.short_name }}</div>
+                <div class="col-sm-1">{{ team.team_abbrev }}</div>
+                <div class="col-sm-1">{{ team.division }}</div>
+                <div class="col-sm-1">{{ team.logo_file_name }}</div>
+                <div class="col-sm-1">Logo Image</div>
+                <div class="col-sm-1">{{ team.win }}</div>
+                <div class="col-sm-1">{{ team.lose }}</div>
+                <div class="col-sm-1">{{ team.tie }}</div>
+                <div class="col-sm-1">{{ team.conference }}</div>
+<!--                <div class="col-sm-1">{{ team.city_name }}</div>-->
+<!--                <div class="col-sm-1">{{ team.web_address }}</div>-->
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

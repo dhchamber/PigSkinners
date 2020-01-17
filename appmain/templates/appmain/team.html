@@ -1,0 +1,7 @@
+{# tutorial/templates/tutorial/people.htm #}
+{% extends 'appmain/new_base.html' %}
+{% load render_table from django_tables2 %}
+{% block content %}
+    <!--    {% render_table object_list %}-->
+    {% render_table table %}
+{% endblock %}
