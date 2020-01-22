@@ -1,9 +1,9 @@
 # \myclub_root\events\forms.py
 from django import forms
-from django.forms import ModelForm # events
+from django.forms import ModelForm, inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Pick  # events
+from .models import Pick, PickGame
 
 
 class SignUpForm(UserCreationForm):
@@ -19,6 +19,26 @@ class SignUpForm(UserCreationForm):
 
 class PickForm(ModelForm):
     required_css_class = 'required'
+
     class Meta:
         model = Pick
+        widgets = {'user': forms.HiddenInput, 'wk': forms.HiddenInput, 'entered_by': forms.HiddenInput, 'updated_by': forms.HiddenInput}
         fields = '__all__'
+
+    # def clean(self):
+
+
+class PickGameForm(ModelForm):
+    required_css_class = 'required'
+
+    class Meta:
+        model = PickGame
+        # widgets = {'user': forms.HiddenInput, 'wk': forms.HiddenInput, 'entered_by': forms.HiddenInput, 'updated_by': forms.HiddenInput}
+        fields = '__all__'
+
+class GamePick(ModelForm):
+    class Meta:
+        model = PickGame
+        exclude = ()
+
+GamePickFormSet = inlineformset_factory(Pick, PickGame, form = GamePick, extra = 1)

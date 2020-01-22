@@ -1,7 +1,185 @@
-{% extends 'appmain/base.html' %}
+{% extends "appmain/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load tz %}
+{% block title %}Make Picks{% endblock title %}
 {% block content %}
-    <section>
-        <h1>Pig Skinners</h1>
-        <p>Make picks page</p>
-    </section>
-{% endblock %}
+<script src="{% static 'appmain/js/picks_make.js' %}" ></script>
+
+{% if submitted %}
+    <p class="success">Your pick was submitted successfully. Thank you.</p>
+{% else %}
+<!--        <form action="" method="post" novalidate>  &lt;!&ndash; why no action value?  novalidate ?&ndash;&gt;-->
+        <div class="col-sm-1 container-fluid text-center">
+          <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <form action="/action/week/" method="get" >
+                    <p><button type="submit" value=1 name="btnSetWeek1">Week&nbsp;1</button></p>
+                    <p><button type="submit" value=2 name="btnSetWeek2">Week&nbsp;2</button></p>
+                    <p><button type="submit" value=3 name="btnSetWeek3">Week&nbsp;3</button></p>
+                    <p><button type="submit" value=4 name="btnSetWeek4">Week&nbsp;4</button></p>
+                    <p><button type="submit" value=5 name="btnSetWeek5">Week&nbsp;5</button></p>
+                    <p><button type="submit" value=6 name="btnSetWeek6">Week&nbsp;6</button></p>
+                    <p><button type="submit" value=7 name="btnSetWeek7">Week&nbsp;7</button></p>
+                    <p><button type="submit" value=8 name="btnSetWeek8">Week&nbsp;8</button></p>
+                    <p><button type="submit" value=9 name="btnSetWeek9">Week&nbsp;9</button></p>
+                    <p><button type="submit" value=10 name="btnSetWeek10">Week&nbsp;10</button></p>
+                    <p><button type="submit" value=11 name="btnSetWeek11">Week&nbsp;11</button></p>
+                    <p><button type="submit" value=12 name="btnSetWeek12">Week&nbsp;12</button></p>
+                    <p><button type="submit" value=13 name="btnSetWeek13">Week&nbsp;13</button></p>
+                    <p><button type="submit" value=14 name="btnSetWeek14">Week&nbsp;14</button></p>
+                    <p><button type="submit" value=15 name="btnSetWeek15">Week&nbsp;15</button></p>
+                    <p><button type="submit" value=16 name="btnSetWeek16">Week&nbsp;16</button></p>
+                    <p><button type="submit" value=17 name="btnSetWeek17">Week&nbsp;17</button></p>
+                    <p><button type="submit" value="PostSeason" name="btnSetWeekPS">Post Season</button></p>
+                </form>
+            </div>
+		  </div>
+		</div>
+            <div class="row content">
+                <div class="col-sm-10 text-center bg-primary text-white">
+    <table width="100%" cellpadding="0" cellspacing="0" border="1" height="100%">
+        <tr>
+            <td valign="top" align="left">
+                <table cellpadding="0" cellspacing="0" border="1" width="100%">
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                    <tr>
+                    <tr>
+<!--                        <td width="15px">&nbsp;</td>-->
+                        <td align="center">
+                            <form method="POST" name="frmPicks" action="/picks/make/">
+                                {% csrf_token %}
+                                <table cellpadding="0" cellspacing="0" border="2" width="100%" >
+                                    <tr>
+<!--                                        <td width="150px" valign="top">-->
+<!--                                            <table name="tblErrorMsg" id="tblErrorMsg" cellpadding="0" cellspacing="0"-->
+<!--                                                   border="0" width="100%" style="display:none" >-->
+<!--                                                <tr>-->
+<!--                                                    <td colspan="2"><b><font color="red">Please correct the following errors:</font></b>-->
+<!--                                                </tr>-->
+<!--                                                <tr>-->
+<!--                                                    <td>&nbsp;</td>-->
+<!--                                                    <td><font id="errMsg" name="errMsg" color="red"></font></td>-->
+<!--                                            </table>-->
+<!--                                        </td>-->
+                                        <td>
+                                            <table cellpadding="0" cellspacing="0" border="0" name="tblPicks" id="tblPicks" align="center">
+                                                <tr dataRow="false">
+                                                    <td colspan="9" align="center">
+                                                        <font size="+1" ><b>Picks for week {{ pick.wk }}  &nbsp;</b></font>
+                                                        <input type="hidden" name="hidPickID" id="hidPickID" style="color: blue;" value="{{ pick.id }}">
+                                                    </td>
+                                                </tr>
+                                                <tr dataRow="false">
+                                                    <td colspan="9" align="center">
+                                                        <font size="+1"><b>{{ pick.wk.date_range }}&nbsp;</b></font>
+                                                    </td>
+                                                </tr>
+    <!--                                            <%If iUserAccessLvl <= cgAdminAccessLvl Then%>-->
+                                                <tr dataRow="false">
+                                                    <td colspan="9" align="center">
+                                                        <font size="+1"><b>For user: {{ pick.user }}&nbsp;</b></font>
+                                                    </td>
+                                                </tr>
+    <!--                                            <%Else%>-->
+<!--                                                <tr dataRow="false">-->
+<!--                                                    <td colspan="9">&nbsp;</td>-->
+<!--                                                </tr>-->
+    <!--                                            <%End If%>-->
+                                                <tr dataRow="false">
+                                                    <td colspan="9">&nbsp;</td>
+                                                </tr>
+                                                <tr dataRow="false">
+                                                    <td colspan="9" align="center"><input type="button" id="btnRandom" name="btnRandom" value="Select Random Picks"  style="color: blue;"  onclick="selectRandomPicks();"/>
+                                                    </td>
+                                                </tr>
+                                                <tr dataRow="false">
+                                                    <td colspan="9">&nbsp;</td>
+                                                </tr>
+                                                <tr dataRow="false">
+                                                    <td align="center">Game</td>
+                                                    <td width="15px">&nbsp;</td>
+                                                    <td class="tdVisitorHeader" align="center" colspan="2">Visitor</td>
+                                                    <td width="15px">&nbsp;</td>
+                                                    <td class="tdHomeHeader" align="center" colspan="2">Home</td>
+                                                    <td width="15px">&nbsp;</td>
+                                                    <td align="center">Time</td>
+                                                </tr>
+                                                {% for pick_game in pick.pickgame_set.all %}
+                                                    <tr>
+        <!--                                            <%if kothOnly = "true" then%>class="trPointsGame"<%end if%>-->
+        <!--                                            id="<%=sScheduleID%>" name="<%=sScheduleID%>" scheduleID="<%=sScheduleID%>"-->
+        <!--                                            dataRow="true" >-->
+        <!--                                            <%end If%>-->
+                                                        <td align="center">{{ forloop.counter }}</td>
+                                                        <td>&nbsp;&nbsp;</td>
+                                                        <td class="tdVisitorContent"><img src="{% static pick_game.game.visitor_team.logo_file_name %}" width="25px" >&nbsp;</td>
+                                                        <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.visitor_team.id }}" href="#" team="{{ pick_game.game.visitor_team.id }}"><font color="white">{{ pick_game.game.visitor_team.team_name }}</font></a></td>
+<!--                                                        <td onclick="javascript:selectTD(this, false);"-->
+<!--                                                            onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this));"-->
+<!--                                                            teamID="ARI" valign="center" class="tdVisitorContent"-->
+<!--                                                            id="<%=sVisitorSelected & sVisitorTeamID%>"-->
+<!--                                                            name="<%=sVisitorSelected & sVisitorTeamID%>">-->
+<!--                                                            {{ pick_game.game.visitor_team.team_name }}</a></td>-->
+                                                        <td>&nbsp;</td>
+<!--                                                        <td onclick="javascript:selectTD(this, false);"-->
+<!--                                                            onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this));"-->
+<!--                                                            teamID="<%=sHomeTeamID%>" valign="center" class="tdHomeContent"-->
+<!--                                                            id="<%=sHomeSelected & sHomeTeamID%>"-->
+<!--                                                            name="<%=sHomeSelected & sHomeTeamID%>">-->
+<!--                                                            {{ pick_game.game.home_team.team_name }}&nbsp;-->
+<!--                                                        </td>-->
+                                                        <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.home_team.id }}" href="#" team="{{ pick_game.game.home_team.id }}"><font color="white">{{ pick_game.game.home_team.team_name }}</font></a></td>
+                                                        <td class="tdHomeContent"><img width="25px" src="{% static pick_game.game.home_team.logo_file_name %}"></td>
+                                                        <td>&nbsp;</td>
+                                                        <td><input type="hidden" name="Selected{{ forloop.counter }}" id="Selected{{ forloop.counter }}" style="color: blue;" ></td>
+                                                        <td>{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date }}</td>
+                                                    </tr>
+                                                {% endfor %}
+
+                                                <tr dataRow="false">
+                                                    <td align="center" colspan="2"><font size="+1" face="wingdings">Ä</font></td>
+                                                    <td colspan="4" align="left" style="color: blue;">Points Game Total:&nbsp;
+                                                        <input type="text" name="txtPointsTotal" style="color: blue;" value="{{ pick.points }}">
+                                                    </td>
+                                                </tr>
+                                                {% if 1 == 1 %}
+                                                    <tr dataRow="false">
+                                                        <td colspan="9">&nbsp;</td>
+                                                    </tr>
+                                                    <tr dataRow="false">
+                                                        <td colspan="9" align="center"><font size="+1"><b>King of the Hill pick:</b></font></td>
+                                                    </tr>
+                                                    <tr dataRow="false">
+                                                        <td colspan="9" align="center">
+                                                            <select name="cboKingOfHillPick" id="cboKingOfHillPick" style="color: blue;">
+                                                                <option value=""></option>
+                                                                {% for team in pick.koth_remaining %}
+                                                                    <option value="{{ team.id }}" style="color: blue;">{{ team.team_name }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr dataRow="false">
+                                                        <td colspan="9">&nbsp;</td>
+                                                    </tr>
+                                                {% endif %}
+                                                <tr dataRow="false">
+                                                    <td colspan="9" style="color: blue;" align="center"><input name="btnSavePicks" id="btnSavePicks" type="submit" value="Save Picks" ></td>
+                                                </tr>
+                                            </table>
+                                            <input type="hidden" name="hidPointsGameTotal" id="hidPointsGameTotal" value="<%=sHiddenPointsGamePoints%>">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+                </div></div>
+{% endif %}
+{% endblock content %}

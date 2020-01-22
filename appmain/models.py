@@ -1,10 +1,12 @@
 from django.db import models
+from django.db.models import Max, Min
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-# from django.utils import timezone
+from django.utils import timezone
+from django.utils.timezone import make_aware
 from datetime import datetime
 import pytz
 
@@ -31,6 +33,9 @@ class Team(models.Model):
     tie = models.SmallIntegerField()
     conference = models.CharField(max_length=50)
     city_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.team_name
 
 
 class Profile(models.Model):
@@ -67,6 +72,9 @@ class Season(models.Model):
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
 
+    def __str__(self):
+        return self.yr
+
 
 #TODO: start and end are not needed or can be compputed from Game model on the fly as min max of date/time
 #TODO: as can forecast date closed, but maybe better to calc and store in table
@@ -87,6 +95,17 @@ class Week(models.Model):
     mobile_standings_report_ran = models.BooleanField(default=False)
     mobile_weekly_standings_html = models.TextField()
 
+    def __str__(self):
+        return str(self.week_no) + '/' + self.gt
+
+    def date_range(self):
+        min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
+        max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
+        print(f'{min_date.strftime("%m-%d-%Y")} to {max_date.strftime("%m-%d-%Y")}')
+        return min_date.strftime('%m-%d-%Y') + ' to ' + max_date.strftime('%m-%d-%Y')
+
+
+# TODO: add methods to class for getting min and max date for week, projected close, ...
 
 class Game(TimeStampMixin):
     # Fields
@@ -103,12 +122,15 @@ class Game(TimeStampMixin):
     gsis = models.CharField(max_length=10) #ID of game game key
     day = models.CharField(max_length=3) #day of the week of game
     time = models.CharField(max_length=5,null=True) #time of game in hh:mm format Eastern Time  TODO: convert to time data type
+    date_time = models.DateTimeField(null=True)
     status = models.CharField(max_length=3) #statue of game F= Finished; FO = Finished Overtime; P = Pending?;
     k = models.CharField(max_length=1, null=True) # ???
+    home_team = models.ForeignKey(Team,on_delete=models.CASCADE,related_name='home')
     home = models.CharField(max_length=3) #home team abreviation            HOU
     home_nickname = models.CharField(max_length=20,null=True) #home team nickname     texans
     home_teamname = models.CharField(max_length=20,null=True) #home team name         Houston Texans
     home_score = models.PositiveSmallIntegerField(null=True) #home team score
+    visitor_team = models.ForeignKey(Team,on_delete=models.CASCADE,related_name='visitor')
     visitor = models.CharField(max_length=3) #visitor team abreviation
     visitor_nickname = models.CharField(max_length=20,null=True) #visitor team nickname
     visitor_teamname = models.CharField(max_length=20,null=True) #visitor team nickname
@@ -126,19 +148,34 @@ class Game(TimeStampMixin):
         return self.gsis
 
     def get_date(self):
-        year = self.eid[:4]
-        mo = self.eid[4:6]
-        day = self.eid[6:8]
-        # date_str =  mo + '-' + day + '-' + year + ' ' + self.time[:2] + ':' + self.time[3:5] + ' PM'
-        date_str =  mo + '-' + day + '-' + year + ' ' + self.time + ' PM'
-        date_obj = datetime.strptime(date_str, '%m-%d-%Y %I:%M %p').astimezone(pytz.timezone('America/Los_Angeles'))
-        return date_obj
-# TODO: add methods to class for getting min and max date for week, projected close, ...
+        # the time of the game from the game feed is in Eastern time, convert to Mountain
+        est = pytz.timezone('America/New_York')
+        year = int(self.eid[:4])
+        mo = int(self.eid[4:6])
+        day = int(self.eid[6:8])
+        hour, min = self.time.split(':')
+        # print(f'{self.gsis} year: {year} mo: {mo} day: {day} t: hour: {hour} min: {min}')
+        # print(f'{self.gsis} year: {year} mo: {mo} day: {day} t: hour: {int(hour)+12} min: {min}')
+        est_date = make_aware(datetime(year,mo,day,int(hour)+12,int(min)), pytz.timezone('America/New_York'))
+        mst_date = est_date.astimezone(pytz.timezone('America/Denver'))  #conver date to MST
+        return mst_date
+
+    def game_winner(self):
+        if self.status == 'F' or self.status == 'FO':
+            if self.home_score > self.visitor_score:
+                return self.home_team
+            elif self.home_score < self.visitor_score:
+                return self.visitor_team
+            elif self.home_score == self.visitor_score:
+                return 'Tie'
+            else:
+                return 'Error'
 
 
+# TODO: add constraint for only 1 record per user per week
 class Pick(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_user',default=1)
-    wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_wk')    #? week of the season 1-17, 18-21
+    wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_wk')
     points = models.PositiveSmallIntegerField()
     koth_team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='koth_team')
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_entered')
@@ -146,8 +183,29 @@ class Pick(models.Model):
     # date_entered = models.DateTimeField(default=datetime.now)
     # date_updated = models.DateTimeField(default=datetime.now)
 
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user','wk'], name='pick_user_wk')]
+
+    # def cap_user(self):
+    #     return self.user.capitalize()
+
+    def koth_eligible(self):
+        return True
+
+    # only allow teams that have games this week in the list
+    # get Home teams, visitors, teams allready used
+    # take union and then difference
+    def koth_remaining(self):
+        teams = Team.objects.all()
+        user_picks = Pick.objects.filter(user=self.user)
+        # for pick in user_picks:
+        #     teams = teams.filter(team=pick.koth_team).delete()
+
+        return teams
+
+
 class PickGame(models.Model):
-    pick_head = models.ForeignKey(Pick,on_delete=models.CASCADE,related_name='pick_head')
+    pick_head = models.ForeignKey(Pick,on_delete=models.CASCADE)  # ,related_name='pick_head'
     game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='pick_game')
     team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='pick_team')  #team must be one of 2 teams in the game
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_game_entered')

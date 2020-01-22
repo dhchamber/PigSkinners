@@ -1,169 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-      background-color: blue;
-    }
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+          margin-bottom: 0;
+          border-radius: 0;
+          background-color: blue;
+        }
 
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 450px}
 
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
+        /* Set gray background color and 100% height */
+        .sidenav {
+          padding-top: 20px;
+          background-color: #f1f1f1;
+          height: 100%;
+        }
 
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: blue;
-      color: white;
-      padding: 15px;
-    }
+        /* Set black background color, white text and some padding */
+        footer {
+          background-color: blue;
+          color: white;
+          padding: 15px;
+        }
 
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;}
-    }
-  </style>
-</head>
-<body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">PigSkinners</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-            <li class="active nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownPickLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Picks
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/picks/view">Make Picks<br></a>
-                    <a class="dropdown-item" href="/picks/view">View Picks<br></a>
-                    <a class="dropdown-item" href="/picks/view">Pick Revisions<br></a>
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+          .sidenav {
+            height: auto;
+            padding: 15px;
+          }
+          .row.content {height:auto;}
+        }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">PigSkinners</a>
                 </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownStandLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Standings
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/picks/view">Weekly Standings<br></a>
-                    <a class="dropdown-item" href="/picks/view">Season Standings<br></a>
-                    <a class="dropdown-item" href="/picks/view">KOTH Standings<br></a>
-                    <a class="dropdown-item" href="/picks/view">BATC Standings<br></a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/picks/view">Post Season Standings</a>
-                </div>
-            </li>
-            <li><a href="#">Options</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownAdminLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Admin
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/setup/teams">Teams<br></a>
-                    <a class="dropdown-item" href="/setup/games">Games<br></a>
-                    <a class="dropdown-item" href="/picks/view">Other<br></a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/admin/auth/user/">Users<br></a>
-                </div>
-            </li>
-            <li><a href="#">About</a></li>
-        </ul>
-        {% if user.is_authenticated %}
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-      </ul>
-        {% else %}
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-        {% endif %}
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid text-center">
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="#">Week 1</a></p>
-      <p><a href="#">Week 2</a></p>
-      <p><a href="#">Week 3</a></p>
-      <p><a href="#">Week 4</a></p>
-      <p><a href="#">Week 5</a></p>
-      <p><a href="#">Week 6</a></p>
-      <p><a href="#">Week 7</a></p>
-      <p><a href="#">Week 8</a></p>
-      <p><a href="#">Week 9</a></p>
-      <p><a href="#">Week 10</a></p>
-      <p><a href="#">Week 11</a></p>
-      <p><a href="#">Week 12</a></p>
-      <p><a href="#">Week 13</a></p>
-      <p><a href="#">Week 14</a></p>
-      <p><a href="#">Week 15</a></p>
-      <p><a href="#">Week 16</a></p>
-      <p><a href="#">Week 17</a></p>
-      <p><a href="#">Post Season</a></p>
-    </div>
-        <div class="col-sm-8 text-left bg-primary text-white">
-            <div class="row">
-                <div class="col-sm-8 text-left bg-primary text-white">
-                    <p>Week Number: 1</p>
-                    <p>Pick Status: OPEN</p>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPickLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Picks
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/picks/make/">Make Picks<br></a>
+                                <a class="dropdown-item" href="/picks/view">View Picks<br></a>
+                                <a class="dropdown-item" href="picks/revisions/">Pick Revisions<br></a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStandLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Standings
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/picks/view">Weekly Standings<br></a>
+                                <a class="dropdown-item" href="/picks/view">Season Standings<br></a>
+                                <a class="dropdown-item" href="/picks/view">KOTH Standings<br></a>
+                                <a class="dropdown-item" href="/picks/view">BATC Standings<br></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/picks/view">Post Season Standings</a>
+                            </div>
+                        </li>
+                        <li><a href="#">Options</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownAdminLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/setup/teams">Teams<br></a>
+                                <a class="dropdown-item" href="/setup/games">Games<br></a>
+                                <a class="dropdown-item" href="/picks/view">Other<br></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/admin/auth/user/">Users<br></a>
+                            </div>
+                        </li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                        <ul class="nav navbar-nav navbar-right">
+                          <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
+        </nav>
 
-            <div class="row">
-                <div class="col-sm-8 text-left bg-primary text-white">
-                    <h1 font align="center" color="blue" face="garmand" size="+3">Football Fun For The Whole Family</h1>
+        <div class="col-sm-12 container-fluid text-center">
+          <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <form action="/action/week/" method="get" >
+                    <p><button type="submit" value=1 name="btnSetWeek1">Week 1</button></p>
+                    <p><input type="submit" value=2 name="btnSetWeek2"></p>
+                    <p><a href="#">Week 2</a></p>
+                    <p><a href="#">Week 3</a></p>
+                    <p><a href="#">Week 4</a></p>
+                    <p><a href="#">Week 5</a></p>
+                    <p><a href="#">Week 6</a></p>
+                    <p><a href="#">Week 7</a></p>
+                    <p><a href="#">Week 8</a></p>
+                    <p><a href="#">Week 9</a></p>
+                    <p><a href="#">Week 10</a></p>
+                    <p><a href="#">Week 11</a></p>
+                    <p><a href="#">Week 12</a></p>
+                    <p><a href="#">Week 13</a></p>
+                    <p><a href="#">Week 14</a></p>
+                    <p><a href="#">Week 15</a></p>
+                    <p><a href="#">Week 16</a></p>
+                    <p><a href="#">Week 17</a></p>
+                    <p><a href="#">Post Season</a></p>
+                </form>
+            </div>
+        <!--        <div class="col-sm-8 text-left bg-primary text-white">-->
+        <!--            <div class="row">-->
+        <!--                <div class="col-sm-8 text-left bg-primary text-white">-->
+        <!--                    <p>Week Number: {{ request.session.week }} </p>-->
+        <!--                    <p>Pick Status: OPEN</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <!--            <div class="row">-->
+        <!--                <div class="col-sm-8 text-left bg-primary text-white">-->
+        <!--                    <h1 font align="center" color="blue" face="garmand" size="+3">Football Fun For The Whole Family</h1>-->
+        <!--                </div>-->
+        <!--            </div>-->
+            <div class="col-sm-1 sidenav">
+                <div class="well">
+                    <p>Blog</p>
+                </div>
+                <div class="well">
+                    <p>Chat</p>
                 </div>
             </div>
 
             <div class="row content">
-                <div class="col-sm-8 text-center bg-primary text-white">
+                <div class="col-sm-10 text-center bg-primary text-white">
                     {% block content %}
                     {% endblock %}
                 </div>
             </div>
         </div>
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>Blog</p>
-      </div>
-      <div class="well">
-        <p>Chat</p>
-      </div>
-    </div>
-  </div>
-</div>
+        <!--  </div>-->
+        <!--</div>-->
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
+        <!--<footer class="container-fluid text-center">-->
+        <!--    <p>Footer Text</p>-->
+        <!--</footer>-->
 
-</body>
+    </body>
 </html>

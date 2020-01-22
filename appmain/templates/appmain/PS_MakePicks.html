@@ -1,10 +1,1039 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ Language=VBScript %>
+<% Option Explicit %>
+<!--#include file="includes/includes.htm"-->
+<!--#include file="includes/makepicks_functions.asp"-->
+<%
+Dim rsPicks, iWeekNum, dictWeekInfo, sWeekNumber, sStartDate, sEndDate, sOnOpenMsg
+Dim bClosed, bLastGamePointsGame, rsWeeks, sSQL, iCount, rsSchedule, userID, sScheduleID, iCount2
+Dim bRowSelected, sSelectedTeamID, sHomeSelected, sVisitorSelected, rsUsers, rsTeams, rsKingOfHillPicks
+Dim userPicksID, sComboUserName, sComboUserID, sPointsGameScheduleID, sHomeTeamID, sVisitorTeamID
+Dim sPointsGamePoints, sHiddenRecordFieldsHTML, sMode, iUserAccessLvl, sHiddenPointsGamePoints, kingOfTheHillEligibleThisWeek, validKingOfHillOption, selectedKingOfHillOption
+Dim sComboTeamScheduleID, sComboTeamName, sComboTeamScheduleID2, kothOnly
+
+'See if the user has a session
+Call hasSession()
+
+'Create db connection
+Call connectDB()
+
+'Retrieve the week number
+iWeekNum = Cint(Request.Form("hidWeekNum"))
+
+'If the user is NOT an administrator then see if the week should be closed
+'we do the administrator check here to allow the administrators to re-open a week and put
+'in picks for somebody in an emergency case
+If iUserAccessLvl > cgAdminAccessLvl Then
+	'See if this week needs to be closed
+	Call autoCloseWeek(iWeekNum)
+End If
+
+'Get the default week number
+Set dictWeekInfo = getWeekInfo(iWeekNum)
+'Retrieve the week information
+If dictWeekInfo("hasInfo") = true Then
+	sWeekNumber = dictWeekInfo("Week")
+	sStartDate = dictWeekInfo("StartDate")
+	sEndDate = dictWeekInfo("EndDate")
+	bClosed = dictWeekInfo("Closed")
+Else
+	sWeekNumber = ""
+	sStartDate = ""
+	sEndDate = ""
+	bClosed = true
+End If
+
+'If the week is "18" then we need to re-direct them to the postseason picks page
+'I'm going to modify this so that we can start making post season picks right now
+If sWeekNumber = "18" Then
+	Call closeDB()
+	Call Response.Redirect("MakePostseasonPicks.asp")
+End If
+
+'get this user's id and role
+userID = Request.Cookies("userID")
+iUserAccessLvl = CInt(Request.Cookies("accessLvl"))
+kothOnly = Request.Cookies("kothOnly")
+kingOfTheHillEligibleThisWeek = "true"
+If Request.Cookies("kothValue") <> "" Then
+	If Cint(sWeekNumber) > Cint(Request.Cookies("kothValue")) Then
+		kingOfTheHillEligibleThisWeek = "false"
+	End If
+End If
+
+'get the user id of the user whose picks are being edited
+userPicksID = Request.Form("hidUserID")
+'If this is blank then make it just be this user's ID
+If userPicksID = "" Then
+	userPicksID = userID
+End If
+
+'See if we need to save some picks
+sMode = Request.Form("hidMode")
+If sMode = "save" Then
+	sOnOpenMsg = savePicks(userID, Request.Form)
+End If
+
+'Look up the schedule for this week
+Set rsSchedule = Server.CreateObject("ADODB.Recordset")
+sSQL = "SELECT dbo.tblSchedule.*, tblHomeTeam.TeamName AS HomeTeamName, tblHomeTeam.LogoFileName as HomeLogoFileName, tblVisitorTeam.TeamName AS VisitorTeamName, tblVisitorTeam.LogoFileName as VisitorLogoFileName " & _
+        "FROM dbo.tblSchedule " & _
+        "INNER JOIN tblTeams as tblVisitorTeam ON tblVisitorTeam.TeamID = tblSchedule.VisitorTeamID " & _
+        "INNER JOIN tblTeams as tblHomeTeam ON tblHomeTeam.TeamID = tblSchedule.HomeTeamID " & _
+        "WHERE (dbo.tblSchedule.Week = '" & sWeekNumber & "') ORDER BY GameNumber ASC"
+Call rsSchedule.Open(sSQL, objConn, 2, 3)
+
+'Look up the picks for this user
+Set rsPicks = Server.CreateObject("ADODB.Recordset")
+sSQL = "SELECT tblPicks.*, tblSchedule.Week FROM tblPicks " & _
+		"INNER JOIN tblSchedule ON tblSchedule.ScheduleID = tblPicks.ScheduleID " & _
+		"WHERE UserID='" & userPicksID & "' AND tblSchedule.Week = '" & sWeekNumber & "'"
+Call rsPicks.Open(sSQL, objConn, 2, 3)
+
+'Look up the teams that have games this week
+Set rsTeams = Server.CreateObject("ADODB.Recordset")
+sSQL = "SELECT * FROM tblTeams " & _
+		"INNER JOIN tblSchedule ON tblTeams.TeamID = tblSchedule.VisitorTeamID or tblTeams.TeamID = tblSchedule.HomeTeamID " & _
+		"WHERE tblSchedule.Week = '" & sWeekNumber & "' ORDER BY TeamID ASC"
+Call rsTeams.Open(sSQL, objConn, 2, 3)
+
+'Look up the teams that this user has already picked in the king of the hill pool
+Set rsKingOfHillPicks = Server.CreateObject("ADODB.Recordset")
+sSQL = "SELECT * FROM tblKingOfTheHillPicks WHERE tblKingOfTheHillPicks.UserID = '" & userPicksID & "'"
+Call rsKingOfHillPicks.Open(sSQL, objConn, 2, 3)
+
+'get a list of all the users
+Set rsUsers = Server.CreateObject("ADODB.Recordset")
+sSQL = "SELECT * FROM tblUsers ORDER BY LName ASC"
+Call rsUsers.Open(sSQL, objConn, 2, 3)
+'Look up the team records
+sHiddenRecordFieldsHTML = Session(cgSessionHiddenRecordsHTML)
+If sHiddenRecordFieldsHTML = "" Then
+	sHiddenRecordFieldsHTML = getHiddenTeamRecordHTML()
+	'Write the team records to the session so we don't have to look this up again
+	Session(cgSessionHiddenRecordsHTML) = sHiddenRecordFieldsHTML
+End If
+
+'Set Title
+sTitle = "Make Your Picks"
+
+%>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+<title><%=sTitle%></title>
+<meta NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<script LANGUAGE="javascript">
+<!--
+var bClosed;
+var bPicksChanged = false;
+
+function window_onload()
+{
+	//set the title
+	window.parent.setTitle();
+	var sMsg, bMessage, i;
+	var userPicksID = "<%=userPicksID%>";
+	var userID = "<%=userID%>";
+	var kingOfTheHillEligible = "<%=kingOfTheHillEligibleThisWeek%>";
+	bClosed = "<%=bClosed%>".toLowerCase();
+	sMsg = "<%=sOnOpenMsg%>";
+
+	if(bClosed != "false")
+	{
+		//alert the user that the picks are closed
+		alert('This weeks picks are closed.');
+		//disable the save button and the points text box
+		frmPicks.btnSavePicks.disabled = true;
+		frmPicks.txtPointsTotal.disabled = true;
+		if(kingOfTheHillEligible.toLowerCase() == "true")
+		{
+			frmPicks.cboKingOfHillPick.disabled = true;
+		}
+	}
+	else
+	{
+		//enable the save button
+		frmPicks.btnSavePicks.disabled = false;
+		frmPicks.txtPointsTotal.disabled = false;
+		if(kingOfTheHillEligible.toLowerCase() == "true")
+		{
+			frmPicks.cboKingOfHillPick.disabled = false;
+		}
+	}
+
+	//now loop through the picks table and highlight the picks that the user has already
+	//made
+	i = tblPicks.rows.length - 1;
+	while(i>=0)
+	{
+		if(isDataRow(tblPicks.rows[i]))
+		{
+			var sVisitorSelected = tblPicks.rows[i].children[3].id.substring(0,1);
+			var sVisitorTeamId = tblPicks.rows[i].children[3].id.substring(1,tblPicks.rows[i].children[3].id.length);
+			var sHomeSelected = tblPicks.rows[i].children[5].id.substring(0,1);
+			var sHomeTeamId = tblPicks.rows[i].children[5].id.substring(1,tblPicks.rows[i].children[5].id.length);
+
+			//set the ID's back to the team ID's
+			tblPicks.rows[i].children[5].id = sHomeTeamId;
+			tblPicks.rows[i].children[3].id = sVisitorTeamId;
+
+			//see if a pick has been made on this row
+			if(sHomeSelected == "T" || sVisitorSelected == "T")
+			{
+				//see if the current user is the same user that the picks are for, if
+				//not show message but don't show the selection
+				if(userID != userPicksID)
+				{
+					alert("This user has submitted picks but they are being hidden from your view.");
+					i = 0;
+				}
+				else
+				{
+					//see which team is selected
+					if(sVisitorSelected == "T")
+					{
+						tblPicks.rows[i].children[3].style.backgroundColor = 'darkblue';
+						tblPicks.rows[i].children[3].style.color = 'white';
+					}
+					else if(sHomeSelected == "T")
+					{
+						tblPicks.rows[i].children[5].style.backgroundColor = 'darkblue';
+						tblPicks.rows[i].children[5].style.color = 'white';
+					}
+				}
+			}
+		}
+		i = i - 1;
+	}
+
+	//see if there's a message to show the user
+	if(sMsg != "")
+	{
+		alert(sMsg);
+	}
+
+}
+
+//**** start of methods necessary for moving homer
+var iHomerCount;
+var iHomerMidWay;
+var iHomerMovePX;
+var Homerdelay_time;
+var bHomerGraphicsPlaying = false;
+var bHomerMovingUp;
+var bHomerMovingDown;
+
+var YYHomerOrigHome;
+var YYHomerHome;
+var YYHomerHome2;
+
+function playHomerGraphics()
+{
+	if(bHomerGraphicsPlaying == false)
+	{
+		YYHomerOrigHome = document.body.clientHeight;
+
+		bHomerGraphicsPlaying = true;
+
+		//make the helmets visible now
+		divHomer.style.display = "";
+
+		//set the positions
+		YYHomerHome = 0;
+		YYHomerHome2 = YYHomerOrigHome;
+
+		//initialize the booleans
+		bHomerMovingUp = true;
+		bHomerMovingDown = false;
+
+		//initialize the other variables
+		iHomerCount = 0;
+		iHomerMovePX = 6;
+		iHomerMidWay = (imgHomer.height / iHomerMovePX) / 3;
+		loopfuncHomer();
+	}
+}
+
+function loopfuncHomer()
+{
+	Homerdelay_time = 20;
+
+	if(bHomerMovingUp)
+	{
+		if(iHomerCount > iHomerMidWay)
+		{
+			//if the image is half-way up then start to show homer
+			bgsBroncos.src = "audio/TalkingHeads/Simpsons_aw_broncos.wma"
+			//reset the variable
+			iHomerCount = -100;
+		}
+
+		if(YYHomerHome + iHomerMovePX < imgHomer.height)
+		{
+			YYHomerHome = YYHomerHome + iHomerMovePX;
+			YYHomerHome2 = YYHomerHome2 - iHomerMovePX;
+			iHomerCount = iHomerCount + 1;
+		}
+		else
+		{
+			//pause at the top, move it the rest of the way to the top
+			YYHomerHome2 = YYHomerHome2 - (imgHomer.height - YYHomerHome);
+			YYHomerHome = imgHomer.height;
+			divHomer.style.height = YYHomerHome
+			divHomer.style.top= YYHomerHome2;
+			Homerdelay_time = 1750;
+			bHomerMovingUp = false;
+			bHomerMovingDown = true;
+		}
+	}
+	else
+	{
+		if(bHomerMovingDown)
+		{
+			if(YYHomerHome - iHomerMovePX > 0)
+			{
+				YYHomerHome = YYHomerHome - iHomerMovePX;
+				YYHomerHome2 = YYHomerHome2 + iHomerMovePX;
+			}
+			else
+			{
+				bHomerMovingUp = false;
+				bHomerMovingDown = false;
+			}
+		}
+	}
+
+	if(bHomerMovingUp || bHomerMovingDown)
+	{
+		divHomer.style.height = YYHomerHome
+		divHomer.style.top= YYHomerHome2;
+		setTimeout('loopfuncHomer()',Homerdelay_time);
+	}
+	else
+	{
+		bHomerGraphicsPlaying = false;
+		divHomer.style.display = "none";
+	}
+}
+//**** end of methods necessary for moving homer
+
+function changeWeek()
+{
+	var iWeekNum;
+	iWeekNum = frmPicks.cboWeeks.value;
+	//Set the week number in the hidden field
+	frmWeekNum.hidWeekNum.value = iWeekNum;
+	//Now submit the week number form
+	frmWeekNum.submit();
+}
+
+function changeSelUser()
+{
+	var iUserID;
+	iUserID = frmPicks.cboUser.value;
+	//Set the userID in the hidden field
+	frmWeekNum.hidUserID.value = iUserID;
+	//Now submit the week number form
+	frmWeekNum.submit();
+}
+
+function addDeletedPick(sScheduleID)
+{
+	var sDeletedPicks = frmPicks.hidDeletedPicks.value;
+	var sDelimiter = "<%=cgDelimiter%>";
+	if(sDeletedPicks == "")
+		frmPicks.hidDeletedPicks.value = sScheduleID;
+	else
+		frmPicks.hidDeletedPicks.value = sDeletedPicks + sDelimiter + sScheduleID;
+}
+
+function removeDeletedPick(sScheduleID)
+{
+	var sDeletedPicks = frmPicks.hidDeletedPicks.value;
+	var sDelimiter = "<%=cgDelimiter%>";
+	var arrDeletedPicks, sDeletedPick;
+	if(sDeletedPicks != "")
+	{
+		arrDeletedPicks = sDeletedPicks.split(sDelimiter);
+		sDeletedPicks = "";
+		for (var x=0; x < arrDeletedPicks.length; x++)
+		{
+			sDeletedPick = arrDeletedPicks[x];
+			if(sDeletedPick != sScheduleID)
+			{
+				if(sDeletedPicks == "")
+					sDeletedPicks = sDeletedPick;
+				else
+					sDeletedPicks = sDeletedPicks + sDelimiter + sDeletedPick;
+			}
+		}
+		frmPicks.hidDeletedPicks.value = sDeletedPicks;
+	}
+}
+
+function isCellSelected(objTD, compareToTD)
+{
+	if(objTD.style.backgroundColor != compareToTD.style.backgroundColor)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function isRowSelected(objRow)
+{
+	if(objRow.cells[3].style.backgroundColor != objRow.cells[0].style.backgroundColor || objRow.cells[5].style.backgroundColor != objRow.cells[0].style.backgroundColor)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+function selectTD(objTD, fromRandom)
+{
+	var bSelect;
+	var bSelected;
+	var bParentSelected;
+	var sScheduleId = objTD.parentElement.id;
+	var iBroncosID = <%=cgBroncosTeamID%>;
+	var iVikingsID = <%=cgVikingsTeamID%>;
+	var kothOnly = "<%=kothOnly%>";
+
+	if(kothOnly.toLowerCase() == "false")
+	{
+
+		bPicksChanged = true;
+		//objTD.parentElement.cells(2)
+
+		//only let them select a TD if the picks aren't closed
+		if(bClosed == "false")
+		{
+			bSelected = isCellSelected(objTD, objTD.parentElement.cells[0]);
+
+			//see if they clicked a td they already clicked on
+			if(bSelected)
+			{
+				//only delete the pick if this WASN'T a pick made by the random generator
+				if(fromRandom == false)
+				{
+					bSelect = false;
+					//don't do the deleted pick functionality if it's the points game
+					if(objTD.parentElement.className != "trPointsGame")
+						addDeletedPick(sScheduleId);
+				}
+				else
+				{
+					//if the picks was made by the random generator, then just keep the existing pick
+					bSelect = true;
+				}
+			}
+			else
+			{
+				bSelect = true;
+				//play the sound if they just selected the broncos
+				//if(objTD.teamID == iBroncosID)
+				//	playHomerGraphics();
+
+				//play the vikings sound if they just selected the vikings
+				if(objTD.getAttribute("teamID") == iVikingsID)
+					bgsVikings.src = bgsSilent3.src;
+
+				//don't do the deleted pick functionality if it's the points game
+				if(objTD.parentElement.className != "trPointsGame")
+					removeDeletedPick(sScheduleId);
+			}
+			bParentSelected = isRowSelected(objTD.parentElement);
+
+			if(bParentSelected)
+			{
+				//something's already been selected in this row, so clear it out
+				objTD.parentElement.cells[3].style.backgroundColor = objTD.parentElement.cells[0].style.backgroundColor;
+				objTD.parentElement.cells[3].style.color = objTD.parentElement.cells[0].style.color;
+				//objTD.parentElement.cells[3].selected = "false";
+				objTD.parentElement.cells[5].style.backgroundColor = objTD.parentElement.cells[0].style.backgroundColor;
+				objTD.parentElement.cells[5].style.color = objTD.parentElement.cells[0].style.color;
+				//objTD.parentElement.cells[5].selected = "false";
+				//objTD.parentElement.selected = "false";
+			}
+
+			if(bSelect == true)
+			{
+				//now select the cell that was clicked
+				objTD.style.backgroundColor = 'darkblue';
+				objTD.style.color = 'white';
+				//objTD.selected = "true";
+				//objTD.parentElement.selected = "true";
+			}
+		}
+	}
+}
+
+function TooltipText(objTD)
+{
+    var sRet = "";
+	var sTeamID = objTD.getAttribute("teamID");
+
+	sRet = "<b>Record:</b> " + document.getElementById("hidTeam" + sTeamID).value;
+
+	return sRet;
+}
+
+function savePicks()
+{
+	//loop through the picks table and retrieve the ID's of the user's picks
+	var bPageValid;
+	var bRet, bAllowEdits, bSavePicks;
+
+	//check to see if we allow edits
+	bAllowEdits = "<%=cgAllowPickEdits%>".toLowerCase();
+	if(bAllowEdits == "false")
+	{
+		if(confirm("You are about to submit your picks.\nYou can't change the picks later!") == true)
+			bSavePicks = true;
+		else
+			bSavePicks = false;
+	}
+	else
+	{
+		bSavePicks = true;
+	}
+
+	bRet = bSavePicks;
+	if(bSavePicks)
+	{
+
+		//now validate the page
+		bPageValid = validatePage();
+
+		bRet = bPageValid;
+		if(bPageValid)
+		{
+			bPicksChanged = false;
+			frmPicks.hidPicksData.value = readPickData();
+			frmPicks.hidPointsGameData.value = readPointsGameData();
+			if(frmPicks.cboKingOfHillPick == undefined)
+			{
+				frmPicks.hidKingOfHillPick.value = "";
+			}
+			else
+			{
+				frmPicks.hidKingOfHillPick.value = frmPicks.cboKingOfHillPick.value;
+			}
+			frmPicks.hidMode.value = "save";
+		}
+	}
+	return bRet;
+}
+
+function isDataRow(objRow)
+{
+	if(objRow.cells.length > 1)
+	{
+		if(objRow.cells[1].innerHTML == "&nbsp;&nbsp;")
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+function validatePage()
+{
+	var bRet, bForceAllPicks, bAllSelected;
+	var i, sErrMsg, kothOnly;
+
+	bForceAllPicks = "<%=cgForceAllPicks%>";
+	kingOfTheHillEligible = "<%=kingOfTheHillEligibleThisWeek%>";
+	kothOnly = "<%=kothOnly%>";
+
+	//loop through the table and see which rows are selected
+	i = tblPicks.rows.length - 1;
+	//initialize booleana
+	bAllSelected = true;
+	bRet = true;
+	if(kothOnly.toLowerCase() == "false")
+	{
+		while(i>=0)
+		{
+			if(isDataRow(tblPicks.rows[i]))
+			{
+				if(isRowSelected(tblPicks.rows[i]) == false)
+				{
+					bAllSelected = false;
+					i = 1;
+				}
+			}
+			i = i - 1;
+		}
+	}
+	sErrMsg = "";
+
+	//if it's a requirement that all picks be selected then show error message
+	if(bForceAllPicks.toLowerCase() == "true")
+	{
+		if(bAllSelected == false)
+		{
+			sErrMsg = sErrMsg + "<br>- Select a winner for all the games.<br>";
+			bRet = false;
+		}
+
+		//also check the "points game total" value
+		if(kothOnly.toLowerCase() == "false" && frmPicks.txtPointsTotal.value == "" && frmPicks.hidPointsGameTotal.value == "")
+		{
+			sErrMsg = sErrMsg + "<br>- Enter a number for the Points Game Total.<br>";
+			bRet = false;
+		}
+
+		//also check the king of the hill pick, if we need to
+		if(kingOfTheHillEligible.toLowerCase() == "true")
+		{
+			//did they pick a king of the hill team?
+			if(frmPicks.cboKingOfHillPick.value == "")
+			{
+				sErrMsg = sErrMsg + "<br>- Pick a team for the 'King of the Hill' pool.<br>";
+				bRet = false;
+			}
+		}
+	}
+
+	if(kothOnly.toLowerCase() == "false")
+	{
+		//also check to make sure that the points game total is a number
+		var nums = /^[0-9]*$/;
+		if (nums.test(frmPicks.txtPointsTotal.value) == false)
+		{
+			sErrMsg = sErrMsg + "<br>- Enter a number for the Points Game Total.<br>";
+			bRet = false;
+		}
+	}
+
+	if(bRet == false)
+	{
+		tblErrorMsg.style.display = "";
+		errMsg.innerHTML = sErrMsg;
+	}
+	return bRet;
+}
+
+function readPickData()
+{
+	var i;
+	var sReturn = "";
+	var sDelimiter = "<%=cgDelimiter%>";
+	var sDelimiter2 = "<%=cgDelimiter2%>";
+	var kothOnly = "<%=kothOnly%>";
+
+	if(kothOnly.toLowerCase() == "false")
+	{
+		i = tblPicks.rows.length - 1;
+		while(i>=0)
+		{
+			if(isDataRow(tblPicks.rows[i]) && isRowSelected(tblPicks.rows[i]) && tblPicks.rows[i].className.toLowerCase() != "trpointsgame")
+			{
+				var sScheduleId = tblPicks.rows[i].id;
+				sReturn = sReturn + sScheduleId;
+				//see which team is selected
+				if(isCellSelected(tblPicks.rows[i].children[3], tblPicks.rows[i].children[0]))
+					sReturn = sReturn + sDelimiter + tblPicks.rows[i].children[3].id;
+				else
+					sReturn = sReturn + sDelimiter + tblPicks.rows[i].children[5].id;
+				sReturn = sReturn + sDelimiter2;
+			}
+			i = i - 1;
+		}
+		//remove the trailing delimiter
+		sReturn = sReturn.substring(0, sReturn.length - 1);
+	}
+
+	//alert(sReturn);
+	return sReturn;
+}
+
+function readPointsGameData()
+{
+	var i;
+	var sReturn = "";
+	var sDelimiter = "<%=cgDelimiter%>";
+	var kothOnly = "<%=kothOnly%>";
+
+	if(kothOnly.toLowerCase() == "false")
+	{
+		i = tblPicks.rows.length - 1;
+		while(i>=0)
+		{
+			if(isDataRow(tblPicks.rows[i])&& tblPicks.rows[i].className.toLowerCase() == "trpointsgame")
+			{
+				sReturn = tblPicks.rows[i].id + sDelimiter;
+				//if the points game textbox is blank then read the value from the hidden
+				//text box
+				if(frmPicks.txtPointsTotal.value == "")
+					sReturn = sReturn + frmPicks.hidPointsGameTotal.value + sDelimiter;
+				else
+					sReturn = sReturn + frmPicks.txtPointsTotal.value + sDelimiter;
+
+				//see which team is selected
+				if(isCellSelected(tblPicks.rows[i].children[3], tblPicks.rows[i].children[0]))
+					sReturn = sReturn + tblPicks.rows[i].children[3].id;
+				else
+				{
+					if(isCellSelected(tblPicks.rows[i].children[5], tblPicks.rows[i].children[0]))
+						sReturn = sReturn + tblPicks.rows[i].children[5].id;
+				}
+				i = 1;
+			}
+			i = i - 1;
+		}
+	}
+	//alert(sReturn);
+	return sReturn;
+}
+
+function window_onbeforeunload()
+{
+	var retValue;
+	if(bPicksChanged == true)
+	{
+		return "You have unsaved picks.\nNavigating away from the page will cause those picks to be lost.";
+		//event.returnValue = "You have unsaved picks.\nNavigating away from the page will cause those picks to be lost.";
+	}
+}
+
+function selectRandomPicks()
+{
+    var i;
+	var kothOnly = "<%=kothOnly%>";
+
+	if(kothOnly.toLowerCase() == "false")
+	{
+		i = tblPicks.rows.length - 1;
+		while(i>=0)
+		{
+			if(isDataRow(tblPicks.rows[i]))
+			{
+				//only select a random pick for this game if there already isn't a pick made
+				if(isCellSelected(tblPicks.rows[i].children[5], tblPicks.rows[i].children[0]) == false && isCellSelected(tblPicks.rows[i].children[3], tblPicks.rows[i].children[0]) == false)
+				{
+					//generate a random number
+					var random = Math.floor(Math.random()*101);
+					//see if the random number is even or odd, even picks the HOME team, odd picks the AWAY team
+					if(random % 2 == 0)
+					{
+						selectTD(tblPicks.rows[i].children[5], true);
+					}
+					else
+					{
+						selectTD(tblPicks.rows[i].children[3], true);
+					}
+				}
+			}
+			i = i - 1;
+		}
+
+		//we've randomly picked all the games, not randomly select a points game value between 30-60 points, but only if they don't already have
+		//something selected
+		if(frmPicks.txtPointsTotal.value == "")
+		{
+			frmPicks.txtPointsTotal.value = Math.floor((60-29)*Math.random()) + 30
+		}
+
+	}
+
+	//select random KOTH if it's available
+	if("<%=kingOfTheHillEligibleThisWeek %>" == "true" && frmPicks.cboKingOfHillPick.value == "")
+	{
+	    //alert("picking KOTH");
+	    //they ARE KOTH eligable this week, so make a pick
+	    var upperLimit = frmPicks.cboKingOfHillPick.options.length - 1;
+	    frmPicks.cboKingOfHillPick.selectedIndex = Math.floor((upperLimit)*Math.random()) + 1;
+	}
+}
+//-->
+</script>
+<!--#include file="random/incJSRandomTalkingHeads.asp"-->
+<link rel="stylesheet" type="text/css" href="includes/styles.css" />
 </head>
-<body>
-$END$
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" onload="javascript:return window_onload();" onbeforeunload="javascript:return window_onbeforeunload()">
+<bgsound id="bgsSilent2" name="bgsSilent2" loop="1" volume="-10000" src="audio/TalkingHeads/Simpsons_aw_broncos.wma">
+<bgsound id="bgsSilent3" name="bgsSilent3" loop="1" volume="-10000" src="audio/TalkingHeads/vikings_horn.wma">
+<bgsound id="bgsBroncos" name="bgsBroncos" loop="1" volume="0">
+<bgsound id="bgsVikings" name="bgsVikings" loop="1" volume="0">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" height="100%">
+	<tr>
+		<td valign="top" align="left">
+			<%=sHiddenRecordFieldsHTML%>
+			<form method="post" name="frmWeekNum" action="MakePicks.asp">
+				<input type="hidden" name="hidWeekNum" id="hidWeekNum" value="<%=dictWeekInfo("Week")%>">
+				<input type="hidden" name="hidUserID" id="hidUserID" value="<%=userPicksID%>">
+			</form>
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				<tr>
+				<tr>
+					<td width="15px">&nbsp;</td>
+					<td align="center">
+						<form method="post" name="frmPicks" action="MakePicks.asp">
+						<input type="hidden" name="hidWeekNum" id="hidWeekNum" value="<%=dictWeekInfo("Week")%>">
+						<input type="hidden" name="hidPicksData" id="hidPicksData">
+						<input type="hidden" name="hidDeletedPicks" id="hidDeletedPicks">
+						<input type="hidden" name="hidMode" id="hidMode">
+						<input type="hidden" name="hidPointsGameData" id="hidPointsGameData">
+						<input type="hidden" name="hidKingOfHillPick" id="hidKingOfHillPick">
+						<input type="hidden" name="hidUserID" id="hidUserID" value="<%=userPicksID%>">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr>
+								<td width="150px" valign="top">
+									<table name="tblErrorMsg" id="tblErrorMsg" cellpadding="0" cellspacing="0" border="0" width="100%" style="display:none">
+										<tr>
+											<td colspan="2"><b><font color="red">Please correct the following errors:</font></b>
+										</tr>
+										<tr>
+											<td>&nbsp;</td>
+											<td><font id="errMsg" name="errMsg" color="red"></font></td>
+									</table>
+								</td>
+								<td>
+									<table cellpadding="0" cellspacing="0" border="0" name="tblPicks" id="tblPicks">
+										<tr dataRow="false">
+											<td colspan="9" align="center">
+												<font size="+1"><b>Picks for week&nbsp;
+												<select name="cboWeeks" id="cboWeeks" LANGUAGE="javascript" onchange="changeWeek();">
+												<%
+												For iCount = 1 to cgMaxNumOfWeeks
+													if iCount = dictWeekInfo("Week") Then
+														%><option value="<%=iCount%>" selected><%=iCount%></option><%
+													else
+														%><option value="<%=iCount%>"><%=iCount%></option><%
+													End if
+												next
+												%>
+												</select>&nbsp;(<%=dictWeekInfo("StartDate")%> to <%=dictWeekInfo("EndDate")%>)</b></font>
+											</td>
+										</tr>
+										<%If iUserAccessLvl <= cgAdminAccessLvl Then%>
+										<tr dataRow="false">
+											<td colspan="9" align="center">
+												<font size="+1"><b>For user&nbsp;
+												<select name="cboUser" id="cboUser" LANGUAGE="javascript" onchange="changeSelUser();">
+												<%
+												For iCount = 1 to getRSCount(rsUsers, true)
+													sComboUserID = CStr(rsUsers("UserID").Value)
+													sComboUserName = getRecordFromRS(rsUsers, "LName", "")
+													If sComboUserName = "" Then
+														sComboUserName = rsUsers("UserName").Value
+													Else
+														sComboUserName = sComboUserName & ", " & getRecordFromRS(rsUsers, "FName", "")
+													End If
+													if sComboUserID = userPicksID Then
+														%><option value="<%=sComboUserID%>" selected><%=sComboUserName%></option><%
+													else
+														%><option value="<%=sComboUserID%>"><%=sComboUserName%></option><%
+													End if
+													rsUsers.MoveNext
+												next
+												%>
+												</select>&nbsp;</b></font>
+											</td>
+										</tr>
+										<%Else%>
+										<tr dataRow="false">
+											<td colspan="9">&nbsp;</td>
+										</tr>
+										<%End If%>
+										<tr dataRow="false">
+											<td colspan="9">&nbsp;</td>
+										</tr>
+										<tr dataRow="false">
+											<td colspan="9" align="center"><input type="button" id="btnRandom" name="btnRandom" value="Select Random Picks" onclick="selectRandomPicks();" /></td>
+										</tr>
+										<tr dataRow="false">
+											<td colspan="9">&nbsp;</td>
+										</tr>
+										<tr dataRow="false">
+											<td align="center">Game</td>
+											<td width="15px">&nbsp;</td>
+											<td class="tdVisitorHeader" align="center" colspan="2">Visitor</td>
+											<td width="15px">&nbsp;</td>
+											<td class="tdHomeHeader" align="center" colspan="2">Home</td>
+											<td width="15px">&nbsp;</td>
+											<td align="center">Time</td>
+										</tr>
+										<%if RSHasRows(rsSchedule, false) = True Then
+											Do While rsSchedule.EOF = False
+												'see if the user has made a pick for this game already
+												sScheduleID = rsSchedule("ScheduleID").Value
+												sHomeTeamID	= CStr(rsSchedule("HomeTeamID").Value)
+												sVisitorTeamID = CStr(rsSchedule("VisitorTeamID").Value)
+												rsPicks.Filter = "ScheduleID = '" & sScheduleID & "'"
+												If RSHasRows(rsPicks, false) = True Then
+													bRowSelected = true
+													sSelectedTeamID = getRecordFromRS(rsPicks, "TeamNameID", "")
+													Select Case sSelectedTeamID
+														Case sHomeTeamID
+															sHomeSelected = "T"
+															sVisitorSelected = "F"
+														Case sVisitorTeamID
+															sVisitorSelected = "T"
+															sHomeSelected = "F"
+														Case Else
+															bRowSelected = false
+															sHomeSelected = "F"
+															sVisitorSelected = "F"
+													End Select
+												Else
+													bRowSelected = false
+													sHomeSelected = "F"
+													sVisitorSelected = "F"
+													sSelectedTeamID = ""
+												End if
+												if rsSchedule("PointsGame").Value = True then
+													sPointsGameScheduleID = sScheduleID
+													bLastGamePointsGame = true%>
+													<tr selected="<%=bRowSelected%>" class="trPointsGame" id="<%=sScheduleID%>" name="<%=sScheduleID%>" scheduleID="<%=sScheduleID%>" dataRow="true">
+												<%else
+													bLastGamePointsGame = false%>
+													<tr selected="<%=bRowSelected%>" <%if kothOnly = "true" then%>class="trPointsGame"<%end if%> id="<%=sScheduleID%>" name="<%=sScheduleID%>" scheduleID="<%=sScheduleID%>" dataRow="true">
+												<%end If%>
+													<td align="center"><%=rsSchedule("GameNumber").Value%></td>
+													<td>&nbsp;&nbsp;</td>
+													<td onclick="javascript:selectTD(this.parentElement.cells[3], false);" class="tdVisitorContent" onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this.parentElement.cells[3]));"><img width="25px" src="images/TeamLogos/<%=rsSchedule("VisitorLogoFileName").Value%>">&nbsp;</td>
+													<td onclick="javascript:selectTD(this, false);" onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this));" teamID ="<%=sVisitorTeamID%>" valign="center" class="tdVisitorContent" id="<%=sVisitorSelected & sVisitorTeamID%>" name="<%=sVisitorSelected & sVisitorTeamID%>"><%=rsSchedule("VisitorTeamName").Value%></a></td>
+													<td>&nbsp;</td>
+													<td onclick="javascript:selectTD(this, false);" onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this));" teamID ="<%=sHomeTeamID%>" valign="center" class="tdHomeContent" id="<%=sHomeSelected & sHomeTeamID%>" name="<%=sHomeSelected & sHomeTeamID%>"><%=rsSchedule("HomeTeamName").Value%>&nbsp;</td>
+													<td onclick="javascript:selectTD(this.parentElement.cells[5], false);" onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this.parentElement.cells[5]));" class="tdHomeContent"><img width="25px" src="images/TeamLogos/<%=rsSchedule("HomeLogoFileName").Value%>"></td>
+													<td>&nbsp;</td>
+													<td><%=WeekdayName(Weekday(rsSchedule("GameDate").Value), true)%>&nbsp;<%=formatTime(rsSchedule("GameDate").Value)%></td>
+												</tr><%
+												rsSchedule.MoveNext
+											Loop
+											'Look up the points game total only if the userID and userPicksID match
+											If userID = userPicksID Then
+												rsPicks.Filter = "ScheduleID = '" & sPointsGameScheduleID & "'"
+												sPointsGamePoints = getRecordFromRS(rsPicks, "PointsGameTotal", "")
+												sHiddenPointsGamePoints = sPointsGamePoints
+											Else
+												sHiddenPointsGamePoints = getRecordFromRS(rsPicks, "PointsGameTotal", "")
+												sPointsGamePoints = ""
+											End If
+											if kothOnly = "true" Then%>
+												<input type="hidden" name="txtPointsTotal" id="txtPointsTotal" value="">
+											<%else
+												if bLastGamePointsGame = true Then%>
+													<tr dataRow="false">
+														<td align="center" colspan="2"><font size="+1" face="wingdings">Ä</font></td>
+														<td colspan="4" align="left">Points Game Total:&nbsp;<input type="text" name="txtPointsTotal" disabled value="<%=sPointsGamePoints%>"></td>
+													</tr>
+												<%else%>
+													<tr dataRow="false">
+														<td colspan="9">&nbsp;</td>
+													</tr>
+													<tr dataRow="false">
+														<td align="left" colspan="9">Points Game Total:&nbsp;<input type="text" name="txtPointsTotal" disabled value="<%=sPointsGamePoints%>"></td>
+													</tr>
+												<%end if%>
+											<%end if%>
+										<%end If%>
+										<%if kingOfTheHillEligibleThisWeek = "true" then%>
+										<tr dataRow="false">
+											<td colspan="9">&nbsp;</td>
+										</tr>
+										<tr dataRow="false">
+											<td colspan="9" align="center"><font size="+1"><b>King of the Hill pick:</b></font></td>
+										</tr>
+										<tr dataRow="false">
+											<td colspan="9" align="center">
+												<select name="cboKingOfHillPick" id="cboKingOfHillPick" LANGUAGE="javascript" onchange="changeKingOfHillPick();">
+													<option value=""></option>
+												<%
+												For iCount = 1 to getRSCount(rsTeams, true)
+													validKingOfHillOption = "true"
+													selectedKingOfHillOption = "false"
+													sComboTeamScheduleID = CStr(rsTeams("TeamID").Value) & "|" & CStr(rsTeams("ScheduleID").Value)
+													sComboTeamName = getRecordFromRS(rsTeams, "TeamName", "")
+													For iCount2 = 1 to getRSCount(rsKingOfHillPicks, true)
+														sComboTeamScheduleID2= CStr(rsKingOfHillPicks("TeamID").Value) & "|" & CStr(rsKingOfHillPicks("ScheduleID").Value)
+														If sComboTeamScheduleID = sComboTeamScheduleID2 Then
+															'this user has already selected this team, but they did it in this week, so it's a valid option and should be selected
+															selectedKingOfHillOption = "true"
+														Else
+															If CStr(rsTeams("TeamID").Value) = CStr(rsKingOfHillPicks("TeamID").Value) Then
+																'this user has already picked this team (and not this week), so don't include it in the list
+																validKingOfHillOption = "false"
+															End If
+														End If
+														rsKingOfHillPicks.MoveNext
+													next
+													If validKingOfHillOption = "true" Then
+														If selectedKingOfHillOption = "true" Then
+															%><option value="<%=sComboTeamScheduleID%>" selected><%=sComboTeamName%></option><%
+														Else
+															%><option value="<%=sComboTeamScheduleID%>"><%=sComboTeamName%></option><%
+														End If
+													End If
+													rsTeams.MoveNext
+												next
+												%>
+												</select>
+											</td>
+										</tr>
+										<tr dataRow="false">
+											<td colspan="9">&nbsp;</td>
+										</tr>
+										<%end if%>
+										<tr dataRow="false">
+											<td colspan="9" align="center"><input name="btnSavePicks" id="btnSavePicks" type="submit" onclick="javascript:return savePicks();" value="Save Picks" disabled></td>
+										</tr>
+									</table>
+									<input type="hidden" name="hidPointsGameTotal" id="hidPointsGameTotal" value="<%=sHiddenPointsGamePoints%>">
+								</td>
+							</tr>
+						</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<div id="divHomer" name="divHomer" STYLE="OVERFLOW: hidden;HEIGHT: 0px;position:absolute;left:200px;display:none;">
+<table border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<img name="imgHomer" id="imgHomer" src="images/TalkingHeads/homer_small2.gif" border="0">
+		</td>
+	</tr>
+</table>
+</div>
+
+<script language="JavaScript" type="text/javascript" src="scripts/wz_tooltip.js"></script>
+<%
+'Close the DB connection and clear any objects
+CloseRS rsSchedule
+CloseRS rsPicks
+CloseRS rsUsers
+CloseRS rsTeams
+CloseRS rsKingOfHillPicks
+Set rsSchedule = nothing
+Set rsPicks = nothing
+Set rsUsers = nothing
+Set rsTeams = nothing
+Set rsKingOfHillPicks = nothing
+Call closeDB()
+
+%>
+
 </body>
 </html>

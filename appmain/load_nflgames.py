@@ -1,6 +1,9 @@
 import requests
+from django.utils.timezone import make_aware
+from datetime import datetime
+import pytz
 import xml.etree.ElementTree as ET
-from appmain.models import Season, Week, Game
+from appmain.models import Season, Week, Team, Game
 from django.core.exceptions import ObjectDoesNotExist
 
 # List of NFL weeks, 4 PreSeason, 17 Regular Season, and 4 Post Season
@@ -100,25 +103,17 @@ def live_scores_reg():
 
 
 def LoadSeason(season):
-   year = season
+   yr = season
    # game_first = -4 # start at -4 to get PreSeason games
    # game_last = 22  # 22 is SB
    for week, gt in nfl_week:
       # get games and convert to XML
-      url = 'http://www.nfl.com/ajax/scorestrip?season=' + year + '&seasonType=' + gt + '&week=' + str(week)
+      url = 'http://www.nfl.com/ajax/scorestrip?season=' + yr + '&seasonType=' + gt + '&week=' + str(week)
       page = requests.get(url)
       print(f'Page URL: {url}')
       page_xml = ET.fromstring(page.content)
 
       for gms in page_xml:
-         # for key, attr in game_attrib_key:
-         #    game_attrib.append = gms.attrib[attr]
-
-         # gd = gms.attrib['gd']
-         # w = gms.attrib['w']  # week
-         # y = gms.attrib['y']  # year
-         # t = gms.attrib['t']  # P for PRE, PreSeason; R for REG, Regular Season; P for POST, PostSeason
-
          cnt = 0
          for score in gms:
             cnt += 1
@@ -130,7 +125,7 @@ def LoadSeason(season):
                sch_game.wk_no = gms.attrib['w']
                sch_game.year = gms.attrib['y']
                sch_game.t = gms.attrib['t']
-               y = Season.objects.get(yr = year)
+               y = Season.objects.get(yr = yr)
                week = Week.objects.get(year = y, week_no = gms.attrib['w'], gt = gt)
                print(f'Week #{week.week_no} ')
                sch_game.week = week
@@ -150,6 +145,11 @@ def LoadSeason(season):
                   sch_game.k = score.attrib[k]
                elif k == 'h':
                   sch_game.home = score.attrib[k]
+                  if score.attrib[k] == 'LA':
+                     team = 'LAR'
+                  else:
+                     team = score.attrib[k]
+                  sch_game.home_team = Team.objects.get(team_abrev = team)
                elif k == 'hnn':
                   sch_game.home_name = score.attrib[k]
                elif k == 'hs':
@@ -157,6 +157,11 @@ def LoadSeason(season):
                      sch_game.home_score = score.attrib[k]
                elif k == 'v':
                   sch_game.visitor = score.attrib[k]
+                  if score.attrib[k] == 'LA':
+                     team = 'LAR'
+                  else:
+                     team = score.attrib[k]
+                  sch_game.visitor_team = Team.objects.get(team_abrev = team)
                elif k == 'vnn':
                   sch_game.visitor_name = score.attrib[k]
                elif k == 'vs':
@@ -170,11 +175,20 @@ def LoadSeason(season):
                   sch_game.ga = score.attrib[k]
                elif k == 'gt':
                   sch_game.gt = score.attrib[k]
-      #      else:
-      #            print(f"something: {score.attrib[k]}")
             #End of for k in score.attrib.keys():
             sch_game.save()
-            print(f'Game #{cnt} loaded for Week {week} for year {year}')
+            # calculate datetime field of game from eid and time
+            year = int(sch_game.eid[:4])
+            mo = int(sch_game.eid[4:6])
+            day = int(sch_game.eid[6:8])
+            hour, min = sch_game.time.split(':')
+            if int(hour) < 12:
+               h = int(hour) + 12
+            else:
+               h = int(hour)
+            sch_game.date_time = make_aware(datetime(year, mo, day, h, int(min)), pytz.timezone('America/New_York'))
+            sch_game.save()
+            print(f'Game #{cnt} loaded for Week {week} for year {year} ')
          #End of for score in gms:
          print(f'Week # {week} loaded for year {year}')
       #End of for gms in page_xml:
