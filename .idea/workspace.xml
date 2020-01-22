@@ -2,89 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Load_Teams.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/Picks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/load_games.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0005_pick_postpick_postresult_result_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0006_profile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0007_auto_20200105_1838.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0008_auto_20200105_1843.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0009_auto_20200105_1846.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0010_profile_ball_pool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0011_auto_20200105_1853.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0012_auto_20200107_1638.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0013_auto_20200107_1640.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0014_auto_20200107_2015.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0015_auto_20200108_0659.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0016_nflgame.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0017_auto_20200108_0811.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0018_auto_20200108_0812.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0019_auto_20200108_1526.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0020_auto_20200108_1540.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0021_auto_20200108_1946.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0022_auto_20200109_1804.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0023_auto_20200109_2051.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0024_auto_20200109_2053.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0025_auto_20200109_2055.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0026_auto_20200109_2100.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0027_auto_20200110_0910.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0028_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0029_week_year.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0030_auto_20200110_0917.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0031_auto_20200110_0952.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0032_remove_game_wk_no.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0033_auto_20200110_0955.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0034_pick_koth_team.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0035_pickgame.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0036_auto_20200110_1543.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0037_auto_20200110_1544.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0038_auto_20200110_1551.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0039_delete_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0040_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0041_delete_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0042_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0043_auto_20200110_1608.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0044_auto_20200110_1610.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0045_delete_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0046_season.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0047_week_year.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0048_auto_20200113_1032.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0049_week_gt.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0050_auto_20200113_1852.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0051_game_home_teamname.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0052_auto_20200113_1855.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0053_game_visitor_teamname.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0054_auto_20200113_1859.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/Logo/Pigskinners_logo_pig_sm.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/Logo/Pigskinners_logo_pig_sm.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/tables.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/temp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/add_pick.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/game.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/game_view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/new_base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/new_games.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/signup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/teams_view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nfl score xml.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/login.html.bak" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,10 +141,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
-    <state x="463" y="185" key="SettingsEditor" timestamp="1578805735537">
+    <state x="515" y="141" key="SettingsEditor" timestamp="1579717803496">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="463" y="185" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578805735537" />
+    <state x="515" y="141" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1579717803496" />
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1578011416398">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
