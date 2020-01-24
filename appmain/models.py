@@ -20,6 +20,7 @@ class TimeStampMixin(models.Model):
         abstract = True
 
 
+# must be defined before Profile because it is referenced in favorite team
 class Team(models.Model):
     team_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=50)
@@ -61,11 +62,12 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
+
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
-# TODO: this is probably not needed anymore
+
 class Season(models.Model):
     yr = models.PositiveSmallIntegerField(null=True,default=2018)
     current = models.BooleanField(default=False)
@@ -73,7 +75,7 @@ class Season(models.Model):
     end_date = models.DateField(null=True)
 
     def __str__(self):
-        return self.yr
+        return str(self.yr)
 
 
 #TODO: start and end are not needed or can be compputed from Game model on the fly as min max of date/time
@@ -160,6 +162,22 @@ class Game(TimeStampMixin):
         mst_date = est_date.astimezone(pytz.timezone('America/Denver'))  #conver date to MST
         return mst_date
 
+    def win_team(self):
+        if self.home_score > self.visitor_score:
+            return self.home_team
+        elif self.home_score < self.visitor_score:
+            return self.visitor_team
+        else:
+            pass
+
+    def lose_team(self):
+        if self.home_score > self.visitor_score:
+            return self.visitor_team
+        elif self.home_score < self.visitor_score:
+            return self.home_team
+        else:
+            pass
+
     def game_winner(self):
         if self.status == 'F' or self.status == 'FO':
             if self.home_score > self.visitor_score:
@@ -172,34 +190,51 @@ class Game(TimeStampMixin):
                 return 'Error'
 
 
-# TODO: add constraint for only 1 record per user per week
 class Pick(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_user',default=1)
     wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_wk')
     points = models.PositiveSmallIntegerField()
+    koth_game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='koth_game')
     koth_team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='koth_team')
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_entered')
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_updated')
-    # date_entered = models.DateTimeField(default=datetime.now)
-    # date_updated = models.DateTimeField(default=datetime.now)
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=['user','wk'], name='pick_user_wk')]
 
+    def pick_year(self):
+        return self.wk.year
+
+    def koth_eligible(self):
+        curr_yr = Season.objects.get(current=True)
+        curr_wks = Week.objects.filter(year=curr_yr)
+        user_picks = Pick.objects.filter(user=self.user, wk__in=curr_wks)
+        eligible = True
+        for pick in user_picks:
+            if pick.koth_game:
+                if pick.koth_game.lose_team() == self.koth_team:
+                    eligible = False
+                    break
+
+        return eligible
+
     # def cap_user(self):
     #     return self.user.capitalize()
 
-    def koth_eligible(self):
-        return True
-
     # only allow teams that have games this week in the list
-    # get Home teams, visitors, teams allready used
+    # get Home teams, visitors, teams already used
     # take union and then difference
     def koth_remaining(self):
-        teams = Team.objects.all()
-        user_picks = Pick.objects.filter(user=self.user)
-        # for pick in user_picks:
-        #     teams = teams.filter(team=pick.koth_team).delete()
+        curr_yr = Season.objects.get(current=True)
+        games = Game.objects.filter(week=self.wk)
+        curr_wks = Week.objects.filter(year=curr_yr)
+        used_picks = Pick.objects.filter(user=self.user, wk__in=curr_wks).values_list('koth_team',flat=True)
+        teams = []
+        for game in games:
+            if game.home_team.id not in used_picks:
+                teams.append(game.home_team)
+            if game.visitor_team.id not in used_picks:
+                teams.append(game.visitor_team)
 
         return teams
 

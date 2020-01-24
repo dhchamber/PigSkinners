@@ -52,17 +52,6 @@
                                 {% csrf_token %}
                                 <table cellpadding="0" cellspacing="0" border="2" width="100%" >
                                     <tr>
-<!--                                        <td width="150px" valign="top">-->
-<!--                                            <table name="tblErrorMsg" id="tblErrorMsg" cellpadding="0" cellspacing="0"-->
-<!--                                                   border="0" width="100%" style="display:none" >-->
-<!--                                                <tr>-->
-<!--                                                    <td colspan="2"><b><font color="red">Please correct the following errors:</font></b>-->
-<!--                                                </tr>-->
-<!--                                                <tr>-->
-<!--                                                    <td>&nbsp;</td>-->
-<!--                                                    <td><font id="errMsg" name="errMsg" color="red"></font></td>-->
-<!--                                            </table>-->
-<!--                                        </td>-->
                                         <td>
                                             <table cellpadding="0" cellspacing="0" border="0" name="tblPicks" id="tblPicks" align="center">
                                                 <tr dataRow="false">
@@ -74,6 +63,7 @@
                                                 <tr dataRow="false">
                                                     <td colspan="9" align="center">
                                                         <font size="+1"><b>{{ pick.wk.date_range }}&nbsp;</b></font>
+                                                        <font size="+2"><b>{{ pick.koth_eligible }}&nbsp;</b></font>
                                                     </td>
                                                 </tr>
     <!--                                            <%If iUserAccessLvl <= cgAdminAccessLvl Then%>-->
@@ -108,32 +98,23 @@
                                                 </tr>
                                                 {% for pick_game in pick.pickgame_set.all %}
                                                     <tr>
-        <!--                                            <%if kothOnly = "true" then%>class="trPointsGame"<%end if%>-->
-        <!--                                            id="<%=sScheduleID%>" name="<%=sScheduleID%>" scheduleID="<%=sScheduleID%>"-->
-        <!--                                            dataRow="true" >-->
-        <!--                                            <%end If%>-->
                                                         <td align="center">{{ forloop.counter }}</td>
                                                         <td>&nbsp;&nbsp;</td>
                                                         <td class="tdVisitorContent"><img src="{% static pick_game.game.visitor_team.logo_file_name %}" width="25px" >&nbsp;</td>
-                                                        <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.visitor_team.id }}" href="#" team="{{ pick_game.game.visitor_team.id }}"><font color="white">{{ pick_game.game.visitor_team.team_name }}</font></a></td>
-<!--                                                        <td onclick="javascript:selectTD(this, false);"-->
-<!--                                                            onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this));"-->
-<!--                                                            teamID="ARI" valign="center" class="tdVisitorContent"-->
-<!--                                                            id="<%=sVisitorSelected & sVisitorTeamID%>"-->
-<!--                                                            name="<%=sVisitorSelected & sVisitorTeamID%>">-->
-<!--                                                            {{ pick_game.game.visitor_team.team_name }}</a></td>-->
+                                                        <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.visitor_team.id }}" href="#" team="{{ pick_game.game.visitor_team.id }}"
+                                                         {% if pick_game.game.visitor_team.id == pick_game.team.id %}
+                                                               background-color="#ff6600" style="background-color: rgb(255, 102, 0);"
+                                                        {% endif %}
+                                                        ><font color="white" >{{ pick_game.game.visitor_team.team_name }}</font></a></td>
                                                         <td>&nbsp;</td>
-<!--                                                        <td onclick="javascript:selectTD(this, false);"-->
-<!--                                                            onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText(this));"-->
-<!--                                                            teamID="<%=sHomeTeamID%>" valign="center" class="tdHomeContent"-->
-<!--                                                            id="<%=sHomeSelected & sHomeTeamID%>"-->
-<!--                                                            name="<%=sHomeSelected & sHomeTeamID%>">-->
-<!--                                                            {{ pick_game.game.home_team.team_name }}&nbsp;-->
-<!--                                                        </td>-->
-                                                        <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.home_team.id }}" href="#" team="{{ pick_game.game.home_team.id }}"><font color="white">{{ pick_game.game.home_team.team_name }}</font></a></td>
+                                                        <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.home_team.id }}" href="#" team="{{ pick_game.game.home_team.id }}"
+                                                         {% if pick_game.game.home_team.id == pick_game.team.id %}
+                                                               background-color="#ff6600" style="background-color: rgb(255, 102, 0);"
+                                                        {% endif %}
+                                                        ><font color="white">{{ pick_game.game.home_team.team_name }}</font></a></td>
                                                         <td class="tdHomeContent"><img width="25px" src="{% static pick_game.game.home_team.logo_file_name %}"></td>
                                                         <td>&nbsp;</td>
-                                                        <td><input type="hidden" name="Selected{{ forloop.counter }}" id="Selected{{ forloop.counter }}" style="color: blue;" ></td>
+                                                        <td><input type="hidden" name="Selected{{ forloop.counter }}" id="Selected{{ forloop.counter }}" style="color: blue;" value="{{ pick_game.team.id }}"></td>
                                                         <td>{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date }}</td>
                                                     </tr>
                                                 {% endfor %}
@@ -156,7 +137,11 @@
                                                             <select name="cboKingOfHillPick" id="cboKingOfHillPick" style="color: blue;">
                                                                 <option value=""></option>
                                                                 {% for team in pick.koth_remaining %}
-                                                                    <option value="{{ team.id }}" style="color: blue;">{{ team.team_name }}</option>
+                                                                    <option value="{{ team.id }}" style="color: blue;"
+                                                                    {% if pick.koth_team.id == team.id %}
+                                                                        selected="selected"
+                                                                    {% endif %}
+                                                                    >{{ team.team_name }}</option>
                                                                 {% endfor %}
                                                             </select>
                                                         </td>

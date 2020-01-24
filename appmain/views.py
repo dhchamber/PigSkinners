@@ -208,20 +208,31 @@ def teams_view(request):
 
 @login_required
 def picks_view(request):
-   # try:
-   picks = Pick.objects.filter(user = request.user, wk = 3)  # changed from get to filter to avoid "Pick is not iterable" error
-   # except Pick.DoesNotExist:
-   if picks.count() == 0:
-      pick_wk = Pick()
-      pick_wk.user = request.user
-      pick_wk.wk = Week.objects.filter(year=2018,week_no=3)
-      pick_wk.points = 41
-      pick_wk.entered_by = request.user
-      pick_wk.updated_by = request.user
-      pick_wk.save()
-      pick_wk = Pick.objects.filter(user = request.user, wk = 3)  # changed from get to filter to avoid "Pick is not iterable" error
+   timezone.activate(pytz.timezone('America/Denver'))
+   year = Season.objects.get(current=True)
+   week_no = request.session.get('week', 1)
+   gt = request.session.get('gt', 'REG')
+   try:
+      wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
+   except:
+      wk = Week.objects.get(year=year, week_no=1, gt='REG')
 
-   return render(request, 'appmain/picks_view.html', {'picks': picks})
+   try:
+      pick = Pick.objects.get(user=request.user, wk=wk)
+   except:  #TODO: get exception type
+      pass
+
+   # if picks.count() == 0:
+   #    pick_wk = Pick()
+   #    pick_wk.user = request.user
+   #    pick_wk.wk = Week.objects.filter(year=2018,week_no=3)
+   #    pick_wk.points = 41
+   #    pick_wk.entered_by = request.user
+   #    pick_wk.updated_by = request.user
+   #    pick_wk.save()
+   #    pick_wk = Pick.objects.filter(user = request.user, wk = 3)  # changed from get to filter to avoid "Pick is not iterable" error
+
+   return render(request, 'appmain/picks_view.html', {'pick': pick})
 
 #TODO: add view for Teams list
 #TODO: add template too (HTML) for Teams list
@@ -232,8 +243,8 @@ def picks_view(request):
 #TODO: add form to display and save picks for all games for week
 # @login_required
 def picks_make(request):
-   if not request.user.is_authenticated:
-      return redirect('%s?next=%s' %(settings.LOGIN_URL, request.path))
+   # if not request.user.is_authenticated:
+   #    return redirect('%s?next=%s' %(settings.LOGIN_URL, request.path))
 
    timezone.activate(pytz.timezone('America/Denver'))
    submitted = False
@@ -244,15 +255,15 @@ def picks_make(request):
       pick_id = request.POST.get("hidPickID")
       pick = Pick.objects.get(pk=pick_id)
       pick.points = request.POST.get("txtPointsTotal")
-      koth = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
-      pick.koth_team = koth
+      pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
+      pick.koth_game = (Game.objects.filter(week=pick.wk,home_team=pick.koth_team) | Game.objects.filter(week=pick.wk,visitor_team=pick.koth_team)).first()
       for i, game in enumerate(pick.pickgame_set.all(), start=1):
          print(f'Setting game for: {i} as Team: {request.POST.get("Selected"+str(i))}')
          team = Team.objects.get(id=request.POST.get("Selected"+str(i)))
          game.team = team
          game.save()
       pick.save()
-      return HttpResponseRedirect('/picks/make/?submitted=True')
+      return redirect('picks_make')
 # TODO: change return to same page with picks displayed and "Picks Saved" response
    else:
       year = Season.objects.get(current=True)

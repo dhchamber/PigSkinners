@@ -1,4 +1,4 @@
-{% extends 'appmain/new_base.html' %}
+{% extends 'appmain/base.html' %}
 {% block content %}
 <!--  get nfl games data for a week and loop through records and display
     game #, home, visitor,
@@ -7,18 +7,30 @@
 -->
     <div class="container-fluid text-center">
         <div class="row">
-            <div class="col-sm-3">ID</div>
-            <div class="col-sm-1">Points</div>
-            <div class="col-sm-1">Week</div>
-            <div class="col-sm-1">User</div>
+            <div class="col-sm-4">Picks for week {{ pick.wk }}</div>
+            <div class="col-sm-4">{{ pick.wk.date_range }}</div>
+            <div class="col-sm-4">For user: {{ pick.user }}</div>
         </div>
-<!--        {% for pk_wk in picks %}-->
+        <div class="row">
+            <div class="col-sm-1">Game</div>
+            <div class="col-sm-3">Visitor</div>
+            <div class="col-sm-3">Home</div>
+            <div class="col-sm-5">Time</div>
+        </div>
+        {% for pick_game in pick.pickgame_set.all %}
             <div class="row">
-                <div class="col-sm-3">{{ pk_wk.id }}</div>
-                <div class="col-sm-1">{{ pk_wk.points }}</div>
-                <div class="col-sm-1">{{ pk_wk.wk_id }}</div>
-                <div class="col-sm-1">{{ pk_wk.user_id }}</div>
+                <div class="col-sm-1">{{ forloop.counter }}</div>
+                {% if pick_game.game.visitor_team.id == pick_game.team.id %}
+                    <div class="col-sm-3"  style="color: blue;">{{ pick_game.game.visitor_team.team_name }}</div>
+                {% else %}
+                    <div class="col-sm-3">{{ pick_game.game.visitor_team.team_name }}</div>
+                {% endif %}
+                <div class="col-sm-3">{{ pick_game.game.home_team.team_name }}</div>
+                <div class="col-sm-5">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date }}</div>
             </div>
-<!--        {% endfor %}-->
+        {% endfor %}
     </div>
+<script>
+
+</script>
 {% endblock %}
