@@ -1,7 +1,23 @@
 from django.contrib import admin
-from .models import Week,Team #,Game
+from .models import Season, Week,Team, Game
 
-admin.site.register(Week)
-admin.site.register(Team)
-# admin.site.register(Game)
+class SeasonAdmin(admin.ModelAdmin):
+    list_display = ('year', 'current', 'start_date', 'end_date')
+
+
+class WeekAdmin(admin.ModelAdmin):
+    list_display = ('id', 'year', 'week_no', 'gt', 'start_date', 'end_date', 'closed', 'forecast_date_closed')
+
+
+class GameAdmin(admin.ModelAdmin):
+    list_display = ('eid', 'gsis', 'gt', 'wk_no', 'day', 'time', 'status', 'home', 'home_score', 'visitor', 'visitor_score')
+
+
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ('id', 'team_abrev', 'short_name', 'team_name', 'web_address', 'conference', 'division', 'city_name')
+
+admin.site.register(Season, SeasonAdmin)
+admin.site.register(Week, WeekAdmin)
+admin.site.register(Team, TeamAdmin)
+admin.site.register(Game, GameAdmin)
 

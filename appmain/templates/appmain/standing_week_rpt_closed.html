@@ -1,0 +1,73 @@
+{% load template_filter %}
+<table id="tblStats" name="tblStats" cellpadding="3px" cellspacing="0" border="1" class="tblWeeklyStats" width=100%>
+    <thead>
+        <tr userRow='false'>
+            <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" align='center' colspan="{{ num_games }}">
+                <font size=+1><b>
+                {% if bBallPoolOnly %}
+                    BATC-Only Weekly Stats</b></font></td>
+                {% else %}
+                    Weekly Stats</b></font></td>
+                {% endif %}
+            <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" align='center' colspan='2'>
+                <input name="btnShowDiffs" id="btnShowDiffs" type="submit" onclick="javascript:showAllDiffs();" value="Show All Diffs">
+            </td>
+        </tr>
+        <!--				'Show the Visitor Teams-->
+        <tr userRow='false'>
+            <td rowspan=2 align=center style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">
+                <font id="ftWeekCombo" name="ftWeekCombo"><b>Week:&nbsp; {{ user_picks.first.wk.week_no }}/{{ user_picks.first.wk.id }}</b></font></td>
+            {% for game in games %}
+                {% with sOnClick=" onmouseover='javascript:this.T_STATIC=true;return escape(TooltipText({{ game.visitor_team.short_name }}));' onclick='sortByTeam({{ game.visitor_team.short_name }}', {{ forloop.counter }}" %}
+                    {% if game.visitor_team == game.win_team %}
+                        {% with sStyle="BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;BORDER-LEFT: black thin solid;BORDER-RIGHT: black thin solid; align='center' " %}
+                        <td><div style="CURSOR: hand;" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ visitor|lookup:game }}</font></div></td>
+                        {% endwith %}
+                    {% else %}
+                        {% with sStyle="" %}
+                        <td><div {{ sOnClick }} style="CURSOR: hand;" {{ sStyle }}><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ visitor|lookup:game }}</font></div></td>
+                        {% endwith %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+<!--            add sOnClick-->
+			<td rowspan=2 align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid"><b>Points Game</b></td>
+            <td rowspan=2 align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid"><b>Number of Wins</b></td>
+        </tr>
+        <!--				'Now show the Home Teams-->
+        <tr userRow='false'>
+            {% for game in games %}
+                {% with sOnClick=" onmouseover='javascript:this.T_STATIC=true;return escape(TooltipText({{ game.home_team.short_name }}));' onclick='sortByTeam({{ game.home_team.short_name }}', {{ forloop.counter }}" %}
+                    {% if game.home_team == game.win_team %}
+                        {% with sStyle="BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;BORDER-LEFT: black thin solid;BORDER-RIGHT: black thin solid; align='center' " %}
+                        <td><div {{ sOnClick }} style="CURSOR: hand;" {{ sStyle }}><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ home|lookup:game }}</font></div></td>
+                        {% endwith %}
+                    {% else %}
+                        {% with sStyle="" %}
+                        <td><div {{ sOnClick }} style="CURSOR: hand;" {{ sStyle }}><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ home|lookup:game }}</font></div></td>
+                        {% endwith %}
+                    {% endif %}
+                {% endwith %}
+            {% endfor %}
+    </thead>
+    <tbody>
+            {% for pick in user_picks %}
+<!--            sOnClick = -->
+                <tr userRow="true" id = "tr{{ pick.user.name }}" name = "tr{{ pick.user.name }}" isCompared="false">
+                    <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;"><font size=""-1">{{ pick.user.first_name }} {{ pick.user.last_name }}</font></td>
+                    {% for pgame in pick.pickgame_set.all %}
+                        {% if pgame.team is not NONE %}
+                            <td style="BORDER-BOTTOM: silver solid thin;"><div style="BACKGROUND-COLOR: silver">{{ pgame.team.short_name }}</div></td>
+                        {% else %}
+                            <td style="BORDER-BOTTOM: silver solid thin;">X&nbsp;</td>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- Put in the points game information-->
+                    <td align="center" style="BORDER-LEFT: black solid; BORDER-BOTTOM: silver solid thin;">{{ pick.points }}</td>
+                    <!--Put in this user's win total -->
+                    </td><td align="center" style="BORDER-LEFT: black solid; BORDER-BOTTOM: silver solid thin;">{{ pick.pick_score }}&nbsp;</td>
+                </tr>
+            {% endfor %}
+
+    </tbody>
+</table>

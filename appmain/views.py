@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.db import transaction
+from django.db.models import Sum
 from appmain.forms import SignUpForm, PickForm, PickGameForm, GamePickFormSet
 from django_tables2 import SingleTableView # django-tables2 readthedocs.io
 from django.utils import timezone
@@ -34,8 +35,20 @@ class TeamListView(SingleTableView):
    table_class = TeamTable
    template_name = 'appmain/team.html'
 
+def get_selected_week(request):
+   year = Season.objects.get(current=True)
+   week_no = request.session.get('week', 1)
+   gt = request.session.get('gt', 'REG')
+   try:
+      wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
+   except:
+      wk = Week.objects.get(year=year, week_no=1, gt=gt)
+   print(f'Found Week # {wk.week_no} loaded for year {year.year}')
 
-@login_required
+   return wk
+
+
+
 def action_week(request):
    if request.GET.get('btnSetWeek1'):
       request.session['week'] = 1
@@ -92,8 +105,21 @@ def action_week(request):
       request.session['week'] = 18
       request.session['gt'] = 'POST'
 
-   return redirect('picks_make')
+   next = request.GET.get('next','/')
+   print(f'NEXT: from GET: {next}')
+   # print(f'Path from request: {request.META.get("HTTP_REFFERER")}')
+   # print(f'Path_info from request: {request.path_info}')
+   # print(f'Path_info from request: {request.build_absolute_url()}')
+   # print(f'Path_info from request: {request.get_full_path()}')
+   return redirect(next)
+   # HttpResponseRedirect(next)
 
+
+def random_picks(request):
+
+
+   next = request.GET.get('next','/')
+   return redirect(next)
 
 # tutorial/views.py
 # class GameListView(SingleTableView):
@@ -108,44 +134,48 @@ def game_list(request):
    if request.method == 'POST' and 'btnLoadSeason' in request.POST:
       LoadSeason((request.POST.get('txtYear')))
       #return user to page
-      return HttpResponseRedirect(home(request))
+      # return HttpResponseRedirect(home(request))
    elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
       LoadWeek()
-      return HttpResponseRedirect(reverse(game_list(request)))
+      # return HttpResponseRedirect(reverse(game_list(request)))
    elif request.method == 'POST' and 'btnLoadLive' in request.POST:
       live_scores_reg()
-      return HttpResponseRedirect(reverse(game_list(request)))
+      # return HttpResponseRedirect(reverse(game_list(request)))
    else:
       # week = Week.objects.get(week_no=15)
       # table = GameTable(Game.objects.filter(week=week))
       table = GameTable(Game.objects.all())
-      return render(request, "appmain/game.html",{"table" : table})
+      # return render(request, "appmain/game.html",{"table" : table})
 
+   return redirect('setup_games')
 
+# setup/games
 @login_required
 def games_view(request):
    if request.method == 'POST' and 'btnLoadSeason' in request.POST:
       LoadSeason((request.POST.get('txtYear')))
 
-      request.method = 'GET'
-      return HttpResponseRedirect(reverse(games_view(request)))
+      # request.method = 'GET'
+      # return HttpResponseRedirect(reverse(games_view(request)))
    elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
       LoadWeek()
 
-      request.method = 'GET'
-      return HttpResponseRedirect(reverse(games_view(request)))
+      # request.method = 'GET'
+      # return HttpResponseRedirect(reverse(games_view(request)))
    elif request.method == 'POST' and 'btnLoadLive' in request.POST:
       live_scores_reg()
 
-      request.method = 'GET'
-      return HttpResponseRedirect(games_view(request))
+      # request.method = 'GET'
+      # return HttpResponseRedirect(games_view(request))
    else:
       year = Season.objects.get(current=True)
       week = Week.objects.get(year=year, week_no= 1, gt='REG')
-      print(f'Found Week # {week.week_no} loaded for year {year.yr}')
+      print(f'Found Week # {week.week_no} loaded for year {year.year}')
       games = Game.objects.filter(week=week)
       print(f'Found games # {games.count()} ')
-   return render(request, 'appmain/games_view.html', {'games': games})
+      return render(request, 'appmain/games_view.html', {'games': games})
+
+   # return redirect('setup_games')
 #       return render(request, 'appmain/new_games.html', {'games': games})
 
 
@@ -173,9 +203,9 @@ def update_profile(request, user_id):
    user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
    user.save()
 
-@login_required
-def post_list(request):
-    return render(request, 'appmain/post_list.html', {})
+# @login_required
+# def post_list(request):
+#     return render(request, 'appmain/post_list.html', {})
 
 
 @login_required
@@ -184,10 +214,10 @@ def home(request):
    return render(request, 'appmain/home.html', {'weeks': weeks})
 
 
-@login_required
-def picks_view(request):
-   games = Game.objects.filter(wk_id=1).order_by('gsis')
-   return render(request, 'appmain/picks_view.html', {'games': games})
+# @login_required
+# def picks_view(request):
+#    games = Game.objects.filter(wk_id=1).order_by('gsis')
+#    return render(request, 'appmain/picks_view.html', {'games': games})
 
 # remove replace with form view and html
 # def picks_make(request):
@@ -196,7 +226,9 @@ def picks_view(request):
 
 @login_required
 def picks_revisions(request):
-    return render(request, 'appmain/picks_revisions.html', {})
+   # if not request.user.is_authenticated:
+   #    return redirect('%s?next=%s' %(settings.LOGIN_URL, request.path))
+   return render(request, 'appmain/picks_revisions.html', {})
 
 
 @login_required
@@ -204,6 +236,11 @@ def teams_view(request):
    teams = Team.objects.all()
    return render(request, 'appmain/teams_view.html', {'teams': teams})
 
+@login_required
+def setup_weeks(request):
+   year = Season.objects.get(current=True)
+   weeks = Week.objects.filter(year=year)
+   return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
 
 
 @login_required
@@ -239,48 +276,76 @@ def picks_view(request):
 #TODO: add link to navbar
 
 
+# TODO: add validated to logic
 # form for user to pick games
-#TODO: add form to display and save picks for all games for week
-# @login_required
+@login_required
 def picks_make(request):
-   # if not request.user.is_authenticated:
-   #    return redirect('%s?next=%s' %(settings.LOGIN_URL, request.path))
-
    timezone.activate(pytz.timezone('America/Denver'))
    submitted = False
+   wk = get_selected_week(request)
+
+   validated = True
+   # if not wk.closed:
+   #    close = wk.close_week(request.user)
+      # print(f'Week closed for week ID: {wk.id}')
+
+   print(f'In picks_make : Chosen Week ID: {wk.id} Start_date {wk.start_dt()} Closed: {wk.closed}')
 
    if request.method == 'POST':
-      print(f'got a response: {request.POST.get("txtPointsTotal")}')
       print(f'of Pick ID: {request.POST.get("hidPickID")}')
       pick_id = request.POST.get("hidPickID")
       pick = Pick.objects.get(pk=pick_id)
       pick.points = request.POST.get("txtPointsTotal")
-      pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
-      pick.koth_game = (Game.objects.filter(week=pick.wk,home_team=pick.koth_team) | Game.objects.filter(week=pick.wk,visitor_team=pick.koth_team)).first()
+      try:
+         pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
+      except:
+         validated = False
+         print(f'Failded Validate of KOTH Team on Pick ID: {request.POST.get("hidPickID")}')
+      try:
+         pick.koth_game = (Game.objects.filter(week=pick.wk,home_team=pick.koth_team) | Game.objects.filter(week=pick.wk,visitor_team=pick.koth_team)).first()
+      except:
+         print(f'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
+         validated = False
+
       for i, game in enumerate(pick.pickgame_set.all(), start=1):
-         print(f'Setting game for: {i} as Team: {request.POST.get("Selected"+str(i))}')
-         team = Team.objects.get(id=request.POST.get("Selected"+str(i)))
+         team_id = request.POST.get("Selected"+str(i))
+         print(f'Setting game for: {i} as Team: {team_id}')
+         try:
+            team = Team.objects.get(id=request.POST.get("Selected"+str(i)))
+         except:
+            print(f'Failded Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
+            validated = False
+
          game.team = team
          game.save()
+
+      if validated:
+         pick.saved = True
+         print(f'SAVED on Pick ID: {request.POST.get("hidPickID")}')
+      else:
+         pick.saved = False
+         print(f'NOT saved on Pick ID: {request.POST.get("hidPickID")}')
       pick.save()
+
       return redirect('picks_make')
 # TODO: change return to same page with picks displayed and "Picks Saved" response
-   else:
-      year = Season.objects.get(current=True)
-      week_no = request.session.get('week',1)
-      gt = request.session.get('gt','REG')
-      try:
-         wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
-      except:
-         wk = Week.objects.get(year=year, week_no=1, gt=gt)
+   # sMessage = "Your picks have been saved."
+   # sMessage = "This week's picks are closed so your changes can't be saved."
 
-      pick, created = Pick.objects.get_or_create(user = request.user, wk = wk, defaults={'user': request.user, 'wk': wk, 'points': 0,'entered_by': request.user, 'updated_by': request.user})
-      #TODO: add check for exception MultipleObjectsReturned  there should be only 1
-      if created:
-         games = Game.objects.filter(week = wk)
-         for game in games:
-            game_picks = PickGame.objects.create(pick_head = pick, game = game, entered_by = request.user, updated_by = request.user)
-            game_picks.save()
+   else:
+      # pick, created = Pick.objects.get_or_create(user = request.user, wk = wk, defaults={'user': request.user, 'wk': wk, 'points': 0,'entered_by': request.user, 'updated_by': request.user})
+      # #TODO: add check for exception MultipleObjectsReturned  there should be only 1
+      # if created:
+      #    games = Game.objects.filter(week = wk)
+      #    for game in games:
+      #       game_picks = PickGame.objects.create(pick_head = pick, game = game, entered_by = request.user, updated_by = request.user)
+      #       game_picks.save()
+      try:
+         pick = Pick.objects.get(user=request.user, wk=wk)
+         print(f'found pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
+      except:
+         pick = Pick.objects.create_pick(user=request.user, week=wk)
+         print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
 
       if 'submitted' in request.GET:
          submitted = True
@@ -292,26 +357,78 @@ class PickList(ListView):
    model = Pick
 
 
-class PickGameCreate(CreateView):
-   model = Pick
-   fields = ['user', 'wk', 'points']
-   success_url = reverse_lazy('pick-list')
 
-   def get_context_data(self, **kwargs):
-      data = super(PickGameCreate, self).get_context_data(**kwargs)
-      if self.request.POST:
-         data['games'] = GamePickFormSet(self.request.POST)
-      else:
-         data['games'] = GamePickFormSet()
-      return data
 
-   def form_valid(self, form):
-      context = self.get_context_data()
-      games = context['games']
-      with transaction.atomic():
-         self.object = form.save()
-         if games.is_valid():
-            games.instance = self.object
-            games.save()
-      return super(PickGameCreate, self).from_valid(form)
+def standings_weeksum(request):
+   wk = get_selected_week(request)
 
+   # loop and create empty picks for each active user if one doesn't exist
+   for user in User.objects.all():
+      print(f'Found user  {user.username} / {user.id} active: {user.is_active}')
+      if user.is_active:
+         try:
+            pick = Pick.objects.get(user=user, wk=wk)
+            print(f'found pick for  {user.username} / {user.id} pick: {pick.id}')
+         except:
+            pick = Pick.objects.create_pick(user=user, week=wk)
+            print(f'Created pick for  {user.username} / {user.id} pick: {pick.id}')
+
+   user_picks = Pick.objects.filter(wk=wk)
+   print(f'ALL: Found picks for  {wk.week_no} / {wk.id} total: {user_picks.count()}')
+   # if the week is closed then show standings
+   if wk.closed:
+      games = Game.objects.filter(week=wk)
+      num_games = games.count() +1
+
+#TODO: build dictionary, list, ... of games, visitor, home, counts, num games, ...
+      # user_picks = Pick.objects.filter(wk=wk) #.values('user').annotate(pick_score=Sum('pickgame__pick_score()'))
+      for g in games:
+         home = {g: 0}
+         visitor = {g: 0}
+         for p in user_picks:
+            for pg in p.pickgame_set.all():
+               if pg.game == g and pg.team == g.home_team:
+                  home[g] = home[g] + 1
+               elif pg.game == g and pg.team == g.visitor_team:
+                  visitor[g] = visitor[g] + 1
+         print(f'count for game: {g.home_team} / {g.visitor_team} count: {home[g]}/{visitor[g]}')
+
+      # calculate score for each user
+      for user_pick in user_picks:
+         user_pick.pick_score = 0
+         for game in user_pick.pickgame_set.all():
+            user_pick.pick_score += game.pick_score()
+         user_pick.save()
+      # i = serviceinvoice.objects.annotate(Sum('serviceinvoiceitems__discount_amount')).get(pk=pk)
+      # pick_score = PickGame.objects.filter(p)
+
+      return render(request, 'appmain/standings_week_closed.html', {'user_picks': user_picks, 'games':games, 'num_games':num_games, 'home':home, 'visitor':visitor})
+
+   # if week is still open then show users and if picks are saved or not
+   else:
+      return render(request, 'appmain/standings_week_open.html', {'user_picks': user_picks})
+      # pass
+
+
+# class PickGameCreate(CreateView):
+#    model = Pick
+#    fields = ['user', 'wk', 'points']
+#    success_url = reverse_lazy('pick-list')
+#
+#    def get_context_data(self, **kwargs):
+#       data = super(PickGameCreate, self).get_context_data(**kwargs)
+#       if self.request.POST:
+#          data['games'] = GamePickFormSet(self.request.POST)
+#       else:
+#          data['games'] = GamePickFormSet()
+#       return data
+#
+#    def form_valid(self, form):
+#       context = self.get_context_data()
+#       games = context['games']
+#       with transaction.atomic():
+#          self.object = form.save()
+#          if games.is_valid():
+#             games.instance = self.object
+#             games.save()
+#       return super(PickGameCreate, self).from_valid(form)

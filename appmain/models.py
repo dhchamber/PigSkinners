@@ -1,14 +1,14 @@
 from django.db import models
 from django.db.models import Max, Min
+from django.urls import reverse
 from django.contrib.auth.models import User
-from datetime import datetime
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils import timezone
 from django.utils.timezone import make_aware
-from datetime import datetime
 import pytz
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 
 class TimeStampMixin(models.Model):
@@ -22,6 +22,12 @@ class TimeStampMixin(models.Model):
 
 # must be defined before Profile because it is referenced in favorite team
 class Team(models.Model):
+    class Meta:
+        verbose_name = 'team'
+        verbose_name_plural = 'teams'
+        indexes = [models.Index(fields=['team_abrev','short_name'])]
+        ordering = ['team_abrev']
+
     team_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=50)
     team_abrev = models.CharField(max_length=3)
@@ -69,47 +75,95 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Season(models.Model):
-    yr = models.PositiveSmallIntegerField(null=True,default=2018)
-    current = models.BooleanField(default=False)
+    class Meta:
+        verbose_name = 'season'
+        verbose_name_plural = 'seasons'
+        indexes = [models.Index(fields=['year','current'])]
+        ordering = ['year']
+
+    year = models.PositiveSmallIntegerField(null=False, default=2020)
+    current = models.BooleanField(null=False, default=False)
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
 
     def __str__(self):
-        return str(self.yr)
+        return str(self.year)
 
+    # def get_absolute_url(self):
+    #     return reverse('season_detail',args=[str(self.id)])
+
+    # def start_dt(self):
+    #     return self.game_wk.aggregate(mind=Min('date_time'))['mind']
+    #
+    # def end_dt(self):
+    #     return self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
 
 #TODO: start and end are not needed or can be compputed from Game model on the fly as min max of date/time
 #TODO: as can forecast date closed, but maybe better to calc and store in table
 class Week(models.Model):
+    class Meta:
+        verbose_name = 'week'
+        verbose_name_plural = 'weeks'
+        indexes = [models.Index(fields=['year','week_no','gt','closed'])]
+        ordering = ['year','week_no']
+
     year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)    #? week of the season 1-17, 18-21
     week_no = models.PositiveSmallIntegerField(null=False) #? week of the season 1-17, 18-21  must be equal to id for foreign key
+#TODO: need a way to sort correctly be week and week type, add new model for gt with key 1,2,3 ??
     gt = models.CharField(max_length=3) #game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
-    start_date = models.DateTimeField(blank=True, null=True)
-    end_date = models.DateTimeField(blank=True, null=True)
     closed = models.BooleanField(default=False)
-    closed_by = models.CharField(max_length=50,null=True)
+    closed_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.SET_NULL,default=1)  #models.CharField(max_length=50,null=True)
     date_closed = models.DateTimeField(blank=True, null=True)
     actual_date_closed = models.DateTimeField(blank=True, null=True)
-    forecast_date_closed = models.DateTimeField(blank=True, null=True)
-    graphics_folder = models.CharField(max_length=100,null=True)
+    graphics_folder = models.CharField(max_length=100,null=True,blank=True)
     standings_report_ran = models.BooleanField(default=False)
-    weekly_standings_html = models.TextField()
+    weekly_standings_html = models.TextField(blank=True)
     mobile_standings_report_ran = models.BooleanField(default=False)
-    mobile_weekly_standings_html = models.TextField()
+    mobile_weekly_standings_html = models.TextField(blank=True)
+    start_date = models.DateField(null=True,blank=True)
+    end_date = models.DateField(null=True,blank=True)
+    forecast_date_closed = models.DateField(null=True,blank=True)
 
     def __str__(self):
         return str(self.week_no) + '/' + self.gt
 
-    def date_range(self):
-        min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
-        max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
-        print(f'{min_date.strftime("%m-%d-%Y")} to {max_date.strftime("%m-%d-%Y")}')
-        return min_date.strftime('%m-%d-%Y') + ' to ' + max_date.strftime('%m-%d-%Y')
+    def start_dt(self):
+        return self.game_wk.aggregate(mind=Min('date_time'))['mind']
 
+    def end_dt(self):
+        return self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
 
-# TODO: add methods to class for getting min and max date for week, projected close, ...
+    def forecast_dt_closed(self):
+        if self.start_dt():
+            return self.start_dt() - timedelta(hours=2)
+
+    # get current time (in UTC timezone) if after forecast close (which is alos in UTC) then close the week
+    def close_week(self, user):
+        if self.start_dt():
+            if timezone.now() > self.forecast_dt_closed():
+                self.closed = True
+                self.date_closed = timezone.now()
+                self.closed_by = user
+                self.save()
+                return True
+        return False
+
+    #TODO: date range returns dates in UTC date/time  when truncated to date it is wrong when displayed on picks page
+    #TODO: remove, not needed anymore
+    # def date_range(self):
+    #     min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
+    #     max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
+    #     print(f'{min_date.strftime("%m-%d-%Y")} to {max_date.strftime("%m-%d-%Y")}')
+    #     return min_date.strftime('%m-%d-%Y') + ' to ' + max_date.strftime('%m-%d-%Y')
+
 
 class Game(TimeStampMixin):
+    class Meta:
+        verbose_name = 'game'
+        verbose_name_plural = 'games'
+        indexes = [models.Index(fields=['week','year','eid','gsis'])]
+        ordering = ['gsis']
+
     # Fields
     # from xml file gms header for each week
     gd = models.PositiveSmallIntegerField(null=True) #? always zero?
@@ -142,10 +196,6 @@ class Game(TimeStampMixin):
     ga = models.CharField(max_length=2,null=True) # ???
     gt = models.CharField(max_length=3,null=True) #game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
 
-    # Metadata
-    class Meta:
-        ordering = ['gsis']
-
     def __str__(self):
         return self.gsis
 
@@ -158,7 +208,11 @@ class Game(TimeStampMixin):
         hour, min = self.time.split(':')
         # print(f'{self.gsis} year: {year} mo: {mo} day: {day} t: hour: {hour} min: {min}')
         # print(f'{self.gsis} year: {year} mo: {mo} day: {day} t: hour: {int(hour)+12} min: {min}')
-        est_date = make_aware(datetime(year,mo,day,int(hour)+12,int(min)), pytz.timezone('America/New_York'))
+#TODO: there is a problem with some times in week 13  need to handle this
+        if int(hour) < 12:
+            est_date = make_aware(datetime(year,mo,day,int(hour)+12,int(min)), pytz.timezone('America/New_York'))
+        else:
+            est_date = make_aware(datetime(year, mo, day, int(hour), int(min)), pytz.timezone('America/New_York'))
         mst_date = est_date.astimezone(pytz.timezone('America/Denver'))  #conver date to MST
         return mst_date
 
@@ -178,6 +232,12 @@ class Game(TimeStampMixin):
         else:
             pass
 
+    def tie(self):
+        if self.home_score == self.visitor_score:
+            return True
+        else:
+            return False
+
     def game_winner(self):
         if self.status == 'F' or self.status == 'FO':
             if self.home_score > self.visitor_score:
@@ -190,24 +250,52 @@ class Game(TimeStampMixin):
                 return 'Error'
 
 
+class PickManager(models.Manager):
+    def create_pick(self, user, week):
+        pick = self.create(user=user, wk=week, points=0, entered_by=user, updated_by=user)
+        for game in Game.objects.filter(week=week):
+            game_picks = PickGame.objects.create(pick_head=pick, game=game, entered_by=user,updated_by=user)
+            game_picks.save()
+        return pick
+
+
 class Pick(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_user',default=1)
+    class Meta:
+        verbose_name = 'pick'
+        verbose_name_plural = 'picks'
+        indexes = [models.Index(fields=['user','wk'])]
+        ordering = ['user','wk']
+        constraints = [models.UniqueConstraint(fields=['user','wk'], name='pick_user_wk')]
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='picks',default=1)
     wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_wk')
     points = models.PositiveSmallIntegerField()
     koth_game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='koth_game')
     koth_team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='koth_team')
+    pick_score = models.PositiveSmallIntegerField(default=0)
+    saved = models.BooleanField(default=False)
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_entered')
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_updated')
 
-    class Meta:
-        constraints = [models.UniqueConstraint(fields=['user','wk'], name='pick_user_wk')]
+    objects = PickManager()
+
+    # TODO: add method to determine if user has picked every game for a week
+
+    # create a new pick for a user for the week and create records for all the games in the week
+    # @classmethod
+    # def create(cls, user, week):
+    #     pick = cls(user=user, wk=week)
+    #     for game in Game.objects.filter(week=week):
+    #         game_picks = PickGame.objects.create(pick_head=pick, game=game, entered_by=user,updated_by=user)
+    #         game_picks.save()
+    #     return cls
 
     def pick_year(self):
         return self.wk.year
 
     def koth_eligible(self):
         curr_yr = Season.objects.get(current=True)
-        curr_wks = Week.objects.filter(year=curr_yr)
+        curr_wks = Week.objects.filter(year=curr_yr, closed=True)
         user_picks = Pick.objects.filter(user=self.user, wk__in=curr_wks)
         eligible = True
         for pick in user_picks:
@@ -218,16 +306,17 @@ class Pick(models.Model):
 
         return eligible
 
-    # def cap_user(self):
-    #     return self.user.capitalize()
+    # return 1 if user won KOTH game, 0 if lost or tied
+    def koth_score(self):
+        if self.koth_game.win_team() == self.koth_team:
+            return 1
+        else:
+            return 0
 
-    # only allow teams that have games this week in the list
-    # get Home teams, visitors, teams already used
-    # take union and then difference
     def koth_remaining(self):
         curr_yr = Season.objects.get(current=True)
         games = Game.objects.filter(week=self.wk)
-        curr_wks = Week.objects.filter(year=curr_yr)
+        curr_wks = Week.objects.filter(year=curr_yr, closed=True)
         used_picks = Pick.objects.filter(user=self.user, wk__in=curr_wks).values_list('koth_team',flat=True)
         teams = []
         for game in games:
@@ -238,15 +327,28 @@ class Pick(models.Model):
 
         return teams
 
+    # def cap_user(self):
+    #     return self.user.capitalize()
+
 
 class PickGame(models.Model):
+    class Meta:
+        verbose_name = 'pick game'
+        verbose_name_plural = 'pick games'
+
     pick_head = models.ForeignKey(Pick,on_delete=models.CASCADE)  # ,related_name='pick_head'
     game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='pick_game')
     team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='pick_team')  #team must be one of 2 teams in the game
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_game_entered')
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_game_updated')
 
-# TODO: add method to determine if user has picked every game for a week  need to add a week ID to picks?
+    # return 1 if user won the game, 0 if lost or tied
+    def pick_score(self):
+        if self.game.win_team() == self.team:
+            return 1
+        else:
+            return 0
+
 
 # TODO: Potential table for PostSeason seeds
 # CREATE TABLE [dbo].[tblPostSeed](

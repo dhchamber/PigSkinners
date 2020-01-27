@@ -61,16 +61,26 @@
 									  Standings
 										</a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-											<a class="dropdown-item" href="picks/view">Weekly Standings</a>
-											<a class="dropdown-item" href="picks/view">Season Standings</a>
-											<a class="dropdown-item" href="picks/form">KOTH Standings</a>
-											<a class="dropdown-item" href="picks/view">BATC Standings</a>
+											<a class="dropdown-item" href="/standings/weeksum/">Weekly Standings</a>
+											<a class="dropdown-item" href="/picks/view">Season Standings</a>
+											<a class="dropdown-item" href="/picks/form">KOTH Standings</a>
+											<a class="dropdown-item" href="/picks/view">BATC Standings</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="picks/view">Post Season Standings</a>
+											<a class="dropdown-item" href="/picks/view">Post Season Standings</a>
 										</div>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="/admin/" tabindex="-1" aria-disabled="true">Administration</a>
+									<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdminLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Admin
+										</a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+											<a class="dropdown-item" href="/setup/teams">Teams<br></a>
+											<a class="dropdown-item" href="/setup/weeks">Weeks<br></a>
+											<a class="dropdown-item" href="/setup/games">Games<br></a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="/admin/">Admin Console<br></a>
+											<a class="dropdown-item" href="/admin/auth/user/">Users<br></a>
+										</div>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="{% url 'logout' %}">Logout</a>

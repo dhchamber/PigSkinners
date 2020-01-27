@@ -1,0 +1,23 @@
+{% extends "appmain/base.html" %}
+{% load static %}
+{% block title %}Weekly Standings{% endblock title %}
+{% block content %}
+    <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" LANGUAGE=javascript onload="return window_onload()" onunload="return window_onunload()">
+        <form method="post" name="frmWeekNum" action="Standings_Week.asp?userGroup=<%=userGroup%>">
+            <input type="hidden" name="hidWeekNum" id="hidWeekNum" value="<%=sWeekNumber%>">
+        </form>
+        {% include 'appmain/weeks_sidebar.html' %}
+        <div class="col-sm-10">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+<!--                <tr>-->
+<!--                    <td>&nbsp;</td>-->
+<!--                </tr>-->
+                <tr>
+                    <td align="center">
+                        {% include 'appmain/standing_week_rpt_closed.html' %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+{% endblock content %}

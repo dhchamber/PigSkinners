@@ -13,7 +13,7 @@ game_attrib_key = [(1,'gd'), (2,'w'), (3,'y'), (4,'t')]  # gd?, week, year, game
 
 def LoadWeek():
    for season in Season.objects.all():
-      yr = season.yr
+      yr = season.year
       print(f'Loading weeks for {yr} ')
       for week, gt in nfl_week:
          print(f'Begin loading week {week} {gt} ')
@@ -125,7 +125,7 @@ def LoadSeason(season):
                sch_game.wk_no = gms.attrib['w']
                sch_game.year = gms.attrib['y']
                sch_game.t = gms.attrib['t']
-               y = Season.objects.get(yr = yr)
+               y = Season.objects.get(year = yr)
                week = Week.objects.get(year = y, week_no = gms.attrib['w'], gt = gt)
                print(f'Week #{week.week_no} ')
                sch_game.week = week

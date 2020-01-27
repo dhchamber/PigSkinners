@@ -2,12 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0060_pick_koth_game.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0061_pick_saved.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0062_auto_20200124_1013.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0063_auto_20200124_1019.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0064_auto_20200124_1035.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0065_auto_20200124_1040.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0066_auto_20200124_1351.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0067_remove_week_forecast_date_closed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0068_week_start_date.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0069_week_end_date.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0070_week_forecast_date_closed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0071_auto_20200124_1558.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0072_auto_20200124_1605.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0073_auto_20200124_2010.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0074_auto_20200125_1012.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0075_pick_pick_score.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0076_auto_20200127_0921.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/setup_weeks.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_open.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standings_week.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standings_week_closed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standings_week_open.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/tempp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -41,7 +69,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../soup" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RunManager" selected="Python.load_nflgames">
     <configuration name="load_games" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -146,10 +174,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
-    <state x="515" y="141" key="SettingsEditor" timestamp="1579719319251">
+    <state x="515" y="141" key="SettingsEditor" timestamp="1580143406788">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="515" y="141" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1579719319251" />
+    <state x="515" y="141" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580143406788" />
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1578011416398">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

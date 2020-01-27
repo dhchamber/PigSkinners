@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <TITLE>Weekly Standings</TITLE>
+</head>
+    <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" LANGUAGE=javascript onload="return window_onload()" onunload="return window_onunload()">
+        <form method="post" name="frmWeekNum" action="Standings_Week.asp?userGroup=<%=userGroup%>">
+            <input type="hidden" name="hidWeekNum" id="hidWeekNum" value="<%=sWeekNumber%>">
+        </form>
+
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr id=trtest name=trtest>
+                <td width="100%" align="right" border="0">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td>&nbsp;</td>
+                        <tr>
+                        <tr>
+                            <td align="center">
+                                {% include 'appmain/standing_week_rpt.html' %}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

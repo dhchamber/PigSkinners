@@ -1,0 +1,77 @@
+{% extends "appmain/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load tz %}
+{% block title %}Weeks{% endblock title %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="includes/styles.css" />
+
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+    <table width=100% cellpadding=0 cellspacing=0 border=0 height=100%>
+        <tr>
+            <td class="main_content" valign=top align=left>
+                <table cellpadding=0 cellspacing=0 border=0 width=100%>
+                    <tr>
+                        <td colspan=2>&nbsp;</td>
+                    <tr>
+                    <tr>
+                        <td width=15px>&nbsp;</td>
+                        <td align=center>
+                            <form method=post action='/setup/weeks/' id=frmWeeks name=frmWeeks>
+                                {% csrf_token %}
+                                <input type=hidden name=hidWeeksData id=hidWeeks>
+                                <input type=hidden name=hidMode id=hidMode>
+                                <table cellpadding=2 cellspacing=0 border=0 id=tblWeeks name=tblWeeks>
+                                    <tr dataRow="false">
+                                        <th>Week</th>
+                                        <th width=10px>&nbsp;</th>
+                                        <th>Start Date</th>
+                                        <th width=10px>&nbsp;</th>
+                                        <th>End Date</th>
+                                        <th width=10px>&nbsp;</th>
+                                        <th>Picks Closed</th>
+                                        <th width=10px>&nbsp;</th>
+                                        <th>Planned Date Closed</th>
+                                        <th width=10px>&nbsp;</th>
+                                        <th>Actual Date Closed</th>
+                                    </tr>
+                                    <tr dataRow="false">
+                                        <td colspan=11><hr></td>
+                                    </tr>
+                                        {% for week in weeks %}
+                                            <tr weekNum="{{ week.week_no }}" dataRow="true">
+                                                <td align=center>{{ week.week_no }}</td>
+                                                <td>&nbsp;</td>
+        										<td><>{{ week.start_dt }}</td>
+		        								<td>&nbsp;</td>
+				        						<td>{{ week.end_dt }}</td>
+						        				<td>&nbsp;</td>
+								        		<td align=center>
+											    {% if week.closed %}
+												    <input type=checkbox name="chkClosed{{ week.week_no }}" id="chkClosed{{ week.week_no }}" checked>
+											    {% else %}
+												    <input type=checkbox name="chkClosed{{ week.week_no }}" id="chkClosed{{ week.week_no }}">
+											    {%endif %}
+										        </td>
+										        <td>&nbsp;</td>
+										        <td><input type="datetime" name="forecastDate{{ week.week_no }}" id="forecastDate{{ week.wk.week_no }}" value="{{ week.forecast_dt_closed }}" /></td>
+										        <td>&nbsp;</td>
+										        <td>{{ week.date_closed }}</td>
+    	    								</tr>
+	    								{% endfor %}
+                                    <tr dataRow="false">
+                                        <td colspan=11 align=center>&nbsp;</td>
+                                    </tr>
+                                    <tr dataRow="false">
+                                        <td colspan=11 align=center><input type=submit id=btnSave name=btnSave value="Save"></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+{% endblock content %}
