@@ -1,0 +1,59 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/koth_rpt.css' %}" />
+<table class="tblWeeklyStats" cellpadding="3px" cellspacing="0" border="1"  width=100% >
+	<tr>
+		<td align=center style="BORDER-TOP: black solid;BORDER-RIGHT: black solid;" >
+			<font id="ftWeekCombo" name="ftWeekCombo"><b>Week:&nbsp;{{user_picks.first.wk.week_no}}</b></font>
+		</td>
+		<td class="team_picked">The team you picked is highlighted</td>
+	</tr>
+	{% for pick in user_picks %}
+	<tr>
+		{% if pick.koth_team == pick.koth_game.lose_team %}
+<!--					<tr border="1">-->
+						<td style = "color:red;text-decoration:line-through;" >--&nbsp;&nbsp; {{pick.user.first_name}} {{pick.user.last_name}}</td>
+						<td style = "color:red;text-decoration:line-through;" >
+						{% if pick.koth_team == NONE %}
+							&nbsp;
+						{% else %}
+						{% if pick.koth_game.visitor_team == pick.koth_team %}
+							<b>{{ pick.koth_team.team_name }}</b> vs. {{ pick.koth_game.home_team.team_name }} {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+						{% elif pick.koth_game.home_team == pick.koth_team %}
+							{{ pick.koth_game.visitor_team.team_name }} vs. <b>{{ pick.koth_team.team_name }}</b> {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+						{% else %}
+							&nbsp;
+						{% endif %}
+						{% endif %}
+						</td>
+		{% else %}
+						<td >--&nbsp;&nbsp; {{pick.user.first_name}} {{pick.user.last_name}}</td>
+						<td>
+						{% if pick.koth_team == NONE %}
+							&nbsp;
+						{% else %}
+						{% if pick.koth_game.visitor_team == pick.koth_team %}
+							<b>{{ pick.koth_team.team_name }}</b> vs. {{ pick.koth_game.home_team.team_name }} {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+						{% elif pick.koth_game.home_team == pick.koth_team %}
+							{{ pick.koth_game.visitor_team.team_name }} vs. <b>{{ pick.koth_team.team_name }}</b> {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+						{% else %}
+							&nbsp;
+						{% endif %}
+						{% endif %}
+						</td>
+		{% endif %}
+<!--					</tr>-->
+
+<!--				</table>-->
+<!--			</td>-->
+	</tr>
+	{% endfor %}
+	<tr>
+		<td align='center' style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">There are <b> Cstr(iRemaining) </b> users remaining<br>( CStr(iEliminated) eliminated this week)</td>
+		<td style="BORDER-BOTTOM: black solid">
+		<input name="btnGroupByUser" id="btnGroupByUser" type="submit" onclick="javascript:groupBy('User');" value="Group Report By User"></td>
+	</tr>
+
+</table>
+
+
+<tr>

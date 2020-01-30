@@ -14,7 +14,7 @@
 	{% for pick in user_picks %}
 		<tr>
             <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;">
-			{{ pick.user }}</td>
+			{{ pick.user.first_name }} {{ pick.user.last_name }}</td>
             {% if pick.saved %}
 			    <td>Yes</td>
             {% else %}

@@ -1,0 +1,30 @@
+.koth_body{
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-height: 0px;
+    margin-width: 0px;
+    marginheight="0"
+    marginwidth="0"
+}
+
+.tblWeeklyStats{}
+/*    cellpadding="3px" cellspacing="0" border="0"  width=100%
+ spacing */
+
+.team_picked
+    border-top: black solid;
+    font-weight: bold;
+    color: blue;
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+}
+
+td {
+    padding: 3px;
+    border-spacing: 0px;
+    border: 1px;
+}

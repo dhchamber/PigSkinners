@@ -1,14 +1,14 @@
 $(function () {
-    // get al links and attach the `click` handler to them
+    // get game links and attach the `click` handler to them
     $('.Game1').on('click', function (e) {
         e.preventDefault();  // prevent default behaviour of link
 
         var team_selected = $(this).attr('team');  // get team selected and set it for the row
         $('#Selected1').val(team_selected);
-
         $('.Game1').css('background-color', 'transparent');  // change the background to transparent for the row
         $(this).css('background-color', '#ff6600');          // set the background of the selecte team for the game
     });
+
     $('.Game2').on('click', function (e) {
         e.preventDefault();  // prevent default behaviour of link
 
@@ -154,3 +154,13 @@ $(function () {
         $(this).css('background-color', '#ff6600');          // set the background of the selecte team for the game
     });
 });
+
+function selectTeam (i) {
+//        e.preventDefault();  // prevent default behaviour of link
+
+        var team_selected = $(this).attr('team');  // get team selected and set it for the row
+        $('#Selected'.concat(i)).val(team_selected);
+        $('.Game'.concat(i)).css('background-color', 'transparent');  // change the background to transparent for the row
+        $(this).css('background-color', '#ff6600');          // set the background of the selecte team for the game
+    };
+

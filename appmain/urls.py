@@ -13,6 +13,7 @@ urlpatterns = [
     path('picks/make/', views.picks_make, name='picks_make'),
     path('picks/revisions/', views.picks_revisions, name='picks_revisions'),
     path('standings/weeksum/', views.standings_weeksum, name='standings_weeksum'),
+    path('standing/koth/', views.standing_koth, name='standing_koth'),
     path('setup/teams/', views.teams_view, name='setup_teams'),
     path('setup/weeks/', views.setup_weeks, name='setup_weeks'),
     # path('setup/teams/', TeamListView.as_view(), name='setup_teams'),

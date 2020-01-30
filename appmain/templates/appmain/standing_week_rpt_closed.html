@@ -52,7 +52,6 @@
     </thead>
     <tbody>
             {% for pick in user_picks %}
-<!--            sOnClick = -->
                 <tr userRow="true" id = "tr{{ pick.user.name }}" name = "tr{{ pick.user.name }}" isCompared="false">
                     <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;"><font size=""-1">{{ pick.user.first_name }} {{ pick.user.last_name }}</font></td>
                     {% for pgame in pick.pickgame_set.all %}

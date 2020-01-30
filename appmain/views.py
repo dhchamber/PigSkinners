@@ -28,12 +28,12 @@ class GameListView(ListView):
       week = Week.objects.get(week_no=15)
       return Game.objects.filter(week=week)  # week 17 games
 
-# django-tables2 readthedocs.io
-#TODO: add login security
+
 class TeamListView(SingleTableView):
    model = Team
    table_class = TeamTable
    template_name = 'appmain/team.html'
+# django-tables2 readthedocs.io
 
 def get_selected_week(request):
    year = Season.objects.get(current=True)
@@ -43,11 +43,9 @@ def get_selected_week(request):
       wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
    except:
       wk = Week.objects.get(year=year, week_no=1, gt=gt)
-   print(f'Found Week # {wk.week_no} loaded for year {year.year}')
+   # print(f'Found Week # {wk.week_no} loaded for year {year.year}')
 
    return wk
-
-
 
 def action_week(request):
    if request.GET.get('btnSetWeek1'):
@@ -353,16 +351,15 @@ def picks_make(request):
       # return render(request, 'appmain/picks_make.html', {'form': form, 'submitted': submitted})
       return render(request, 'appmain/picks_make.html', {'pick': pick, 'submitted': submitted})
 
-class PickList(ListView):
-   model = Pick
-
-
+# class PickList(ListView):
+#    model = Pick
 
 
 def standings_weeksum(request):
    wk = get_selected_week(request)
 
    # loop and create empty picks for each active user if one doesn't exist
+#TODO: make this a common function
    for user in User.objects.all():
       print(f'Found user  {user.username} / {user.id} active: {user.is_active}')
       if user.is_active:
@@ -409,26 +406,16 @@ def standings_weeksum(request):
       return render(request, 'appmain/standings_week_open.html', {'user_picks': user_picks})
       # pass
 
+def standing_koth(request):
+   wk = get_selected_week(request)
+   for user in User.objects.all():
+      if user.is_active:
+         try:
+            pick = Pick.objects.get(user=user, wk=wk)
+         except:
+            pick = Pick.objects.create_pick(user=user, week=wk)
 
-# class PickGameCreate(CreateView):
-#    model = Pick
-#    fields = ['user', 'wk', 'points']
-#    success_url = reverse_lazy('pick-list')
-#
-#    def get_context_data(self, **kwargs):
-#       data = super(PickGameCreate, self).get_context_data(**kwargs)
-#       if self.request.POST:
-#          data['games'] = GamePickFormSet(self.request.POST)
-#       else:
-#          data['games'] = GamePickFormSet()
-#       return data
-#
-#    def form_valid(self, form):
-#       context = self.get_context_data()
-#       games = context['games']
-#       with transaction.atomic():
-#          self.object = form.save()
-#          if games.is_valid():
-#             games.instance = self.object
-#             games.save()
-#       return super(PickGameCreate, self).from_valid(form)
+   user_picks = Pick.objects.filter(wk=wk)
+
+   return render(request, 'appmain/standing_koth.html', {'user_picks': user_picks})
+

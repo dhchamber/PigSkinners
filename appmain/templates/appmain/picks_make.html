@@ -4,7 +4,6 @@
 {% load tz %}
 {% block title %}Make Picks{% endblock title %}
 {% block content %}
-<script src="{% static 'appmain/js/picks_make.js' %}" ></script>
 
 {% if submitted %}
     <p class="success">Your pick was submitted successfully. Thank you.</p>
@@ -53,15 +52,17 @@
                                                         </td>
                                                     </tr>
                                                     <tr dataRow="false">
-                                                        <td colspan="9">&nbsp;</td>
+                                                        <td colspan="9" >&nbsp;</td>
                                                     </tr>
                                                     <tr dataRow="false">
 <!--                                                        <td colspan="9" align="center"><input type="button" id="btnRandom" name="btnRandom" value="Select Random Picks"  style="color: blue;"  onclick="selectRandomPicks();"/>-->
 <!--                                                        </td>-->
                                                         <td colspan="9" align="center">
-                                                            <form method="POST" name="frmRandom" action="/picks/make/">
-                                                                <input type="submit" id="btnRandom" name="btnRandom" value="Select Random Picks"  style="color: blue;">
-                                                            </form>
+                                                                <input type="button" class="btnRandom" id="btnRandom" name="btnRandom" style="color: blue;" value="Select Random Picks" onclick="selectRandomPicks()"
+                                                                {% if pick.wk.closed %}
+                                                                    disabled
+                                                                {% endif %}
+                                                                >
                                                         </td>
 
                                                     </tr>
@@ -82,13 +83,13 @@
                                                             <td align="center">{{ forloop.counter }}</td>
                                                             <td>&nbsp;&nbsp;</td>
                                                             <td class="tdVisitorContent"><img src="{% static pick_game.game.visitor_team.logo_file_name %}" width="25px" >&nbsp;</td>
-                                                            <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.visitor_team.id }}" href="#" team="{{ pick_game.game.visitor_team.id }}"
+                                                            <td><a class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Visitor" href="#" team="{{ pick_game.game.visitor_team.id }}"
                                                              {% if pick_game.game.visitor_team.id == pick_game.team.id %}
                                                                    background-color="#ff6600" style="background-color: rgb(255, 102, 0);"
                                                             {% endif %}
                                                             ><font color="white" >{{ pick_game.game.visitor_team.team_name }}</font></a></td>
-                                                            <td>&nbsp;</td>
-                                                            <td><a class="Game{{ forloop.counter }}" id="{{ pick_game.game.home_team.id }}" href="#" team="{{ pick_game.game.home_team.id }}"
+                                                            <td>&nbsp;&nbsp;</td>
+                                                            <td><a class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Home" href="#" team="{{ pick_game.game.home_team.id }}"
                                                              {% if pick_game.game.home_team.id == pick_game.team.id %}
                                                                    background-color="#ff6600" style="background-color: rgb(255, 102, 0);"
                                                             {% endif %}
@@ -103,7 +104,7 @@
                                                     <tr dataRow="false">
                                                         <td align="center" colspan="2"><font size="+1" face="wingdings">Ä</font></td>
                                                         <td colspan="4" align="left" style="color: blue;">Points Game Total:&nbsp;
-                                                            <input type="text" name="txtPointsTotal" style="color: blue;" value="{{ pick.points }}"
+                                                            <input type="text" name="txtPointsTotal" id="txtPointsTotal" style="color: blue;" value="{{ pick.points }}"
                                                             {% if pick.wk.closed %}
                                                                 readonly
                                                             {% endif %}
@@ -118,7 +119,7 @@
                                                             <td colspan="9" align="center"><font size="+1"><b>King of the Hill pick:</b></font></td>
                                                         </tr>
                                                         <tr dataRow="false">
-                                                            <td colspan="9" align="center">
+                                                            <td class = "cboKingOfHillPick" kothEligible = "{{ pick.koth_eligible }}" colspan="9" align="center">
                                                             {% if pick.wk.closed %}
                                                                 <input type="text" name="txtPointsTotal" style="color: blue;" value="{{ pick.koth_team.team_name }}" readonly >
                                                             {% else %}
@@ -167,4 +168,40 @@
         </div>
     </div>
 {% endif %}
+
+<script type="text/javascript" language="Javascript" src="{% static 'appmain/js/picks_make.js' %}"> </script>
+
+<script type="text/javascript" language="Javascript">
+function selectRandomPicks() {
+    var i;
+    var sel;
+
+    //randomly select a points game value between 30-60 points, but only if they haven't already have selected something
+    var x = $('#txtPointsTotal').val();
+    if (!(parseInt(x) > 0)) {
+        $('#txtPointsTotal').val(Math.floor((60-29)*Math.random()) + 30);
+    }
+
+	//select random KOTH if it's available
+	var kothEligible = $('.cboKingOfHillPick').attr('kothEligible');
+	if(kothEligible == "True" && frmPicks.cboKingOfHillPick.value == "") {
+	    var upperLimit = frmPicks.cboKingOfHillPick.options.length - 1;
+	    frmPicks.cboKingOfHillPick.selectedIndex = Math.floor((upperLimit)*Math.random()) + 1;
+	}
+
+    //Select a random pick for each game if there already isn't a pick made
+    for (i = 1; i <= 16; i++) {
+        selTeam = $('#Selected'.concat(i)).val();
+        if(!(parseInt(selTeam) > 0)) {
+            //generate a random number and see if it is even or odd, even = HOME team, odd = AWAY team
+            var random = Math.floor(Math.random()*101);
+            if(random % 2 == 0) {
+                $('#Game'.concat(i).concat('Home')).click();
+            } else {
+                $('#Game'.concat(i).concat('Visitor')).click();
+            }
+        }
+    }
+};
+</script>
 {% endblock content %}
