@@ -355,7 +355,7 @@ def picks_make(request):
 #    model = Pick
 
 
-def standings_weeksum(request):
+def standings_weekdet(request):
    wk = get_selected_week(request)
 
    # loop and create empty picks for each active user if one doesn't exist
@@ -379,9 +379,11 @@ def standings_weeksum(request):
 
 #TODO: build dictionary, list, ... of games, visitor, home, counts, num games, ...
       # user_picks = Pick.objects.filter(wk=wk) #.values('user').annotate(pick_score=Sum('pickgame__pick_score()'))
+      home = {}
+      visitor = {}
       for g in games:
-         home = {g: 0}
-         visitor = {g: 0}
+         home[g] = 0
+         visitor[g] = 0
          for p in user_picks:
             for pg in p.pickgame_set.all():
                if pg.game == g and pg.team == g.home_team:

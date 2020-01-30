@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/koth_rpt.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth_rpt.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/picks_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/picks_make.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_open.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_open.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
