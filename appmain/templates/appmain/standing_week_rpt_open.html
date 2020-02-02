@@ -5,21 +5,45 @@
     </tr>
     <tr>
         <td align=center style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">
-            <font id="ftWeekCombo"><b>Week:&nbsp; {{ user_picks.first.wk.week_no }} </b></font>
+            <font id="ftWeekCombo" name="ftWeekCombo" ><b>Week:&nbsp;{{ user_picks.first.wk.week_no }}</b></font>
         </td>
 
         <td style="BORDER-BOTTOM: black solid">Submitted Picks</td>
     </tr>
 
 	{% for pick in user_picks %}
-		<tr>
-            <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;">
-			{{ pick.user.first_name }} {{ pick.user.last_name }}</td>
-            {% if pick.saved %}
-			    <td>Yes</td>
+		<tr id = "tr{{request.user.id}}" >
+            {% if pick.user == request.user %}
+                <td class="picks" style="BORDER-RIGHT: black solid; BACKGROUND-COLOR: yellow; BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;" >
+        			{{ pick.user.first_name }} {{ pick.user.last_name }}</td>
+                {% if pick.saved %}
+                    <td class="picks" style="BACKGROUND-COLOR: yellow;BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;" >Yes</td>
+                {% else %}
+                    <td class="picks" style="BACKGROUND-COLOR: yellow;BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;" >No</td>
+                {% endif %}
             {% else %}
-			    <td>No</td>
+                <td class="picks" style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;">
+        			{{ pick.user.first_name }} {{ pick.user.last_name }}</td>
+                {% if pick.saved %}
+                    <td class="picks" style="BORDER-BOTTOM: black thin solid;" >Yes</td>
+                {% else %}
+                    <td class="picks" style="BORDER-BOTTOM: black thin solid;" >No</td>
+                {% endif %}
             {% endif %}
 		</tr>
 	{% endfor %}
 </table>
+<input type=hidden id=hidWinnerID name=hidWinnerID value=sWinnerUserID>
+
+<!--<script>-->
+<!--$( document ).ready(function(request) {-->
+<!--        $(".picks").css("background-color", "yellow");-->
+<!--        $(".picks").css("background-color", "yellow");-->
+
+<!--    console.log( pick.user.id );-->
+<!--});-->
+
+<!--$( window ).on( "load", function() {-->
+<!--    console.log( "window loaded" );-->
+<!--});-->
+<!--</script>-->

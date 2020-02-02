@@ -10,7 +10,6 @@
 	{% for pick in user_picks %}
 	<tr>
 		{% if pick.koth_team == pick.koth_game.lose_team %}
-<!--					<tr border="1">-->
 						<td style = "color:red;text-decoration:line-through;" >--&nbsp;&nbsp; {{pick.user.first_name}} {{pick.user.last_name}}</td>
 						<td style = "color:red;text-decoration:line-through;" >
 						{% if pick.koth_team == NONE %}
@@ -41,10 +40,6 @@
 						{% endif %}
 						</td>
 		{% endif %}
-<!--					</tr>-->
-
-<!--				</table>-->
-<!--			</td>-->
 	</tr>
 	{% endfor %}
 	<tr>
@@ -54,6 +49,3 @@
 	</tr>
 
 </table>
-
-
-<tr>

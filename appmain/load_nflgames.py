@@ -195,6 +195,7 @@ def LoadSeason(season):
    #End of for i in range(game_first, game_last+1):
 #End of function
 
+#TODO: when loading scores, update won team on game and status on PickGame
 def LoadScores(season_type):
    if season_type == 'REG':
       # doc has 1 section <gms>

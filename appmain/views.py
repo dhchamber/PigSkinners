@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.db import transaction
-from django.db.models import Sum
+from django.db.models import Count, Case, When, Sum, F, IntegerField
 from appmain.forms import SignUpForm, PickForm, PickGameForm, GamePickFormSet
 from django_tables2 import SingleTableView # django-tables2 readthedocs.io
 from django.utils import timezone
@@ -20,13 +20,23 @@ from appmain.load_nflgames import LoadWeek, LoadSeason, live_scores_reg
 
 # tutorial page 1
 #TODO: add login security
-class GameListView(ListView):
+class GameListView(SingleTableView):
    model = Game
-   template_name = 'appmain/game.html'
+   table_class = GameTable
+   template_name = 'appmain/game_view.html'
 
-   def get_queryset(self):
-      week = Week.objects.get(week_no=15)
-      return Game.objects.filter(week=week)  # week 17 games
+   def get_recordset(self):
+      # week = get_selected_week(request)
+      # week = Week.objects.get(week=wk)
+      year = Season.objects.get(current=True)
+      week = Week.objects.get(year=year, week_no=22, gt="REG")
+      return Game.objects.filter(week=week)
+
+# tutorial/views.py
+# class GameListView(SingleTableView):
+#    model = Game
+#    table_class = GameTable
+#    template_name = 'appmain/game.html'
 
 
 class TeamListView(SingleTableView):
@@ -119,11 +129,6 @@ def random_picks(request):
    next = request.GET.get('next','/')
    return redirect(next)
 
-# tutorial/views.py
-# class GameListView(SingleTableView):
-#    model = Game
-#    table_class = GameTable
-#    template_name = 'appmain/game.html'
 
 # tutorial page 2 - QuerySets
 # takes table GameTable based on model Game
@@ -351,9 +356,6 @@ def picks_make(request):
       # return render(request, 'appmain/picks_make.html', {'form': form, 'submitted': submitted})
       return render(request, 'appmain/picks_make.html', {'pick': pick, 'submitted': submitted})
 
-# class PickList(ListView):
-#    model = Pick
-
 
 def standings_weekdet(request):
    wk = get_selected_week(request)
@@ -374,23 +376,36 @@ def standings_weekdet(request):
    print(f'ALL: Found picks for  {wk.week_no} / {wk.id} total: {user_picks.count()}')
    # if the week is closed then show standings
    if wk.closed:
-      games = Game.objects.filter(week=wk)
+      games = Game.objects.filter(week=wk).annotate(h_win=Count(Case(When(pick_game__team=F('home_team'), then=1), outputfield=IntegerField())))\
+                                        .annotate(v_win=Count(Case(When(pick_game__team=F('visitor_team'), then=1), outputfield=IntegerField())))
       num_games = games.count() +1
 
+      # picks_score = Pick.objects.filter(wk=wk).annotate(score=Count(Case(When(pickgame__game_winner=F('pickgame__team'), then=1), outputfield=IntegerField())))
+      # for pick in picks_score:
+      #    print(f'Calculated score for pick {pick.user.username}  score: {pick.score}')
+
 #TODO: build dictionary, list, ... of games, visitor, home, counts, num games, ...
-      # user_picks = Pick.objects.filter(wk=wk) #.values('user').annotate(pick_score=Sum('pickgame__pick_score()'))
-      home = {}
-      visitor = {}
-      for g in games:
-         home[g] = 0
-         visitor[g] = 0
-         for p in user_picks:
-            for pg in p.pickgame_set.all():
-               if pg.game == g and pg.team == g.home_team:
-                  home[g] = home[g] + 1
-               elif pg.game == g and pg.team == g.visitor_team:
-                  visitor[g] = visitor[g] + 1
-         print(f'count for game: {g.home_team} / {g.visitor_team} count: {home[g]}/{visitor[g]}')
+
+      # user_picks = Pick.objects.filter(wk=wk).values('user').annotate(pick_score=Count('pickgame__pick_score()'))
+      # gms = Game.objects.filter(week=wk, home_score__gt=F('visitor_score'))
+      # print(f'count for games in week which home team won: count: {gms.count()}')
+
+      # get number of picks that picked the home team and visitor team for each game this week
+      # for g in gms:
+      #    print(f'number of picks home team winin game {g.gsis} {g.home_team.team_abrev}/{g.visitor_team.team_abrev} which home team won: count: {g.h_win}/{g.v_win}')
+
+      # home = {}
+      # visitor = {}
+      # for g in games:
+      #    home[g] = 0
+      #    visitor[g] = 0
+      #    for p in user_picks:
+      #       for pg in p.pickgame_set.all():
+      #          if pg.game == g and pg.team == g.home_team:
+      #             home[g] = home[g] + 1
+      #          elif pg.game == g and pg.team == g.visitor_team:
+      #             visitor[g] = visitor[g] + 1
+      #    print(f'count for game: {g.home_team} / {g.visitor_team} count: {home[g]}/{visitor[g]}')
 
       # calculate score for each user
       for user_pick in user_picks:
@@ -401,7 +416,7 @@ def standings_weekdet(request):
       # i = serviceinvoice.objects.annotate(Sum('serviceinvoiceitems__discount_amount')).get(pk=pk)
       # pick_score = PickGame.objects.filter(p)
 
-      return render(request, 'appmain/standings_week_closed.html', {'user_picks': user_picks, 'games':games, 'num_games':num_games, 'home':home, 'visitor':visitor})
+      return render(request, 'appmain/standings_week_closed.html', {'user_picks': user_picks, 'games':games, 'num_games':num_games})
 
    # if week is still open then show users and if picks are saved or not
    else:

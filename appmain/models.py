@@ -191,6 +191,7 @@ class Game(TimeStampMixin):
     visitor_nickname = models.CharField(max_length=20,null=True) #visitor team nickname
     visitor_teamname = models.CharField(max_length=20,null=True) #visitor team nickname
     visitor_score = models.PositiveSmallIntegerField(null=True) #visitor team score
+    winner = models.ForeignKey(Team,null=True, blank=True, on_delete=models.SET_NULL,related_name='wins')
     p = models.CharField(max_length=1,null=True) # possession?
     red_zone = models.CharField(max_length=1,null=True) # ???
     ga = models.CharField(max_length=2,null=True) # ???
@@ -339,6 +340,7 @@ class PickGame(models.Model):
     pick_head = models.ForeignKey(Pick,on_delete=models.CASCADE)  # ,related_name='pick_head'
     game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='pick_game')
     team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='pick_team')  #team must be one of 2 teams in the game
+    status = models.CharField(max_length=1, null=True)  # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_game_entered')
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='pick_game_updated')
 

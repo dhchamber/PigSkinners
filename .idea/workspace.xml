@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0077_auto_20200131_1259.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0078_auto_20200131_1315.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0079_game_winner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0080_pickgame_status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/wz_tooltip.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/game_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/game_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth_rpt.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth_rpt.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_open.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_open.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +50,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../soup" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.splitter.proportion" value="0.23336746" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -147,10 +161,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
-    <state x="515" y="141" key="SettingsEditor" timestamp="1580143406788">
+    <state x="794" y="260" key="RollbackChangesDialog" timestamp="1580420900743">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="515" y="141" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580143406788" />
+    <state x="794" y="260" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580420900743" />
+    <state x="517" y="127" key="SettingsEditor" timestamp="1580495056833">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="517" y="127" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580495056833" />
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1578011416398">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

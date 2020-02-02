@@ -7,7 +7,7 @@ class GameTable(tables.Table):
    class Meta:
       model = Game
       template_name = "django_tables2/bootstrap.html"
-      fields = ("wk_no","gsis","home","home_score","visitor","visitor_score","p","red_zone","gt")
+      fields = ("week_id","wk_no","gt","gsis","date_time","status","home","home_score","visitor","visitor_score","p","red_zone")
 
 
 class TeamTable(tables.Table):
