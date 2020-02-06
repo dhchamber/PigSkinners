@@ -21,11 +21,11 @@
                 {% with sOnClick=" onmouseover='javascript:this.T_STATIC=true;return escape(TooltipText({{ game.visitor_team.short_name }}));' onclick='sortByTeam({{ game.visitor_team.short_name }}', {{ forloop.counter }}" %}
                     {% if game.visitor_team == game.win_team %}
                         {% with sStyle="BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;BORDER-LEFT: black thin solid;BORDER-RIGHT: black thin solid; align='center' " %}
-                        <td align="center"><div style="CURSOR: hand; BORDER-TOP: black thin solid; BORDER-BOTTOM: black thin solid; BORDER-LEFT: black thin solid; BORDER-RIGHT: black thin solid; " ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_win }}</font></div></td>
+                        <td align="center"><div style="CURSOR: hand; BORDER-TOP: black thin solid; BORDER-BOTTOM: black thin solid; BORDER-LEFT: black thin solid; BORDER-RIGHT: black thin solid; " ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
                         {% endwith %}
                     {% else %}
                         {% with sStyle="" %}
-                        <td align="center"><div style="CURSOR: hand; {{ sStyle }}" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_win }}</font></div></td>
+                        <td align="center"><div style="CURSOR: hand; {{ sStyle }}" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
                         {% endwith %}
                     {% endif %}
                 {% endwith %}
@@ -40,11 +40,11 @@
                 {% with sOnClick=" onmouseover='javascript:this.T_STATIC=true;return escape(TooltipText({{ game.home_team.short_name }}));' onclick='sortByTeam({{ game.home_team.short_name }}', {{ forloop.counter }}" %}
                     {% if game.home_team == game.win_team %}
                         {% with sStyle="BORDER-TOP: black thin solid;BORDER-BOTTOM: black thin solid;BORDER-LEFT: black thin solid;BORDER-RIGHT: black thin solid; align='center' " %}
-                        <td align="center"><div {{ sOnClick }} style="CURSOR: hand; {{ sStyle }}" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_win }}</font></div></td>
+                        <td align="center"><div {{ sOnClick }} style="CURSOR: hand; {{ sStyle }}" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
                         {% endwith %}
                     {% else %}
                         {% with sStyle="" %}
-                        <td align="center"><div {{ sOnClick }} style="CURSOR: hand; {{ sStyle }}" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_win }}</font></div></td>
+                        <td align="center"><div {{ sOnClick }} style="CURSOR: hand; {{ sStyle }}" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
                         {% endwith %}
                     {% endif %}
                 {% endwith %}
@@ -58,16 +58,16 @@
                 {% else %}
                     >
                 {% endif %}
-                    <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;" ><font size="-1">{{ pick.user.first_name }} {{ pick.user.last_name }}</font></td>
+                    <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;" ><font size="-1">{{ pick.user.first_name }} {{ pick.user.last_name }} {{ pick.id }}</font></td>
                     {% for pgame in pick.pickgame_set.all %}
                         {% if pgame.team is not NONE %}
                             <td style="BORDER-BOTTOM: silver solid thin;"><div style="
                             {% if pgame.team == pgame.game.win_team %}
-                                BACKGROUND-COLOR: silver"
+                                BACKGROUND-COLOR: silver">
                             {% else %}
-                                "COLOR: silver"
+                                "COLOR: silver">
                             {% endif %}
-                            >{{ pgame.team.short_name }}</div></td>
+                            {{ pgame.team.short_name }}</div></td>
                         {% else %}
                             <td style="BORDER-BOTTOM: silver solid thin;">X&nbsp;</td>
                         {% endif %}

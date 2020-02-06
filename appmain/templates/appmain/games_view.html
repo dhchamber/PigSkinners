@@ -1,29 +1,30 @@
-{% extends 'appmain/new_base.html' %}
+{% extends 'appmain/base.html' %}
 {% block content %}
+    <div class="col-sm-2" align="left">
+    <!--    {% include 'appmain/weeks_sidebar.html' %}-->
+    </div>
     <form method="post" >
-<!--        {% csrf_token %}-->
-<!--        <button type="submit name=load_games">Load Games</button>-->
         {% csrf_token %}
         <input type="text"  value="2019" name="txtYear" size="1" style="font-face: 'Comic Sans MS'; font-size: larger; color: teal; background-color: #FFFFC0; border: 3pt ridge lightgrey"/>
         <input type="submit" class="btn" value="Load Season" name="btnLoadSeason" style="font-face: 'Comic Sans MS'; font-size: larger; color: teal; background-color: #FFFFC0; border: 3pt ridge lightgrey">
         <input type="submit" class="btn" value="Load Weeks" name="btnLoadWeek" style="font-face: 'Comic Sans MS'; font-size: larger; color: teal; background-color: #FFFFC0; border: 3pt ridge lightgrey">
         <input type="submit" class="btn" value="Load Live" name="btnLoadLive" style="font-face: 'Comic Sans MS'; font-size: larger; color: teal; background-color: #FFFFC0; border: 3pt ridge lightgrey">
     </form>
-    <div class="container-fluid text-center">
+<div class="col-sm-12" align="left" border="solid">
+<!--    <div class="container-fluid text-center">-->
         <div class="row">
             {% with games|first as game %}
                 <div class="col-sm-3">Season: {{ game.year }}</div>
             {% endwith %}
         </div>
         <div class="row">
+            <div class="col-sm-1">Week No</div>
+            <div class="col-sm-2">Date/Time</div>
             <div class="col-sm-1">Home</div>
-            <div class="col-sm-3">Date/Time</div>
-            <div class="col-sm-1">Week</div>
-<!--            <div class="col-sm-3">Nick Name</div>-->
             <div class="col-sm-1">Score</div>
             <div class="col-sm-1">Visitor</div>
-<!--            <div class="col-sm-3">NickName</div>-->
             <div class="col-sm-1">Score</div>
+            <div class="col-sm-2">winner</div>
             <div class="col-sm-1">Type</div>
             <div class="col-sm-1">Last Down</div>
             <div class="col-sm-1">red zone</div>
@@ -31,13 +32,12 @@
         {% for game in games %}
             <div class="row">
                 <div class="col-sm-1">{{ game.wk_no }}</div>
-                <div class="col-sm-3">{{ game.day }} {{ game.get_date }}</div>
+                <div class="col-sm-2">{{ game.day }} {{ game.get_date }}</div>
                 <div class="col-sm-1">{{ game.home }}</div>
-<!--                <div class="col-sm-3">{{ game.home_nickname }}</div>-->
                 <div class="col-sm-1">{{ game.home_score }}</div>
                 <div class="col-sm-1">{{ game.visitor }}</div>
-<!--                <div class="col-sm-3">{{ game.visitor_nickname }}</div>-->
                 <div class="col-sm-1">{{ game.visitor_score }}</div>
+                <div class="col-sm-2">{{ game.winner.team_name }}</div>
                 <div class="col-sm-1">{{ game.gt }}</div>
                 <div class="col-sm-1">{{ game.p }}</div>
                 <div class="col-sm-1">{{ game.red_zone }}</div>

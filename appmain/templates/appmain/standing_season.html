@@ -1,0 +1,21 @@
+{% extends "appmain/base.html" %}
+{% load static %}
+{% block title %}Season Standings{% endblock title %}
+{% block content %}
+	<table width="100%" cellpadding="0" cellspacing="0" border="1">
+		<tr id=trtest name=trtest>
+			<td width="100%" align="right" border="0">
+				<table cellpadding="0" cellspacing="0" border="1" width="100%">
+					<tr>
+						<td>&nbsp;</td>
+					<tr>
+					<tr>
+						<td align="center">
+							{% include 'appmain/standing_season_rpt.html' %}
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+{% endblock content %}

@@ -192,7 +192,8 @@ class Game(TimeStampMixin):
     visitor_teamname = models.CharField(max_length=20,null=True) #visitor team nickname
     visitor_score = models.PositiveSmallIntegerField(null=True) #visitor team score
     winner = models.ForeignKey(Team,null=True, blank=True, on_delete=models.SET_NULL,related_name='wins')
-    p = models.CharField(max_length=1,null=True) # possession?
+    p = models.CharField(max_length=1,null=True) # possession
+    network = models.CharField(max_length=20,null=True)
     red_zone = models.CharField(max_length=1,null=True) # ???
     ga = models.CharField(max_length=2,null=True) # ???
     gt = models.CharField(max_length=3,null=True) #game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
@@ -257,9 +258,10 @@ class PickManager(models.Manager):
         for game in Game.objects.filter(week=week):
             game_picks = PickGame.objects.create(pick_head=pick, game=game, entered_by=user,updated_by=user)
             game_picks.save()
+        pick.save()
         return pick
 
-
+# add manager for picks in current year
 class Pick(models.Model):
     class Meta:
         verbose_name = 'pick'
@@ -327,6 +329,13 @@ class Pick(models.Model):
                 teams.append(game.visitor_team)
 
         return teams
+
+    # def score(self):
+    #     sum_score = 0
+    #     for pg in self.pickgame_set.all():
+    #         sum_score += pg.pick_score()
+    #
+    #     return sum_score
 
     # def cap_user(self):
     #     return self.user.capitalize()
