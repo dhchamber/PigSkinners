@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',          # Core authentication framework and its default models
     'django.contrib.contenttypes',  # Django content type system (allows permissions to be associated with models)
     'django.contrib.sessions',      # django session management, session values
-    'django.contrib.messages',
+    'django.contrib.messages',      # django messages in request to return errors
     'django.contrib.staticfiles',
     'django_tables2',
     'crispy_forms',

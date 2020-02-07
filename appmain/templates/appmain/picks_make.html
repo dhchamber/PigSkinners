@@ -57,8 +57,6 @@
                                                         <td colspan="9" >&nbsp;</td>
                                                     </tr>
                                                     <tr dataRow="false">
-<!--                                                        <td colspan="9" align="center"><input type="button" id="btnRandom" name="btnRandom" value="Select Random Picks"  style="color: blue;"  onclick="selectRandomPicks();"/>-->
-<!--                                                        </td>-->
                                                         <td colspan="9" align="center">
                                                                 <input type="button" class="btnRandom" id="btnRandom" name="btnRandom" style="color: blue;" value="Select Random Picks" onclick="selectRandomPicks()"
                                                                 {% if pick.wk.closed %}
@@ -68,8 +66,18 @@
                                                         </td>
 
                                                     </tr>
-                                                    <tr dataRow="false">
-                                                        <td colspan="9">&nbsp;</td>
+                                                    <tr dataRow="false"  align="center">>
+                                                        {% if messages %}
+                                                            <td colspan="9">
+                                                            <ul class="messages">
+                                                                {% for message in messages %}
+                                                                    <li class = ""{{ message.tags }}">{{ message }}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                            </td>
+                                                        {% else %}
+                                                            <td colspan="9">&nbsp;</td>
+                                                        {% endif %}
                                                     </tr>
                                                     <tr dataRow="false">
                                                         <td align="center">Game</td>

@@ -12,6 +12,7 @@ urlpatterns = [
     path('picks/view/', views.picks_view, name='picks_view'),
     path('picks/make/', views.picks_make, name='picks_make'),
     path('picks/revisions/', views.picks_revisions, name='picks_revisions'),
+    path('standing/weeksum/', views.standing_weeksum, name='standing_weeksum'),
     path('standing/weekdet/', views.standing_weekdet, name='standing_weekdet'),
     path('standing/season/', views.standing_season, name='standing_weeksum'),
     path('standing/koth/', views.standing_koth, name='standing_koth'),

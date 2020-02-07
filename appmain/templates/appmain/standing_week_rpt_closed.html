@@ -2,21 +2,27 @@
 <table class="tblWeeklyStats" id="tblStats" name="tblStats" cellpadding="3px" cellspacing="0" border="1" width=100%>
     <thead>
         <tr userRow='false'>
+        {% if num_games > 0 %}
             <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" align='center' colspan="{{ num_games }}">
+        {% else %}
+            <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" align='center' colspan="3">
+        {% endif %}
                 <font size=+1><b>
                 {% if bBallPoolOnly %}
                     BATC-Only Weekly Standings</b></font></td>
                 {% else %}
                     Weekly Standings</b></font></td>
                 {% endif %}
-            <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" align='center' colspan='2'>
-                <input name="btnShowDiffs" id="btnShowDiffs" type="submit" onclick="javascript:showAllDiffs();" value="Show All Diffs">
-            </td>
+            {% if num_games > 0 %}
+                <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" align='center' colspan='2'>
+                    <input name="btnShowDiffs" id="btnShowDiffs" type="submit" onclick="javascript:showAllDiffs();" value="Show All Diffs">
+                </td>
+            {% endif %}
         </tr>
         <!--				'Show the Visitor Teams-->
         <tr userRow='false'>
             <td rowspan=2 align=center style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">
-                <font id="ftWeekCombo" name="ftWeekCombo"><b>Week:&nbsp; {{ user_picks.first.wk.week_no }}/{{ user_picks.first.wk.id }}</b></font></td>
+                <font id="ftWeekCombo" name="ftWeekCombo"><b>Week:&nbsp;{{ user_picks.first.wk.week_no }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></font></td>
             {% for game in games %}
                 {% with sOnClick=" onmouseover='javascript:this.T_STATIC=true;return escape(TooltipText({{ game.visitor_team.short_name }}));' onclick='sortByTeam({{ game.visitor_team.short_name }}', {{ forloop.counter }}" %}
                     {% if game.visitor_team == game.win_team %}
@@ -30,7 +36,6 @@
                     {% endif %}
                 {% endwith %}
             {% endfor %}
-<!--            add sOnClick-->
 			<td rowspan=2 align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid"><b>Points Game</b></td>
             <td rowspan=2 align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid"><b>Number of Wins</b></td>
         </tr>
@@ -49,6 +54,7 @@
                     {% endif %}
                 {% endwith %}
             {% endfor %}
+        </tr>
     </thead>
     <tbody>
             {% for pick in user_picks %}
@@ -58,27 +64,26 @@
                 {% else %}
                     >
                 {% endif %}
-                    <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;" ><font size="-1">{{ pick.user.first_name }} {{ pick.user.last_name }} {{ pick.id }}</font></td>
-                    {% for pgame in pick.pickgame_set.all %}
-                        {% if pgame.team is not NONE %}
-                            <td style="BORDER-BOTTOM: silver solid thin;"><div style="
-                            {% if pgame.team == pgame.game.win_team %}
-                                BACKGROUND-COLOR: silver">
+                    <td style="BORDER-RIGHT: black solid; BORDER-BOTTOM: silver solid thin;" ><font size="-1">{{ pick.user.first_name }}&nbsp;{{ pick.user.last_name }}</font></td>
+                    {% if num_games > 0 %}
+                        {% for pgame in pick.pickgame_set.all %}
+                            {% if pgame.team is not NONE %}
+                                <td style="BORDER-BOTTOM: silver solid thin;"><div style="
+                                {% if pgame.team == pgame.game.win_team %}
+                                    BACKGROUND-COLOR: silver">
+                                {% else %}
+                                    "COLOR: silver">
+                                {% endif %}
+                                {{ pgame.team.short_name }}</div></td>
                             {% else %}
-                                "COLOR: silver">
+                                <td style="BORDER-BOTTOM: silver solid thin;">X&nbsp;</td>
                             {% endif %}
-                            {{ pgame.team.short_name }}</div></td>
-                        {% else %}
-                            <td style="BORDER-BOTTOM: silver solid thin;">X&nbsp;</td>
-                        {% endif %}
-                    {% endfor %}
-                    <!-- Put in the points game information-->
+                        {% endfor %}
+                    {% endif %}
                     <td align="center" style="BORDER-LEFT: black solid; BORDER-BOTTOM: silver solid thin;">{{ pick.points }}</td>
-                    <!--Put in this user's win total -->
                     </td><td align="center" style="BORDER-LEFT: black solid; BORDER-BOTTOM: silver solid thin;">{{ pick.pick_score }}&nbsp;</td>
                 </tr>
             {% endfor %}
-
     </tbody>
 </table>
 

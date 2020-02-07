@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect  # add redirect
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.auth import login, authenticate  # new
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -285,13 +286,6 @@ def picks_view(request):
     return render(request, 'appmain/picks_view.html', {'pick': pick})
 
 
-# TODO: add view for Teams list
-# TODO: add template too (HTML) for Teams list
-# TODO: add link to navbar
-
-
-# TODO: add validated to logic
-# form for user to pick games
 @login_required
 def picks_make(request):
     timezone.activate(pytz.timezone('America/Denver'))
@@ -303,23 +297,29 @@ def picks_make(request):
     #    close = wk.close_week(request.user)
     # print(f'Week closed for week ID: {wk.id}')
 
-    print(f'In picks_make : Chosen Week ID: {wk.id} Start_date {wk.start_dt()} Closed: {wk.closed}')
-
     if request.method == 'POST':
-        print(f'of Pick ID: {request.POST.get("hidPickID")}')
         pick_id = request.POST.get("hidPickID")
         pick = Pick.objects.get(pk=pick_id)
-        pick.points = request.POST.get("txtPointsTotal")
+        try:
+            pts = int(request.POST.get("txtPointsTotal"))
+            assert pts > 0
+            pick.points = pts
+        except AssertionError:
+            messages.warning(request, 'Invalid value for points game. Must be greater than zero.')
+            validated = False
+
         try:
             pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
         except:
             validated = False
-            print(f'Failded Validate of KOTH Team on Pick ID: {request.POST.get("hidPickID")}')
+            messages.warning(request, 'Failed Validate of KOTH Team: {request.POST.get("cboKingOfHillPick")}')
+            print(f'Failed Validate of KOTH Team on Pick ID: {request.POST.get("hidPickID")}')
         try:
             pick.koth_game = (
                         Game.objects.filter(week=pick.wk, home_team=pick.koth_team) | Game.objects.filter(week=pick.wk,
                                                                                                           visitor_team=pick.koth_team)).first()
         except:
+            messages.warning(request, 'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
             print(f'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
             validated = False
 
@@ -329,7 +329,8 @@ def picks_make(request):
             try:
                 team = Team.objects.get(id=request.POST.get("Selected" + str(i)))
             except:
-                print(f'Failded Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
+                messages.warning(request, 'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
+                print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
                 validated = False
 
             game.team = team
@@ -337,40 +338,38 @@ def picks_make(request):
 
         if validated:
             pick.saved = True
+            messages.success(request, 'Your Picks have been saved!')
             print(f'SAVED on Pick ID: {request.POST.get("hidPickID")}')
         else:
             pick.saved = False
+            messages.warning(request,'Please correct the errors below:')
             print(f'NOT saved on Pick ID: {request.POST.get("hidPickID")}')
         pick.save()
 
         return redirect('picks_make')
-    # TODO: change return to same page with picks displayed and "Picks Saved" response
-    # sMessage = "Your picks have been saved."
-    # sMessage = "This week's picks are closed so your changes can't be saved."
-
     else:
-        # pick, created = Pick.objects.get_or_create(user = request.user, wk = wk, defaults={'user': request.user, 'wk': wk, 'points': 0,'entered_by': request.user, 'updated_by': request.user})
-        # #TODO: add check for exception MultipleObjectsReturned  there should be only 1
-        # if created:
-        #    games = Game.objects.filter(week = wk)
-        #    for game in games:
-        #       game_picks = PickGame.objects.create(pick_head = pick, game = game, entered_by = request.user, updated_by = request.user)
-        #       game_picks.save()
         try:
             pick = Pick.objects.get(user=request.user, wk=wk)
-            print(f'found pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
+            # print(f'found pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
         except:
             pick = Pick.objects.create_pick(user=request.user, week=wk)
-            print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
+            # print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
 
         if 'submitted' in request.GET:
             submitted = True
 
-        # return render(request, 'appmain/picks_make.html', {'form': form, 'submitted': submitted})
         return render(request, 'appmain/picks_make.html', {'pick': pick, 'submitted': submitted})
 
 
 def standing_weekdet(request):
+    page = standing_week(request,True)
+    return page
+
+def standing_weeksum(request):
+    page = standing_week(request,False)
+    return page
+
+def standing_week(request, detail):
     wk = get_selected_week(request)
 
     # loop and create empty picks for each active user if one doesn't exist
@@ -386,43 +385,21 @@ def standing_weekdet(request):
                 # print(f'Created pick for  {user.username} / {user.id} pick: {pick.id}')
 
     if wk.closed:
-        games = Game.objects.filter(week=wk).annotate(
-            h_pick=Count(Case(When(pick_game__team=F('home_team'), then=1), output_field=IntegerField(), ))) \
-            .annotate(
-            v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
-        num_games = games.count() + 1
+        if detail:
+            games = Game.objects.filter(week=wk).annotate(
+                h_pick=Count(Case(When(pick_game__team=F('home_team'), then=1), output_field=IntegerField(), ))) \
+                .annotate(
+                v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
+            num_games = games.count() + 1
+        else:
+            games = None
+            num_games = 0
 
         user_picks = Pick.objects.filter(wk=wk).annotate(
             score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
 
         # TODO: build dictionary, list, ... of games, visitor, home, counts, num games, ...
         # user_picks = Pick.objects.filter(wk=wk).values('user').annotate(pick_score=Count('pickgame__pick_score()'))
-        # print(f'count for games in week which home team won: count: {gms.count()}')
-
-        # get number of picks that picked the home team and visitor team for each game this week
-        # for g in gms:
-        #    print(f'number of picks home team winin game {g.gsis} {g.home_team.team_abrev}/{g.visitor_team.team_abrev} which home team won: count: {g.h_win}/{g.v_win}')
-
-        # home = {}
-        # visitor = {}
-        # for g in games:
-        #    home[g] = 0
-        #    visitor[g] = 0
-        #    for p in user_picks:
-        #       for pg in p.pickgame_set.all():
-        #          if pg.game == g and pg.team == g.home_team:
-        #             home[g] = home[g] + 1
-        #          elif pg.game == g and pg.team == g.visitor_team:
-        #             visitor[g] = visitor[g] + 1
-        #    print(f'count for game: {g.home_team} / {g.visitor_team} count: {home[g]}/{visitor[g]}')
-
-        # calculate score for each user
-        # for user_pick in user_picks:
-        #    user_pick.pick_score = 0
-        #    for game in user_pick.pickgame_set.all():
-        #       user_pick.pick_score += game.pick_score()
-        #    user_pick.save()
-        # pick_score = PickGame.objects.filter(p)
 
         return render(request, 'appmain/standing_week_closed.html',
                       {'user_picks': user_picks, 'games': games, 'num_games': num_games})
@@ -489,8 +466,6 @@ def standing_season(request):
             except ObjectDoesNotExist:
                 p = Pick.objects.create_pick(user=user,week=week)
 
-        # tot_wins = half1_sub + half2_sub
-        # win_subtot[user.id] = (half1_sub, half1_sub/game_sub1, half2_sub, half2_sub/game_sub2, tot_wins, tot_wins/tot)
         win_subtot1[user.id] = half1_sub
         win_perc1[user.id] = floatformat( (half1_sub/game_sub1) * 100.0, 1) + '%'
         win_subtot2[user.id] = half2_sub

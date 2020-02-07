@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0081_game_network.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_season_rpt.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standings_week.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standings_week_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standings_week_open.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_open.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/teams_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/teams_view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
