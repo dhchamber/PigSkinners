@@ -18,7 +18,7 @@ import pytz
 from django.template.defaultfilters import floatformat
 
 from .models import Season, Week, Pick, Team, Game, PickGame
-from .tables import TeamTable, GameTable  # tutorial page 2 - QuerySets [implied] + django-tables2 readthedocs.io
+from .tables import TeamTable, GameTable, PickGameTable
 from appmain.load_nflgames import load_week, LoadSeason, load_score
 
 
@@ -161,24 +161,26 @@ def games_view(request):
     timezone.activate(pytz.timezone('America/Denver'))
     if request.method == 'POST' and 'btnLoadSeason' in request.POST:
         LoadSeason((request.POST.get('txtYear')))
-
         request.method = 'GET'
-        # return HttpResponseRedirect(reverse(games_view(request)))
         return redirect(games_view)
-    elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
-        load_week()
 
-        # request.method = 'GET'
-        # return HttpResponseRedirect(reverse(games_view(request)))
+    elif request.method == 'POST' and 'btnLoadWeeks' in request.POST:
+        load_week()
+        return redirect('setup_games')
+
     elif request.method == 'POST' and 'btnLoadLive' in request.POST:
         load_score('REG')
+        return redirect('setup_games')
 
-        # request.method = 'GET'
-        # return HttpResponseRedirect(games_view(request))
+    elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
+        load_score('WEEK')
+        return redirect('setup_games')
     else:
         year = Season.objects.get(current=True)
-        # week = Week.objects.get(year=year, week_no= 1, gt='REG')
-        weeks = Week.objects.filter(year=year, gt='POST')
+        week_no = request.session.get('week', 1)
+        gt = request.session.get('gt', 'REG')
+        weeks = Week.objects.filter(year=year, week_no= week_no, gt=gt)
+        # weeks = Week.objects.filter(year=year, gt='POST')
         # print(f'Found Week # {week.week_no} loaded for year {year.year}')
         games = Game.objects.filter(week__in=weeks)
         print(f'Found games # {games.count()} ')
@@ -223,14 +225,16 @@ def update_profile(request, user_id):
 
 @login_required
 def home(request):
-    weeks = Week.objects.filter(id=1)
+    timezone.activate(pytz.timezone('America/Denver'))
+    year = Season.objects.get(current=True)
+    weeks = Week.objects.filter(year=year,gt='REG')
     return render(request, 'appmain/home.html', {'weeks': weeks})
 
 
 # @login_required
 # def picks_view(request):
 #    games = Game.objects.filter(wk_id=1).order_by('gsis')
-#    return render(request, 'appmain/picks_view.html', {'games': games})
+#    return render(request, 'appmain/pick_view.html', {'games': games})
 
 # remove replace with form view and html
 # def picks_make(request):
@@ -257,34 +261,25 @@ def setup_weeks(request):
     return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
 
 
-@login_required
-def picks_view(request):
+# @login_required
+def pick_view(request):
     timezone.activate(pytz.timezone('America/Denver'))
+
     year = Season.objects.get(current=True)
     week_no = request.session.get('week', 1)
     gt = request.session.get('gt', 'REG')
     try:
-        wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
+        week = Week.objects.get(year=year, week_no=week_no, gt=gt)
     except:
-        wk = Week.objects.get(year=year, week_no=1, gt='REG')
+        week = Week.objects.get(year=year, week_no=1, gt='REG')
 
     try:
-        pick = Pick.objects.get(user=request.user, wk=wk)
+        pick = Pick.objects.get(user=request.user, wk=week)
     except:  # TODO: get exception type
-        pass
+        pick = Pick.objects.create_pick(user=request.user, week=week)
 
-    # if picks.count() == 0:
-    #    pick_wk = Pick()
-    #    pick_wk.user = request.user
-    #    pick_wk.wk = Week.objects.filter(year=2018,week_no=3)
-    #    pick_wk.points = 41
-    #    pick_wk.entered_by = request.user
-    #    pick_wk.updated_by = request.user
-    #    pick_wk.save()
-    #    pick_wk = Pick.objects.filter(user = request.user, wk = 3)  # changed from get to filter to avoid "Pick is not iterable" error
-
-    return render(request, 'appmain/picks_view.html', {'pick': pick})
-
+    return render(request, 'appmain/pick_view.html', {'pick': pick})
+    # return render(request, 'appmain/bootstrap_sort.html', {'pick': pick})
 
 @login_required
 def picks_make(request):

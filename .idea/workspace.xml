@@ -2,14 +2,128 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/bootstrap_sort.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pickgame_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/License.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/README.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/Useful_Resources.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/addons/datatables-select.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/addons/datatables.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/addons/directives.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/addons/flag.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/addons/jquery.zmd.hierarchical-display.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/addons/rating.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/mdb.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/mdb.lite.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/mdb.lite.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/mdb.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/modules/animations-extended.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/mdb-favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/overlays/09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/svg/arrow_left.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/img/svg/arrow_right.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/datatables-select.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/datatables.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/directives.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/flag.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/imagesloaded.pkgd.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/jquery.zmd.hierarchical-display.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/masonry.pkgd.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/addons/rating.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/mdb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/mdb.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/modules/animations-extended.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/modules/forms-free.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/modules/scrolling-navbar.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/modules/treeview.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/modules/wow.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/popper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/js/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/_custom-styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/_custom-variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/addons/_datatables-select.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/addons/_datatables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/addons/_directives.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/addons/_flag.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/addons/_hierarchical-display.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/addons/_rating.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_colors.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_global.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_helpers.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_masks.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_typography.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/_waves.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/bootstrap/_functions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/bootstrap/_rfs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/core/bootstrap/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_animations-basic.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_badges.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_cards.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_carousels.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_depreciated.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_dropdowns.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_footers.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_input-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_loader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_modals.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_msc.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_navbars.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_steppers.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/_treeview.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/modules/animations-extended/_module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/free/modules/animations-extended/animations-extended.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/mdb-free.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/scss/mdb-lite-free.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/free/forms-free.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/free/scrolling-navbar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/free/treeview.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/free/wow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/addons/datatables-select.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/addons/datatables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/addons/imagesloaded.pkgd.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/addons/jquery.zmd.hierarchical-display.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/addons/masonry.pkgd.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/addons/rating.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/bs-custom-file-input.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/chart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/chartjs-datalabels.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/enhanced-modals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/jquery.easing.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/velocity.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdb/src/js/vendor/free/waves.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_view.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/teams_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/teams_view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>

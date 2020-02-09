@@ -1,0 +1,103 @@
+{% extends 'appmain/base.html' %}
+{% block content %}
+<!--  get nfl games data for a week and loop through records and display
+    game #, home, visitor,
+    by date & time
+    dividers by day & am/pm?
+-->
+<style>
+    .thead1 {color:blue;
+             font-weight:bold;
+             text-align:center;
+            }
+    .pickteam {color: blue;
+             }
+    .winteam {color: blue;
+              font-weight: bold
+             }
+
+}
+</style>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-12" align="center">
+            {% include 'appmain/weeks_sidebar.html' %}
+        </div>
+    </div>
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover table-sm"
+            id="dtBasicExample"
+            data-toggle="table"
+            data-sortable="true"
+            data-height="400" >
+<!--  data-sort-name="id"-->
+<!--  data-sort-order="desc" >-->
+<!--           xmlns="http://www.w3.org/1999/html">-->
+<!--        <caption>List of Users Picks</caption>-->
+        <thead class="thead-light">
+            <tr class="thead1">
+                <td >Picks for week: {{ pick.wk.week_no }}<br>
+                    {% if pick.wk.closed %} CLOSED
+                    {% else %} OPEN {% endif %}
+                </td>
+                <td colspan="2">{{ pick.wk.start_dt }} TO {{ pick.wk.end_dt }}<br>
+                    Score for week: {{ pick.calc_score }}
+                </td>
+                <td>For user: {{ pick.user }}</td>
+            </tr>
+            <tr class = "thead1">
+                <th data-field="id" data-sortable="true">Game</th>
+                <th data-field="visitor" data-sortable="true">Visitor</th>
+                <th data-field="home" data-sortable="true">Home</th>
+                <th data-field="time" data-sortable="true">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pick_game in pick.pickgame_set.all %}
+                {% if forloop.last %}
+                    <tr class="table-primary">
+                {% else %}
+                    <tr>
+                {% endif %}
+                    <td scope="row" style="text-align:center;">{{ forloop.counter }}</td>
+                    {% if pick_game.game.visitor_team.id == pick_game.team.id %}
+                        {% if pick_game.team == pick_game.game.win_team %}
+                            <td  class="winteam">{{ pick_game.game.visitor_team.team_name }}</td>
+                        {% else %}
+                            <td  class="pickteam">{{ pick_game.game.visitor_team.team_name }}</td>
+                        {% endif %}
+                    {% else %}
+                        <td>{{ pick_game.game.visitor_team.team_name }}</td>
+                    {% endif %}
+
+                    {% if pick_game.game.home_team.id == pick_game.team.id %}
+                        {% if pick_game.team == pick_game.game.win_team %}
+                            <td  class="winteam">{{ pick_game.game.home_team.team_name }}</td>
+                        {% else %}
+                            <td  class="pickteam">{{ pick_game.game.home_team.team_name }}</td>
+                        {% endif %}
+                    {% else %}
+                        <td>{{ pick_game.game.home_team.team_name }}</td>
+                    {% endif %}
+                    <td>{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date }}</td>
+                </tr>
+            {% endfor %}
+        <tr>
+            <td>Points Game: </td>
+            <td>{{ pick.points}}</td>
+            <td style="text-align:center">KOTH: </td>
+            {% if pick.koth_team == pick.koth_game.win_team %}
+                <td class="winteam">{{ pick.koth_team.team_name}}</td>
+            {% else %}
+                <td class="pickteam">{{ pick.koth_team.team_name}}</td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+    </div>
+<script>
+    $(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+{% endblock %}

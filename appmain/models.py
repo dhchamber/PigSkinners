@@ -330,15 +330,15 @@ class Pick(models.Model):
 
         return teams
 
-    # def score(self):
-    #     sum_score = 0
-    #     for pg in self.pickgame_set.all():
-    #         sum_score += pg.pick_score()
-    #
-    #     return sum_score
+    def calc_score(self):
+        sum_score = 0
+        for pg in self.pickgame_set.all():
+            sum_score += pg.pick_score()
 
-    # def cap_user(self):
-    #     return self.user.capitalize()
+        return sum_score
+
+    def cap_user(self):
+        return self.user.capitalize()
 
 
 class PickGame(models.Model):

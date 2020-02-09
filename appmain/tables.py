@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Team, Game
+from .models import Team, Game, PickGame
 
 
 # tutorial/tables.py
@@ -15,3 +15,9 @@ class TeamTable(tables.Table):
       model = Team
       template_name = "django_tables2/bootstrap.html"
       fields = ("team_abrev", "short_name","team_name","division","city_name")
+
+class PickGameTable(tables.Table):
+   class Meta:
+      model = PickGame
+      template_name = "django_tables2/bootstrap.html"
+      fields = ("parent.wk.week_no", "game.visitor_team.team_name","game.home_team.team_name", "team.team_abrev", "status", "entered_by")
