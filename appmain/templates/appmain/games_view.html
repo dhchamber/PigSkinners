@@ -1,5 +1,19 @@
 {% extends 'appmain/base.html' %}
 {% block content %}
+<style>
+    .thead1 {color:blue;
+             font-weight:bold;
+             text-align:center;
+            }
+    .pickteam {color: blue;
+             }
+    .winteam {color: blue;
+              font-weight: bold
+             }
+    .newday {BORDER-TOP: silver solid thick;
+            }
+}
+</style>
     <div class="row justify-content-md-center">
         <div class="col-sm-12" align="center">
             {% include 'appmain/weeks_sidebar.html' %}
@@ -17,40 +31,57 @@
             </form>
         </div>
     </div>
-    <div class="row justify-content-md-center">
-        <div class="col-sm-12" align="left" border="solid">
+    <div class="col-sm-12 row justify-content-md-center">
+    <table class="table table-bordered table-hover table-sm"
+            id="dtBasicExample"
+            data-toggle="table"
+            data-sortable="true"
+            data-height="400" >
     <!--    <div class="container-fluid text-center">-->
-            <div class="row">
+        <thead class="thead-light">
+
+            <tr class="thead1">
                 {% with games|first as game %}
-                    <div class="col-sm-3">Season: {{ game.year }}</div>
+                    <td colspan="3">Season: {{ game.year }}</td>
                 {% endwith %}
-            </div>
-            <div class="row">
-                <div class="col-sm-1">Week</div>
-                <div class="col-sm-3">Date/Time</div>
-                <div class="col-sm-1">Home</div>
-                <div class="col-sm-1">Score</div>
-                <div class="col-sm-1">Visitor</div>
-                <div class="col-sm-1">Score</div>
-                <div class="col-sm-2">winner</div>
-                <div class="col-sm-1">Type</div>
-<!--                <div class="col-sm-1">Last Down</div>-->
-                <div class="col-sm-1">red zone</div>
-            </div>
+            </tr>
+            <tr class="thead1">
+                <th data-field="week" data-sortable="true">Week</th>
+                <th data-field="date" data-sortable="true">Date/Time</th>
+                <th data-field="home" data-sortable="true">Home</th>
+                <th data-field="hscore" data-sortable="true">Score</th>
+                <th data-field="visitor" data-sortable="true">Visitor</th>
+                <th data-field="vscore" data-sortable="true">Score</th>
+                <th data-field="status" data-sortable="true">Game Status</th>
+                <th data-field="winner" data-sortable="true">winner</th>
+                <th data-field="type" data-sortable="true">Last Posession</th>
+                <th data-field="rz" data-sortable="true">red zone</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for game in games %}
-                <div class="row">
-                    <div class="col-sm-1">{{ game.wk_no }}</div>
-                    <div class="col-sm-3">{{ game.day }} {{ game.get_date }}</div>
-                    <div class="col-sm-1">{{ game.home }}</div>
-                    <div class="col-sm-1">{{ game.home_score }}</div>
-                    <div class="col-sm-1">{{ game.visitor }}</div>
-                    <div class="col-sm-1">{{ game.visitor_score }}</div>
-                    <div class="col-sm-2">{{ game.winner.team_name }}</div>
-                    <div class="col-sm-1">{{ game.gt }}</div>
-<!--                    <div class="col-sm-1">{{ game.p }}</div>-->
-                    <div class="col-sm-1">{{ game.red_zone }}</div>
-                </div>
+                {% ifchanged game.day  %}
+                    {% if forloop.first %}
+                        <tr>
+                    {% else %}
+                        <tr class = "newday">
+                    {% endif %}
+                {% else %}
+                    <tr>
+                {% endifchanged %}
+                    <td>{{ game.week }}</td>
+                    <td>{{ game.day }} {{ game.get_date }}</td>
+                    <td>{{ game.home }}</td>
+                    <td>{{ game.home_score }}</td>
+                    <td>{{ game.visitor }}</td>
+                    <td>{{ game.visitor_score }}</td>
+                    <td align="center">{{ game.status }}</td>
+                    <td class="winteam">{{ game.winner.team_name }}</td>
+                    <td>{{ game.p }}</td>
+                    <td>{{ game.red_zone }}</td>
+                </tr>
             {% endfor %}
-        </div>
+        </tbody>
+    </table>
     </div>
 {% endblock %}

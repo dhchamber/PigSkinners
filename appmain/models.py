@@ -197,9 +197,13 @@ class Game(TimeStampMixin):
     red_zone = models.CharField(max_length=1,null=True) # ???
     ga = models.CharField(max_length=2,null=True) # ???
     gt = models.CharField(max_length=3,null=True) #game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
+    points_game = models.BooleanField(default=False)
 
     def __str__(self):
         return self.gsis
+
+    def points_score(self):
+        return self.home_score + self.visitor_score
 
     def get_date(self):
         # the time of the game from the game feed is in Eastern time, convert to Mountain

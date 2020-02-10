@@ -169,11 +169,14 @@ def games_view(request):
         return redirect('setup_games')
 
     elif request.method == 'POST' and 'btnLoadLive' in request.POST:
-        load_score('REG')
+        load_score('LIVE')
         return redirect('setup_games')
 
     elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
-        load_score('WEEK')
+        year = Season.objects.get(current=True)
+        week_no = request.session.get('week', 1)
+        gt = request.session.get('gt', 'REG')
+        load_score('WEEK',year, gt, week_no)
         return redirect('setup_games')
     else:
         year = Season.objects.get(current=True)

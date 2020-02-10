@@ -16,6 +16,8 @@
               font-weight: bold
              }
 
+    .newday {BORDER-TOP: silver solid thick;
+            }
 }
 </style>
     <div class="row justify-content-md-center">
@@ -53,10 +55,26 @@
         </thead>
         <tbody>
             {% for pick_game in pick.pickgame_set.all %}
-                {% if forloop.last %}
-                    <tr class="table-primary">
+                {% if pick_game.game.points_game %}
+                    {% ifchanged pick_game.game.day  %}
+                        {% if forloop.first %}
+                            <tr class="table-primary">
+                        {% else %}
+                            <tr class = "table-primary newday">
+                        {% endif %}
+                    {% else %}
+                        <tr class="table-primary">
+                    {% endifchanged %}
                 {% else %}
-                    <tr>
+                    {% ifchanged pick_game.game.day  %}
+                        {% if forloop.first %}
+                            <tr>
+                        {% else %}
+                            <tr class = "newday">
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                    {% endifchanged %}
                 {% endif %}
                     <td scope="row" style="text-align:center;">{{ forloop.counter }}</td>
                     {% if pick_game.game.visitor_team.id == pick_game.team.id %}
@@ -71,7 +89,7 @@
 
                     {% if pick_game.game.home_team.id == pick_game.team.id %}
                         {% if pick_game.team == pick_game.game.win_team %}
-                            <td  class="winteam">{{ pick_game.game.home_team.team_name }}</td>
+                            <td  class="winteam">{{ pick_game.game.visitor_team.team_name }}</td>
                         {% else %}
                             <td  class="pickteam">{{ pick_game.game.home_team.team_name }}</td>
                         {% endif %}
@@ -83,7 +101,7 @@
             {% endfor %}
         <tr>
             <td>Points Game: </td>
-            <td>{{ pick.points}}</td>
+            <td align="center">{{ pick.points}}&nbsp;&nbsp;&nbsp;&nbsp;Score: {{ pick.koth_game.points_score }}</td>
             <td style="text-align:center">KOTH: </td>
             {% if pick.koth_team == pick.koth_game.win_team %}
                 <td class="winteam">{{ pick.koth_team.team_name}}</td>
