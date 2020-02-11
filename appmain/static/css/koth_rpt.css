@@ -1,3 +1,16 @@
+.thead1 {color:blue;
+             font-weight:bold;
+             text-align:center;
+            }
+.pickteam {color: blue;
+             }
+.winteam {color: blue;
+              font-weight: bold
+             }
+
+.newday {BORDER-TOP: silver solid thick;
+            }
+
 .koth_body{
     margin-left: 0px;
     margin-top: 0px;

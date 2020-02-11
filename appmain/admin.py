@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import Season, Week,Team, Game
+from .models import Season, Week,Team, Game, Seed
 
 class SeasonAdmin(admin.ModelAdmin):
     list_display = ('year', 'current', 'start_date', 'end_date')
+
+
+class SeedAdmin(admin.ModelAdmin):
+    list_display = ('year', 'team', 'seed')
 
 
 class WeekAdmin(admin.ModelAdmin):
@@ -17,6 +21,7 @@ class TeamAdmin(admin.ModelAdmin):
     list_display = ('id', 'team_abrev', 'short_name', 'team_name', 'web_address', 'conference', 'division', 'city_name')
 
 admin.site.register(Season, SeasonAdmin)
+admin.site.register(Seed, SeedAdmin)
 admin.site.register(Week, WeekAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Game, GameAdmin)

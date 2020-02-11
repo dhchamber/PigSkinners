@@ -25,7 +25,7 @@ SECRET_KEY = 'jv(x+^91=0bnlr60f*hw53nzmx)u9y^vv29+)%7vcg3x8&ow5p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["dhchamber.pythonanywhere.com"]
 
 
 # Application definition

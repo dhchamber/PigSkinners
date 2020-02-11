@@ -3,29 +3,89 @@
 {% block title %}King Of The Hill (KOTH) Standings{% endblock title %}
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/koth_rpt.css' %}" />
+<style>
+    .thead1 {color:blue;
+             font-weight:bold;
+             text-align:center;
+            }
+    .pickteam {color: blue;
+             }
+    .winteam {color: blue;
+              font-weight: bold
+             }
 
+    .loseteam {color: red;
+              text-decoration: line-through;
+             }
+
+    .newday {BORDER-TOP: silver solid thick;
+            }
+}
+</style>
+
+    <div class="row justify-content-md-center">
+        <div class="col-sm-12" align="center">
+            {% include 'appmain/weeks_sidebar.html' %}
+        </div>
+    </div>
     <body class = "koth_body" >
-        <form method="post" name="frmWeekNum" action="Standings_KOTH.asp">
-            <input type="hidden" name="hidWeekNum" id="hidWeekNum" value="<%=sWeekNumber%>">
-            <input type="hidden" name="hidGroupBy" id="hidGroupBy" value="<%=groupBy%>">
-        </form>
-        {% include 'appmain/weeks_sidebar.html' %}
-        <div class="col-sm-10">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr id=trtest name=trtest>
-                    <td width="100%" align="right" border="0">
-                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                            <tr>
-                                <td>&nbsp;</td>
-                            <tr>
-                            <tr>
-                                <td align="center">
-                                    {% include 'appmain/standing_koth_rpt.html' %}
-                                </td>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm"
+                    id="dtBasicExample"
+                    data-toggle="table"
+                    data-sortable="true"
+                    data-height="400" >
+                <thead class="thead-light">
+                    <tr class="thead1">
+                        <td text-weight: "bold">Week:&nbsp;{{user_picks.first.wk.week_no}}
+                        </td>
+                        <td class="team_picked">The team you picked is highlighted</td>
+                    </tr>
+                </thead>
+                    <tbody>
+                    {% for pick in user_picks %}
+                        {% if pick.koth_team == pick.koth_game.lose_team %}
+                            <tr class="loseteam">
+                                        <td>--&nbsp;&nbsp{{pick.user.first_name}} {{pick.user.last_name}}</td>
+                                        <td>
+                                        {% if pick.koth_team == NONE %}
+                                            &nbsp;
+                                        {% else %}
+                                            {% if pick.koth_team == pick.koth_game.visitor_team %}
+                                                <b>{{ pick.koth_team.team_name }}</b> vs. {{ pick.koth_game.home_team.team_name }} {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+                                            {% elif pick.koth_team == pick.koth_game.home_team %}
+                                                {{ pick.koth_game.visitor_team.team_name }} vs. <b>{{ pick.koth_team.team_name }}</b> {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+                                            {% else %}
+                                                &nbsp;
+                                            {% endif %}
+                                        {% endif %}
+                                        </td>
                             </tr>
-                        </table>
-                    </td>
-                </tr>
+                        {% else %}
+                            <tr class="winteam">
+                                        <td >--&nbsp;&nbsp;{{pick.user.first_name}} {{pick.user.last_name}}</td>
+                                        <td>
+                                        {% if pick.koth_team == NONE %}
+                                            &nbsp;
+                                        {% else %}
+                                            {% if pick.koth_team == pick.koth_game.visitor_team %}
+                                                <b>{{ pick.koth_team.team_name }}</b> vs. {{ pick.koth_game.home_team.team_name }} {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+                                            {% elif pick.koth_team == pick.koth_game.home_team %}
+                                                {{ pick.koth_game.visitor_team.team_name }} vs. <b>{{ pick.koth_team.team_name }}</b> {{ pick.koth_game.day }} {{ pick.koth_game.date_time }}
+                                            {% else %}
+                                                &nbsp;
+                                            {% endif %}
+                                        {% endif %}
+                                        </td>
+                        {% endif %}
+                            </tr>
+                    {% endfor %}
+                    <tr>
+                        <td align='center' style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">There are <b> Cstr(iRemaining) </b> users remaining<br>( CStr(iEliminated) eliminated this week)</td>
+                        <td style="BORDER-BOTTOM: black solid">
+                        <input name="btnGroupByUser" id="btnGroupByUser" type="submit" onclick="javascript:groupBy('User');" value="Group Report By User"></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </body>

@@ -17,7 +17,7 @@ from django.utils import timezone
 import pytz
 from django.template.defaultfilters import floatformat
 
-from .models import Season, Week, Pick, Team, Game, PickGame
+from .models import Season, Week, Seed, Pick, Team, Game, PickGame
 from .tables import TeamTable, GameTable, PickGameTable
 from appmain.load_nflgames import load_week, LoadSeason, load_score
 
@@ -64,8 +64,27 @@ def get_selected_week(request):
 
     return wk
 
+def get_postseason_weeks(request):
+    year = Season.objects.get(current=True)
+    weeks = Week.objects.filter(year=year, gt='POST')
+
+    return weeks
+
 
 def action_week(request):
+    if request.GET.get('btnSetPre1'):
+        request.session['week'] = 1
+        request.session['gt'] = 'PRE'
+    if request.GET.get('btnSetPre2'):
+        request.session['week'] = 2
+        request.session['gt'] = 'PRE'
+    if request.GET.get('btnSetPre3'):
+        request.session['week'] = 3
+        request.session['gt'] = 'PRE'
+    if request.GET.get('btnSetPre4'):
+        request.session['week'] = 4
+        request.session['gt'] = 'PRE'
+
     if request.GET.get('btnSetWeek1'):
         request.session['week'] = 1
         request.session['gt'] = 'REG'
@@ -117,18 +136,14 @@ def action_week(request):
     elif request.GET.get('btnSetWeek17'):
         request.session['week'] = 17
         request.session['gt'] = 'REG'
+
     elif request.GET.get('btnSetWeekPS'):
         request.session['week'] = 18
         request.session['gt'] = 'POST'
 
     next = request.GET.get('next', '/')
     print(f'NEXT: from GET: {next}')
-    # print(f'Path from request: {request.META.get("HTTP_REFFERER")}')
-    # print(f'Path_info from request: {request.path_info}')
-    # print(f'Path_info from request: {request.build_absolute_url()}')
-    # print(f'Path_info from request: {request.get_full_path()}')
     return redirect(next)
-    # HttpResponseRedirect(next)
 
 
 def random_picks(request):
@@ -241,14 +256,14 @@ def home(request):
 
 # remove replace with form view and html
 # def picks_make(request):
-#     return render(request, 'appmain/picks_make.html', {})
+#     return render(request, 'appmain/pick_make.html', {})
 
 
 @login_required
-def picks_revisions(request):
+def pick_revision(request):
     # if not request.user.is_authenticated:
     #    return redirect('%s?next=%s' %(settings.LOGIN_URL, request.path))
-    return render(request, 'appmain/picks_revisions.html', {})
+    return render(request, 'appmain/pick_revision.html', {})
 
 
 @login_required
@@ -285,7 +300,7 @@ def pick_view(request):
     # return render(request, 'appmain/bootstrap_sort.html', {'pick': pick})
 
 @login_required
-def picks_make(request):
+def pick_make(request):
     timezone.activate(pytz.timezone('America/Denver'))
     submitted = False
     wk = get_selected_week(request)
@@ -356,17 +371,48 @@ def picks_make(request):
         if 'submitted' in request.GET:
             submitted = True
 
-        return render(request, 'appmain/picks_make.html', {'pick': pick, 'submitted': submitted})
+        return render(request, 'appmain/pick_make.html', {'pick': pick, 'submitted': submitted})
 
 
+@login_required
+def pick_make_ps(request):
+    timezone.activate(pytz.timezone('America/Denver'))
+    year = Season.objects.get(current=True)
+    weeks = get_postseason_weeks(request)
+
+#TODO: loop and check for user post season picks create if necessary
+    try:
+        picks = Pick.objects.filter(user=request.user, wk__in=weeks)
+        print(f'found pick for  {request.user.username} / {request.user.id} pick: {picks.count()}')
+    except:
+        for week in weeks:
+            pick = Pick.objects.create_pick(user=request.user, week=week)
+            print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
+        picks = Pick.objects.get(user=request.user, wk__in=weeks)
+
+    afc = {}
+    nfc = {}
+    seeds = Seed.objects.filter(year=year)
+    for seed in seeds:
+        if seed.team.conference == "AFC":
+            afc[seed.seed] = seed.team
+        else:
+            nfc[seed.seed] = seed.team
+#TODO: add lookup to get game for each seed and add to afc and nfc dicts
+    return render(request, 'appmain/pick_make_ps.html', {'picks': picks, 'seeds':seeds, 'afc':afc, 'nfc':nfc})
+
+
+@login_required
 def standing_weekdet(request):
     page = standing_week(request,True)
     return page
 
+@login_required
 def standing_weeksum(request):
     page = standing_week(request,False)
     return page
 
+@login_required
 def standing_week(request, detail):
     wk = get_selected_week(request)
 

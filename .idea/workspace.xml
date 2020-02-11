@@ -2,12 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0082_game_points_game.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0083_auto_20200211_1307.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0084_auto_20200211_1310.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0085_seed_game.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/css/koth_rpt.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/koth_rpt.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_make.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/picks_revisions.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

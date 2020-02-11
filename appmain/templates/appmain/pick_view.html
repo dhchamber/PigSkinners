@@ -1,4 +1,5 @@
 {% extends 'appmain/base.html' %}
+{% block title %}View Picks{% endblock title %}
 {% block content %}
 <!--  get nfl games data for a week and loop through records and display
     game #, home, visitor,
@@ -37,7 +38,7 @@
 <!--        <caption>List of Users Picks</caption>-->
         <thead class="thead-light">
             <tr class="thead1">
-                <td >Picks for week: {{ pick.wk.week_no }}<br>
+                <td >Picks for week: {{ pick.wk }}<br>
                     {% if pick.wk.closed %} CLOSED
                     {% else %} OPEN {% endif %}
                 </td>

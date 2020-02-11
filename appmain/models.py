@@ -110,7 +110,7 @@ class Week(models.Model):
     year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)    #? week of the season 1-17, 18-21
     week_no = models.PositiveSmallIntegerField(null=False) #? week of the season 1-17, 18-21  must be equal to id for foreign key
 #TODO: need a way to sort correctly be week and week type, add new model for gt with key 1,2,3 ??
-    gt = models.CharField(max_length=3) #game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
+    gt = models.CharField(max_length=3) #game type  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
     closed = models.BooleanField(default=False)
     closed_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.SET_NULL,default=1)  #models.CharField(max_length=50,null=True)
     date_closed = models.DateTimeField(blank=True, null=True)
@@ -136,6 +136,18 @@ class Week(models.Model):
     def forecast_dt_closed(self):
         if self.start_dt():
             return self.start_dt() - timedelta(hours=2)
+
+#TODO: if day = day then just return the first day
+    def postseason_week(self):
+        timezone.activate(pytz.timezone('America/Denver'))
+        min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
+        max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
+
+        if min_date.strftime("%d") == max_date.strftime("%d"):
+            date_str = min_date.strftime("%b. %d")
+        else:
+            date_str = min_date.strftime("%b. %d") + '-' + max_date.strftime("%d")
+        return date_str
 
     # get current time (in UTC timezone) if after forecast close (which is alos in UTC) then close the week
     def close_week(self, user):
@@ -255,6 +267,20 @@ class Game(TimeStampMixin):
             else:
                 return 'Error'
 
+#  Table for PostSeason seeds
+class Seed(models.Model):
+    class Meta:
+        verbose_name = 'seed'
+        verbose_name_plural = 'seeds'
+        indexes = [models.Index(fields=['year', 'team'])]
+        ordering = ['year', 'team','seed']
+        constraints = [models.UniqueConstraint(fields=['year', 'team'], name='year_team')]
+
+    year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='seed')
+    game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='gm_seeds')
+    seed = models.PositiveSmallIntegerField(default=0)
+
 
 class PickManager(models.Manager):
     def create_pick(self, user, week):
@@ -365,11 +391,6 @@ class PickGame(models.Model):
             return 0
 
 
-# TODO: Potential table for PostSeason seeds
-# CREATE TABLE [dbo].[tblPostSeed](
-# 	[PostSeedID] [int] IDENTITY(1,1) NOT NULL,
-# 	[TeamID] [tinyint] NOT NULL,
-# 	[Seed] [int] NOT NULL,
 
 # TODO: Potential table for PostSeason points per round
 # CREATE TABLE [dbo].[tblPostRound](

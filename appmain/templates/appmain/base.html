@@ -90,13 +90,11 @@
 									  Picks
 										</a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-											<a class="dropdown-item" href="/add_pick">Make PreSeason Picks</a>
-											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="/picks/make/">Make Picks</a>
+											<a class="dropdown-item" href="/pick/make/">Make Picks</a>
 											<a class="dropdown-item" href="/pick/view">View Picks</a>
-											<a class="dropdown-item" href="/picks/revisions/">Pick Revisions</a>
+											<a class="dropdown-item" href="/pick/revision/">Pick Revisions</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="/picks/make/">Make PostSeason Picks</a>
+											<a class="dropdown-item" href="/pick/make_ps/">Make PostSeason Picks</a>
 										</div>
 									</li>
 									<li class="nav-item dropdown">
@@ -150,26 +148,26 @@
 						</nav>
 					</div>
 				</div>
-				<div class="row justify-content-md-center">
-<!--					<div class = "col-sm-2">-->
+<!--				<div class="row justify-content-md-center">-->
+<!--&lt;!&ndash;					<div class = "col-sm-2">&ndash;&gt;-->
+<!--&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--					<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">-->
+<!--					<div class="col-sm-6" >-->
+<!--						<span class="navbar-text" style="align-top">-->
+<!--							{% if user.is_authenticated %}-->
+<!--								Current User: {{ user.first_name }} {{ user.last_name }}-->
+<!--							{% else %}-->
+<!--								Current User: NO USER-->
+<!--							{% endif %}-->
+<!--						</span>-->
 <!--					</div>-->
-					<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
-					<div class="col-sm-6" >
-						<span class="navbar-text" style="align-top">
-							{% if user.is_authenticated %}
-								Current User: {{ user.first_name }} {{ user.last_name }}
-							{% else %}
-								Current User: NO USER
-							{% endif %}
-						</span>
-					</div>
-					<div class="col-sm-6" >
-						<span class="navbar-text" style="align-top align-right">
-							Current Week: week 3 1/1/2020 - 1/5/2020
-						</span>
-					</div>
-					</nav>
-				</div>
+<!--					<div class="col-sm-6" >-->
+<!--						<span class="navbar-text" style="align-top align-right">-->
+<!--							Current Week: week 3 1/1/2020 - 1/5/2020-->
+<!--						</span>-->
+<!--					</div>-->
+<!--					</nav>-->
+<!--				</div>-->
 			</div>
 		</header>
 
