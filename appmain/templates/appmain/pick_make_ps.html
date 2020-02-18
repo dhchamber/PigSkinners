@@ -2,6 +2,7 @@
 {% load static %}
 {% load tz %}
 {% block title %}Make Post Season Picks{% endblock title %}
+
 {% block content %}
 <style type="text/css">
     .thead1 {color:blue;
@@ -11,71 +12,88 @@
     .pickteam {color: blue;
              }
     .winteam {color: blue;
-              font-weight: bold
+              font-weight: bold;
              }
 
     .newday {BORDER-TOP: silver solid thick;
             }
-}
-    .bottom_border
-    {
-        BORDER-BOTTOM: black solid 1px
+
+    .bottom_border {
+        BORDER-BOTTOM: black solid 1px;
+        cursor: pointer;
+        text-align: center;
+        font-size: smaller;
     }
 
-    .right_border
-    {
+    .right_border {
         BORDER-RIGHT: black solid 1px;
+        text-align:center;
+        font-size: smaller;
     }
 
-    .left_border
-    {
+    .left_border {
         BORDER-LEFT: black solid 1px;
+        font-size: smaller;
+        text-align:center;
     }
 
     .left_right_border
     {
         BORDER-LEFT: black solid 1px;
         BORDER-RIGHT: black solid 1px;
+        font-size: smaller;
+        text-align:center;
     }
 
-    .right_bottom_border
-    {
+    .right_bottom_border {
         BORDER-BOTTOM: black solid 1px;
         BORDER-RIGHT: black solid 1px;
+        CURSOR: HAND;
+        font-size: smaller;
+        text-align: center;
     }
 
-    .left_bottom_border
-    {
+    .left_bottom_border {
         BORDER-BOTTOM: black solid 1px;
         BORDER-LEFT: black solid 1px;
+        CURSOR: HAND;
+        font-size: smaller;
+        text-align: center;
     }
 
-    .left_right_bottom_border
-    {
+    .left_right_bottom_border {
         BORDER-BOTTOM: black solid 1px;
         BORDER-LEFT: black solid 1px;
         BORDER-RIGHT: black solid 1px;
+        font-size: smaller;
+        text-align:center;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="includes/styles.css" />
+<link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}"/>
 
     <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" onload="javascript:return window_onload();" onbeforeunload="javascript:return window_onbeforeunload()">
-    <form id=frmPostPicks method="post" action="MakePostseasonPicks.asp">
-        <input type=hidden id="hidAfc45Pick" name="hidAfc45Pick" value="<%=afc45Pick%>">
-        <input type=hidden id="hidNfc45Pick" name="hidNfc45Pick" value="<%=nfc45Pick%>">
-        <input type=hidden id="hidAfc36Pick" name="hidAfc36Pick" value="<%=afc36Pick%>">
-        <input type=hidden id="hidNfc36Pick" name="hidNfc36Pick" value="<%=nfc36Pick%>">
-        <input type=hidden id="hidAfcCC1Pick" name="hidAfcCC1Pick" value="<%=afcCC1Pick%>">
-        <input type=hidden id="hidNfcCC1Pick" name="hidNfcCC1Pick" value="<%=nfcCC1Pick%>">
-        <input type=hidden id="hidAfcCC2Pick" name="hidAfcCC2Pick" value="<%=afcCC2Pick%>">
-        <input type=hidden id="hidNfcCC2Pick" name="hidNfcCC2Pick" value="<%=nfcCC2Pick%>">
-        <input type=hidden id="hidAfcCCPick" name="hidAfcCCPick" value="<%=afcCCPick%>">
-        <input type=hidden id="hidNfcCCPick" name="hidNfcCCPick" value="<%=nfcCCPick%>">
-        <input type=hidden id="hidSuperPick" name="hidSuperPick" value="<%=superPick%>">
-        <input type=hidden id="hidMode" name="hidMode">
-        <input type="hidden" name="hidWeekNum" id="hidWeekNum" value={{ pick.first.wk.week_no }}>
+    <form id=frmPostPicks method="post" action="/pick/save_ps/">
+        {% csrf_token %}
+<!--        {% for pg in pick.post_games.all %}-->
+<!--            <input type=text id="{{ pg.ps_type }}" name="{{ pg.ps_type }}" value="{{ pg.team.id }}">-->
+<!--        {% endfor %}-->
+        <input type=hidden id="hidAWC45" name="hidAWC45" value="">
+        <input type=hidden id="hidNWC45" name="hidNWC45" value="">
+        <input type=hidden id="hidAWC36" name="hidAWC36" value="">
+        <input type=hidden id="hidNWC36" name="hidNWC36" value="">
+        <input type=hidden id="hidADIV1" name="hidADIV1" value="">
+        <input type=hidden id="hidNDIV1" name="hidNDIV1" value="">
+        <input type=hidden id="hidADIV2" name="hidADIV2" value="">
+        <input type=hidden id="hidNDIV2" name="hidNDIV2" value="">
+        <input type=hidden id="hidACONF" name="hidACONF" value="">
+        <input type=hidden id="hidNCONF" name="hidNCONF" value="">
+        <input type=hidden id="hidSB" name="hidSB" value="">
+        <input type=hidden id="hidPickID" name="hidPickID" value={{ pick.id }}>
+<!--        <input type="hidden" name="hidWeekNum" id="hidWeekNum" value={{ pick.first.wk.week_no }}>-->
 
         <table width=100% cellpadding=0 cellspacing=0 border=0>
+<!--    <table class="table table-bordered table-hover table-sm" data-toggle="table">-->
+
             <tr>
                 <td bgcolor=#3399cc align=center colspan=9><font size=+2><b>Playoff Bracket</b></font></td>
             </tr>
@@ -94,16 +112,16 @@
                 <td bgcolor=Silver align=center width=14.5%>Wild Card</td>
             </tr>
             <tr>
-                {% for pick in picks %}
-                    {% if pick.wk.week_no == 22 %}
-                        <td align=center colspan=3>{{ pick.wk.postseason_week }}</td>
+                {% for week in weeks %}
+                    {% if week.week_no == 22 %}
+                        <td align=center colspan=3>{{ week.postseason_week }}</td>
                     {% else %}
-                        <td align=center>{{ pick.wk.postseason_week }}</td>
+                        <td align=center>{{ week.postseason_week }}</td>
                     {% endif %}
                 {% endfor %}
-                {% for pick in picks reversed %}
-                    {% if pick.wk.week_no != 22 %}
-                        <td align=center>{{ pick.wk.postseason_week }}</td>
+                {% for week in weeks reversed %}
+                    {% if week.week_no != 22 %}
+                        <td align=center>{{ week.postseason_week }}</td>
                     {% endif %}
                 {% endfor %}
             </tr>
@@ -111,9 +129,14 @@
                 <td colspan=9>&nbsp;</td>
             </tr>
             <tr>
-                <td align=center class=bottom_border id=afc4 onclick="pickTeam(this)" style="CURSOR: HAND">{{ afc.4.team_name }}</td>
+<!--                this is a seed team so display the game team not the pick -->
+                <td class=bottom_border id=htAWC45 teamID="{{ pick.post_games.all.0.game.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static pick.post_games.all.0.game.home_team.logo_file_name %}" width=25px>
+                    <br>#4 {{ pick.post_games.all.0.game.home_team }}</td>
                 <td colspan=7>&nbsp;</td>
-                <td align=center class=bottom_border id=nfc4 onclick="pickTeam(this)" style="CURSOR: HAND">{{ nfc.4.team_name }}</td>
+                <td class=bottom_border id=htNWC45 teamID="{{ pick.post_games.all.1.game.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static pick.post_games.all.1.game.home_team.logo_file_name %}" width=25px>
+                    <br>#4 {{ pick.post_games.all.1.game.home_team }}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -122,9 +145,15 @@
             </tr>
             <tr>
                 <td align=center>&nbsp;</td>
-                <td align=center class=left_bottom_border style="CURSOR: HAND"><font id=afc45 onclick="pickTeam(this)"><%=afc45Html%></font></td>
+                <td class=left_bottom_border id=vtADIV1 onclick="pickTeam(this)">
+                    {% if pick.post_games.all.4.team == None %} TBD
+                    {% else %} <img src="{% static pick.post_games.all.4.team.logo_file_name %}" width=25px> #{{ pick.post_games.all.4.team.cy_seed }} {{ pick.post_games.all.4.team }}
+                    {% endif %} </td>
                 <td colspan=5>&nbsp;</td>
-                <td align=center class=right_bottom_border style="CURSOR: HAND"><font id=nfc45 onclick="pickTeam(this)"><%=nfc45Html%></font></td>
+                <td class=right_bottom_border id=vtNDIV1 onclick="pickTeam(this)">
+                    {% if pick.post_games.all.6.team == None %} TBD
+                    {% else %} <img src="{% static pick.post_games.all.6.team.logo_file_name %}" width=25px> #{{ pick.post_games.all.6.team.cy_seed }} {{ pick.post_games.all.6.team }}
+                    {% endif %} </td>
                 <td align=center>&nbsp;</td>
             </tr>
             <tr>
@@ -135,39 +164,71 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td align=center class=bottom_border id=afc5 onclick="pickTeam(this)" style="CURSOR: HAND">{{ afc.5.team_name }}</td>
-                <td class=left_right_border align=center><%=dp1AfcDateTime%>&nbsp;</td>
-                <td align=center class=bottom_border style="CURSOR: HAND"><font id=afcCC1 onclick="pickTeam(this)"><%=afcCC1Html%></font></td>
+                <td class=bottom_border id=vtAWC45 teamID="{{ pick.post_games.all.0.game.visitor_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static pick.post_games.all.0.game.visitor_team.logo_file_name %}" width=25px>
+                    <br>#5 {{ pick.post_games.all.0.game.visitor_team }}</td>
+                <td class="left_right_border">{{ pick.post_games.all.4.game.date_time }}</td>
+                <td class=bottom_border id=htACONF onclick="pickTeam(this)">
+                    {% if pick.post_games.all.8.team == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static pick.post_games.all.8.team.logo_file_name %}" width=25px> {{ pick.post_games.all.8.team }}
+                    {% endif %}
+                    </td>
                 <td colspan=3>&nbsp;</td>
-                <td align=center class=bottom_border style="CURSOR: HAND"><font id=nfcCC1 onclick="pickTeam(this)"><%=nfcCC1Html%></font></td>
-                <td class=left_right_border align=center><%=dp1NfcDateTime%>&nbsp;</td>
-                <td align=center class=bottom_border id=nfc5 onclick="pickTeam(this)" style="CURSOR: HAND">{{ nfc.5.team_name }}</td>
+                <td class=bottom_border id=htNCONF onclick="pickTeam(this)">
+                    {% if pick.post_games.all.9.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.9.team }}
+                    {% endif %}
+                    </td>
+                <td class=left_right_border >{{ pick.post_games.all.6.game.date_time }}&nbsp;</td>
+                <td class=bottom_border id=vtNWC45 teamID="{{ pick.post_games.all.1.game.visitor_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.1.game.visitor_team.logo_file_name %}" width=25px>
+                    <br>#5 {{ pick.post_games.all.1.game.visitor_team }}</td>
             </tr>
             <tr>
                 <td colspan=2 class=right_border>&nbsp;</td>
                 <td class=right_border>&nbsp;</td>
-                <td colspan=2 class=bottom_border align=center style="CURSOR: HAND"><font id="afcCC" onclick="pickTeam(this)"><%=afcCCHtml%></font></td>
+                <td colspan=2 class=bottom_border id="atSB" onclick="pickTeam(this)">
+                    {% if pick.post_games.all.8.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.8.team }}
+                    {% endif %}
+                    </td>
                 <td>&nbsp;</td>
                 <td class=left_border>&nbsp;</td>
                 <td colspan=2 class=left_border>&nbsp;</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td align=center class=right_bottom_border style="CURSOR: HAND"><font id=afc121 teamID="<%=afc121TeamID%>" onclick="pickTeam(this)">{{ afc.1.team_name }}</font></td>
+                <td class=right_bottom_border id=htADIV1 teamID="{{ pick.post_games.all.4.game.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.4.game.home_team.logo_file_name %}" width=25px>
+                    <br>#1 {{ pick.post_games.all.4.game.home_team }}</td>
                 <td class=right_border align=center>&nbsp;</td>
                 <td colspan=3>&nbsp;</td>
                 <td class=left_border align=center>&nbsp;</td>
-                <td align=center class=left_bottom_border style="CURSOR: HAND"><font id=nfc121 teamID="<%=nfc121TeamID%>" onclick="pickTeam(this)">{{ nfc.1.team_name }}</font></td>
+                <td class=left_bottom_border id=htNDIV1 teamID="{{ pick.post_games.all.6.game.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.6.game.home_team.logo_file_name %}" width=25px>
+                    <br>#1 {{ pick.post_games.all.6.game.home_team }}</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td colspan=2>&nbsp;</td>
-                <td class=right_border align=center><%=ccAfcDateTime%>&nbsp;</td>
+                <td class=right_border align=center>{{ pick.post_games.all.8.game.date_time }}&nbsp;</td>
                 <td colspan=3 align=center>
                     <table width="100%" cellpadding="0" cellspacing="0" align=center>
                         <tr>
                             <td>&nbsp;</td>
-                            <td align=center><b>Super Bowl Winner:</b><br><font id="superChamp"><%=superChampHtml%></font></td>
+                            <td align=center><b>Super Bowl Winner:</b><br><font id="superChamp">
+                                {% if pick.post_games.all.10.team == None %}
+                                    TBD
+                                {% else %}
+                                    {{ pick.post_games.all.10.team }}
+                                {% endif %}
+                            </font></td>
                             <td>&nbsp;</td>
                         </tr>
                         <tr>
@@ -175,44 +236,70 @@
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
-                            <td align=center><b>Total Points:</b>&nbsp;<input type=text id=bowlPoints maxlength=3 style="width: 25px" NAME="bowlPoints" value="<%=bowlPoints%>"></td>
+                            <td align=center><b>Total Points:</b>&nbsp;<input type=text id=bowlPoints maxlength=3 style="width: 25px" NAME="bowlPoints" value="{{ pick.points }}"></td>
                             <td>&nbsp;</td>
                         </tr>
-
                     </table>
                 </td>
-                <td class=left_border align=center><%=ccNfcDateTime%>&nbsp;</td>
+                <td class=left_border align=center>{{ pick.post_games.all.9.game.date_time }}&nbsp;</td>
                 <td colspan=2>&nbsp;</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td align=center class=bottom_border style="CURSOR: HAND"><font id=afc122 teamID="<%=afc122TeamId%>" onclick="pickTeam(this)">{{ afc.2.team_name }}</font></td>
+                <td class=bottom_border id=htADIV2 teamID="{{ pick.post_games.all.5.game.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.5.game.home_team.logo_file_name %}" width=25px>
+                    <br>#2 {{ pick.post_games.all.5.game.home_team }}</td>
                 <td class=right_border align=center>&nbsp;</td>
                 <td colspan=3>&nbsp;</td>
-                <td class=left_border align=center>&nbsp;</td>
-                <td align=center class=bottom_border style="CURSOR: HAND"><font id=nfc122 teamID="<%=nfc122TeamId%>" onclick="pickTeam(this)">{{ nfc.2.team_name }}</font></td>
+                <td class=left_border>&nbsp;</td>
+                <td class=bottom_border id=htNDIV2 teamID="{{ pick.post_games.all.7.game.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.7.game.home_team.logo_file_name %}" width=25px>
+                    <br>#2 {{ pick.post_games.all.7.game.home_team }}</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td colspan=2 class=right_border>&nbsp;</td>
                 <td class=right_border>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td class=bottom_border align=center colspan=2 style="CURSOR: HAND"><font id="nfcCC" onclick="pickTeam(this)"><%=nfcCCHtml%></font></td>
+                <td class=bottom_border>&nbsp;</td>
+                <td class=bottom_border colspan=2 id="ntSB" onclick="pickTeam(this)">
+                    {% if pick.post_games.all.9.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.9.team }}
+                    {% endif %}
+                </td>
                 <td class=left_border>&nbsp;</td>
                 <td colspan=2 class=left_border>&nbsp;</td>
             </tr>
             <tr>
-                <td align=center class=bottom_border id=afc3 onclick="pickTeam(this)" style="CURSOR: HAND">{{ afc.3.team_name }}</td>
-                <td align=center class=right_border><%=dp2AfcDateTime%>&nbsp;</td>
-                <td align=center class=right_bottom_border style="CURSOR: HAND"><font id=afcCC2 onclick="pickTeam(this)"><%=afcCC2Html%></font></td>
-                <td colspan=3 align=center valign=bottom>&nbsp;
-                    <%If bAllowPicks Then%>
-                        <input type=submit onclick="javascript:return savePicks();" value="Save Picks">&nbsp;
-                    <%End If%>
+                <td class=bottom_border id=htAWC36 teamID="{{ pick.post_games.all.2.game.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static pick.post_games.all.2.game.home_team.logo_file_name %}" width=25px>
+                    <br>#3 {{ pick.post_games.all.2.game.home_team }}</td>
+                <td class=right_border>{{ pick.post_games.all.5.game.date_time }}&nbsp;</td>
+                <td class=right_bottom_border id=vtACONF onclick="pickTeam(this)">
+                    {% if pick.post_games.all.8.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.8.team }}
+                    {% endif %}
                 </td>
-                <td align=center class=left_bottom_border style="CURSOR: HAND"><font id=nfcCC2 onclick="pickTeam(this)"><%=nfcCC2Html%></font></td>
-                <td align=center class=left_border><%=dp2NfcDateTime%>&nbsp;</td>
-                <td align=center class=bottom_border id=nfc3 onclick="pickTeam(this)" style="CURSOR: HAND">{{ nfc.3.team_name }}</td>
+                <td colspan=3 align=center valign=bottom>&nbsp;
+                    <input type=submit onclick="javascript:return savePicks();" value="Save Picks"&nbsp;>
+<!--                    {% if not allowPicks %} disabled-->
+<!--                    {% endif %}>-->
+
+                </td>
+                <td class=left_bottom_border id=vtNCONF onclick="pickTeam(this)">
+                    {% if pick.post_games.all.9.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.9.team }}
+                    {% endif %}
+                </td>
+                <td class=left_border>{{ pick.post_games.all.7.game.date_time }}&nbsp;</td>
+                <td class=bottom_border id=htNWC36 teamID="{{ pick.post_games.all.3.game.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static pick.post_games.all.3.game.home_team.logo_file_name %}" width=25px>
+                    <br>#3 {{ pick.post_games.all.3.game.home_team }}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -223,9 +310,21 @@
             </tr>
             <tr>
                 <td align=center>&nbsp;</td>
-                <td align=center class=left_right_bottom_border style="CURSOR: HAND"><font id=afc36 onclick="pickTeam(this)"><%=afc36Html%></font></td>
+                <td class=left_right_bottom_border id=vtADIV2 onclick="pickTeam(this)">
+                    {% if pick.post_games.all.5.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.5.team }}
+                    {% endif %}
+                </td>
                 <td colspan=5>&nbsp;</td>
-                <td align=center class=left_right_bottom_border style="CURSOR: HAND"><font id=nfc36 onclick="pickTeam(this)"><%=nfc36Html%></font></td>
+                <td class=left_right_bottom_border id=vtNDIV2 onclick="pickTeam(this)">
+                    {% if pick.post_games.all.7.team == None %}
+                        TBD
+                    {% else %}
+                        {{ pick.post_games.all.7.team }}
+                    {% endif %}
+                </td>
                 <td align=center>&nbsp;</td>
             </tr>
             <tr>
@@ -234,10 +333,377 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td align=center class=bottom_border id=afc6 onclick="pickTeam(this)" style="CURSOR: HAND">{{ afc.6.team_name }}</td>
+                <td class=bottom_border id=vtAWC36 teamID="{{ pick.post_games.all.2.game.visitor_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.2.game.visitor_team.logo_file_name %}" width=25px>
+                    <br>#6 {{ pick.post_games.all.2.game.visitor_team }}</td>
                 <td colspan=7 class=left_right_border>&nbsp;</td>
-                <td align=center class=bottom_border id=nfc6 onclick="pickTeam(this)" style="CURSOR: HAND">{{ nfc.6.team_name }}</td>
+                <td class=bottom_border id=vtNWC36 teamID="{{ pick.post_games.all.3.game.visitor_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static pick.post_games.all.3.game.visitor_team.logo_file_name %}" width=25px>
+                    <br>#6 {{ pick.post_games.all.3.game.visitor_team }}</td>
             </tr>
         </table>
     </form>
+
+<script type="text/javascript" language="Javascript" src="{% static 'appmain/js/picks_make_ps.js' %}" > </script>
+<script language=javascript>
+<!--
+var bClosed;
+var bPicksChanged = false;
+var bAllowPicks = true;
+
+function window_onload()
+{
+	var sMsg;
+
+	//see if there's a message to show the user
+    bAllowPicks = true;
+	sMsg = "<%=sOnOpenMsg%>";
+	if(sMsg != "")
+	{
+		alert(sMsg);
+	}
+
+}
+
+function window_onbeforeunload() {
+	if(bPicksChanged == true) {
+		event.returnValue = "You have unsaved picks.\nNavigating away from the page will cause those picks to be lost.";
+    }
+}
+
+$('form#frmPostPicks').submit(function() {
+   $(window).unbind('beforeunload');
+});
+
+function pickTeam(objTd)
+{
+	var allowPicks = "True";
+	var id = objTd.id;
+	if(allowPicks == "True"){
+		bPicksChanged = true;
+		if(id == "htAWC36"){
+			//if the 3 seed is picked then it plays the 2 seed in DIV (vtADIV2)
+			vtADIV2.innerHTML = objTd.innerHTML;
+			vtADIV2.setAttribute("teamID", htAWC36.getAttribute("teamID"));
+            frmPostPicks.hidAWC36.value =  htAWC36.getAttribute("teamID");
+			//if they changed the winner of this game, we need to clear out the afc picks that come after
+			clearAfcPicks(3);
+
+		}else if(id == "vtAWC36"){
+			//if the 6 seed is picked then it plays the 1 seed in DIV (vtADIV1)
+			vtADIV1.innerHTML = objTd.innerHTML;
+			vtADIV1.setAttribute("teamID", vtAWC36.getAttribute("teamID"));
+			frmPostPicks.hidAWC36.value = vtAWC36.getAttribute("teamID");
+			//if they changed the winner of this game, we need to clear out the afc picks that come after
+			clearAfcPicks(3);
+
+		} else if(id == "htNWC36"){
+			//if the 3 seed is picked then it plays the 2 seed in DIV (vtNDIV2)
+			vtNDIV2.innerHTML = objTd.innerHTML;
+			vtNDIV2.setAttribute("teamID",htNWC36.getAttribute("teamID"));
+			frmPostPicks.hidNWC36.value = htNWC36.getAttribute("teamID");
+			clearNfcPicks(3);
+
+		}else if(id == "vtNWC36"){
+			vtNDIV2.innerHTML = objTd.innerHTML;
+			vtNDIV2.setAttribute("teamID",vtNWC36.getAttribute("teamID"));
+			frmPostPicks.hidNWC36.value = vtNWC36.getAttribute("teamID");
+			clearNfcPicks(3);
+
+		}else if(id == "htAWC45") {
+		    // need to check the AWC36 game, if 6 is picked then the winner plays the 2 seed (vtADIV2)
+		    if(vtADIV1.getAttribute("teamID") == vtAWC36.getAttribute("teamID")){
+			    vtADIV2.innerHTML = objTd.innerHTML;
+			    vtADIV2.setAttribute("teamID", htAWC45.getAttribute("teamID"));
+            }else{
+			    vtADIV1.innerHTML = objTd.innerHTML;
+			    vtADIV1.setAttribute("teamID", htAWC45.getAttribute("teamID"));
+            }
+            frmPostPicks.hidAWC45.value = htAWC45.getAttribute("teamID");
+			//if they changed the winner of this game, we need to clear out the afc picks that come after
+			clearAfcPicks(3);
+
+		}else if(id == "vtAWC45"){
+		    // need to check the AWC36 game, if 6 is picked then the winner plays the 2 seed (vtADIV2)
+		    if(vtADIV1.getAttribute("teamID") == vtAWC36.getAttribute("teamID")){
+    			vtADIV2.innerHTML = objTd.innerHTML;
+    			vtADIV2.setAttribute("teamID", vtAWC45.getAttribute("teamID"));
+            }else{
+    			vtADIV1.innerHTML = objTd.innerHTML;
+    			vtADIV1.setAttribute("teamID", vtAWC45.getAttribute("teamID"));
+            }
+			frmPostPicks.hidAWC45.value = vtAWC45.getAttribute("teamID");
+			//if they changed the winner of this game, we need to clear out the afc picks that come after
+			clearAfcPicks(3);
+
+		}else if(id == "htNWC45"){
+		    // need to check the NWC36 game, if 6 is picked then the winner plays the 2 seed (vtNDIV2)
+		    if(vtNDIV1.getAttribute("teamID") == vtNWC36.getAttribute("teamID")){
+                vtNDIV2.innerHTML = objTd.innerHTML;
+                vtNDIV2.setAttribute("teamID", htNWC45.getAttribute("teamID"));
+            }else{
+                vtNDIV1.innerHTML = objTd.innerHTML;
+                vtNDIV1.setAttribute("teamID", htNWC45.getAttribute("teamID"));
+            }
+			frmPostPicks.hidNWC45.value = htNWC45.getAttribute("teamID");
+			clearNfcPicks(3);
+
+		}else if(id == "vtNWC45"){
+		    if(vtNDIV1.getAttribute("teamID") == vtNWC36.getAttribute("teamID")){
+                vtNDIV2.innerHTML = objTd.innerHTML;
+                vtNDIV2.setAttribute("teamID", vtNWC45.getAttribute("teamID"));
+            }else{
+                vtNDIV1.innerHTML = objTd.innerHTML;
+                vtNDIV1.setAttribute("teamID", vtNWC45.getAttribute("teamID"));
+            }
+			frmPostPicks.hidNWC45.value = vtNWC45.getAttribute("teamID");
+			clearNfcPicks(3);
+
+		} else if(id == "htADIV1") {
+			//they picked this 1 seed to go to the conference championship game
+			htACONF.innerHTML = htADIV1.innerHTML;
+            htACONF.setAttribute("teamID",htADIV1.getAttribute("teamID"));
+			frmPostPicks.hidADIV1.value = htADIV1.getAttribute("teamID");
+
+			//if they changed the winner of this game, we need to clear out the afc picks that come after
+			clearAfcPicks(4);
+
+		} else if(id == "vtADIV1") {
+			//they picked the winner of the 4/5 game to win the next round
+			htACONF.innerHTML = vtADIV1.innerHTML;
+            htACONF.setAttribute("teamID",vtADIV1.getAttribute("teamID"));
+			frmPostPicks.hidADIV1.value = vtADIV1.getAttribute("teamID");
+
+			//if they changed the winner of this game, we need to clear out the afc picks that come after
+			clearAfcPicks(4);
+
+		} else if(id == "htNDIV1") {
+			htNCONF.innerHTML = htNDIV1.innerHTML;
+			htNCONF.setAttribute("teamID",htNDIV1.getAttribute("teamID"));
+			frmPostPicks.hidNDIV1.value = htNDIV1.getAttribute("teamID");
+			clearNfcPicks(4);
+
+		} else if(id == "vtNDIV1") {
+			htNCONF.innerHTML = vtNDIV1.innerHTML;
+			htNCONF.setAttribute("teamID",vtNDIV1.getAttribute("teamID"));
+			frmPostPicks.hidNDIV1.value = vtNDIV1.getAttribute("teamID");
+			clearNfcPicks(4);
+
+		} else if(id == "htADIV2") {
+			vtACONF.innerHTML = htADIV2.innerHTML;
+			vtACONF.setAttribute("teamID",htADIV2.getAttribute("teamID"));
+			frmPostPicks.hidADIV2.value = htADIV2.getAttribute("teamID");
+			clearAfcPicks(4);
+
+		} else if(id == "vtADIV2") {
+			vtACONF.innerHTML = vtADIV2.innerHTML;
+			vtACONF.setAttribute("teamID", htADIV2.getAttribute("teamID"));
+			frmPostPicks.hidADIV2.value = htADIV2.getAttribute("teamID");
+			clearAfcPicks(4);
+
+		} else if(id == "htNDIV2") {
+			vtNCONF.innerHTML = htNDIV2.innerHTML;
+			vtNCONF.setAttribute("teamID", htNDIV2.getAttribute("teamID"));
+			frmPostPicks.hidNDIV2.value = htNDIV2.getAttribute("teamID");
+			clearNfcPicks(4);
+
+		} else if(id == "vtNDIV2") {
+			vtNCONF.innerHTML = vtNDIV2.innerHTML;
+			vtNCONF.setAttribute("teamID", vtNDIV2.getAttribute("teamID"));
+			frmPostPicks.hidNDIV2.value = vtNDIV2.getAttribute("teamID");
+			clearNfcPicks(4);
+
+		} else if(id == "htACONF") {
+			atSB.innerHTML = htACONF.innerHTML;
+			atSB.setAttribute("teamID", htACONF.getAttribute("teamID"));
+			frmPostPicks.hidACONF.value = htACONF.getAttribute("teamID");
+			clearAfcPicks(5);
+
+		} else if(id == "vtACONF") {
+			atSB.innerHTML = vtACONF.innerHTML;
+			atSB.setAttribute("teamID", vtACONF.getAttribute("teamID"));
+			frmPostPicks.hidACONF.value = vtACONF.getAttribute("teamID");
+			clearAfcPicks(5);
+
+		} else if(id == "htNCONF") {
+			ntSB.innerHTML = htNCONF.innerHTML;
+			ntSB.setAttribute("teamID", htNCONF.getAttribute("teamID"));
+			frmPostPicks.hidNCONF.value = htNCONF.getAttribute("teamID");
+			clearNfcPicks(5);
+
+		} else if(id == "vtNCONF") {
+			ntSB.innerHTML = vtNCONF.innerHTML;
+			ntSB.setAttribute("teamID", vtNCONF.getAttribute("teamID"));
+			frmPostPicks.hidNCONF.value = vtNCONF.getAttribute("teamID");
+			clearNfcPicks(5);
+
+		} else if(id == "atSB") {
+			superChamp.innerHTML = atSB.innerHTML;
+			superChamp.setAttribute("teamID", atSB.getAttribute("teamID"));
+			frmPostPicks.hidSB.value = atSB.getAttribute("teamID");
+
+		} else if(id == "ntSB") {
+			superChamp.innerHTML = ntSB.innerHTML;
+			superChamp.setAttribute("teamID", ntSB.getAttribute("teamID"));
+			frmPostPicks.hidSB.value = ntSB.getAttribute("teamID");
+		}
+	}
+}
+function clearAfcPicks(roundNumber){
+	if(roundNumber <= 3){
+		htACONF.innerHTML = "TBD";
+		vtACONF.innerHTML = "TBD";
+		frmPostPicks.hidADIV1.value = "";
+		frmPostPicks.hidADIV2.value = "";
+	}
+
+	if(roundNumber <= 4){
+		atSB.innerHTML = "TBD";
+		frmPostPicks.hidACONF.value = "";
+	}
+
+	//we're always clearing the superbowl rounds
+	superChamp.innerHTML = "TBD";
+	frmPostPicks.bowlPoints.value = "";
+	frmPostPicks.hidSB.value = "";
+}
+
+function clearNfcPicks(roundNumber){
+	if(roundNumber <= 3){
+		htNCONF.innerHTML = "TBD";
+		vtNCONF.innerHTML = "TBD";
+		frmPostPicks.hidNDIV1.value = "";
+		frmPostPicks.hidNDIV2.value = "";
+	}
+
+	if(roundNumber <= 4){
+		ntSB.innerHTML = "TBD";
+		frmPostPicks.hidNCONF.value = "";
+	}
+
+	//we're always clearing the superbowl rounds
+	superChamp.innerHTML = "TBD";
+	frmPostPicks.bowlPoints.value = "";
+	frmPostPicks.hidSB.value = "";
+}
+
+function savePicks(){
+	var bRet;
+	var bPageValid;
+
+	//now validate the page
+	bPageValid = validatePage();
+	bRet = bPageValid;
+	if(bPageValid)
+	{
+		bPicksChanged = false;
+		frmPostPicks.hidMode.value = "save";
+	}
+
+	return bRet;
+}
+
+function validatePage(){
+	//make sure they've made all the picks necessary (and entered points)
+	var bRet = true;
+	var sMsg = "";
+	var afcValid = true;
+	var nfcValid = true;
+	var tempValue1 = "";
+	var tempValue2 = "";
+
+	tempValue1 = frmPostPicks.hidAWC45.value;
+	if(tempValue1 == "" || tempValue1 == "undefined"){
+		afcValid = false;
+		sMsg += "Pick a winner for the AFC #4 vs #5 game\n";
+	}
+
+	tempValue1 = frmPostPicks.hidADIV2.value;
+	if(tempValue1 == "" || tempValue1 == "undefined"){
+		afcValid = false;
+		sMsg += "Pick a winner for the AFC #3 vs #6 game\n";
+	}
+
+	tempValue1 = frmPostPicks.hidNDIV1.value;
+	if(tempValue1 == "" || tempValue1 == "undefined"){
+		nfcValid = false;
+		sMsg += "Pick a winner for the NFC #4 vs #5 game\n";
+	}
+
+	tempValue1 = frmPostPicks.hidNWC36.value;
+	if(tempValue1 == "" || tempValue1 == "undefined"){
+		nfcValid = false;
+		sMsg += "Pick a winner for the NFC #3 vs #6 game\n";
+	}
+
+	if(afcValid){
+		//they've made picks for the first round, so check the next round
+		tempValue1 = frmPostPicks.hidADIV1.value;
+		tempValue2 = frmPostPicks.hidADIV2.value;
+		if(tempValue1 == "" || tempValue1 == "undefined" || tempValue2  == "" || tempValue2 == "undefined"){
+			afcValid = false;
+			sMsg += "Pick winners for the AFC Divisional Playoff games\n";
+		}
+	}
+
+	if(nfcValid){
+		//they've made picks for the first round, so check the next round
+		tempValue1 = frmPostPicks.hidNDIV1.value;
+		tempValue2 = frmPostPicks.hidNDIV2.value;
+		if(tempValue1 == "" || tempValue1 == "undefined" || tempValue2  == "" || tempValue2 == "undefined"){
+			nfcValid = false;
+			sMsg += "Pick winners for the NFC Divisional Playoff games\n";
+		}
+	}
+
+	if(afcValid){
+		//they've made picks for the second round, so check the next round
+		tempValue1 = frmPostPicks.hidACONF.value;
+		if(tempValue1 == "" || tempValue1 == "undefined"){
+			afcValid = false;
+			sMsg += "Pick a winner for the AFC Conference Championship game\n";
+		}
+	}
+
+	if(nfcValid){
+		//they've made picks for the second round, so check the next round
+		tempValue1 = frmPostPicks.hidNCONF.value;
+		if(tempValue1 == "" || tempValue1 == "undefined"){
+			nfcValid = false;
+			sMsg += "Pick a winner for the NFC Conference Championship game\n";
+		}
+	}
+
+	bRet = afcValid && nfcValid;
+
+	//if everything else was good, check that they've picked a super bowl winner and picked points
+	if(bRet){
+		tempValue1 = frmPostPicks.hidSB.value;
+		if(tempValue1 == "" || tempValue1 == "undefined"){
+			bRet = false;
+			sMsg += "Pick a winner for the Super Bowl game\n";
+		}
+
+		if(frmPostPicks.bowlPoints.value == ""){
+			bRet = false;
+			sMsg += "Enter a number for the Total Points of the Super Bowl\n";
+		} else {
+			//also check to make sure that the points game total is a number
+			var nums = /^[0-9]*$/;
+			if (nums.test(frmPostPicks.bowlPoints.value) == false)
+			{
+				sMsg += "Enter a number for the Total Points of the Super Bowl\n";
+				bRet = false;
+			}
+
+		}
+	}
+
+	if(sMsg != ""){
+		alert(sMsg);
+	}
+
+	return bRet;
+}
+</script>
 {% endblock %}

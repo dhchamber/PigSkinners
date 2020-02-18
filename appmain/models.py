@@ -9,7 +9,7 @@ from django.utils.timezone import make_aware
 import pytz
 from datetime import datetime, timedelta
 from django.utils import timezone
-
+from enum import Enum
 
 class TimeStampMixin(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -43,6 +43,10 @@ class Team(models.Model):
 
     def __str__(self):
         return self.team_name
+
+    def cy_seed(self):
+        seed = Seed.objects.get(team=self,year=Season.objects.get(current=True))
+        return seed
 
 
 class Profile(models.Model):
@@ -107,7 +111,7 @@ class Week(models.Model):
         indexes = [models.Index(fields=['year','week_no','gt','closed'])]
         ordering = ['year','week_no']
 
-    year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)    #? week of the season 1-17, 18-21
+    year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)
     week_no = models.PositiveSmallIntegerField(null=False) #? week of the season 1-17, 18-21  must be equal to id for foreign key
 #TODO: need a way to sort correctly be week and week type, add new model for gt with key 1,2,3 ??
     gt = models.CharField(max_length=3) #game type  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
@@ -277,10 +281,12 @@ class Seed(models.Model):
         constraints = [models.UniqueConstraint(fields=['year', 'team'], name='year_team')]
 
     year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='seed')
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='seeds')
     game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='gm_seeds')
     seed = models.PositiveSmallIntegerField(default=0)
 
+    def __str__(self):
+        return str(self.seed)
 
 class PickManager(models.Manager):
     def create_pick(self, user, week):
@@ -391,11 +397,218 @@ class PickGame(models.Model):
             return 0
 
 
+class PostPickManager(models.Manager):
+    def create_ps_pick(self, user):
+        pick = self.create(user=user, entered_by=user, updated_by=user)
+        year = Season.objects.get(current=True)
+        weeks = Week.objects.filter(year=year, gt='POST')
+        afc_teams = Team.objects.filter(conference='AFC')
+        nfc_teams = Team.objects.filter(conference='NFC')
+        print(f'found weeks for post season: {weeks.count()}')
+        # games = Game.objects.filter(week__in=weeks)
+        # print(f'found games for post season: {games.count()}')
+        # for game in Game.objects.filter(week__in=weeks):
+        for type in PostPickGame.PSTYPE:
+            print(f'create game for {type}')
+            seeds = None
+            games = None
+#TODO: make this logic common function so it can be reused later
+            if type == PostPickGame.PSTYPE.AWC45:
+                print(f'Type is : {type}')
+                # try to find 4 seed AFC team
+                seeds = Seed.objects.filter(year=year, seed=4, team__in=afc_teams)
+                print(f'Seed is : {seeds[0].seed}')
+                week = weeks[0]  # week 18 WC
+            elif type == PostPickGame.PSTYPE.AWC36:
+                # try to find 3 seed AFC team
+                seeds = Seed.objects.filter(year=year, seed=3, team__in=afc_teams)
+                week = weeks[0]
+            elif type == PostPickGame.PSTYPE.ADIV1:
+                # try to find 1 seed AFC team
+                seeds = Seed.objects.filter(year=year, seed=1, team__in=afc_teams)
+                week = weeks[1] # week 19 DIV
+            elif type == PostPickGame.PSTYPE.ADIV2:
+                # try to find 2 seed AFC team
+                seeds = Seed.objects.filter(year=year, seed=2, team__in=afc_teams)
+                week = weeks[1] # week 19 DIV
+            elif type == PostPickGame.PSTYPE.NWC45:
+                # try to find 4 seed NFC team
+                seeds = Seed.objects.filter(year=year, seed=4, team__in=nfc_teams)
+                week = weeks[0]  # week 18 WC
+            elif type == PostPickGame.PSTYPE.NWC36:
+                # try to find 3 seed team
+                seeds = Seed.objects.filter(year=year, seed=3, team__in=nfc_teams)
+                week = weeks[0]
+            elif type == PostPickGame.PSTYPE.NDIV1:
+                # try to find 1 seed team
+                seeds = Seed.objects.filter(year=year, seed=1, team__in=nfc_teams)
+                week = weeks[1] # week 19 DIV
+            elif type == PostPickGame.PSTYPE.NDIV2:
+                # try to find 2 seed team
+                seeds = Seed.objects.filter(year=year, seed=2, team__in=nfc_teams)
+                week = weeks[1] # week 19 DIV
 
-# TODO: Potential table for PostSeason points per round
-# CREATE TABLE [dbo].[tblPostRound](
-# 	[RoundID] [tinyint] NOT NULL,
-# 	[Points] [int] NOT NULL,
+            if seeds != None and seeds.count() > 0:
+                games = Game.objects.filter(week=week, home_team=seeds[0].team)
+            else:
+                if type == PostPickGame.PSTYPE.ACONF:
+                    week = weeks[2]  # week 20 Conference Championship
+                    # games = Game.objects.filter(week=week, home_team__in=afc_teams)
+#TODO: switch back to getting the game
+                    games = None
+                elif type == PostPickGame.PSTYPE.NCONF:
+                    week = weeks[2]  # week 20 Conference Championship
+                    # games = Game.objects.filter(week=week, home_team__in=nfc_teams)
+# TODO: switch back to getting the game
+                    games = None
+                elif type == PostPickGame.PSTYPE.SB:
+                    week = weeks[3]  # week 22 Super Bowl!
+                    # games = Game.objects.filter(week=week)
+# TODO: switch back to getting the game
+                    games = None
+
+            if games != None and games.count() > 0:
+                game = games[0]
+            else:
+                game = None
+            # try:
+            #     seed = Seed.objects.get(year=year, team=game.home_team)
+            # except:
+            #     seed = None
+            # print(f'found seed for game: {game.gsis}')
+            # if seed is not None:
+            #     if game.home_team.conference == 'AFC':
+            #         if game.wk_no == 18 and seed.seed == 4:
+            #             ps_type = 'AWC45'
+            #         elif game.wk_no == 18 and seed.seed == 3:
+            #             ps_type = 'AWC36'
+            #         elif game.wk_no == 19 and seed.seed == 1:
+            #             ps_type = 'ADIV1'
+            #         elif game.wk_no == 19 and seed.seed == 2:
+            #             ps_type = 'ADIV2'
+            #         elif game.wk_no == 20:
+            #             ps_type = 'ACONF'
+            #         elif game.wk_no == 22:
+            #             ps_type = 'SB'
+            #         else: ps_type = None
+            #     elif game.home_team.conference == 'NFC':
+            #         if game.wk_no == 18 and seed.seed == 4:
+            #             ps_type = 'NWC45'
+            #         elif game.wk_no == 18 and seed.seed == 3:
+            #             ps_type = 'NWC36'
+            #         elif game.wk_no == 19 and seed.seed == 1:
+            #             ps_type = 'NDIV1'
+            #         elif game.wk_no == 19 and seed.seed == 2:
+            #             ps_type = 'NDIV2'
+            #         elif game.wk_no == 20:
+            #             ps_type = 'NCONF'
+            #         elif game.wk_no == 22:
+            #             ps_type = 'SB'
+            #         else:
+            #             ps_type = None
+            #     else:
+            #         ps_type = None
+            # else:
+            #     ps_type = None
+            #
+            # game_pick = PostPickGame.objects.create(post_pick_head=pick, ps_type=ps_type, game=game, entered_by=user,updated_by=user)
+            game_pick = PostPickGame.objects.create(post_pick_head=pick, ps_type=type, game=game, entered_by=user,updated_by=user)
+            game_pick.save()
+            print(f'game saved for post season: {game_pick.ps_type}')
+        pick.save()
+        return pick
+
+
+class PostPick(models.Model):
+    class Meta:
+        verbose_name = 'post season pick'
+        verbose_name_plural = 'post season picks'
+        indexes = [models.Index(fields=['user'])]
+        ordering = ['user']
+        constraints = [models.UniqueConstraint(fields=['user'], name='ps_pick_user')]
+
+    year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL, default=3)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='post_picks',default=1)
+    points = models.PositiveSmallIntegerField(default=0)
+    pick_score = models.PositiveSmallIntegerField(default=0)
+    saved = models.BooleanField(default=False)
+    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='post_pick_entered')
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='post_pick_updated')
+    # round_id = models.PositiveSmallIntegerField()
+
+    objects = PostPickManager()
+
+    def calc_score(self):
+        sum_score = 0
+        for pg in self.pickgame_set.all():
+            sum_score += pg.pick_score()
+
+        return sum_score
+
+
+class PostPickGame(models.Model):
+    class Meta:
+        verbose_name = 'post seasin pick game'
+        verbose_name_plural = 'post seasonpick games'
+
+    class PSTYPE(Enum):
+        AWC45 = ('AWC45', 'AFC Wild Card 45')
+        NWC45 = ('NWC45', 'NFC Wild Card 45')
+        AWC36 = ('AWC36', 'AFC Wild Card 36')
+        NWC36 = ('NWC36', 'NFC Wild Card 36')
+        ADIV1 = ('ADIV1', 'AFC Divisional 1')
+        ADIV2 = ('ADIV2', 'AFC Divisional 2')
+        NDIV1 = ('NDIV1', 'NFC Divisional 1')
+        NDIV2 = ('NDIV2', 'NFC Divisional 2')
+        ACONF = ('ACONF', 'AFC Conference Champ')
+        NCONF = ('NCONF', 'AFC Conference Champ')
+        SB    = ('SB', 'Super Bowl')
+
+        @classmethod
+        def get_value(cls,member):
+            return cls[member].value[0]
+
+
+    post_pick_head = models.ForeignKey(PostPick,on_delete=models.CASCADE, related_name='post_games')
+    ps_type = models.CharField(max_length=5,choices=[x.value for x in PSTYPE],default=PSTYPE.get_value('AWC45'))
+    game = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='post_pick_game')
+    team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='post_pick_team')  #team must be one of 2 teams in the game
+    status = models.CharField(max_length=1, null=True)  # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
+    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='post_pick_game_entered')
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='_post_pick_game_updated')
+
+    # return 1 if user won the game, 0 if lost or tied
+    def pick_score(self):
+        if self.game.win_team() == self.team:
+            return 1
+        else:
+            return 0
+
+    def h_team(self):
+        if self.game == None:
+            hteam = "TBD"
+        else:
+            hteam = self.game.home_team.short_name
+        return hteam
+
+    def v_team(self):
+        if self.game == None:
+            vteam = "TBD"
+        else:
+            vteam = self.game.visitor_team.short_name
+        return vteam
+
+
+class PostPoint(models.Model):
+    class Meta:
+        verbose_name = 'point'
+        verbose_name_plural = 'points'
+        indexes = [models.Index(fields=['gt'])]
+        ordering = ['gt']
+        constraints = [models.UniqueConstraint(fields=['gt'], name='gt_pts')]
+
+    gt = models.CharField(max_length=3,null=True) #game type;  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
+    points = models.PositiveSmallIntegerField()
 
 
 # class Game(models.Model):  (from Pigskinners script)
@@ -408,11 +621,6 @@ class PickGame(models.Model):
 #     points_game = models.BooleanField(default=False)
 #     tv_network = models.CharField(max_length=10)
 
-# class PostPick(models.Model):
-#     round_id = models.PositiveSmallIntegerField()
-#     user_id = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-#     team_id = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='post_team')
-#     points = models.PositiveSmallIntegerField()
 
 # class Result(models.Model):
 #     schedule_id = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='result_game')

@@ -11,13 +11,13 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.db import transaction
 from django.db.models import Count, Case, When, Sum, F, IntegerField
-from appmain.forms import SignUpForm, PickForm, PickGameForm, GamePickFormSet
+from appmain.forms import SignUpForm
 from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
 from django.utils import timezone
 import pytz
 from django.template.defaultfilters import floatformat
 
-from .models import Season, Week, Seed, Pick, Team, Game, PickGame
+from .models import Season, Week, Seed, Pick, Team, Game, PostPick
 from .tables import TeamTable, GameTable, PickGameTable
 from appmain.load_nflgames import load_week, LoadSeason, load_score
 
@@ -382,13 +382,11 @@ def pick_make_ps(request):
 
 #TODO: loop and check for user post season picks create if necessary
     try:
-        picks = Pick.objects.filter(user=request.user, wk__in=weeks)
-        print(f'found pick for  {request.user.username} / {request.user.id} pick: {picks.count()}')
+        pick = PostPick.objects.get(user=request.user)
+        print(f'found pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
     except:
-        for week in weeks:
-            pick = Pick.objects.create_pick(user=request.user, week=week)
-            print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
-        picks = Pick.objects.get(user=request.user, wk__in=weeks)
+        pick = PostPick.objects.create_ps_pick(user=request.user)
+        print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
 
     afc = {}
     nfc = {}
@@ -399,7 +397,42 @@ def pick_make_ps(request):
         else:
             nfc[seed.seed] = seed.team
 #TODO: add lookup to get game for each seed and add to afc and nfc dicts
-    return render(request, 'appmain/pick_make_ps.html', {'picks': picks, 'seeds':seeds, 'afc':afc, 'nfc':nfc})
+    return render(request, 'appmain/pick_make_ps.html', {'pick': pick, 'weeks': weeks, 'seeds':seeds, 'afc':afc, 'nfc':nfc})
+
+@login_required
+def pick_save_ps(request):
+
+    if request.method == 'POST':
+#TODO: validate pick data is complete and return message if not
+        pick_id = request.POST.get("hidPickID")
+        print(f'Pick ID: {pick_id}')
+        pick = PostPick.objects.get(id=pick_id)
+        pick.updated_by = request.user
+        try:
+            pts = int(request.POST.get("bowlPoints"))
+            assert pts > 0
+            pick.points = pts
+        except AssertionError:
+            messages.warning(request, 'Invalid value for points game. Must be greater than zero.')
+            validated = False
+        for i, game in enumerate(pick.post_games.all(), start=1):
+            ps_type = game.ps_type[7:]
+            print(f'Setting game for: {i} as Type: {ps_type}')
+            team_id = request.POST.get('hid'+ps_type)
+            print(f'Setting game for: {i} as Team: {team_id}')
+            try:
+                team = Team.objects.get(id=team_id)
+            except:
+                messages.warning(request, 'Failed Validate of Game {i}/team ID: {team_id} on Pick ID: {pick_id}')
+                print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
+                validated = False
+
+            game.team = team
+            game.save()
+
+        pick.saved = True
+        pick.save()
+    return redirect('pick_make_ps')
 
 
 @login_required
@@ -468,6 +501,24 @@ def standing_koth(request):
     user_picks = Pick.objects.filter(wk=wk)
 
     return render(request, 'appmain/standing_koth.html', {'user_picks': user_picks})
+
+
+def standing_post(request):
+    year = Season.objects.get(current=True)
+    weeks = Week.objects.filter(year=year,gt='POST')
+    games = Game.objects.filter(week__in=weeks)
+
+    # for user in User.objects.all():
+    #     if user.is_active:
+    #         try:
+    #             pick = PostPick.objects.get(user=user, year=Season.objects.get(current=True))
+    #         except:
+    #             pass
+    # pick = Pick.objects.create_pick(user=user, year=Season.objects.get(current=True))
+
+    picks = PostPick.objects.filter(year=Season.objects.get(current=True))
+
+    return render(request, 'appmain/standing_post.html', {'picks': picks,'games':games})
 
 
 def standing_season(request):
