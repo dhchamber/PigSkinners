@@ -30,8 +30,13 @@
 			}
 
 </style>
-<table id="tblStats" name="tblStats" cellpadding="3px" cellspacing="0" border="0" class="tblWeeklyStats" width=100% >
-	<thead>
+<!--<table id="tblStats" name="tblStats" cellpadding="3px" cellspacing="0" border="0" class="tblWeeklyStats" width=100% >-->
+<table class="table table-bordered table-hover table-sm"
+            id="pick_make"
+            data-toggle="table"
+            data-sortable="true"
+            data-height="400" >
+	<thead class="thead-light">
 	<tr userRow='false'>
 		<td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" colspan='15'><font size=+1><b>Postseason Stats</b></font></td>
 	</tr>
@@ -121,9 +126,8 @@
 
 <!--Put in the points game information-->
 				<td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ iPointsRemaining }}&nbsp;</td>
-				<td align=center style="BORDER-LEFT: black solid; sAdditStyle" >
-				</td>
-				<td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{iUserPoints }}&nbsp;</td>
+				<td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ pick.points }}</td>
+				<td align=center style="BORDER-LEFT: black solid; sAdditStyle" >0&nbsp;</td>
 			</tr>
 		{% endfor %}
 

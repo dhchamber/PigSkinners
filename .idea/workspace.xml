@@ -2,26 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0086_auto_20200213_0714.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0087_auto_20200213_1052.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0088_remove_postpickgame_ps_type.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0089_postpickgame_ps_type.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0090_auto_20200214_1516.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0091_postpick_year.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0092_auto_20200217_1632.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0093_auto_20200217_2034.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0094_auto_20200218_0740.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0095_remove_postpoint_wk.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/picks_make_ps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post_rpt.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0096_auto_20200219_0755.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/standing_post.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_games.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_post_rpt.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post_rpt.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

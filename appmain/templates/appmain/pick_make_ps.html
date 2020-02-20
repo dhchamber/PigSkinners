@@ -169,18 +169,22 @@
                     <br>#5 {{ pick.post_games.all.0.game.visitor_team }}</td>
                 <td class="left_right_border">{{ pick.post_games.all.4.game.date_time }}</td>
                 <td class=bottom_border id=htACONF onclick="pickTeam(this)">
-                    {% if pick.post_games.all.8.team == None %}
+                    {# display team user picked as winner of ADIV1 4 #}
+                    {% if pick.post_games.all.4.team == None %}
                         TBD
                     {% else %}
-                        <img src="{% static pick.post_games.all.8.team.logo_file_name %}" width=25px> {{ pick.post_games.all.8.team }}
+                        <img src="{% static pick.post_games.all.4.team.logo_file_name %}" width=25px>
+                        #{{ pick.post_games.all.4.team.cy_seed }} {{ pick.post_games.all.4.team }}
                     {% endif %}
                     </td>
                 <td colspan=3>&nbsp;</td>
                 <td class=bottom_border id=htNCONF onclick="pickTeam(this)">
-                    {% if pick.post_games.all.9.team == None %}
+                    {# display team user picked as winner of NDIV1 6 #}
+                    {% if pick.post_games.all.6.team == None %}
                         TBD
                     {% else %}
-                        {{ pick.post_games.all.9.team }}
+                        <img src="{% static pick.post_games.all.6.team.logo_file_name %}" width=25px>
+                        #{{ pick.post_games.all.6.team.cy_seed }} {{ pick.post_games.all.6.team }}
                     {% endif %}
                     </td>
                 <td class=left_right_border >{{ pick.post_games.all.6.game.date_time }}&nbsp;</td>
@@ -192,10 +196,12 @@
                 <td colspan=2 class=right_border>&nbsp;</td>
                 <td class=right_border>&nbsp;</td>
                 <td colspan=2 class=bottom_border id="atSB" onclick="pickTeam(this)">
+                    {# display team user picked as winner of ACONF 8 #}
                     {% if pick.post_games.all.8.team == None %}
                         TBD
                     {% else %}
-                        {{ pick.post_games.all.8.team }}
+                        <img src="{% static pick.post_games.all.8.team.logo_file_name %}" width=25px>
+                        #{{ pick.post_games.all.8.team.cy_seed }} {{ pick.post_games.all.8.team }}
                     {% endif %}
                     </td>
                 <td>&nbsp;</td>
@@ -223,10 +229,12 @@
                         <tr>
                             <td>&nbsp;</td>
                             <td align=center><b>Super Bowl Winner:</b><br><font id="superChamp">
+                            {# display team user picked as winner of SB 10 #}
                                 {% if pick.post_games.all.10.team == None %}
                                     TBD
                                 {% else %}
-                                    {{ pick.post_games.all.10.team }}
+                                    <img src="{% static pick.post_games.all.10.team.logo_file_name %}" width=25px>
+                                    #{{ pick.post_games.all.10.team.cy_seed }} {{ pick.post_games.all.10.team }}
                                 {% endif %}
                             </font></td>
                             <td>&nbsp;</td>
@@ -262,10 +270,12 @@
                 <td class=right_border>&nbsp;</td>
                 <td class=bottom_border>&nbsp;</td>
                 <td class=bottom_border colspan=2 id="ntSB" onclick="pickTeam(this)">
+                    {# display team user picked as winner of NCONF 9 #}
                     {% if pick.post_games.all.9.team == None %}
                         TBD
                     {% else %}
-                        {{ pick.post_games.all.9.team }}
+                        <img src="{% static pick.post_games.all.9.team.logo_file_name %}" width=25px>
+                        #{{ pick.post_games.all.9.team.cy_seed }} {{ pick.post_games.all.9.team }}
                     {% endif %}
                 </td>
                 <td class=left_border>&nbsp;</td>
@@ -277,10 +287,12 @@
                     <br>#3 {{ pick.post_games.all.2.game.home_team }}</td>
                 <td class=right_border>{{ pick.post_games.all.5.game.date_time }}&nbsp;</td>
                 <td class=right_bottom_border id=vtACONF onclick="pickTeam(this)">
-                    {% if pick.post_games.all.8.team == None %}
+                    {# display team user picked as winner of ADIV2 5 #}
+                    {% if pick.post_games.all.5.team == None %}
                         TBD
                     {% else %}
-                        {{ pick.post_games.all.8.team }}
+                        <img src="{% static pick.post_games.all.5.team.logo_file_name %}" width=25px>
+                        #{{ pick.post_games.all.5.team.cy_seed }} {{ pick.post_games.all.5.team }}
                     {% endif %}
                 </td>
                 <td colspan=3 align=center valign=bottom>&nbsp;
@@ -290,10 +302,12 @@
 
                 </td>
                 <td class=left_bottom_border id=vtNCONF onclick="pickTeam(this)">
-                    {% if pick.post_games.all.9.team == None %}
+                    {# display team user picked as winner of NDIV2 7 #}
+                    {% if pick.post_games.all.7.team == None %}
                         TBD
                     {% else %}
-                        {{ pick.post_games.all.9.team }}
+                        <img src="{% static pick.post_games.all.7.team.logo_file_name %}" width=25px>
+                        #{{ pick.post_games.all.7.team.cy_seed }} {{ pick.post_games.all.7.team }}
                     {% endif %}
                 </td>
                 <td class=left_border>{{ pick.post_games.all.7.game.date_time }}&nbsp;</td>
@@ -311,18 +325,40 @@
             <tr>
                 <td align=center>&nbsp;</td>
                 <td class=left_right_bottom_border id=vtADIV2 onclick="pickTeam(this)">
-                    {% if pick.post_games.all.5.team == None %}
-                        TBD
+                    {# 2 = AWC36 user picked team as for 36 if 3 seed then it goes here else the 45 team does #}
+                    {% if pick.post_games.all.2.team.cy_seed == 3 %}
+                        {% if pick.post_games.all.2.team == None %}
+                            TBD
+                        {% else %}
+                            <img src="{% static pick.post_games.all.2.team.logo_file_name %}" width=25px>
+                            #{{ pick.post_games.all.2.team.cy_seed }} {{ pick.post_games.all.2.team }}
+                        {% endif %}
                     {% else %}
-                        {{ pick.post_games.all.5.team }}
+                        {% if pick.post_games.all.0.team == None %}
+                            TBD
+                        {% else %}
+                            <img src="{% static pick.post_games.all.0.team.logo_file_name %}" width=25px>
+                            #{{ pick.post_games.all.0.team.cy_seed }} {{ pick.post_games.all.0.team }}
+                        {% endif %}
                     {% endif %}
                 </td>
                 <td colspan=5>&nbsp;</td>
                 <td class=left_right_bottom_border id=vtNDIV2 onclick="pickTeam(this)">
-                    {% if pick.post_games.all.7.team == None %}
-                        TBD
+                    {# 3 = NWC36 user picked team as for 36 if 3 seed then it goes here else the 45 team does #}
+                    {% if pick.post_games.all.3.team.cy_seed == 3 %}
+                        {% if pick.post_games.all.3.team == None %}
+                            TBD
+                        {% else %}
+                            <img src="{% static pick.post_games.all.3.team.logo_file_name %}" width=25px>
+                            #{{ pick.post_games.all.3.team.cy_seed }} {{ pick.post_games.all.3.team }}
+                        {% endif %}
                     {% else %}
-                        {{ pick.post_games.all.7.team }}
+                        {% if pick.post_games.all.1.team == None %}
+                            TBD
+                        {% else %}
+                            <img src="{% static pick.post_games.all.1.team.logo_file_name %}" width=25px>
+                            #{{ pick.post_games.all.1.team.cy_seed }} {{ pick.post_games.all.1.team }}
+                        {% endif %}
                     {% endif %}
                 </td>
                 <td align=center>&nbsp;</td>

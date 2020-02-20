@@ -1,0 +1,28 @@
+    .winteam {BORDER-TOP: black thin solid;
+    		BORDER-BOTTOM: black thin solid;
+    		BORDER-LEFT: black thin solid;
+    		BORDER-RIGHT: black thin solid;
+    		CURSOR: hand;
+             }
+
+	.endcol {BORDER-RIGHT: black 1px solid;
+			CURSOR: hand;
+			}
+
+	.hand {CURSOR: hand;
+			}
+
+	.userrow {BORDER-RIGHT: black solid;
+<!--	 sAdditStyle  -->
+			}
+
+	.userendcol {BORDER-BOTTOM: silver solid thin;
+				BORDER-RIGHT: black 1px solid;"
+			}
+
+	.usercol {BORDER-BOTTOM: silver solid thin;
+			}
+
+	.wingame {BACKGROUND-COLOR: silver;
+			}
+

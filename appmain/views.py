@@ -286,18 +286,24 @@ def pick_view(request):
     year = Season.objects.get(current=True)
     week_no = request.session.get('week', 1)
     gt = request.session.get('gt', 'REG')
-    try:
-        week = Week.objects.get(year=year, week_no=week_no, gt=gt)
-    except:
-        week = Week.objects.get(year=year, week_no=1, gt='REG')
+    if gt == 'PRE':
+        # TODO: make preseason view page
+        pass
+    elif gt == 'REG':
+        try:
+            week = Week.objects.get(year=year, week_no=week_no, gt=gt)
+        except:
+            week = Week.objects.get(year=year, week_no=1, gt='REG')
 
-    try:
-        pick = Pick.objects.get(user=request.user, wk=week)
-    except:  # TODO: get exception type
-        pick = Pick.objects.create_pick(user=request.user, week=week)
+        try:
+            pick = Pick.objects.get(user=request.user, wk=week)
+        except:  # TODO: get exception type
+            pick = Pick.objects.create_pick(user=request.user, week=week)
 
-    return render(request, 'appmain/pick_view.html', {'pick': pick})
-    # return render(request, 'appmain/bootstrap_sort.html', {'pick': pick})
+        return render(request, 'appmain/pick_view.html', {'pick': pick})
+    elif gt == 'POST':
+        return redirect('pick_make_ps')
+
 
 @login_required
 def pick_make(request):
@@ -508,15 +514,14 @@ def standing_post(request):
     weeks = Week.objects.filter(year=year,gt='POST')
     games = Game.objects.filter(week__in=weeks)
 
-    # for user in User.objects.all():
-    #     if user.is_active:
-    #         try:
-    #             pick = PostPick.objects.get(user=user, year=Season.objects.get(current=True))
-    #         except:
-    #             pass
-    # pick = Pick.objects.create_pick(user=user, year=Season.objects.get(current=True))
-
+    for user in User.objects.all():
+        if user.is_active:
+            try:
+                pick = PostPick.objects.get(user=user, year=Season.objects.get(current=True))
+            except:
+                pick = PostPick.objects.create_ps_pick(user=user)
     picks = PostPick.objects.filter(year=Season.objects.get(current=True))
+#TODO: calc score and points remaining for each user
 
     return render(request, 'appmain/standing_post.html', {'picks': picks,'games':games})
 

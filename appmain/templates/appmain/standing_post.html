@@ -2,23 +2,112 @@
 {% load static %}
 {% block title %}Postseason Standings{% endblock title %}
 {% block content %}
-
-<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" LANGUAGE=javascript onload="return window_onload()" onunload="return window_onunload()">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr id=trtest name=trtest>
-            <td width="100%" align="right" border="0">
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                    <tr>
-                        <td>&nbsp;</td>
-                    <tr>
-                    <tr>
-                        <td align="center">
-                            {% include 'appmain/standing_post_rpt.html' %}
-                        </td>
-                    </tr>
-                </table>
-            </td>
+<link rel="stylesheet" type="text/css" href="{% static 'css/standing_post.css' %}">
+<body>
+<div class="table-responsive">
+    <table class="table  table-bordered table-hover table-sm"
+                id="pick_make"
+                data-toggle="table"
+                data-sortable="true"
+                data-height="400" >
+        <thead class="thead-light">
+        <tr userRow='false'>
+            <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" colspan='15'><font size=+1><b>Postseason Stats</b></font></td>
         </tr>
+        <tr userRow='false'>
+            <td rowspan=3 align=center style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">
+                <font id="ftWeekCombo" name="ftWeekCombo"><b>Playoffs!</b></font></td>
+
+    <!--Loop through the picks recordset and put the info into the dictionary-->
+
+    <!--Put in the round groupings-->
+    <!--Round 1-->
+            <td colspan=4 align='center' style='BORDER-RIGHT: black 1px solid'><b>Wild Card</b></td>
+    <!--Round 2-->
+            <td colspan=4 align='center' style='BORDER-RIGHT: black 1px solid'><b>Divisional Playoffs</b></td>
+    <!--Round 3-->
+            <td colspan=2 align='center' style='BORDER-RIGHT: black 1px solid'><b>Conference Championships</b></td>
+    <!--Round 4-->
+            <td align='center'><b>Super Bowl</b></td>
+
+    <!--				sOnClick = "  onmouseover="javascript:this.T_STATIC=true;return escape(PointsTooltip());" onclick="sortByNumber('Points')"-->
+    <!--				sOnClick2 = "  onmouseover="javascript:this.T_STATIC=true;return escape(WinsTooltip());" onclick="sortByNumber('Wins')"-->
+    <!--				sOnClick3 = "  onmouseover="javascript:this.T_STATIC=true;return escape(PossiblePointsTooltip());" onclick="sortByNumber('PossiblePoints')"-->
+            <td sOnClick3 rowspan=3 width="100px" align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid" ><b>Possible Points Remaining</b></td>
+            <td sOnClick  rowspan=3 width="100px" align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid" ><b>Super Bowl Points</b></td>
+            <td sOnClick2 rowspan=3 align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid" ><b>Score</b></td>
+        </tr>
+    <!--Now show the Visiting teams-->
+            <tr userRow='false'>
+                {% for pg in picks.first.post_games.all %}
+                    {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 10 %}
+                        {% if pg.game.visitor_team == pg.game.win_team and pg.v_team != 'TBD' %}
+                            <td class=endcol><div class=winteam>{{ pg.v_team }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ pg.v_team }}</div></td>
+                        {% endif %}
+                    {% else %}
+                        {% if pg.game.visitor_team == pg.game.win_team and pg.v_team != 'TBD' %}
+                            <td><div class=winteam>{{ pg.v_team }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ pg.v_team }}</div></td>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tr>
+
+    <!--Now show the Home Teams-->
+            <tr userRow='false'>
+                {% for pg in picks.first.post_games.all %}
+                    {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 10 %}
+                        {% if pg.game.home_team == pg.game.win_team and pg.h_team != 'TBD' %}
+                            <td style="BORDER-BOTTOM: black solid;" class=endcol><div class=winteam>{{ pg.h_team }}</div></td>
+                        {% else %}
+                            <td style="BORDER-BOTTOM: black solid;" class=endcol><div class=hand>{{ pg.h_team }}</div></td>
+                        {% endif %}
+                    {% else %}
+                        {% if pg.game.home_team == pg.game.win_team and pg.h_team != 'TBD' %}
+                            <td style="BORDER-BOTTOM: black solid;"><div class=winteam>{{ pg.h_team }}</div></td>
+                        {% else %}
+                            <td style="BORDER-BOTTOM: black solid;"><div class=hand>{{ pg.h_team }}</div></td>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+
+    <!--Now loop through and actually show all of the user's picks-->
+            {% for pick in picks %}
+                <tr onclick="highlightRow(this)" userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}' isCompared='false'>
+                    <td class=userrow >{{ pick.user.first_name }}&nbsp;{{ pick.user.last_name }}</td>
+    <!--loop through all of this user's picks-->
+                        {% for pgame in pick.post_games.all %}
+                            {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 10 %}
+                                {% if pgame.team == pgame.game.win_team %}
+                                    <td class=userendcol><div class=wingame>{{ pgame.team.short_name }}</div></td>
+                                {% else %}
+                                    <td class=userendcol><div>{{ pgame.team.short_name }}</div></td>
+                                {% endif %}
+                            {% else %}
+                                {% if pgame.team == pgame.game.win_team %}
+                                    <td class=userendcol><div class=wingame>{{ pgame.team.short_name }}</div></td>
+                                {% else %}
+                                    <td class=userendcol><div>{{ pgame.team.short_name }}</div></td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+    <!--Put in the points game information-->
+                    <td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ pick.points_rem|default:0 }}</td>
+                    <td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ pick.points }}</td>
+                    <td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ pick.calc_score }}</td>
+                </tr>
+            {% endfor %}
+
+    <!--end the stats table-->
+        </tbody>
     </table>
+</div>
 </body>
 {% endblock content %}

@@ -28,8 +28,9 @@ def load_week():
             week.save()
             print(f'Week # {week} {gt} loaded ')
 
-
+#TODO: add post season, update scores on PickGame, Pick, and PostPick, PostPickGame
 def update_score(g):
+    # get all the pick games that have a pick for this game and update the status as won or lost
     pgames = g.pick_game.all()
     for pg in pgames:
         if pg.team != None:
