@@ -8,6 +8,7 @@ from . import views
 urlpatterns = [
     path('ps_home/', views.home, name='ps_home'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('password/change', views.change_password, name='change_password'),
     path('pick/view/', views.pick_view, name='pick_view'),
     # path('picks/view/', views.PickListView.as_view(), name='picks_view'),
     path('pick/make/', views.pick_make, name='pick_make'),

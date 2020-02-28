@@ -4,71 +4,7 @@
 {% block title %}Make Post Season Picks{% endblock title %}
 
 {% block content %}
-<style type="text/css">
-    .thead1 {color:blue;
-             font-weight:bold;
-             text-align:center;
-            }
-    .pickteam {color: blue;
-             }
-    .winteam {color: blue;
-              font-weight: bold;
-             }
-
-    .newday {BORDER-TOP: silver solid thick;
-            }
-
-    .bottom_border {
-        BORDER-BOTTOM: black solid 1px;
-        cursor: pointer;
-        text-align: center;
-        font-size: smaller;
-    }
-
-    .right_border {
-        BORDER-RIGHT: black solid 1px;
-        text-align:center;
-        font-size: smaller;
-    }
-
-    .left_border {
-        BORDER-LEFT: black solid 1px;
-        font-size: smaller;
-        text-align:center;
-    }
-
-    .left_right_border
-    {
-        BORDER-LEFT: black solid 1px;
-        BORDER-RIGHT: black solid 1px;
-        font-size: smaller;
-        text-align:center;
-    }
-
-    .right_bottom_border {
-        BORDER-BOTTOM: black solid 1px;
-        BORDER-RIGHT: black solid 1px;
-        CURSOR: HAND;
-        font-size: smaller;
-        text-align: center;
-    }
-
-    .left_bottom_border {
-        BORDER-BOTTOM: black solid 1px;
-        BORDER-LEFT: black solid 1px;
-        CURSOR: HAND;
-        font-size: smaller;
-        text-align: center;
-    }
-
-    .left_right_bottom_border {
-        BORDER-BOTTOM: black solid 1px;
-        BORDER-LEFT: black solid 1px;
-        BORDER-RIGHT: black solid 1px;
-        font-size: smaller;
-        text-align:center;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="{% static '/css/pick_make_ps.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}"/>
 
     <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" onload="javascript:return window_onload();" onbeforeunload="javascript:return window_onbeforeunload()">

@@ -155,12 +155,3 @@ $(function () {
     });
 });
 
-function selectTeam (i) {
-//        e.preventDefault();  // prevent default behaviour of link
-
-        var team_selected = $(this).attr('team');  // get team selected and set it for the row
-        $('#Selected'.concat(i)).val(team_selected);
-        $('.Game'.concat(i)).css('background-color', 'transparent');  // change the background to transparent for the row
-        $(this).css('background-color', '#ff6600');          // set the background of the selecte team for the game
-    };
-

@@ -1,25 +1,47 @@
 from django.shortcuts import render, redirect
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate  # new
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ObjectDoesNotExist
-# from django.contrib.auth.forms import UserCreationForm  # new
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView
-from django.db import transaction
-from django.db.models import Count, Case, When, Sum, F, IntegerField
+from django.db.models import Count, Case, When, Sum, Max, F, Q, IntegerField, FloatField, ExpressionWrapper
 from appmain.forms import SignUpForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
 from django.utils import timezone
-import pytz
 from django.template.defaultfilters import floatformat
+import pytz
 
 from .models import Season, Week, Seed, Pick, Team, Game, PostPick
 from .tables import TeamTable, GameTable, PickGameTable
 from appmain.load_nflgames import load_week, LoadSeason, load_score
+
+# from django.conf import settings
+# from django.core.exceptions import ObjectDoesNotExist
+# from django.contrib.auth.forms import UserCreationForm  # new
+# from django.http import HttpResponseRedirect, HttpResponse
+# from django.urls import reverse, reverse_lazy
+# from django.views.generic import ListView, CreateView
+# from django.db import transaction
+# from django.template.defaultfilters import floatformat
+
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {
+        'form': form
+    })
 
 
 # tutorial page 1
@@ -365,7 +387,7 @@ def pick_make(request):
             print(f'NOT saved on Pick ID: {request.POST.get("hidPickID")}')
         pick.save()
 
-        return redirect('picks_make')
+        return redirect('pick_make')
     else:
         try:
             pick = Pick.objects.get(user=request.user, wk=wk)
@@ -458,14 +480,11 @@ def standing_week(request, detail):
     # loop and create empty picks for each active user if one doesn't exist
     # TODO: make this a common function
     for user in User.objects.all():
-        # print(f'Found user  {user.username} / {user.id} active: {user.is_active}')
         if user.is_active:
             try:
                 pick = Pick.objects.get(user=user, wk=wk)
-                # print(f'found pick for  {user.username} / {user.id} pick: {pick.id}')
             except:
                 pick = Pick.objects.create_pick(user=user, week=wk)
-                # print(f'Created pick for  {user.username} / {user.id} pick: {pick.id}')
 
     if wk.closed:
         if detail:
@@ -480,9 +499,6 @@ def standing_week(request, detail):
 
         user_picks = Pick.objects.filter(wk=wk).annotate(
             score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
-
-        # TODO: build dictionary, list, ... of games, visitor, home, counts, num games, ...
-        # user_picks = Pick.objects.filter(wk=wk).values('user').annotate(pick_score=Count('pickgame__pick_score()'))
 
         return render(request, 'appmain/standing_week_closed.html',
                       {'user_picks': user_picks, 'games': games, 'num_games': num_games})
@@ -529,52 +545,42 @@ def standing_post(request):
 def standing_season(request):
     year = Season.objects.get(current=True)
     weeks = Week.objects.filter(year=year,gt='REG')
-    users = User.objects.all()
 
-    # get number of games in 1st half, 2nd half, and overall
-    game_sub1 = 0
-    game_sub2 = 0
-    for week in weeks:
-      week.game_wk.count()
-      if week.week_no <= 9:
-         game_sub1 += week.game_wk.count()
-      else:
-         game_sub2 += week.game_wk.count()
-    tot = game_sub1 + game_sub2
-    game_cnt = (game_sub1,game_sub2,tot)
+    w1 = Week.objects.filter(year=year, gt='REG', week_no__lt=10)
+    w2 = Week.objects.filter(year=year, gt='REG', week_no__gt=9)
+
+    game_cnt = Season.objects.filter(current=True)\
+        .annotate(half1=Count('weeks__game_wk__gsis',filter=Q(weeks__in=w1)))\
+        .annotate(half2=Count('weeks__game_wk__gsis', filter=Q(weeks__in=w2)))\
+        .annotate(all=Count('weeks__game_wk__gsis', filter=Q(weeks__in=weeks)))
+
+    users = year.season_scores().annotate(perc1=ExpressionWrapper(F('half1') * float(100.0 / game_cnt[0].half1), output_field=FloatField()))\
+                                .annotate(perc2=ExpressionWrapper(F('half2')*float(100.0/game_cnt[0].half2),output_field=FloatField()))\
+                                .annotate(pall=ExpressionWrapper(F('all')*float(100.0/game_cnt[0].all),output_field=FloatField()))
+
+    winners = year.season_winner()
+    for user in winners['half1']:
+        print(f'half1 winner(s): {user.last_name}')
+
+    for user in winners['half2']:
+        print(f'half2 winner(s): {user.last_name}')
+
+    for user in winners['all']:
+        print(f'overall winner(s): {user.last_name}')
 
     #  first make sure picks exist for every user for every week
-    # and get total wins by half and win percent
-    win_subtot1 = {}
-    win_perc1 = {}
-    win_subtot2 = {}
-    win_perc2 = {}
-    win_total = {}
-    win_totalperc = {}
+    #  if picks didn't exist then they didn't get counted above, that is ok, but they need to exist even if empty for the page display
     for user in users:
-        half1_sub = 0
-        half2_sub = 0
+        print(f'user: {user.last_name} half1: {user.half1} games: {game_cnt[0].half1} perc1: {user.perc1} ')
         for week in weeks:
-            try:
-                p = Pick.objects.filter(user=user,wk=week).annotate(
-                    score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
-                if week.week_no <= 9:
-                    half1_sub += p[0].score
-                else:
-                    half2_sub += p[0].score
+            # try:
+                p = Pick.objects.filter(user=user,wk=week)
+                if p.count() == 0:
+                    Pick.objects.create_pick(user=user, week=week)
 
-            except ObjectDoesNotExist:
-                p = Pick.objects.create_pick(user=user,week=week)
+    user_picks = Pick.objects.filter(wk__in=weeks)\
+            .annotate(score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
 
-        win_subtot1[user.id] = half1_sub
-        win_perc1[user.id] = floatformat( (half1_sub/game_sub1) * 100.0, 1) + '%'
-        win_subtot2[user.id] = half2_sub
-        win_perc2[user.id] = floatformat( (half2_sub/game_sub2) * 100.0, 1) + '%'
-        win_total[user.id] = half1_sub + half2_sub
-        win_totalperc[user.id] = floatformat( (half1_sub + half2_sub)/tot * 100.0, 1) + '%'
-
-    user_picks = Pick.objects.filter(wk__in=weeks).annotate(
-      score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
-
-    return render(request, 'appmain/standing_season.html', {'weeks': weeks, 'user_picks': user_picks, 'game_cnt': game_cnt,
-                   'win_subtot1': win_subtot1, 'win_perc1': win_perc1, 'win_subtot2': win_subtot2, 'win_perc2': win_perc2, 'win_total': win_total, 'win_totalperc': win_totalperc})
+    # return render(request, 'appmain/standing_season.html', {'weeks': weeks, 'user_picks': user_picks, 'game_cnt': game_cnt,
+    #                'win_subtot1': win_subtot1, 'win_perc1': win_perc1, 'win_subtot2': win_subtot2, 'win_perc2': win_perc2, 'win_total': win_total, 'win_totalperc': win_totalperc})
+    return render(request, 'appmain/standing_season.html', {'weeks': weeks, 'users':users, 'user_picks': user_picks, 'game_cnt': game_cnt, 'winners': winners})

@@ -22,8 +22,8 @@ from appmain import views as appmain_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/logout', auth_views.auth_logout, name = 'logout'),
-    path('accounts/', include('django.contrib.auth.urls')),  # new
-    path('accounts/logout', auth_views.auth_logout, name = 'logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/logout', auth_views.auth_logout, name = 'logout'),
     path('signup/', appmain_views.signup, name='signup'),
     path('', include('appmain.urls')),
 #    path('', TemplateView.as_view(template_name='home.html'), name='home'), # new

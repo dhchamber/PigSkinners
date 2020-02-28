@@ -1,0 +1,68 @@
+    .norm_cell {
+        BORDER-BOTTOM: silver solid thin;
+        BORDER-RIGHT: silver solid thin;
+        color: black;
+        text-align:center;
+    }
+    .winner_cell {
+        BORDER-BOTTOM: silver solid thin;
+        BORDER-RIGHT: silver solid thin;
+        color: green;
+        text-align:center;
+        font-weight: bold;
+    }
+    .c_right {
+        text-align:center;
+        BORDER-RIGHT: black thin dashed;
+    }
+    .c_bottom {
+        text-align:center;
+        BORDER-BOTTOM: black solid;
+    }
+    .n_bottom {
+        BORDER-BOTTOM: silver solid thin;
+    }
+    .c_bottom_right {
+        text-align:center;
+        BORDER-BOTTOM: black solid;
+        BORDER-RIGHT: black thin dashed;
+    }
+    .c_bottom_right_left {
+        text-align:center;
+        BORDER-BOTTOM: silver solid thin;
+        BORDER-RIGHT: black solid thin;
+        BORDER-LEFT: black solid thin;"
+    }
+    .r_bottom_right {
+        text-align:right;
+        BORDER-BOTTOM: silver solid thin;
+        BORDER-RIGHT: black solid thin;
+    }
+    .l_bottom_right {
+        text-align:left;
+        BORDER-BOTTOM: silver solid thin;
+        BORDER-RIGHT: black solid thin;
+    }
+    .tdNumGames {
+        text-align:center;
+    }
+    .top_bottom_border {
+        BORDER-TOP: black solid;
+        BORDER-BOTTOM: black solid;
+    }
+    .top_bottom_right_border {
+        BORDER-TOP: black solid;
+        BORDER-BOTTOM: black solid;
+        BORDER-RIGHT: black thin dashed;
+    }
+
+    .right_border_dash {
+        BORDER-RIGHT: black thin dashed;
+    }
+
+
+    .tblWeeklyStats {
+        cellpadding: "3px";
+        cellspacing: "0";
+        border: "1";
+    }

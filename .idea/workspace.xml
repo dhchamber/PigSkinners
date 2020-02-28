@@ -2,15 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0096_auto_20200219_0755.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/standing_post.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/standing_season.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/pick_make.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/pick_make_ps.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/pick_view.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/standing_season.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/change_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/password_reset_complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/password_reset_confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/password_reset_email.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/password_reset_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/password_reset_subject.txt.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_games.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/picks_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make_ps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/picks_make_ps.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/PS_MakePicks.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_post_rpt.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post_rpt.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_season_rpt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,12 +64,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../soup" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/appmain/templates/registration" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
     <property name="settings.editor.splitter.proportion" value="0.23336746" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\templates\registration" />
       <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\templates\appmain" />
     </key>
   </component>
@@ -135,10 +157,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="698" y="349" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578453036219" />
-    <state x="740" y="297" key="FileChooserDialogImpl" timestamp="1578440970615">
+    <state x="740" y="297" key="FileChooserDialogImpl" timestamp="1582232129126">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="740" y="297" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578440970615" />
+    <state x="740" y="297" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1582232129126" />
     <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1578695855921">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -163,10 +185,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="517" y="127" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580788628359" />
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1581602616087">
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1582253438782">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1581602616087" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1582253438782" />
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1578021715940">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

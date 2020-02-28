@@ -1,0 +1,72 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownPickLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Picks
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/pick/make/">Make Picks</a>
+                    <a class="dropdown-item" href="/pick/view">View Picks</a>
+                    <a class="dropdown-item" href="/pick/revision/">Pick Revisions</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/pick/make_ps/">Make PostSeason Picks</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="picks/view" id="navbarDropdownStandLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Standings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/standing/weeksum/">Summary Weekly Standings</a>
+                    <a class="dropdown-item" href="/standing/weekdet/">Detail Weekly Standings</a>
+                    <a class="dropdown-item" href="/standing/season">Season Standings</a>
+                    <a class="dropdown-item" href="/standing/koth">KOTH Standings</a>
+                    <a class="dropdown-item" href="/pick/view">BATC Standings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/standing/post">Post Season Standings</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAdminLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/setup/teams">Change Password<br></a>
+                    <a class="dropdown-item" href="/setup/teams">Teams<br></a>
+                    <a class="dropdown-item" href="/setup/weeks">Weeks<br></a>
+                    <a class="dropdown-item" href="/setup/games">Games<br></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/admin/">Admin Console<br></a>
+                    <a class="dropdown-item" href="/admin/auth/user/">Users<br></a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        </ul>
+<!--
+        <span class="navbar-text" style="align-top">
+            {% if user.is_authenticated %}
+                Current User: {{ user.username }}
+            {% else %}
+                Current User: NO USER
+            {% endif %}
+        </span>
+-->
+<!--
+        <form class="form-inline my-2 my-lg-0" method="post", action="{% url 'logout' %}">
+            &lt;!&ndash;				  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;
+            {% csrf_token %}
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+-->
+    </div>
+</nav>

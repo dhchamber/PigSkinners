@@ -61,6 +61,8 @@
                 <tr userRow="true" id = "tr{{ pick.user.name }}" name = "tr{{ pick.user.name }}" isCompared="false"
                 {% if request.user == pick.user %}
                     style= "BACKGROUND-COLOR: yellow;">
+                {% elif pick == pick.wk.week_winner.0 %}
+                    style= "BACKGROUND-COLOR: red;">
                 {% else %}
                     >
                 {% endif %}

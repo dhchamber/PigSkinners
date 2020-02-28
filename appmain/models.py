@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Max, Min, Count, Case, When, Sum, F, IntegerField
+from django.db.models import Max, Min, Count, Case, When, Sum, F, Q, IntegerField
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -104,6 +104,55 @@ class Season(models.Model):
                 return week
         return week
 
+    def season_scores(self):
+        # determine winner or winners for the week
+        # update pick scores for each pick for each week for the season
+
+        half1 = Week.objects.filter(year=self, gt='REG',week_no__lt=10)
+        half2 = Week.objects.filter(year=self, gt='REG',week_no__gt=9)
+        all = Week.objects.filter(year=self, gt='REG')
+
+        # TODO: find way to avoid this every time.  it is slow
+        # add score fields to model and update
+        # for week in self.weeks.all():
+        #     for pick in week.pick_wk.all():
+        #         pick.pick_score = pick.pickgame_set.all().aggregate(score=Sum(Case(When(status='W', then=1), default=0, output_field=IntegerField(), )))['score']
+        #         pick.save()
+        #         print(f'calc pick score for week: {week.week_no} user: {pick.user.id} {pick.user.first_name} {pick.user.last_name} score: {pick.pick_score}')
+
+        user_scores = User.objects.all().annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
+                                        .annotate(half2=Sum('picks__pick_score', filter=Q(picks__wk__in=half2)))\
+                                        .annotate(all=Sum('picks__pick_score', filter=Q(picks__wk__in=all)))
+
+        # for user in user_scores:
+        #     print(f'user: {user.id} {user.first_name} {user.last_name} 1st half {user.half1} 2nd half {user.half2} overall {user.all}')
+
+        return user_scores
+
+    def season_winner(self):
+        # determine winner or winners for the 1st half, 2nd half and overall
+
+        # update pick scores for all picks for all the weeks of the regular season
+        winners = {}
+        year = Season.objects.get(current=True)
+        weeks = Week.objects.filter(year=year, gt='REG')
+        for pick in Pick.objects.filter(wk__in=weeks):
+            pick.pick_score = pick.pickgame_set.all().aggregate(score=Sum(Case(When(status='W', then=1), default=0, output_field=IntegerField(), )))['score']
+
+        # get max scores for the Season
+        users = self.season_scores()
+        half1_max = users.aggregate(max_score=Max('half1', default=0, output_field=IntegerField(), ))['max_score']
+        half2_max = users.aggregate(max_score=Max('half2', default=0, output_field=IntegerField(), ))['max_score']
+        all_max = users.aggregate(max_score=Max('all', default=0, output_field=IntegerField(), ))['max_score']
+        print(f'1st half max: {half1_max}  2nd half max: {half2_max} overall max: {all_max}')
+
+        # get 1st and 2nd half and overall winner(s)
+        winners['half1'] = users.filter(half1=half1_max)
+        winners['half2'] = users.filter(half2=half2_max)
+        winners['all'] = users.filter(all=all_max)
+        return winners
+
+
     # def get_absolute_url(self):
     #     return reverse('season_detail',args=[str(self.id)])
 
@@ -201,7 +250,11 @@ class Week(models.Model):
     #     print(f'{min_date.strftime("%m-%d-%Y")} to {max_date.strftime("%m-%d-%Y")}')
     #     return min_date.strftime('%m-%d-%Y') + ' to ' + max_date.strftime('%m-%d-%Y')
 
-
+# TODO: pick score management
+# when game score is updated, update pick game status W/L...
+# roll pick game status up to pick score  When should this happen?
+# if score changes then run script to roll up changes, not need to run if no change
+# roll pick score up to scores for the week/season
 class Game(TimeStampMixin):
     class Meta:
         verbose_name = 'game'
@@ -214,7 +267,7 @@ class Game(TimeStampMixin):
     gd = models.PositiveSmallIntegerField(null=True) #? always zero?
     week = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='game_wk')    #key to ID in week table based on year and wk_no
     wk_no = models.PositiveSmallIntegerField(null=True)    #week of the NFL season 1-17, 18-20, 22
-    year = models.PositiveSmallIntegerField(null=True) #? season year
+    year = models.PositiveSmallIntegerField(null=True) # season year
     t = models.CharField(max_length=10, null=True) #? P = Post Season, R = Regular Season ?
     bf = models.CharField(max_length=10, null=True) #? 1?   from liveupdate postseason
     bph = models.CharField(max_length=10, null=True) #? 0? 172?  from liveupdate
@@ -340,7 +393,7 @@ class Pick(models.Model):
         verbose_name_plural = 'picks'
         indexes = [models.Index(fields=['user','wk'])]
         ordering = ['user','wk']
-        constraints = [models.UniqueConstraint(fields=['user','wk'], name='pick_user_wk')]
+        constraints = [models.UniqueConstraint(fields=['user','wk'], name='pick_uweser_wk')]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='picks',default=1)
     wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_wk')

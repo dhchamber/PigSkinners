@@ -1,6 +1,7 @@
-<!-- templates/home.html -->
 {% extends 'appmain/base.html' %}
 {% load static %}
+{% load tz %}
+{% block title %}{{ request.user.first_name }}, Welcome to the Football Pool!{% endblock title %}
 
 {% block content %}
     {% if user.is_authenticated %}
@@ -10,4 +11,108 @@
       <p>You are not logged in</p>
       <a href="{% url 'login' %}">login</a>
     {% endif %}
+
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" LANGUAGE="javascript" onload="return window_onload()">
+    {% get_current_timezone as TIMEZONE %}
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="home_content" id="tblContent" name="tblContent" STYLE="-moz-opacity:1%;filter:alpha(opacity=1)">
+                <tr>
+                    <td width="15px">&nbsp;</td>
+                    <td align="center">
+                        <table cellpadding="0" cellspacing="0" border="0" bgcolor="white" width="100%">
+                            <tr>
+                                <td colspan=3 align=center>Welcome {{request.user.first_name }} {{request.user.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td width="30%" align="center" valign="top">
+                                    <a href='http://www.stlouisrams.com/'><img border='0' src="{% static '/appmain/helmets/small/v_stl.jpg' %}" height='72px'></a>
+                                    <br>
+                                    <br>
+                                    <font size="+2"><b>Playoff time!</b></font>
+                                    <br>
+                                    <br>
+                                    <font size="+1">Pick Status: </font>
+                                    <font size="+2" color="red"><b>CLOSED</b></font>
+                                </td>
+                                <td width="40%" align="center">
+                                    <font size=-1>All times are in {{ TIMEZONE }}</font>
+                                    <br>
+                                    <img class="imgLogo" id="imgLogo" name="imgLogo" src="{% static '/appmain/Logo/Pigskinners_logo.gif' %}" WIDTH="367" HEIGHT="196">
+                                    <br>
+                                    <!--this is to make sure the gif is downloaded by the time we need it-->
+                                    <img id="hidExplode" name="hidExplode" width="0px" src="{% static '/appmain/HomePage/explosion.gif' %}" style="visibility:hidden">
+                                </td>
+                                <td width="30%" align="center" valign="top">
+                                    <a href='http://www.stlouisrams.com/'><img border='0' src="{% static '/appmain/helmets/small/h_stl.jpg' %}" height='72px'></a>
+                                    <br>
+                                    <br>&nbsp;
+                                    <div id="countdown" style="visibility: hidden">
+                                        <table cellpadding="0" cellspacing="0" class="countdown_clock_newyears">
+                                            <tr>
+                                                <td colspan="3">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5px">&nbsp;</td>
+                                                <td><img id="counter_day1" /><img id="counter_day2" /><img id="counter_divider1" src="{% static '/appmain/counter/dgc.gif' %}" /><img id="counter_hour1" /><img id="counter_hour2" /><img id="counter_divider2" src="{% static '/appmain/counter/dgc.gif' %}" /><img id="counter_minute1" /><img id="counter_minute2" /><img id="counter_divider3" src="{% static '/appmain/counter/dgc.gif' %}" /><img id="counter_second1" /><img id="counter_second2" /></td>
+                                                <td width="5px">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=3 align=center>
+                                    <br>
+                                    <br><a href='Standings_Post.asp'><font size='+2' color='darkgreen'>Click here to see the Postseason Standings!</font></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+    </table>
+
+    <!--these are all divs used for the "helmet crashing"-->
+    <div id="divExplode" name="divExplode" STYLE="position:absolute;top:100px;left:400px;visibility:hidden;">
+        <img src id="imgExplode" name="imgExplode" loop="1" width="95px">
+    </div>
+    <div id="divVisitorHelmet" name="divVisitorHelmet" STYLE="position:absolute;top:450px;left:300px;visibility:hidden;">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <img src="" alt border="0" onclick="javascript: playGraphics();">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="divPointsGameText" name="divPointsGameText" STYLE="position:absolute;visibility:hidden;width=512px;-moz-opacity:1%;filter:alpha(opacity=1)">
+        <table border="0" cellspacing="0" cellpadding="2" width="100%" class="tblPointsGame">
+            <tr>
+                <td align="center">
+                    This Week's Points Game:
+                </td>
+            </tr>
+            <tr>
+                <td align="center"><font size="+1"><b></b></font></td>
+            </tr>
+            <tr>
+                <td align="center"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="divHomeHelmet" name="divHomeHelment" STYLE="position:absolute;top:450px;left:812px;visibility:hidden;">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <img src="" alt border="0" onclick="javascript: playGraphics();">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
 {% endblock %}

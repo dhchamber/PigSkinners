@@ -1,21 +1,123 @@
 {% extends "appmain/base.html" %}
 {% load static %}
+{% load template_filter %}
+
 {% block title %}Season Standings{% endblock title %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/standing_season.css' %}">
+{% endblock stylesheet %}
+{% block bodyextra %}onload="window_onload()"{% endblock bodyextra %}
 {% block content %}
-	<table width="100%" cellpadding="0" cellspacing="0" border="1">
-		<tr id=trtest name=trtest>
-			<td width="100%" align="right" border="0">
-				<table cellpadding="0" cellspacing="0" border="1" width="100%">
-					<tr>
-						<td>&nbsp;</td>
-					<tr>
-					<tr>
-						<td align="center">
-							{% include 'appmain/standing_season_rpt.html' %}
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+    <table id="tblStats" name="tblStats" class="tblSeasonStats" width=100% >
+        <thead>
+            <tr userRow='false'>
+                <th colspan=2 nowrap class=top_bottom_border><font size=+1><b>Season Stats</b></font></th>
+                <th class=top_bottom_border colspan="9" align=center><font size=+1><b>1st Half</b></font></th>
+                <th class=top_bottom_right_border colspan="2">&nbsp;</th>
+                <th class=top_bottom_border colspan="8" align=center><font size=+1><b>2nd Half</b></font></th>
+                <th class=top_bottom_right_border colspan="2">&nbsp;</th>
+                <th class=top_bottom_border colspan="2" align=center><font size=+1><b>Overall</b></font></th>
+            </tr>
+            <tr userRow='false'>
+                <th class=right_border_dash colspan="13"><b>Weekly Winner Is Highlighted in <font color="lightgreen">Green</font></b></th>
+                <th class=right_border_dash colspan="10">&nbsp;</th>
+                <th colspan="3">&nbsp;</th>
+            </tr>
+            <tr userRow='false'>
+                <th colspan=2><b>Number Of Games</b></th>
+                {% for week in weeks %}
+                    {% if forloop.counter == 10 %}
+                        <th class=right_border_dash colspan=2>&nbsp;</th>
+                        <th class=tdNumGames>{{ week.game_wk.count }}</th>
+                    {% else %}
+                        <th class=tdNumGames>{{ week.game_wk.count }}</th>
+                    {% endif %}
+                {% endfor %}
+                <th class=right_border_dash colspan=2>&nbsp;</th>
+                <th colspan=2>&nbsp;</th>
+            </tr>
+            <tr userRow='false'>
+                <th colspan="11">&nbsp;</th>
+                <th class=right_border_dash colspan="2" align=center>Game Count: {{ game_cnt.0.half1 }}</th>
+                <th colspan="8">&nbsp;</th>
+                <th class=c_right colspan=2 >Game Count: {{ game_cnt.0.half2 }}</th>
+                <th colspan="2" align=center>Game Count: {{ game_cnt.0.all }}</th>
+            </tr>
+            <tr>
+                <th class=c_bottom >&nbsp;</th>
+                <th class=c_bottom onclick="sortTable(1)" ><b>Week</b></th>
+                {% for week in weeks %}
+                    {% if forloop.counter == 10 %}
+                        <th class="c_bottom" onclick="sortTableNum(11);" ><b>Total</b></th>
+                        <th class="c_bottom_right" ><b>Win%</b></th>
+                        <th class="c_bottom" ><b>{{ week.week_no }}</b></th>
+                    {% else %}
+                        <th class="c_bottom" ><b>{{ week.week_no }}</b></th>
+                    {% endif %}
+                {% endfor %}
+                <th class=c_bottom onclick="sortTableNum(21);"><b>Total</b></th>
+                <th class=c_bottom_right ><b>Win%</b></th>
+                <th class=c_bottom onclick="sortTableNum(23);"><b>Total</b></th>
+                <th class=c_bottom_right ><b>Win%</b></th>
+            </tr>
+        </thead>
+        <tr>
+    <!--    for each user-->
+            {% for pick in user_picks %}
+                {% ifchanged pick.user %}
+                    {% if forloop.first %}
+                        &nbsp;
+                    {% else %}
+                        </tr>
+                    {% endif %}
+    <!--    if half is in progress then show user, if not then highlight winner -->
+                    <tr userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}'
+                    {% if request.user == pick.user %}
+                        style= " BACKGROUND-COLOR: yellow;">
+                    {% elif pick.user in winners|lookup:'half2' %}
+                        >
+                    {% else %}
+                        >
+                    {% endif %}
+                    <td class=n_bottom >&nbsp;</td>
+                        <td class="l_bottom_right" >{{ pick.user.first_name }} {{ pick.user.last_name }}</td>
+                    {% if pick in weeks|get_winners:pick %}
+                        <td class=winner_cell >{{ pick.score }}</td>
+                    {% else %}
+                        <td class=norm_cell >{{ pick.score }}</td>
+                    {% endif %}
+                {% else %}
+                    {% if pick.wk.week_no == 9 %}
+                        {% if pick in weeks|get_winners:pick %}
+                            <td class=winner_cell >{{ pick.score }}</td>
+                        {% else %}
+                            <td class=norm_cell >{{ pick.score }}</td>
+                        {% endif %}
+                        <td class="c_bottom_right_left" >{{ users|get_half1:pick.user.id }}</td>
+                        <td class="r_bottom_right" >{{ users|get_perc1:pick.user.id }}%&nbsp;</td>
+                    {% elif pick.wk.week_no == 17 %}
+                        {% if pick in weeks|get_winners:pick %}
+                            <td class=winner_cell >{{ pick.score }}</td>
+                        {% else %}
+                            <td class=norm_cell >{{ pick.score }}</td>
+                        {% endif %}
+                        <td class="c_bottom_right_left" >{{ users|get_half2:pick.user_id }}</td>
+                        <td class="r_bottom_right" >{{ users|get_perc2:pick.user.id }}&nbsp;</td>
+                        <td class="c_bottom_right_left" >{{ users|get_all:pick.user.id }}</td>
+                        <td class="r_bottom_right" >{{ users|get_pall:pick.user.id }}&nbsp;</td>
+                    {% else %}
+                        {% if pick in weeks|get_winners:pick %}
+                            <td class=winner_cell >{{ pick.score }}</td>
+                        {% else %}
+                            <td class=norm_cell >{{ pick.score }}</td>
+                        {% endif %}
+                    {% endif %}
+                {% endifchanged %}
+            {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    {% block script %}
+        <script src="{% static 'appmain/js/standing_season.js' %}"></script>
+    {% endblock %}
 {% endblock content %}
