@@ -1,6 +1,5 @@
 from django.db import models
-from django.db.models import Max, Min, Count, Case, When, Sum, F, Q, IntegerField
-from django.urls import reverse
+from django.db.models import Max, Min, Case, When, Sum, Q, IntegerField
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -10,6 +9,8 @@ import pytz
 from datetime import datetime, timedelta
 from django.utils import timezone
 from enum import Enum
+# from django.urls import reverse
+
 
 class TimeStampMixin(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -24,7 +25,7 @@ class Team(models.Model):
     class Meta:
         verbose_name = 'team'
         verbose_name_plural = 'teams'
-        indexes = [models.Index(fields=['team_abrev','short_name'])]
+        indexes = [models.Index(fields=['team_abrev', 'short_name'])]
         ordering = ['team_abrev']
 
     team_name = models.CharField(max_length=50)
@@ -44,7 +45,7 @@ class Team(models.Model):
         return self.team_name
 
     def cy_seed(self):
-        seed = Seed.objects.get(team=self,year=Season.objects.get(current=True))
+        seed = Seed.objects.get(team=self, year=Season.objects.get(current=True))
         return seed.seed
 
 
@@ -52,14 +53,14 @@ class Profile(models.Model):
 # additional user data
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=50,null=True)
-    entry_fee = models.DecimalField(max_digits=6, decimal_places=2,default=0)
+    entry_fee = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     ball_pool = models.BooleanField(default=False)
     king_hill_eligable = models.BooleanField(default=False)
 # user updateable options
     intro_sound = models.BooleanField(default=False)
     show_graphics = models.BooleanField(default=False)
     show_video = models.BooleanField(default=False)
-    favorite_team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='favorite_team')
+    favorite_team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='favorite_team')
 #    bio = models.TextField(max_length=500, blank=True)
 #    location = models.CharField(max_length=30, blank=True)
 #    birth_date = models.DateField(null=True, blank=True)
@@ -81,7 +82,7 @@ class Season(models.Model):
     class Meta:
         verbose_name = 'season'
         verbose_name_plural = 'seasons'
-        indexes = [models.Index(fields=['year','current'])]
+        indexes = [models.Index(fields=['year', 'current'])]
         ordering = ['year']
 
     year = models.PositiveSmallIntegerField(null=False, default=2020)
@@ -108,8 +109,8 @@ class Season(models.Model):
         # determine winner or winners for the week
         # update pick scores for each pick for each week for the season
 
-        half1 = Week.objects.filter(year=self, gt='REG',week_no__lt=10)
-        half2 = Week.objects.filter(year=self, gt='REG',week_no__gt=9)
+        half1 = Week.objects.filter(year=self, gt='REG', week_no__lt=10)
+        half2 = Week.objects.filter(year=self, gt='REG', week_no__gt=9)
         all = Week.objects.filter(year=self, gt='REG')
 
         # TODO: find way to avoid this every time.  it is slow
@@ -220,7 +221,10 @@ class Week(models.Model):
 
         # get max score for the week
         max_score = self.pick_wk.all().aggregate(max_score=Max('pick_score', default=0, output_field=IntegerField(), ))['max_score']
-        winners = self.pick_wk.filter(pick_score=max_score)
+        picks = Pick.objects.filter(wk=self).annotate(score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
+        # winners = self.pick_wk.filter(pick_score=max_score)
+        winners = picks.filter(score=max_score)
+
         if winners.count() > 1:
             min_delta = 100
             win_ids = []
@@ -353,6 +357,40 @@ class Game(TimeStampMixin):
             else:
                 return 'Error'
 
+    def update_score(self):
+        # get all the pick games that have a pick for this game and update the status as won or lost
+        pgames = self.pick_game.all()
+        for pg in pgames:
+            if pg.team != None:
+                if self.status == 'P':
+                    if pg.team == self.winner:
+                        pg.status = 'w'
+                    elif self.home_score == self.visitor_score:
+                        pg.status = 't'
+                    else:
+                        pg.status = 'l'
+                else:
+                    if pg.team == self.winner:
+                        pg.status = 'W'
+                    elif self.home_score == self.visitor_score:
+                        pg.status = 'T'
+                    else:
+                        pg.status = 'L'
+                pg.save()
+                pg.pick_head.calc_score()
+                print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
+
+    def set_winner(self):
+        if self.status[:1] == 'F':
+            if self.home_score > self.visitor_score:
+                self.winner = self.home_team
+            elif self.home_score < self.visitor_score:
+                self.winner = self.visitor_team
+            else:
+                self.winner = None
+        self.save()
+
+
 #  Table for PostSeason seeds
 class Seed(models.Model):
     class Meta:
@@ -465,6 +503,8 @@ class Pick(models.Model):
         sum_score = 0
         for pg in self.pickgame_set.all():
             sum_score += pg.pick_score()
+        self.pick_score = sum_score
+        self.save()
 
         return sum_score
 

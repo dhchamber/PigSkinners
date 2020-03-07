@@ -2,10 +2,17 @@
              font-weight:bold;
              text-align:center;
             }
-    .pickteam {color: blue;
+    .pickwin {color: blue;
+              font-weight: bold;
              }
-    .winteam {color: blue;
-              font-weight: bold
+    .picklost {color: blue;
+            font-weight: normal;
+             }
+    .nonwin {color: red;
+            font-weight: bold;
+             }
+    .nonlost {color: black;
+            font-weight: normal;
              }
     .newday {BORDER-TOP: silver solid thick;
             }

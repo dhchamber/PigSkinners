@@ -3,7 +3,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color: black;">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
@@ -53,15 +53,6 @@
             </li>
         </ul>
 <!--
-        <span class="navbar-text" style="align-top">
-            {% if user.is_authenticated %}
-                Current User: {{ user.username }}
-            {% else %}
-                Current User: NO USER
-            {% endif %}
-        </span>
--->
-<!--
         <form class="form-inline my-2 my-lg-0" method="post", action="{% url 'logout' %}">
             &lt;!&ndash;				  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;
             {% csrf_token %}
@@ -69,4 +60,11 @@
         </form>
 -->
     </div>
+    <span class="navbar-text" >
+        {% if user.is_authenticated %}
+            Current User: {{ user.first_name }} {{ user.last_name }}
+        {% else %}
+            Current User: NO USER
+        {% endif %}
+    </span>
 </nav>

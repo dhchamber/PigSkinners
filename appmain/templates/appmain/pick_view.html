@@ -2,33 +2,27 @@
 {% load static %}
 {% block title %}View Picks{% endblock title %}
 {% block stylesheet %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_view.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_view.css' %}?version=2" >
 {% endblock stylesheet %}
-<!--TODO: need to show who won each game and team picked for the game -->
 {% block content %}
     <div class="row justify-content-md-center">
         <div class="col-sm-12" align="center">
             {% include 'appmain/weeks_sidebar.html' %}
         </div>
     </div>
-    <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm" id="dtBasicExample" data-toggle="table"
-            data-sortable="true" data-height="400" >
-<!--  data-sort-name="id"-->
-<!--  data-sort-order="desc" >-->
-<!--        <caption>List of Users Picks</caption>-->
+    <div>
+    <table id="pick_view" class="table table-bordered table-hover table-sm" data-sortable="true" >
         <thead class="thead-light">
             <tr class="thead1">
-                <th >Picks for week: {{ pick.wk }}<br>
+                <th colspan="2" align="center">Picks for week: {{ pick.wk }}<br>
                     {% if pick.wk.closed %} CLOSED
                     {% else %} OPEN {% endif %}
                 </th>
-                <td class="thead1 d-table-cell d-md-none" >{{ pick.wk.start_dt|date:"m/d" }} TO {{ pick.wk.end_dt|date:"m/d" }}<br>
-                <th class="d-none d-md-table-cell d-lg-none" colspan="2">{{ pick.wk.start_dt|date:"m/d/y" }} TO {{ pick.wk.end_dt|date:"m/d/y" }}<br>
-                <th class="d-none d-lg-table-cell" colspan="2">{{ pick.wk.start_dt|date:"M d Y h:s A" }} TO {{ pick.wk.end_dt|date:"M d Y h:s A" }}<br>
+                <th class="d-table-cell d-md-none" colspan="2" align="center">{{ pick.wk.start_dt|date:"m/d" }} TO {{ pick.wk.end_dt|date:"m/d" }}<br>
+                <th class="d-none d-md-table-cell d-lg-none" colspan="2" align="center">{{ pick.wk.start_dt|date:"m/d/y" }} TO {{ pick.wk.end_dt|date:"m/d/y" }}<br>
+                <th class="d-none d-lg-table-cell" colspan="2" align="center">{{ pick.wk.start_dt|date:"M d Y h:s A" }} TO {{ pick.wk.end_dt|date:"M d Y h:s A" }}<br>
                     Score for week: {{ pick.calc_score }}
                 </th>
-                <th>User: {{ pick.user }}</th>
             </tr>
             <tr class = "thead1">
                 <th data-field="id" data-sortable="true">Game</th>
@@ -61,36 +55,51 @@
                     {% endifchanged %}
                 {% endif %}
                     <td class="d-table-cell" scope="row" style="text-align:center;">{{ forloop.counter }}</td>
-                    {% if pick_game.game.visitor_team.id == pick_game.team.id %}
+<!--                display visitor team-->
+<!--                did I pick the visitor team? -->
+                    {% if pick_game.game.visitor_team == pick_game.team %}
+<!--                did the visitor team win-->
                         {% if pick_game.team == pick_game.game.win_team %}
-                            <td class="winteam d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
-                            <td class="winteam d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
-                            <td class="winteam d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
+                            <td class="pickwin d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
+                            <td class="pickwin d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
+                            <td class="pickwin d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
                         {% else %}
-                            <td class="pickteam d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
-                            <td class="pickteam d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
-                            <td class="pickteam d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
+                            <td class="picklost d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
+                            <td class="picklost d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
+                            <td class="picklost d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
                         {% endif %}
                     {% else %}
-                        <td class="d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
-                        <td class="d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
-                        <td class="d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
+                        {% if pick_game.game.visitor_team == pick_game.game.win_team %}
+                            <td class="nonwin d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
+                            <td class="nonwin d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
+                            <td class="nonwin d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
+                        {% else %}
+                            <td class="nonlost d-table-cell d-md-none">{{ pick_game.game.visitor_team.team_abrev }}</td>
+                            <td class="nonlost d-none d-md-table-cell d-lg-none">{{ pick_game.game.visitor_team.short_name }}</td>
+                            <td class="nonlost d-none d-lg-table-cell">{{ pick_game.game.visitor_team.team_name }}</td>
+                        {% endif %}
                     {% endif %}
 
-                    {% if pick_game.game.home_team.id == pick_game.team.id %}
+                    {% if pick_game.game.home_team == pick_game.team %}
                         {% if pick_game.team == pick_game.game.win_team %}
-                            <td class="winteam d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
-                            <td class="winteam d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
-                            <td class="winteam d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
+                            <td class="pickwin d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
+                            <td class="pickwin d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
+                            <td class="pickwin d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
                         {% else %}
-                            <td class="pickteam d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
-                            <td class="pickteam d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
-                            <td class="pickteam d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
+                            <td class="picklost d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
+                            <td class="picklost d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
+                            <td class="picklost d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
                         {% endif %}
                     {% else %}
-                        <td class="pickteam d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
-                        <td class="pickteam d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
-                        <td class="pickteam d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
+                        {% if pick_game.game.home_team == pick_game.game.win_team %}
+                            <td class="nonwin d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
+                            <td class="nonwin d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
+                            <td class="nonwin d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
+                        {% else %}
+                            <td class="nonlost d-table-cell d-md-none">{{ pick_game.game.home_team.team_abrev }}</td>
+                            <td class="nonlost d-none d-md-table-cell d-lg-none">{{ pick_game.game.home_team.short_name }}</td>
+                            <td class="nonlost d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
+                        {% endif %}
                     {% endif %}
                     <td class="d-table-cell d-md-none">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date|date:"d/j h:s A" }}</td>
                     <td class="d-none d-md-table-cell d-lg-none">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date|date:"d/j/Y h:s A" }}</td>
@@ -111,9 +120,5 @@
     </table>
     </div>
 <script>
-    $(document).ready(function () {
-    $('#dtBasicExample').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-    });
 </script>
 {% endblock %}

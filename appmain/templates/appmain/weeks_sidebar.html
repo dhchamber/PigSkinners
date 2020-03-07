@@ -1,34 +1,90 @@
 <!--            <div class="col-sm-2 sidenav">-->
-    <font size=-1>
     <form action="/action/week/" method="GET" >
         {% csrf_token %}
         <input type="hidden" id = "next" name="next" value="{{ request.path }}">
-        <button type="submit" value=1 name="btnSetPre1">Pre&nbsp;1</button>
-        <button type="submit" value=2 name="btnSetPre2">Pre&nbsp;2</button>
-        <button type="submit" value=3 name="btnSetPre3">Pre&nbsp;3</button>
-        <button type="submit" value=4 name="btnSetPre4">Pre&nbsp;4</button>
+        <div class="thead1 d-table-cell d-md-none">
+            <font size=-2>
+            <button type="submit" value=1 name="btnSetPre1">P&nbsp;1</button>
+            <button type="submit" value=2 name="btnSetPre2">P&nbsp;2</button>
+            <button type="submit" value=3 name="btnSetPre3">P&nbsp;3</button>
+            <button type="submit" value=4 name="btnSetPre4">P&nbsp;4</button>
+                <br>
+            <button type="submit" value=1 name="btnSetWeek1">1</button>
+            <button type="submit" value=2 name="btnSetWeek2">2</button>
+            <button type="submit" value=3 name="btnSetWeek3">3</button>
+            <button type="submit" value=4 name="btnSetWeek4">4</button>
+            <button type="submit" value=5 name="btnSetWeek5">5</button>
+            <button type="submit" value=6 name="btnSetWeek6">6</button>
+            <button type="submit" value=7 name="btnSetWeek7">7</button>
+            <button type="submit" value=8 name="btnSetWeek8">8</button>
+            <button type="submit" value=9 name="btnSetWeek9">9</button>
+            <button type="submit" value=10 name="btnSetWeek10">10</button>
+            <button type="submit" value=11 name="btnSetWeek11">11</button>
+            <button type="submit" value=12 name="btnSetWeek12">12</button>
+            <button type="submit" value=13 name="btnSetWeek13">13</button>
+            <button type="submit" value=14 name="btnSetWeek14">14</button>
+            <button type="submit" value=15 name="btnSetWeek15">15</button>
+            <button type="submit" value=16 name="btnSetWeek16">16</button>
+            <button type="submit" value=17 name="btnSetWeek17">17</button>
+                <br>
+            <button type="submit" value="PostSeason" name="btnSetWeekPS">Post</button>
+            </font>
+        </div>
+        <div class="d-none d-md-table-cell d-lg-none">
+            <font size=-2>
+            <button type="submit" value=1 name="btnSetPre1">Pre&nbsp;1</button>
+            <button type="submit" value=2 name="btnSetPre2">Pre&nbsp;2</button>
+            <button type="submit" value=3 name="btnSetPre3">Pre&nbsp;3</button>
+            <button type="submit" value=4 name="btnSetPre4">Pre&nbsp;4</button>
             <br>
-        <button type="submit" value=1 name="btnSetWeek1">Week&nbsp;1</button>
-        <button type="submit" value=2 name="btnSetWeek2">Week&nbsp;2</button>
-        <button type="submit" value=3 name="btnSetWeek3">Week&nbsp;3</button>
-        <button type="submit" value=4 name="btnSetWeek4">Week&nbsp;4</button>
-        <button type="submit" value=5 name="btnSetWeek5">Week&nbsp;5</button>
-        <button type="submit" value=6 name="btnSetWeek6">Week&nbsp;6</button>
-        <button type="submit" value=7 name="btnSetWeek7">Week&nbsp;7</button>
-        <button type="submit" value=8 name="btnSetWeek8">Week&nbsp;8</button>
-        <button type="submit" value=9 name="btnSetWeek9">Week&nbsp;9</button>
-        <button type="submit" value=10 name="btnSetWeek10">Week&nbsp;10</button>
-        <button type="submit" value=11 name="btnSetWeek11">Week&nbsp;11</button>
-        <button type="submit" value=12 name="btnSetWeek12">Week&nbsp;12</button>
-        <button type="submit" value=13 name="btnSetWeek13">Week&nbsp;13</button>
-        <button type="submit" value=14 name="btnSetWeek14">Week&nbsp;14</button>
-        <button type="submit" value=15 name="btnSetWeek15">Week&nbsp;15</button>
-        <button type="submit" value=16 name="btnSetWeek16">Week&nbsp;16</button>
-        <button type="submit" value=17 name="btnSetWeek17">Week&nbsp;17</button>
+            <button type="submit" value=1 name="btnSetWeek1">W&nbsp;1</button>
+            <button type="submit" value=2 name="btnSetWeek2">W&nbsp;2</button>
+            <button type="submit" value=3 name="btnSetWeek3">W&nbsp;3</button>
+            <button type="submit" value=4 name="btnSetWeek4">W&nbsp;4</button>
+            <button type="submit" value=5 name="btnSetWeek5">W&nbsp;5</button>
+            <button type="submit" value=6 name="btnSetWeek6">W&nbsp;6</button>
+            <button type="submit" value=7 name="btnSetWeek7">W&nbsp;7</button>
+            <button type="submit" value=8 name="btnSetWeek8">W&nbsp;8</button>
+            <button type="submit" value=9 name="btnSetWeek9">W&nbsp;9</button>
+            <button type="submit" value=10 name="btnSetWeek10">W&nbsp;10</button>
+            <button type="submit" value=11 name="btnSetWeek11">W&nbsp;11</button>
+            <button type="submit" value=12 name="btnSetWeek12">W&nbsp;12</button>
+            <button type="submit" value=13 name="btnSetWeek13">W&nbsp;13</button>
+            <button type="submit" value=14 name="btnSetWeek14">W&nbsp;14</button>
+            <button type="submit" value=15 name="btnSetWeek15">W&nbsp;15</button>
+            <button type="submit" value=16 name="btnSetWeek16">W&nbsp;16</button>
+            <button type="submit" value=17 name="btnSetWeek17">W&nbsp;17</button>
+                <br>
+            <button type="submit" value="PostSeason" name="btnSetWeekPS">Post Season</button>
+            </font>
+        </div>
+        <div class="d-none d-lg-table-cell">
+            <font size=-1>
+            <button type="submit" value=1 name="btnSetPre1">Pre&nbsp;1</button>
+            <button type="submit" value=2 name="btnSetPre2">Pre&nbsp;2</button>
+            <button type="submit" value=3 name="btnSetPre3">Pre&nbsp;3</button>
+            <button type="submit" value=4 name="btnSetPre4">Pre&nbsp;4</button>
             <br>
-        <button type="submit" value="PostSeason" name="btnSetWeekPS">Post Season</button>
+            <button type="submit" value=1 name="btnSetWeek1">Week&nbsp;1</button>
+            <button type="submit" value=2 name="btnSetWeek2">Week&nbsp;2</button>
+            <button type="submit" value=3 name="btnSetWeek3">Week&nbsp;3</button>
+            <button type="submit" value=4 name="btnSetWeek4">Week&nbsp;4</button>
+            <button type="submit" value=5 name="btnSetWeek5">Week&nbsp;5</button>
+            <button type="submit" value=6 name="btnSetWeek6">Week&nbsp;6</button>
+            <button type="submit" value=7 name="btnSetWeek7">Week&nbsp;7</button>
+            <button type="submit" value=8 name="btnSetWeek8">Week&nbsp;8</button>
+            <button type="submit" value=9 name="btnSetWeek9">Week&nbsp;9</button>
+            <button type="submit" value=10 name="btnSetWeek10">Week&nbsp;10</button>
+            <button type="submit" value=11 name="btnSetWeek11">Week&nbsp;11</button>
+            <button type="submit" value=12 name="btnSetWeek12">Week&nbsp;12</button>
+            <button type="submit" value=13 name="btnSetWeek13">Week&nbsp;13</button>
+            <button type="submit" value=14 name="btnSetWeek14">Week&nbsp;14</button>
+            <button type="submit" value=15 name="btnSetWeek15">Week&nbsp;15</button>
+            <button type="submit" value=16 name="btnSetWeek16">Week&nbsp;16</button>
+            <button type="submit" value=17 name="btnSetWeek17">Week&nbsp;17</button>
+                <br>
+            <button type="submit" value="PostSeason" name="btnSetWeekPS">Post Season</button>
+            </font>
+        </div>
     </form>
-    </font>
-<!--            </div>-->
-<!--		  </div>-->
-<!--		</div>-->
+

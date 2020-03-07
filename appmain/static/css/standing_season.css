@@ -1,3 +1,9 @@
+    .winner{
+        BACKGROUND-COLOR: red;
+    }
+    .user{
+        BACKGROUND-COLOR: yellow;
+    }
     .norm_cell {
         BORDER-BOTTOM: silver solid thin;
         BORDER-RIGHT: silver solid thin;

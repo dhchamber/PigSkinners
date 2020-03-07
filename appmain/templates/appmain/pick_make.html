@@ -14,17 +14,13 @@
                 {% include 'appmain/weeks_sidebar.html' %}
             </div>
         </div>
-
         <div>
-    <!--        class="table-responsive"-->
             {% get_current_timezone as TIMEZONE %}
             <form method="POST" name="frmPicks" action="/pick/make/">
                 {% csrf_token %}
                 <table id="pick_make" class="table table-bordered table-hover table-sm" data-sortable="true">
-    <!--                     data-height="400" >-->
-    <!--class="table table-bordered table-hover table-sm"                 -->
                     <thead class="thead-light">
-                    <tr>
+                    <tr dataRow="false">
                         <td colspan="6" align="center"><font size="+1" ><b>Picks for week:  {{ pick.wk.gt }} {{ pick.wk.week_no }}
                             <br>Picks are:
                             {% if pick.wk.closed %}
@@ -38,18 +34,15 @@
                             <input type="hidden" name="hidPickID" id="hidPickID" style="color: blue;" value="{{ pick.id }}">
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="6" align="center">
-                            <font size="+1">For user: {{ pick.user.first_name }}&nbsp;{{ pick.user.last_name }}</font>
-                        </td>
-                    </tr>
                     <tr dataRow="false">
-                        <td colspan="6" align="center">
+                        <td colspan="3" align="center">
                             <input type="button" class="btnRandom" id="btnRandom" name="btnRandom" style="color: blue;" value="Select Random Picks" onclick="selectRandomPicks()"
-                                {% if pick.wk.closed %}
-                                    disabled
-                                {% endif %}
-                                >
+                                {% if pick.wk.closed %}disabled{% endif %}>
+                            <input type="button" name="btnValidPicks" id="btnValodPicks" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.koth_eligible }}');" value="Save Picks">
+                        </td>
+                        <td colspan="3" align="center">
+                            <input name="btnSavePicks" id="btnSavePicks1" type="submit" value="Save Picks"
+                                {% if pick.wk.closed %}disabled{% endif %}>
                         </td>
                     </tr>
                     <tr dataRow="false"  align="center">
@@ -66,36 +59,43 @@
                         {% endif %}
                     </tr>
                     <tr dataRow="false">
-                        <th data-field="game" data-sortable="true" align="center">Game</th>
-    <!--                    <td width="15px">&nbsp;</td>-->
-                        <th data-field="visitor" data-sortable="true" class="tdVisitorHeader" colspan="2" align="center">Visitor</th>
-    <!--                    <td width="15px">&nbsp;</td>-->
+                        <th data-field="game" align="center">Game</th>
+                        <th data-field="visitor" class="tdVisitorHeader" colspan="2" align="center">Visitor</th>
                         <th class="tdHomeHeader" colspan="2" align="center">Home</th>
-    <!--                    <td width="15px">&nbsp;</td>-->
-                        <th data-field="visitor" data-sortable="true" align="center">Time in timezone({{ TIMEZONE }})</th>
+                        <th data-field="date" align="center" >Date/Time</th>
+<!--({{ TIMEZONE }})                        -->
                     </tr>
                     </thead>
                     <tbody>
                     {% for pick_game in pick.pickgame_set.all %}
-                        <tr>
+                        {% if pick_game.game.points_game %}
+                            <tr dataRow="true" style="background: yellow">
+                        {% else %}
+                            <tr dataRow="true">
+                        {% endif %}
                             <td align="center">{{ forloop.counter }}</td>
-    <!--                        <td>&nbsp;&nbsp;</td>-->
                             <td class="tdVisitorContent"><img src="{% static pick_game.game.visitor_team.logo_file_name %}" width="25px" >&nbsp;</td>
-                            <td><a class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Visitor" href="#" team="{{ pick_game.game.visitor_team.id }}"
+                            <td class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Visitor" href="#" team="{{ pick_game.game.visitor_team.id }}"
                              {% if pick_game.game.visitor_team.id == pick_game.team.id %}
-                                   background-color="#ff6600" style="background-color: rgb(255, 102, 0);"
-                            {% endif %}
-                            ><font color="blue" >{{ pick_game.game.visitor_team.team_name }}</font></a></td>
-    <!--                        <td>&nbsp;&nbsp;</td>-->
-                            <td><a class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Home" href="#" team="{{ pick_game.game.home_team.id }}"
+                                   style="background-color: lightblue;"
+                            {% endif %} >
+                            <font class="d-table-cell d-md-none" color="blue" >{{ pick_game.game.visitor_team.team_abrev }}</font>
+                            <font class=" d-lg-none" color="blue" >{{ pick_game.game.visitor_team.short_name }}</font>
+                            <font class="d-none d-lg-table-cell" color="blue" >{{ pick_game.game.visitor_team.team_name }}</font>
+                            </td>
+                            <td class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Home" href="#" team="{{ pick_game.game.home_team.id }}"
                              {% if pick_game.game.home_team.id == pick_game.team.id %}
-                                   background-color="#ff6600" style="background-color: rgb(255, 102, 0);"
-                            {% endif %}
-                            ><font color="blue">{{ pick_game.game.home_team.team_name }}</font></a></td>
+                                   style="background-color: lightblue;"
+                            {% endif %} >
+                            <font class="d-table-cell d-md-none" color="blue">{{ pick_game.game.home_team.team_abrev }}</font>
+                            <font class="d-none d-md-table-cell d-lg-none" color="blue">{{ pick_game.game.home_team.short_name }}</font>
+                            <font class="d-none d-lg-table-cell" color="blue">{{ pick_game.game.home_team.team_name }}</font>
+                            </td>
                             <td class="tdHomeContent"><img width="25px" src="{% static pick_game.game.home_team.logo_file_name %}"></td>
-    <!--                        <td>&nbsp;</td>-->
-                            <td align="center">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date }}
-                                <input type="hidden" name="Selected{{ forloop.counter }}" id="Selected{{ forloop.counter }}" style="color: blue;" value="{{ pick_game.team.id }}"></td>
+                            <td class="d-table-cell d-md-none" align="center">{{ pick_game.game.get_date|date:"D m/d h:s A" }}
+                            <td class="d-none d-md-table-cell d-lg-none" align="center">{{ pick_game.game.get_date|date:"D m/d/Y h:s A" }}
+                            <td class="d-none d-lg-table-cell" align="center">{{ pick_game.game.get_date|date:"D M d, Y h:s A" }} }}
+                            <input type="hidden" name="Selected{{ forloop.counter }}" id="Selected{{ forloop.counter }}" style="color: blue;" value="{{ pick_game.team.id }}"></td>
                         </tr>
                     {% endfor %}
                     <tr dataRow="false">
@@ -141,7 +141,7 @@
                         </td>
                     </tr>
                     <tr dataRow="false">
-                        <td colspan="9" style="color: blue;" align="center"><input name="btnSavePicks" id="btnSavePicks" type="submit" value="Save Picks"
+                        <td colspan="6" style="color: blue;" align="center"><input name="btnSavePicks" id="btnSavePicks1" type="submit" value="Save Picks"
                         {% if pick.wk.closed %}
                             disabled
                         {% endif %}
@@ -156,41 +156,7 @@
         </div>
     {% endif %}
 
-        {% block script %}
-            <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make.js' %}" > </script>
-        {% endblock %}
-
-    <script type="text/javascript" language="Javascript" >
-        function selectRandomPicks() {
-        var i;
-        var sel;
-
-        //randomly select a points game value between 30-60 points, but only if they haven't already have selected something
-        var x = $('#txtPointsTotal').val();
-        if (!(parseInt(x) > 0)) {
-            $('#txtPointsTotal').val(Math.floor((60-29)*Math.random()) + 30);
-        }
-
-        //select random KOTH if it's available
-        var kothEligible = $('.cboKingOfHillPick').attr('kothEligible');
-        if(kothEligible == "True" && frmPicks.cboKingOfHillPick.value == "") {
-            var upperLimit = frmPicks.cboKingOfHillPick.options.length - 1;
-            frmPicks.cboKingOfHillPick.selectedIndex = Math.floor((upperLimit)*Math.random()) + 1;
-        }
-
-        //Select a random pick for each game if there already isn't a pick made
-        for (i = 1; i <= 16; i++) {
-            selTeam = $('#Selected'.concat(i)).val();
-            if(!(parseInt(selTeam) > 0)) {
-                //generate a random number and see if it is even or odd, even = HOME team, odd = AWAY team
-                var random = Math.floor(Math.random()*101);
-                if(random % 2 == 0) {
-                    $('#Game'.concat(i).concat('Home')).click();
-                } else {
-                    $('#Game'.concat(i).concat('Visitor')).click();
-                }
-            }
-        }
-        };
-    </script>
+    {% block script %}
+        <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make.js' %}?version=6"></script>
+    {% endblock %}
 {% endblock content %}

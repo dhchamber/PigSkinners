@@ -5,7 +5,7 @@ import pytz
 import xml.etree.ElementTree as ET
 from appmain.models import Season, Week, Team, Game
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import F
+# from django.db.models import F
 
 # List of NFL weeks, 4 PreSeason, 17 Regular Season, and 4 Post Season
 nfl_week = [(1, 'PRE'), (2, 'PRE'), (3, 'PRE'), (4, 'PRE'), (1, 'REG'), (2, 'REG'), (3, 'REG'), (4, 'REG'), (5, 'REG'),
@@ -29,38 +29,40 @@ def load_week():
             print(f'Week # {week} {gt} loaded ')
 
 #TODO: add post season, update scores on PickGame, Pick, and PostPick, PostPickGame
-def update_score(g):
-    # get all the pick games that have a pick for this game and update the status as won or lost
-    pgames = g.pick_game.all()
-    for pg in pgames:
-        if pg.team != None:
-            if g.status == 'P':
-                if pg.team == g.winner:
-                    pg.status = 'w'
-                elif g.home_score == g.visitor_score:
-                    pg.status = 't'
-                else:
-                    pg.status = 'l'
-            else:
-                if pg.team == g.winner:
-                    pg.status = 'W'
-                elif g.home_score == g.visitor_score:
-                    pg.status = 'T'
-                else:
-                    pg.status = 'L'
-            pg.save()
+# TODO: move to Game model
+# def update_score(g):
+#     # get all the pick games that have a pick for this game and update the status as won or lost
+#     pgames = g.pick_game.all()
+#     for pg in pgames:
+#         if pg.team != None:
+#             if g.status == 'P':
+#                 if pg.team == g.winner:
+#                     pg.status = 'w'
+#                 elif g.home_score == g.visitor_score:
+#                     pg.status = 't'
+#                 else:
+#                     pg.status = 'l'
+#             else:
+#                 if pg.team == g.winner:
+#                     pg.status = 'W'
+#                 elif g.home_score == g.visitor_score:
+#                     pg.status = 'T'
+#                 else:
+#                     pg.status = 'L'
+#             pg.save()
+#             pg.pick_head.calc_score()
+#             print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
 
-
-def set_winner(g):
-    # set game winner
-    if g.status[:1] == 'F':
-        if g.home_score > g.visitor_score:
-            g.winner = g.home_team
-        elif g.home_score < g.visitor_score:
-            g.winner = g.visitor_team
-        else:
-            g.winner = None
-    g.save()
+# def set_winner(g):
+#     # set game winner
+#     if g.status[:1] == 'F':
+#         if g.home_score > g.visitor_score:
+#             g.winner = g.home_team
+#         elif g.home_score < g.visitor_score:
+#             g.winner = g.visitor_team
+#         else:
+#             g.winner = None
+#     g.save()
 
 
 def load_score(url_type, year='2019', week_type='REG', week=1):
@@ -87,10 +89,8 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 cnt += 1
                 created = False
                 # get existing game record
-                print(f'Game_rec: {game_rec} ')
                 try:
                     g = Game.objects.get(eid=game_rec.attrib['eid'])  # changed from gsis
-                    print(f'Found game {g.id} for gsis code {game_rec.attrib["eid"]}')
                 except ObjectDoesNotExist:
                     if url_type in ('LIVE', 'POST'):
                         # throw error  and stop don't create  the game should have been created by load season
@@ -104,7 +104,6 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                         print(f'Game created for Week #{week.week_no}')
                         g.week = week
                         created = True
-                print(f'URL_type: {url_type} year: {year} week_type: {week_type} week: {week}')
                 try:
                     g.gd = int(ss.attrib['gd'])
                 except KeyError:
@@ -124,7 +123,6 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                         if k in ('hs', 'vs'):
                             int_val = int(game_rec.attrib[k])
                             setattr(g, val, int_val)
-                            # print(f' and {game_rec.attrib[k]} ')
                         elif k in ('h'):
                             g.home = game_rec.attrib[k]
                             if game_rec.attrib[k] == 'LA':
@@ -140,12 +138,12 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                                 team = game_rec.attrib[k]
                             g.visitor_team = Team.objects.get(team_abrev=team)
                         elif k in ('htn', 'vtn', 'n') and type == 'reg_live':
-                            print(f'Skipping {val} for {type}')
+                            pass
+                            # print(f'Skipping {val} for {type}')
                         else:
                             setattr(g, val, game_rec.attrib[k])
-                            # print(f' and {game_rec.attrib[k]} ')
                     except KeyError:
-                        print(f'Key error on key {k} / {val}')
+                        pass
                 # end of for k, val in key.items():
                 g.save()
                 # calculate datetime field of game from eid and time
@@ -160,7 +158,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 g.date_time = make_aware(datetime(year, mo, day, h, int(min)), pytz.timezone('America/New_York'))
                 g.save()
 
-                set_winner(g)
+                g.set_winner
                 update_score(g)
                 print(f'Game #{cnt} {g.id} loaded for Week {g.wk_no} for year {g.year} Winner: {g.winner} ')
             # end of for game_rec in ss:

@@ -1,14 +1,95 @@
 {% extends "appmain/base.html" %}
 {% load static %}
+{% load template_filter %}
 {% block title %}Weekly Standings{% endblock title %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/standing_week.css' %}?version=5" >
+{% endblock stylesheet %}
+{% block bodyextra %}onload="window_onload({{ num_games }})"{% endblock bodyextra %}
 {% block content %}
-    <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" >
-        <form method="post" name="frmWeekNum" action="Standings_Week.asp?userGroup=<%=userGroup%>">
-            <input type="hidden" name="hidWeekNum" id="hidWeekNum" value="<%=sWeekNumber%>">
-        </form>
-        {% include 'appmain/weeks_sidebar.html' %}
-        <div class="col-sm-10">
-            {% include 'appmain/standing_week_rpt_closed.html' %}
-        </div>
-    </body>
+<div align="center">{% include 'appmain/weeks_sidebar.html' %}</div>
+<div class="col-sm-12">
+    <table class="tblWeeklyStats" id="tblStats" name="tblStats" cellpadding="3px" cellspacing="0" border="1" width=100%>
+        <thead>
+            <tr userRow="false">
+                {% if num_games > 0 %}
+                    <td class=border_top_bottom colspan="{{ num_games }}">
+                {% else %}
+                    <td class=border_top_bottom colspan="3">
+                {% endif %}
+                <font size=+1><b>
+                {% if bBallPoolOnly %}
+                    BATC-Only Weekly Standings
+                {% else %}
+                    Weekly Standings
+                {% endif %}
+                </b></font>
+                </td>
+                {% if num_games > 0 %}
+                    <td class=border_top_bottom colspan="2">
+                        <input name="btnShowDiffs" id="btnShowDiffs" type="submit" onclick="javascript:showAllDiffs();" value="Show All Diffs" >
+                    </td>
+                {% endif %}
+            </tr>
+            <!--				'Show the Visitor Teams-->
+            <tr userRow="false" >
+                <td class=border_bottom_right rowspan=2 >
+                    <font id="ftWeekCombo" name="ftWeekCombo" ><b>Week:&nbsp;{{ user_picks.first.wk.week_no }}</b></font>
+                </td>
+                {% for game in games %}
+                    {% if game.visitor_team == game.win_team %}
+                        <td><div class=winteam onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText('{{ game.visitor_team.short_name }}'));" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
+                    {% else %}
+                        <td><div class=loseteam onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
+                    {% endif %}
+                {% endfor %}
+                <td class=pts_game valign=center onclick="sortTableNum(17)" ><b>Points</b></td>
+                <td class=pts_game valign=center onclick="sortTableNum(18)" ><b>Number</b></td>
+            </tr>
+            <!--				'Now show the Home Teams-->
+            <tr userRow='false'>
+                {% for game in games %}
+                        {% if game.home_team == game.win_team %}
+                            <td><div class="winteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
+                        {% else %}
+                            <td><div class="loseteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
+                        {% endif %}
+                {% endfor %}
+                <td class=pts_game_head valign=center onclick="sortTableNum(18)" ><b>Game</b></td>
+                <td class=pts_game_head valign=center onclick="sortTableNum(19)" ><b>of Wins</b></td>
+            </tr>
+        </thead>
+        <tbody>
+                {% for pick in user_picks %}
+                    {% if pick == pick.wk.week_winner.0 %}
+                        <tr class=week_winner onclick="highlightRow(this)" userRow="true" id = "tr{{ pick.user.id }}" name = "tr{{ pick.user.last_name }}" isCompared="false">
+                    {% elif request.user == pick.user %}
+                        <tr class=curr_user onclick="highlightRow(this)" userRow="true" id = "tr{{ pick.user.id }}" name = "tr{{ pick.user.last_name }}" isCompared="false">
+                    {% else %}
+                        <tr userRow="true" onclick="highlightRow(this)" id = "tr{{ pick.user.id }}" name = "tr{{ pick.user.last_name }}" isCompared="false">
+                    {% endif %}
+                        <td class=user_row >{{ pick.user.first_name }}&nbsp;{{ pick.user.last_name }}</td>
+                        {% if num_games > 0 %}
+                            {% for pgame in pick.pickgame_set.all %}
+                                {% if pgame.team is not NONE %}
+                                    {% if pgame.team == pgame.game.win_team %}
+                                        <td class=user_cell_win ><div>{{ pgame.team.short_name }}</div></td>
+                                    {% else %}
+                                        <td class=user_cell_lost ><div>{{ pgame.team.short_name }}</div></td>
+                                    {% endif %}
+                                {% else %}
+                                        <td class=user_cell_non ><div>&nbsp;</div></td>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <td class=pts_game >{{ pick.points }}</td>
+                        <td class=pts_game >{{ pick.score }}</td>
+                    </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% block script %}
+    <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/standing_week.js' %}?version=4"></script>
+{% endblock %}
 {% endblock content %}
