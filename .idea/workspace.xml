@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/standing_week.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/standing_week.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nfl week score xml.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make_ps.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make_ps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/css/pick_view.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/pick_view.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/css/standing_season.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/standing_season.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/Pick_form2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/weeks_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
