@@ -508,6 +508,40 @@ def standing_week(request, detail):
         # pass
 
 
+@login_required
+def standing_week_prospective(request):
+    wk = get_selected_week(request)
+
+    # loop and create empty picks for each active user if one doesn't exist
+    # TODO: make this a common function
+    for user in User.objects.all():
+        if user.is_active:
+            try:
+                pick = Pick.objects.get(user=user, wk=wk)
+            except:
+                pick = Pick.objects.create_pick(user=user, week=wk)
+
+    # if wk.closed:
+        games = Game.objects.filter(week=wk).annotate(
+            h_pick=Count(Case(When(pick_game__team=F('home_team'), then=1), output_field=IntegerField(), ))) \
+            .annotate(
+            v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
+        num_games = games.count() + 1
+
+        # score the game as won if it is done (W) or still in prgress (w)
+        user_picks = Pick.objects.filter(wk=wk).annotate(
+            score=Sum(Case(When(pickgame__status__in=('w','W'), then=1), default=0, output_field=IntegerField(), )))
+        # TODO: add something to html to show the game status and highlight winning from won
+        return render(request, 'appmain/standing_week_prospective.html',
+                      {'user_picks': user_picks, 'games': games, 'num_games': num_games})
+
+    # if week is still open then show users and if picks are saved or not
+    # else:
+    #     user_picks = Pick.objects.filter(wk=wk)
+    #     print(f'ALL: Found picks for  {wk.week_no} / {wk.id} total: {user_picks.count()}')
+    #     return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
+
+
 def standing_koth(request):
     wk = get_selected_week(request)
     for user in User.objects.all():

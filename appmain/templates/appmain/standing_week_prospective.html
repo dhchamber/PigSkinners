@@ -1,7 +1,7 @@
 {% extends "appmain/base.html" %}
 {% load static %}
 {% load template_filter %}
-{% block title %}Weekly Standings{% endblock title %}
+{% block title %}Prospective Standings{% endblock title %}
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/standing_week.css' %}?version=5" >
 {% endblock stylesheet %}
@@ -37,7 +37,7 @@
                     <font id="ftWeekCombo" name="ftWeekCombo" ><b>Week:&nbsp;{{ user_picks.first.wk }}</b></font>
                 </td>
                 {% for game in games %}
-                    {% if game.visitor_team == game.game_winner %}
+                    {% if game.visitor_team == game.win_team %}
                         <td><div class=winteam onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText('{{ game.visitor_team.short_name }}'));" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
                     {% else %}
                         <td><div class=loseteam onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
@@ -49,7 +49,7 @@
             <!--				'Now show the Home Teams-->
             <tr userRow='false'>
                 {% for game in games %}
-                        {% if game.home_team == game.game_winner %}
+                        {% if game.home_team == game.win_team %}
                             <td><div class="winteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
                         {% else %}
                             <td><div class="loseteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>

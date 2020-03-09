@@ -3,7 +3,7 @@
 {% load tz %}
 {% block title %}Make Picks{% endblock title %}
 {% block stylesheet %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_make.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_make.css' %}?version=2"/>
 {% endblock stylesheet %}
 {% block content %}
     {% if submitted %}
@@ -38,11 +38,11 @@
                         <td colspan="3" align="center">
                             <input type="button" class="btnRandom" id="btnRandom" name="btnRandom" style="color: blue;" value="Select Random Picks" onclick="selectRandomPicks()"
                                 {% if pick.wk.closed %}disabled{% endif %}>
-                            <input type="button" name="btnValidPicks" id="btnValodPicks" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.koth_eligible }}');" value="Save Picks">
                         </td>
                         <td colspan="3" align="center">
-                            <input name="btnSavePicks" id="btnSavePicks1" type="submit" value="Save Picks"
+                            <input type="button" name="btnValidPicks" id="btnValodPicks" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.koth_eligible }}');" value="Save Picks"
                                 {% if pick.wk.closed %}disabled{% endif %}>
+                            <input type="submit" name="btnSavePicks" id="btnSavePicks1" type="submit" value="Save Picks">
                         </td>
                     </tr>
                     <tr dataRow="false"  align="center">
@@ -69,9 +69,25 @@
                     <tbody>
                     {% for pick_game in pick.pickgame_set.all %}
                         {% if pick_game.game.points_game %}
-                            <tr dataRow="true" style="background: yellow">
+                            {% ifchanged pick_game.game.day  %}
+                                {% if forloop.first %}
+                                    <tr dataRow="true">
+                                {% else %}
+                                    <tr class = newday dataRow="true" style="background: yellow">
+                                {% endif %}
+                            {% else %}
+                                <tr dataRow="true">
+                            {% endifchanged %}
                         {% else %}
-                            <tr dataRow="true">
+                            {% ifchanged pick_game.game.day  %}
+                                {% if forloop.first %}
+                                    <tr dataRow="true">
+                                {% else %}
+                                    <tr class = newday dataRow="true">
+                                {% endif %}
+                            {% else %}
+                                <tr dataRow="true">
+                            {% endifchanged %}
                         {% endif %}
                             <td align="center">{{ forloop.counter }}</td>
                             <td class="tdVisitorContent"><img src="{% static pick_game.game.visitor_team.logo_file_name %}" width="25px" >&nbsp;</td>
@@ -80,7 +96,7 @@
                                    style="background-color: lightblue;"
                             {% endif %} >
                             <font class="d-table-cell d-md-none" color="blue" >{{ pick_game.game.visitor_team.team_abrev }}</font>
-                            <font class=" d-lg-none" color="blue" >{{ pick_game.game.visitor_team.short_name }}</font>
+                            <font class="d-none d-md-table-cell d-lg-none" color="blue" >{{ pick_game.game.visitor_team.short_name }}</font>
                             <font class="d-none d-lg-table-cell" color="blue" >{{ pick_game.game.visitor_team.team_name }}</font>
                             </td>
                             <td class="Game{{ forloop.counter }}" id="Game{{ forloop.counter }}Home" href="#" team="{{ pick_game.game.home_team.id }}"
@@ -141,7 +157,8 @@
                         </td>
                     </tr>
                     <tr dataRow="false">
-                        <td colspan="6" style="color: blue;" align="center"><input name="btnSavePicks" id="btnSavePicks1" type="submit" value="Save Picks"
+                        <td colspan="6" style="color: blue;" align="center">
+                            <input type="button" name="btnSavePicks" id="btnSavePicks2" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.koth_eligible }}');"  value="Save Picks"
                         {% if pick.wk.closed %}
                             disabled
                         {% endif %}
@@ -157,6 +174,6 @@
     {% endif %}
 
     {% block script %}
-        <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make.js' %}?version=6"></script>
+        <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make.js' %}?version=7"></script>
     {% endblock %}
 {% endblock content %}

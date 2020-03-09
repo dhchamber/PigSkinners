@@ -159,7 +159,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 g.save()
 
                 g.set_winner
-                update_score(g)
+                g.update_score()
                 print(f'Game #{cnt} {g.id} loaded for Week {g.wk_no} for year {g.year} Winner: {g.winner} ')
             # end of for game_rec in ss:
             # set points game true for the last game in the list if this is a regular season game and just created

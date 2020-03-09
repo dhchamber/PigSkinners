@@ -255,12 +255,8 @@ function validatePage(bKothElibible)
 	//initialize boolean
 	bAllSelected = true;
 	bValid = true;
-	console.log('kothOnly:', kothOnly.toLowerCase())
 	if(kothOnly.toLowerCase() == "false") {
-//change to For loop 1 to 16
 		for (let i = 1; i < 17; i++) {
-            console.log('Selected:', i, 'Selected'.concat(i));
-            console.log('Selected:', i, $('#Selected'.concat(i)).val());
             if($('#Selected'.concat(i)).val() == "") {
                 bAllSelected = false;
                 break;
@@ -270,8 +266,6 @@ function validatePage(bKothElibible)
 	sErrMsg = "";
 
 	//if it's a requirement that all picks be selected then show error message
-	console.log('forceAllPicks:', bForceAllPicks.toLowerCase());
-	console.log('bAllSelected:', bAllSelected);
 	if(bForceAllPicks.toLowerCase() == "true") {
 		if(bAllSelected == false) {
 			sErrMsg = sErrMsg + "\n- Select a winner for all the games.\n";
@@ -285,10 +279,8 @@ function validatePage(bKothElibible)
 		}
 
 		//also check the king of the hill pick, if we need to
-		console.log('KothEligible:', kingOfTheHillEligible.toLowerCase());
 		if(kingOfTheHillEligible.toLowerCase() == "true") {
 			//did they pick a king of the hill team?
-    		console.log('KothPick:', frmPicks.cboKingOfHillPick.value);
 			if(frmPicks.cboKingOfHillPick.value == "") {
 				sErrMsg = sErrMsg + "\n- Pick a team for the 'King of the Hill' pool.\n";
 				bValid = false;
@@ -305,7 +297,6 @@ function validatePage(bKothElibible)
 		}
 	}
 
-    console.log('ErrMsg:', sErrMsg);
 	if(bValid == false) {
 //		tblErrorMsg.style.display = "";
 //		errMsg.innerHTML = sErrMsg;
