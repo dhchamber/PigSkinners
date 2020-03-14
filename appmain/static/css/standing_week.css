@@ -33,6 +33,11 @@
             BORDER-RIGHT: black thin solid;
             text-align: center;
     }
+    .prosteam {
+            CURSOR: grab;
+            BACKGROUND-COLOR: light-gray;
+            text-align: center;
+    }
     .loseteam {
             CURSOR: grab;
             text-align: center;

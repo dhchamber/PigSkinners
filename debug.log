@@ -1,0 +1,382 @@
+2020-03-14 10:23:42,307 appmain.views ERROR    Test!!
+2020-03-14 10:29:58,529 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:29:58,531 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:30:37,107 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:30:37,110 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:30:38,589 appmain.views DEBUG    Starting pick_make:dcota
+2020-03-14 10:30:50,410 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:30:50,411 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:30:59,411 appmain.views DEBUG    Starting pick_make: dcota
+2020-03-14 10:33:45,661 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:33:45,662 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:34:35,474 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:34:35,475 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:34:36,927 django.utils.autoreload DEBUG    Apps ready_event triggered. Sending autoreload_started signal.
+2020-03-14 10:34:36,927 django.utils.autoreload DEBUG    Apps ready_event triggered. Sending autoreload_started signal.
+2020-03-14 10:34:36,929 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\locale with glob **/*.mo.
+2020-03-14 10:34:36,929 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\locale with glob **/*.mo.
+2020-03-14 10:34:36,929 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\locale with glob **/*.mo.
+2020-03-14 10:34:36,929 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\locale with glob **/*.mo.
+2020-03-14 10:34:36,930 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\locale with glob **/*.mo.
+2020-03-14 10:34:36,930 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\locale with glob **/*.mo.
+2020-03-14 10:34:36,930 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\contenttypes\locale with glob **/*.mo.
+2020-03-14 10:34:36,930 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\contenttypes\locale with glob **/*.mo.
+2020-03-14 10:34:36,937 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\sessions\locale with glob **/*.mo.
+2020-03-14 10:34:36,937 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\sessions\locale with glob **/*.mo.
+2020-03-14 10:34:36,939 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\messages\locale with glob **/*.mo.
+2020-03-14 10:34:36,939 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\messages\locale with glob **/*.mo.
+2020-03-14 10:34:36,939 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\staticfiles\locale with glob **/*.mo.
+2020-03-14 10:34:36,939 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\staticfiles\locale with glob **/*.mo.
+2020-03-14 10:34:36,939 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django_tables2\locale with glob **/*.mo.
+2020-03-14 10:34:36,939 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django_tables2\locale with glob **/*.mo.
+2020-03-14 10:34:36,940 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\crispy_forms\locale with glob **/*.mo.
+2020-03-14 10:34:36,940 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\crispy_forms\locale with glob **/*.mo.
+2020-03-14 10:34:36,940 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\appmain\locale with glob **/*.mo.
+2020-03-14 10:34:36,940 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\appmain\locale with glob **/*.mo.
+2020-03-14 10:34:37,128 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\forms\widgets.py first seen with mtime 1577594803.0216775
+2020-03-14 10:34:37,128 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\forms\widgets.py first seen with mtime 1577594803.0216775
+2020-03-14 10:34:37,130 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\auth\base_user.py first seen with mtime 1577594798.8416219
+2020-03-14 10:34:37,130 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\auth\base_user.py first seen with mtime 1577594798.8416219
+2020-03-14 10:34:37,130 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\langthaimodel.py first seen with mtime 1578440305.1930747
+2020-03-14 10:34:37,130 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\langthaimodel.py first seen with mtime 1578440305.1930747
+2020-03-14 10:34:37,131 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\templatetags\static.py first seen with mtime 1577594803.109627
+2020-03-14 10:34:37,131 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\templatetags\static.py first seen with mtime 1577594803.109627
+2020-03-14 10:34:37,131 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\email\message.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,131 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\email\message.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,132 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\email\errors.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,132 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\email\errors.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,132 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\idna\package_data.py first seen with mtime 1578440305.8591087
+2020-03-14 10:34:37,132 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\idna\package_data.py first seen with mtime 1578440305.8591087
+2020-03-14 10:34:37,133 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\langhebrewmodel.py first seen with mtime 1578440305.1910756
+2020-03-14 10:34:37,133 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\langhebrewmodel.py first seen with mtime 1578440305.1910756
+2020-03-14 10:34:37,133 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\encodings\latin_1.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,133 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\encodings\latin_1.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,134 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\auth\__init__.py first seen with mtime 1577594798.8386247
+2020-03-14 10:34:37,134 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\auth\__init__.py first seen with mtime 1577594798.8386247
+2020-03-14 10:34:37,135 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\concurrent\futures\_base.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,135 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\concurrent\futures\_base.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,135 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\gb2312freq.py first seen with mtime 1578440305.1830802
+2020-03-14 10:34:37,135 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\gb2312freq.py first seen with mtime 1578440305.1830802
+2020-03-14 10:34:37,136 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\encodings\idna.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,136 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\encodings\idna.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,136 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\_bootlocale.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,136 django.db.backends DEBUG    (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2020-03-14 10:34:37,136 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\_bootlocale.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,136 django.db.backends DEBUG    (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2020-03-14 10:34:37,137 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\json\scanner.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,137 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\json\scanner.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,137 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\utils\deprecation.py first seen with mtime 1577594803.1406093
+2020-03-14 10:34:37,137 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\utils\deprecation.py first seen with mtime 1577594803.1406093
+2020-03-14 10:34:37,138 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\forms\__init__.py first seen with mtime 1577594803.0136814
+2020-03-14 10:34:37,139 django.db.backends DEBUG    (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=()
+2020-03-14 10:34:37,138 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\forms\__init__.py first seen with mtime 1577594803.0136814
+2020-03-14 10:34:37,139 django.db.backends DEBUG    (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=()
+2020-03-14 10:34:37,141 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\asyncio\protocols.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,141 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\asyncio\protocols.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,142 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\auth\forms.py first seen with mtime 1577594798.8456194
+2020-03-14 10:34:37,142 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\auth\forms.py first seen with mtime 1577594798.8456194
+2020-03-14 10:34:37,143 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django_tables2\utils.py first seen with mtime 1578594713.2973797
+2020-03-14 10:34:37,143 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django_tables2\utils.py first seen with mtime 1578594713.2973797
+2020-03-14 10:34:37,143 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\__future__.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,143 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\__future__.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,148 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\euckrprober.py first seen with mtime 1578440305.1800818
+2020-03-14 10:34:37,148 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\chardet\euckrprober.py first seen with mtime 1578440305.1800818
+2020-03-14 10:34:37,148 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\core\handlers\asgi.py first seen with mtime 1577594802.8006537
+2020-03-14 10:34:37,148 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\core\handlers\asgi.py first seen with mtime 1577594802.8006537
+2020-03-14 10:34:37,149 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\dis.py first seen with mtime 1576736802.0
+2020-03-14 10:34:37,149 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\dis.py first seen with mtime 1576736802.0
+2020-03-14 10:35:26,891 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:35:26,892 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:35:28,153 django.utils.autoreload DEBUG    Apps ready_event triggered. Sending autoreload_started signal.
+2020-03-14 10:35:28,153 django.utils.autoreload DEBUG    Apps ready_event triggered. Sending autoreload_started signal.
+2020-03-14 10:35:28,155 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\locale with glob **/*.mo.
+2020-03-14 10:35:28,155 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\locale with glob **/*.mo.
+2020-03-14 10:35:28,156 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\locale with glob **/*.mo.
+2020-03-14 10:35:28,156 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\locale with glob **/*.mo.
+2020-03-14 10:35:28,156 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\locale with glob **/*.mo.
+2020-03-14 10:35:28,156 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\locale with glob **/*.mo.
+2020-03-14 10:35:28,156 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\contenttypes\locale with glob **/*.mo.
+2020-03-14 10:35:28,156 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\contenttypes\locale with glob **/*.mo.
+2020-03-14 10:35:28,164 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\sessions\locale with glob **/*.mo.
+2020-03-14 10:35:28,164 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\sessions\locale with glob **/*.mo.
+2020-03-14 10:35:28,165 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\messages\locale with glob **/*.mo.
+2020-03-14 10:35:28,165 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\messages\locale with glob **/*.mo.
+2020-03-14 10:35:28,165 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\staticfiles\locale with glob **/*.mo.
+2020-03-14 10:35:28,165 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\staticfiles\locale with glob **/*.mo.
+2020-03-14 10:35:28,166 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django_tables2\locale with glob **/*.mo.
+2020-03-14 10:35:28,166 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django_tables2\locale with glob **/*.mo.
+2020-03-14 10:35:28,166 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\crispy_forms\locale with glob **/*.mo.
+2020-03-14 10:35:28,166 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\crispy_forms\locale with glob **/*.mo.
+2020-03-14 10:35:28,166 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\appmain\locale with glob **/*.mo.
+2020-03-14 10:35:28,166 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\appmain\locale with glob **/*.mo.
+2020-03-14 10:35:28,357 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\inspect.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,357 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\inspect.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,358 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\certifi\__init__.py first seen with mtime 1578440305.976115
+2020-03-14 10:35:28,358 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\certifi\__init__.py first seen with mtime 1578440305.976115
+2020-03-14 10:35:28,358 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\core\serializers\base.py first seen with mtime 1577594802.8396308
+2020-03-14 10:35:28,358 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\core\serializers\base.py first seen with mtime 1577594802.8396308
+2020-03-14 10:35:28,359 django.db.backends DEBUG    (0.016) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2020-03-14 10:35:28,359 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\core\validators.py first seen with mtime 1577594802.7696705
+2020-03-14 10:35:28,359 django.db.backends DEBUG    (0.016) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2020-03-14 10:35:28,359 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\core\validators.py first seen with mtime 1577594802.7696705
+2020-03-14 10:35:28,360 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\admin\__init__.py first seen with mtime 1577594797.9701948
+2020-03-14 10:35:28,360 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\admin\__init__.py first seen with mtime 1577594797.9701948
+2020-03-14 10:35:28,360 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\random.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,360 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\random.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,362 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\DLLs\_sqlite3.pyd first seen with mtime 1576736812.0
+2020-03-14 10:35:28,362 django.db.backends DEBUG    (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=()
+2020-03-14 10:35:28,362 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\DLLs\_sqlite3.pyd first seen with mtime 1576736812.0
+2020-03-14 10:35:28,362 django.db.backends DEBUG    (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=()
+2020-03-14 10:35:28,362 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\contenttypes\fields.py first seen with mtime 1577594799.0634787
+2020-03-14 10:35:28,362 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\contrib\contenttypes\fields.py first seen with mtime 1577594799.0634787
+2020-03-14 10:35:28,364 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\asyncio\selector_events.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,364 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\asyncio\selector_events.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,368 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\conf\global_settings.py first seen with mtime 1577594797.6615953
+2020-03-14 10:35:28,368 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\conf\global_settings.py first seen with mtime 1577594797.6615953
+2020-03-14 10:35:28,368 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\email\parser.py first seen with mtime 1576736802.0
+2020-03-14 10:35:28,368 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\email\parser.py first seen with mtime 1576736802.0
+2020-03-14 10:36:00,980 appmain.views DEBUG    Starting pick_make: dcota
+2020-03-14 10:38:25,013 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:38:25,014 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:38:26,668 django.utils.autoreload DEBUG    Apps ready_event triggered. Sending autoreload_started signal.
+2020-03-14 10:38:26,668 django.utils.autoreload DEBUG    Apps ready_event triggered. Sending autoreload_started signal.
+2020-03-14 10:38:26,670 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\locale with glob **/*.mo.
+2020-03-14 10:38:26,670 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\locale with glob **/*.mo.
+2020-03-14 10:38:26,671 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\locale with glob **/*.mo.
+2020-03-14 10:38:26,671 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\locale with glob **/*.mo.
+2020-03-14 10:38:26,671 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\locale with glob **/*.mo.
+2020-03-14 10:38:26,671 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\locale with glob **/*.mo.
+2020-03-14 10:38:26,678 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\contenttypes\locale with glob **/*.mo.
+2020-03-14 10:38:26,678 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\contenttypes\locale with glob **/*.mo.
+2020-03-14 10:38:26,680 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\sessions\locale with glob **/*.mo.
+2020-03-14 10:38:26,680 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\sessions\locale with glob **/*.mo.
+2020-03-14 10:38:26,680 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\messages\locale with glob **/*.mo.
+2020-03-14 10:38:26,680 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\messages\locale with glob **/*.mo.
+2020-03-14 10:38:26,681 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\staticfiles\locale with glob **/*.mo.
+2020-03-14 10:38:26,681 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\staticfiles\locale with glob **/*.mo.
+2020-03-14 10:38:26,681 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django_tables2\locale with glob **/*.mo.
+2020-03-14 10:38:26,681 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django_tables2\locale with glob **/*.mo.
+2020-03-14 10:38:26,681 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\crispy_forms\locale with glob **/*.mo.
+2020-03-14 10:38:26,681 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\crispy_forms\locale with glob **/*.mo.
+2020-03-14 10:38:26,682 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\appmain\locale with glob **/*.mo.
+2020-03-14 10:38:26,682 django.utils.autoreload DEBUG    Watching dir C:\Users\DOUG\Django\PigSkinners\appmain\locale with glob **/*.mo.
+2020-03-14 10:38:26,860 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\fnmatch.py first seen with mtime 1576736802.0
+2020-03-14 10:38:26,860 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\fnmatch.py first seen with mtime 1576736802.0
+2020-03-14 10:38:26,861 django.db.backends DEBUG    (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2020-03-14 10:38:26,861 django.db.backends DEBUG    (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2020-03-14 10:38:26,861 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\requests\certs.py first seen with mtime 1578440305.0611455
+2020-03-14 10:38:26,861 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\requests\certs.py first seen with mtime 1578440305.0611455
+2020-03-14 10:38:26,862 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\utils\timesince.py first seen with mtime 1577594803.1575994
+2020-03-14 10:38:26,862 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\utils\timesince.py first seen with mtime 1577594803.1575994
+2020-03-14 10:38:26,862 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\appmain\urls.py first seen with mtime 1584029751.5239987
+2020-03-14 10:38:26,862 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\appmain\urls.py first seen with mtime 1584029751.5239987
+2020-03-14 10:38:26,863 django.db.backends DEBUG    (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=()
+2020-03-14 10:38:26,864 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\conf\global_settings.py first seen with mtime 1577594797.6615953
+2020-03-14 10:38:26,863 django.db.backends DEBUG    (0.000) SELECT "django_migrations"."id", "django_migrations"."app", "django_migrations"."name", "django_migrations"."applied" FROM "django_migrations"; args=()
+2020-03-14 10:38:26,864 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\conf\global_settings.py first seen with mtime 1577594797.6615953
+2020-03-14 10:38:26,865 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\db\models\fields\related_lookups.py first seen with mtime 1577594802.9966927
+2020-03-14 10:38:26,865 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\db\models\fields\related_lookups.py first seen with mtime 1577594802.9966927
+2020-03-14 10:38:26,869 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\urls\utils.py first seen with mtime 1577594803.1256175
+2020-03-14 10:38:26,869 django.utils.autoreload DEBUG    File C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django\urls\utils.py first seen with mtime 1577594803.1256175
+2020-03-14 10:38:26,870 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\zipfile.py first seen with mtime 1576736804.0
+2020-03-14 10:38:26,870 django.utils.autoreload DEBUG    File C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\Lib\zipfile.py first seen with mtime 1576736804.0
+2020-03-14 10:39:16,298 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:39:16,300 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:40:43,765 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:40:43,766 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:40:51,850 appmain.views DEBUG    Starting standing_season: dcota
+2020-03-14 10:42:44,800 django.utils.autoreload INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:42:44,802 asyncio      DEBUG    Using proactor: IocpProactor
+2020-03-14 10:47:40,510 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 10:47:40,512 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 10:47:45,425 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 10:47:45,471 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 10:47:45,473 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 10:47:45,481 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 10:47:45,791 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 10:47:45,792 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 10:48:48,594 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 10:48:48,636 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 10:48:48,638 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 10:48:48,646 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 10:48:48,929 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 10:48:48,930 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 10:54:09,785 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 10:54:09,787 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 10:54:14,993 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 10:54:15,033 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 10:54:15,034 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 10:54:15,043 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 10:54:15,327 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 10:54:15,328 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 12:14:15,134 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 12:14:15,137 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 12:19:08,996 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 12:19:08,997 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 12:20:57,592 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 12:20:57,637 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 12:20:57,638 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 12:20:57,648 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 12:20:57,944 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 12:20:57,945 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 12:24:07,144 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 12:24:07,145 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 12:24:08,769 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 12:24:08,813 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 12:24:08,814 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 12:24:08,823 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 12:24:09,124 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 12:24:09,125 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 12:32:55,710 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 12:32:55,756 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 12:32:55,758 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 12:32:55,766 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 12:32:56,049 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 12:32:56,049 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 12:34:18,609 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 12:34:18,657 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 12:34:18,658 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 12:34:18,668 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 12:34:18,960 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 12:34:18,960 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 12:46:07,652 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 12:46:07,693 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 12:46:07,695 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 12:46:07,703 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 12:46:08,002 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 12:46:08,002 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 13:23:44,455 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 13:23:44,499 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 13:23:44,501 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 13:23:44,511 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 13:23:44,800 appmain.views 641 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 13:23:44,801 appmain.views 645 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 13:25:15,276 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 13:25:15,278 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:27:27,837 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 13:27:27,838 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:27:29,514 appmain.views 609 DEBUG    Starting standing_season: dcota
+2020-03-14 13:27:29,560 appmain.views 616 DEBUG    Starting standing_season/got w1 & w2: dcota
+2020-03-14 13:27:29,562 appmain.views 622 DEBUG    Starting standing_season/got game_cnts: dcota
+2020-03-14 13:27:29,572 appmain.views 628 DEBUG    Starting standing_season/got user subtotals: dcota
+2020-03-14 13:27:29,856 appmain.views 643 DEBUG    Starting standing_season/created picks: dcota
+2020-03-14 13:27:29,857 appmain.views 647 DEBUG    Starting standing_season/got annotated picks: dcota
+2020-03-14 13:33:26,927 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 13:33:26,928 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:36:15,475 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 13:36:15,478 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:43:32,488 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:43:36,656 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:43:38,995 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:43:55,359 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:44:00,943 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:44:24,788 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:44:26,835 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:46:28,908 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 13:46:28,910 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:46:30,821 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:46:40,893 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:46:42,825 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 13:46:56,727 appmain.views 383 DEBUG    Starting pick_make: footballpool
+2020-03-14 13:46:58,167 appmain.views 383 DEBUG    Starting pick_make: footballpool
+2020-03-14 13:46:59,682 appmain.views 383 DEBUG    Starting pick_make: footballpool
+2020-03-14 13:47:02,964 appmain.views 383 DEBUG    Starting pick_make: footballpool
+2020-03-14 13:47:14,616 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 13:47:17,771 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 13:47:19,258 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 13:47:21,793 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 13:47:31,863 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 13:47:33,116 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 13:47:34,509 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 13:47:36,776 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 13:47:50,976 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 13:47:52,695 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 13:47:54,361 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 13:47:56,497 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 13:48:07,597 appmain.views 383 DEBUG    Starting pick_make: dharriso
+2020-03-14 13:48:09,073 appmain.views 383 DEBUG    Starting pick_make: dharriso
+2020-03-14 13:48:10,661 appmain.views 383 DEBUG    Starting pick_make: dharriso
+2020-03-14 13:48:12,565 appmain.views 383 DEBUG    Starting pick_make: dharriso
+2020-03-14 13:48:25,482 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 13:48:27,292 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 13:48:29,584 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 13:48:32,002 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 13:48:43,459 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 13:48:44,995 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 13:48:52,755 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 13:48:54,715 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 13:51:13,655 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-03-14 13:51:13,657 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:57:07,140 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 13:57:07,141 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 13:58:29,340 appmain.views 611 DEBUG    Starting standing_season: footballpool
+2020-03-14 13:58:29,384 appmain.views 618 DEBUG    Starting standing_season/got w1 & w2: footballpool
+2020-03-14 13:58:29,385 appmain.views 624 DEBUG    Starting standing_season/got game_cnts: footballpool
+2020-03-14 13:58:29,393 appmain.views 630 DEBUG    Starting standing_season/got user subtotals: footballpool
+2020-03-14 13:58:29,672 appmain.views 645 DEBUG    Starting standing_season/created picks: footballpool
+2020-03-14 13:58:29,673 appmain.views 649 DEBUG    Starting standing_season/got annotated picks: footballpool
+2020-03-14 14:00:19,789 appmain.views 611 DEBUG    Starting standing_season: footballpool
+2020-03-14 14:00:19,833 appmain.views 618 DEBUG    Starting standing_season/got w1 & w2: footballpool
+2020-03-14 14:00:19,835 appmain.views 624 DEBUG    Starting standing_season/got game_cnts: footballpool
+2020-03-14 14:00:19,844 appmain.views 630 DEBUG    Starting standing_season/got user subtotals: footballpool
+2020-03-14 14:00:20,128 appmain.views 645 DEBUG    Starting standing_season/created picks: footballpool
+2020-03-14 14:00:20,128 appmain.views 649 DEBUG    Starting standing_season/got annotated picks: footballpool
+2020-03-14 14:02:48,686 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 14:02:48,687 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 14:02:52,988 appmain.views 610 DEBUG    Starting standing_season: footballpool
+2020-03-14 14:02:53,033 appmain.views 617 DEBUG    Starting standing_season/got w1 & w2: footballpool
+2020-03-14 14:02:53,034 appmain.views 623 DEBUG    Starting standing_season/got game_cnts: footballpool
+2020-03-14 14:02:53,043 appmain.views 629 DEBUG    Starting standing_season/got user subtotals: footballpool
+2020-03-14 14:02:53,349 appmain.views 644 DEBUG    Starting standing_season/created picks: footballpool
+2020-03-14 14:02:53,350 appmain.views 648 DEBUG    Starting standing_season/got annotated picks: footballpool
+2020-03-14 14:03:42,888 appmain.views 383 DEBUG    Starting pick_make: footballpool
+2020-03-14 14:03:45,750 appmain.views 383 DEBUG    Starting pick_make: footballpool
+2020-03-14 14:03:55,856 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 14:03:57,237 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 14:03:59,018 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 14:04:01,314 appmain.views 383 DEBUG    Starting pick_make: dcota
+2020-03-14 14:04:23,625 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 14:04:25,009 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 14:04:26,848 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 14:04:28,995 appmain.views 383 DEBUG    Starting pick_make: epopoff
+2020-03-14 14:04:40,733 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 14:04:42,740 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 14:04:44,775 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 14:04:46,914 appmain.views 383 DEBUG    Starting pick_make: mdeanto
+2020-03-14 14:04:56,955 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 14:04:58,382 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 14:05:00,091 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 14:05:02,625 appmain.views 383 DEBUG    Starting pick_make: mike
+2020-03-14 14:05:14,281 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 14:05:15,601 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 14:05:17,025 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 14:05:19,062 appmain.views 383 DEBUG    Starting pick_make: kstone
+2020-03-14 14:05:37,312 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 14:05:39,012 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 14:05:44,915 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 14:05:47,193 appmain.views 383 DEBUG    Starting pick_make: doug
+2020-03-14 14:05:59,772 appmain.views 383 DEBUG    Starting pick_make: dchamber
+2020-03-14 14:06:01,761 appmain.views 383 DEBUG    Starting pick_make: dchamber
+2020-03-14 14:06:03,729 appmain.views 383 DEBUG    Starting pick_make: dchamber
+2020-03-14 14:06:06,164 appmain.views 383 DEBUG    Starting pick_make: dchamber
+2020-03-14 15:12:02,722 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-03-14 15:12:02,723 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-03-14 15:12:35,766 asyncio      623 DEBUG    Using proactor: IocpProactor

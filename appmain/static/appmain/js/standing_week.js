@@ -13,8 +13,10 @@ console.log('N: ', n)
     } else {
         col = n + 1
     }
+console.log('col: ', col)
     sortTableNum(col);
     sortTableNum(col); // sort descending
+console.log('Sorted Desc ', col)
 }
 
 // example code coppied from https://www.w3schools.com/howto/howto_js_sort_table.asp
@@ -38,8 +40,9 @@ function sortTableNum(n) {
       shouldSwitch = false;
       /* Get the two elements you want to compare,
       one from current row and one from the next: */
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
+      x = rows[i].getElementsByClassName("score")[0];
+      y = rows[i + 1].getElementsByClassName("score")[0];
+//      y = rows[i + 1].getElementsByTagName("TD")[n];
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
       if (dir == "asc") {

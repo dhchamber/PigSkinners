@@ -5,7 +5,6 @@ import pytz
 import xml.etree.ElementTree as ET
 from appmain.models import Season, Week, Team, Game
 from django.core.exceptions import ObjectDoesNotExist
-# from django.db.models import F
 
 # List of NFL weeks, 4 PreSeason, 17 Regular Season, and 4 Post Season
 nfl_week = [(1, 'PRE'), (2, 'PRE'), (3, 'PRE'), (4, 'PRE'), (1, 'REG'), (2, 'REG'), (3, 'REG'), (4, 'REG'), (5, 'REG'),
@@ -28,8 +27,8 @@ def load_week():
             week.save()
             print(f'Week # {week} {gt} loaded ')
 
-#TODO: add post season, update scores on PickGame, Pick, and PostPick, PostPickGame
-# TODO: move to Game model
+
+# TODO: add post season, update scores on PickGame, Pick, and PostPick, PostPickGame
 # def update_score(g):
 #     # get all the pick games that have a pick for this game and update the status as won or lost
 #     pgames = g.pick_game.all()
@@ -71,7 +70,8 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
     elif url_type == 'POST':
         url = 'http://www.nfl.com/liveupdate/scorestrip/postseason/ss.xml'
     elif url_type == 'WEEK':
-        url = 'http://www.nfl.com/ajax/scorestrip?season=' + str(year)+'&seasonType=' + week_type + '&week=' + str(week)
+        url = 'http://www.nfl.com/ajax/scorestrip?season=' + str(year) + '&seasonType=' + week_type + '&week=' + str(
+            week)
     else:
         url = None
     print(f'URL: {url}')
@@ -96,7 +96,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                         # throw error  and stop don't create  the game should have been created by load season
                         print(f'Game not found for {game_rec.attrib["eid"]}')
                         continue
-                    elif url_type in ('WEEK'):
+                    elif url_type == 'WEEK':
                         # we are loading the schedule so we can create the game if needed
                         g = Game()
                         y = Season.objects.get(year=year)
@@ -162,11 +162,12 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 g.update_score()
                 print(f'Game #{cnt} {g.id} loaded for Week {g.wk_no} for year {g.year} Winner: {g.winner} ')
             # end of for game_rec in ss:
-            # set points game true for the last game in the list if this is a regular season game and just created
-            # don't set for pre or post season and don't reset once created
-            if g.week.gt == 'REG' and created == True:
+            # set points game true for the last game in the list if this is a regular or pre season game and just created
+            # don't set for post season and don't reset once created
+            if g.week.gt in ('PRE', 'REG') and created == True:
                 g.points_game = True
-                print(f'Points Game set for  {g.id} {g.gsis} {g.eid} loaded for Week {g.week} for year {g.year} Winner: {g.winner} ')
+                print(
+                    f'Points Game set for  {g.id} {g.gsis} {g.eid} loaded for Week {g.week} for year {g.year} Winner: {g.winner} ')
                 g.save()
         # elif:  add else if for gds which has more live score data, dad = down and distance
 

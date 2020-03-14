@@ -8,7 +8,7 @@
 {% block bodyextra %}onload="window_onload({{ num_games }})"{% endblock bodyextra %}
 {% block content %}
 <div align="center">{% include 'appmain/weeks_sidebar.html' %}</div>
-<div class="col-sm-12">
+<div class="col-sm-12" align="center">
     <table class="tblWeeklyStats" id="tblStats" name="tblStats" cellpadding="3px" cellspacing="0" border="1">
         <thead>
             <tr userRow="false">
@@ -72,10 +72,12 @@
                         {% if num_games > 0 %}
                             {% for pgame in pick.pickgame_set.all %}
                                 {% if pgame.team is not NONE %}
-                                    {% if pgame.team == pgame.game.win_team %}
-                                        <td class=user_cell_win ><div>{{ pgame.team.short_name }}</div></td>
+                                    {% if pgame.team == pgame.game.game_winner %}
+                                        <td class="user_cell_win d-table-cell d-lg-none"><div>{{ pgame.team.team_abrev }}</div></td>
+                                        <td class="user_cell_win d-none d-lg-table-cell"><div>{{ pgame.team.short_name }}</div></td>
                                     {% else %}
-                                        <td class=user_cell_lost ><div>{{ pgame.team.short_name }}</div></td>
+                                        <td class="user_cell_lost d-table-cell d-lg-none"><div>{{ pgame.team.team_abrev }}</div></td>
+                                        <td class="user_cell_lost d-none d-lg-table-cell"><div>{{ pgame.team.short_name }}</div></td>
                                     {% endif %}
                                 {% else %}
                                         <td class=user_cell_non ><div>&nbsp;</div></td>
@@ -83,13 +85,13 @@
                             {% endfor %}
                         {% endif %}
                         <td class=pts_game >{{ pick.points }}</td>
-                        <td class=pts_game >{{ pick.score }}</td>
+                        <td class="pts_game score" >{{ pick.score }}</td>
                     </tr>
                 {% endfor %}
         </tbody>
     </table>
 </div>
 {% block script %}
-    <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/standing_week.js' %}?version=4"></script>
+    <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/standing_week.js' %}?version=6"></script>
 {% endblock %}
 {% endblock content %}

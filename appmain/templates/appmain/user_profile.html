@@ -1,0 +1,29 @@
+<!--# \events\templates\events\add_venue.html-->
+{% extends "appmain/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}User Profile{% endblock title %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user_profile.css' %}?version=1" />
+{% endblock stylesheet %}
+{% block content %}
+<h1>User Profile</h1>
+
+{% if submitted %}
+    <p class="success">
+        Your profile was successfully updated. Thank you.
+    </p>
+
+{% else %}
+    <form action="" method="post" novalidate>
+    <table>
+         {{ form|crispy }}
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Save Profile"></td>
+        </tr>
+    </table>
+    {% csrf_token %}
+    </form>
+{% endif %}
+{% endblock content %}

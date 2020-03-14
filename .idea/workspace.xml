@@ -2,26 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0097_auto_20200312_1023.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0098_auto_20200313_1425.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0099_auto_20200313_1558.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/standing_koth.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth_open.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/user_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/css/pick_make.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/pick_make.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/standing_week.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/standing_week.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/css/standing_week.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/standing_week.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth_rpt.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_koth_rpt_OLD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_season.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_closed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_open.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_open.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_closed.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_rpt_open.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/registration/change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/registration/change_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="PigSkinners" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -173,13 +189,28 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="517" y="127" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583463862225" />
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1583463800432">
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1584106691025">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583463800432" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584106691025" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1583942098292">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583942098292" />
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1578021715940">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578021715940" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/appmain/models.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

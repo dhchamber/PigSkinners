@@ -3,18 +3,55 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate  # new
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count, Case, When, Sum, Max, F, Q, IntegerField, FloatField, ExpressionWrapper
-from appmain.forms import SignUpForm
-from django.contrib.auth.forms import PasswordChangeForm
+from django.db.models import Count, Case, When, Sum, F, Q, IntegerField, FloatField, ExpressionWrapper
+from appmain.forms import SignUpForm, ProfileForm
+from django.contrib.auth.forms import AdminPasswordChangeForm  # PasswordChangeForm requires old password
 from django.contrib.auth import update_session_auth_hash
-from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
 from django.utils import timezone
-from django.template.defaultfilters import floatformat
 import pytz
+import logging
 
-from .models import Season, Week, Seed, Pick, Team, Game, PostPick
-from .tables import TeamTable, GameTable, PickGameTable
+from .models import Season, Week, Seed, Pick, Team, Game, PostPick, Profile
 from appmain.load_nflgames import load_week, LoadSeason, load_score
+
+logger = logging.getLogger(__name__)
+
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': 'debug.log'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'level': 'DEBUG',
+            'propagate': True,
+            'handlers': ['console', 'file'],
+        },
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file'],
+        },
+    },
+})
+
 
 # from django.conf import settings
 # from django.core.exceptions import ObjectDoesNotExist
@@ -24,12 +61,15 @@ from appmain.load_nflgames import load_week, LoadSeason, load_score
 # from django.views.generic import ListView, CreateView
 # from django.db import transaction
 # from django.template.defaultfilters import floatformat
+# from .tables import TeamTable, GameTable, PickGameTable
+# from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
+# from django.template.defaultfilters import floatformat
 
 
-
+@login_required
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        form = AdminPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
@@ -38,24 +78,71 @@ def change_password(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = PasswordChangeForm(request.user)
+        form = AdminPasswordChangeForm(request.user)
     return render(request, 'registration/change_password.html', {
         'form': form
     })
 
 
-# tutorial page 1
-class GameListView(SingleTableView):
-    model = Game
-    table_class = GameTable
-    template_name = 'appmain/game_view.html'
+@login_required
+def user_profile(request):
+    submitted = False
+    profile = Profile.objects.get(user=request.user)
+    print(f'request.method', request.method)
+    if request.method == 'POST':
+        print(f'POST:', request.POST)
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('/user/profile/?submitted=True')
+    else:
+        user = User.objects.get(pk=request.user.id)
+        print(f'user:', user.id, user.first_name)
+        form = ProfileForm(instance=profile)
+        if 'submitted' in request.GET:
+            submitted = True
 
-    def get_recordset(self):
-        # week = get_selected_week(request)
-        # week = Week.objects.get(week=wk)
-        year = Season.objects.get(current=True)
-        week = Week.objects.get(year=year, week_no=22, gt="REG")
-        return Game.objects.filter(week=week)
+    return render(request, 'appmain/user_profile.html', {'form': form, 'submitted': submitted})
+
+
+# new signup form
+@login_required
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.birth_date = form.cleaned_data.get('birth_date')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'appmain/signup.html', {'form': form})
+
+
+# @login_required
+# def update_profile(request, user_id):
+#     user = User.objects.get(pk=user_id)
+#     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
+#     user.save()
+
+
+# tutorial page 1
+# class GameListView(SingleTableView):
+#     model = Game
+#     table_class = GameTable
+#     template_name = 'appmain/game_view.html'
+#
+#     def get_recordset(self):
+#         # week = get_selected_week(request)
+#         # week = Week.objects.get(week=wk)
+#         year = Season.objects.get(current=True)
+#         week = Week.objects.get(year=year, week_no=22, gt="REG")
+#         return Game.objects.filter(week=week)
 
 
 # tutorial/views.py
@@ -65,10 +152,10 @@ class GameListView(SingleTableView):
 #    template_name = 'appmain/game.html'
 
 
-class TeamListView(SingleTableView):
-    model = Team
-    table_class = TeamTable
-    template_name = 'appmain/team.html'
+# class TeamListView(SingleTableView):
+#     model = Team
+#     table_class = TeamTable
+#     template_name = 'appmain/team.html'
 
 
 # django-tables2 readthedocs.io
@@ -79,14 +166,13 @@ def get_selected_week(request):
     gt = request.session.get('gt', 'REG')
     try:
         wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
-    except:
+    except wk.DoesNotExist:
         wk = Week.objects.get(year=year, week_no=1, gt=gt)
-    # print(f'Found Week # {wk.week_no} loaded for year {year.year}')
 
     return wk
 
 
-def get_postseason_weeks(request):
+def get_postseason_weeks():
     year = Season.objects.get(current=True)
     weeks = Week.objects.filter(year=year, gt='POST')
 
@@ -175,21 +261,21 @@ def random_picks(request):
 
 # tutorial page 2 - QuerySets
 # takes table GameTable based on model Game
-@login_required
-def game_list(request):
-    if request.method == 'POST' and 'btnLoadSeason' in request.POST:
-        LoadSeason((request.POST.get('txtYear')))
-    elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
-        load_week()
-    elif request.method == 'POST' and 'btnLoadLive' in request.POST:
-        load_score('REG')
-    else:
-        # week = Week.objects.get(week_no=15)
-        # table = GameTable(Game.objects.filter(week=week))
-        table = GameTable(Game.objects.all())
-        # return render(request, "appmain/game.html",{"table" : table})
-
-    return redirect('setup_games')
+# @login_required
+# def game_list(request):
+#     if request.method == 'POST' and 'btnLoadSeason' in request.POST:
+#         LoadSeason((request.POST.get('txtYear')))
+#     elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
+#         load_week()
+#     elif request.method == 'POST' and 'btnLoadLive' in request.POST:
+#         load_score('REG')
+#     else:
+#         # week = Week.objects.get(week_no=15)
+#         # table = GameTable(Game.objects.filter(week=week))
+#         # table = GameTable(Game.objects.all())
+#         # return render(request, "appmain/game.html",{"table" : table})
+#
+#     return redirect('setup_games')
 
 
 # setup/games
@@ -213,49 +299,16 @@ def games_view(request):
         year = Season.objects.get(current=True)
         week_no = request.session.get('week', 1)
         gt = request.session.get('gt', 'REG')
-        load_score('WEEK',year, gt, week_no)
+        load_score('WEEK', year, gt, week_no)
         return redirect('setup_games')
     else:
         year = Season.objects.get(current=True)
         week_no = request.session.get('week', 1)
         gt = request.session.get('gt', 'REG')
-        weeks = Week.objects.filter(year=year, week_no= week_no, gt=gt)
-        # weeks = Week.objects.filter(year=year, gt='POST')
-        # print(f'Found Week # {week.week_no} loaded for year {year.year}')
+        weeks = Week.objects.filter(year=year, week_no=week_no, gt=gt)
         games = Game.objects.filter(week__in=weeks)
         print(f'Found games # {games.count()} ')
         return render(request, 'appmain/games_view.html', {'games': games})
-
-    # return redirect('setup_games')
-
-
-#       return render(request, 'appmain/new_games.html', {'games': games})
-
-
-# new signup form
-@login_required
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.profile.birth_date = form.cleaned_data.get('birth_date')
-            user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = SignUpForm()
-    return render(request, 'appmain/signup.html', {'form': form})
-
-
-@login_required
-def update_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
-    user.save()
 
 
 # @login_required
@@ -267,7 +320,8 @@ def update_profile(request, user_id):
 def home(request):
     timezone.activate(pytz.timezone('America/Denver'))
     year = Season.objects.get(current=True)
-    weeks = Week.objects.filter(year=year,gt='REG')
+    # TODO: get week from session, default to current week
+    weeks = Week.objects.filter(year=year, gt='REG')
     return render(request, 'appmain/home.html', {'weeks': weeks})
 
 
@@ -326,14 +380,15 @@ def pick_view(request):
 
 @login_required
 def pick_make(request):
+    logger.debug('Starting pick_make: ' + request.user.username)
     timezone.activate(pytz.timezone('America/Denver'))
     submitted = False
-    wk = get_selected_week(request)
+    week = get_selected_week(request)
 
     validated = True
-    # if not wk.closed:
-    #    close = wk.close_week(request.user)
-    # print(f'Week closed for week ID: {wk.id}')
+    # if not week.closed:
+    #    close = week.close_week(request.user)
+    # print(f'Week closed for week ID: {week.id}')
 
     if request.method == 'POST':
         pick_id = request.POST.get("hidPickID")
@@ -346,52 +401,43 @@ def pick_make(request):
             messages.warning(request, 'Invalid value for points game. Must be greater than zero.')
             validated = False
 
+        if pick.koth_eligible():
+            try:
+                pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
+            except:
+                validated = False
+                messages.warning(request, 'Failed Validate of KOTH Team: {request.POST.get("cboKingOfHillPick")}')
         try:
-            pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
-        except:
-            validated = False
-            messages.warning(request, 'Failed Validate of KOTH Team: {request.POST.get("cboKingOfHillPick")}')
-            print(f'Failed Validate of KOTH Team on Pick ID: {request.POST.get("hidPickID")}')
-        try:
-            pick.koth_game = (
-                        Game.objects.filter(week=pick.wk, home_team=pick.koth_team) | Game.objects.filter(week=pick.wk,
-                                                                                                          visitor_team=pick.koth_team)).first()
+            pick.koth_game = (Game.objects.filter(week=pick.wk, home_team=pick.koth_team)
+                              | Game.objects.filter(week=pick.wk, visitor_team=pick.koth_team)).first()
         except:
             messages.warning(request, 'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
-            print(f'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
             validated = False
 
         for i, pg in enumerate(pick.pickgame_set.all(), start=1):
             team_id = request.POST.get("Selected" + str(i))
-            print(f'Setting game for: {i} as Team: {team_id}')
             try:
                 team = Team.objects.get(id=team_id)
                 pg.team = team
                 pg.save()
             except:
                 messages.warning(request, 'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
-                print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
                 validated = False
-
 
         if validated:
             pick.saved = True
             pick.save()
             messages.success(request, 'Your Picks have been saved!')
-            print(f'SAVED on Pick ID: {request.POST.get("hidPickID")}')
         else:
             pick.saved = False
-            messages.warning(request,'Please correct the errors below:')
-            print(f'NOT saved on Pick ID: {request.POST.get("hidPickID")}')
+            messages.warning(request, 'Please correct the errors below:')
 
         return redirect('pick_make')
     else:
         try:
-            pick = Pick.objects.get(user=request.user, wk=wk)
-            # print(f'found pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
-        except:
-            pick = Pick.objects.create_pick(user=request.user, week=wk)
-            # print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
+            pick = Pick.objects.get(user=request.user, wk=week)
+        except pick.DoesNotExist:
+            pick = Pick.objects.create_pick(user=request.user, week=week)
 
         if 'submitted' in request.GET:
             submitted = True
@@ -403,15 +449,12 @@ def pick_make(request):
 def pick_make_ps(request):
     timezone.activate(pytz.timezone('America/Denver'))
     year = Season.objects.get(current=True)
-    weeks = get_postseason_weeks(request)
+    weeks = get_postseason_weeks()
 
-#TODO: loop and check for user post season picks create if necessary
     try:
         pick = PostPick.objects.get(user=request.user)
-        print(f'found pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
     except:
         pick = PostPick.objects.create_ps_pick(user=request.user)
-        print(f'Created pick for  {request.user.username} / {request.user.id} pick: {pick.id}')
 
     afc = {}
     nfc = {}
@@ -421,14 +464,15 @@ def pick_make_ps(request):
             afc[seed.seed] = seed.team
         else:
             nfc[seed.seed] = seed.team
-#TODO: add lookup to get game for each seed and add to afc and nfc dicts
-    return render(request, 'appmain/pick_make_ps.html', {'pick': pick, 'weeks': weeks, 'seeds':seeds, 'afc':afc, 'nfc':nfc})
+    # TODO: add lookup to get game for each seed and add to afc and nfc dicts
+    return render(request, 'appmain/pick_make_ps.html',
+                  {'pick': pick, 'weeks': weeks, 'seeds': seeds, 'afc': afc, 'nfc': nfc})
+
 
 @login_required
 def pick_save_ps(request):
-
     if request.method == 'POST':
-#TODO: validate pick data is complete and return message if not
+        # TODO: validate pick data is complete and return message if not
         pick_id = request.POST.get("hidPickID")
         print(f'Pick ID: {pick_id}')
         pick = PostPick.objects.get(id=pick_id)
@@ -439,18 +483,16 @@ def pick_save_ps(request):
             pick.points = pts
         except AssertionError:
             messages.warning(request, 'Invalid value for points game. Must be greater than zero.')
-            validated = False
         for i, game in enumerate(pick.post_games.all(), start=1):
             ps_type = game.ps_type[7:]
             print(f'Setting game for: {i} as Type: {ps_type}')
-            team_id = request.POST.get('hid'+ps_type)
+            team_id = request.POST.get('hid' + ps_type)
             print(f'Setting game for: {i} as Team: {team_id}')
             try:
                 team = Team.objects.get(id=team_id)
             except:
                 messages.warning(request, 'Failed Validate of Game {i}/team ID: {team_id} on Pick ID: {pick_id}')
                 print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
-                validated = False
 
             game.team = team
             game.save()
@@ -462,30 +504,26 @@ def pick_save_ps(request):
 
 @login_required
 def standing_weekdet(request):
-    page = standing_week(request,True)
+    page = standing_week(request, True)
     return page
+
 
 @login_required
 def standing_weeksum(request):
-    page = standing_week(request,False)
+    page = standing_week(request, False)
     return page
+
 
 @login_required
 def standing_week(request, detail):
-    wk = get_selected_week(request)
+    week = get_selected_week(request)
 
     # loop and create empty picks for each active user if one doesn't exist
-    # TODO: make this a common function
-    for user in User.objects.all():
-        if user.is_active:
-            try:
-                pick = Pick.objects.get(user=user, wk=wk)
-            except:
-                pick = Pick.objects.create_pick(user=user, week=wk)
+    week.create_picks()
 
-    # if wk.closed:
+    if week.closed:
         if detail:
-            games = Game.objects.filter(week=wk).annotate(
+            games = Game.objects.filter(week=week).annotate(
                 h_pick=Count(Case(When(pick_game__team=F('home_team'), then=1), output_field=IntegerField(), ))) \
                 .annotate(
                 v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
@@ -494,71 +532,61 @@ def standing_week(request, detail):
             games = None
             num_games = 0
 
-        user_picks = Pick.objects.filter(wk=wk).annotate(
+        user_picks = Pick.objects.filter(wk=week).annotate(
             score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
 
         return render(request, 'appmain/standing_week_closed.html',
                       {'user_picks': user_picks, 'games': games, 'num_games': num_games})
 
     # if week is still open then show users and if picks are saved or not
-    # else:
-    #     user_picks = Pick.objects.filter(wk=wk)
-    #     print(f'ALL: Found picks for  {wk.week_no} / {wk.id} total: {user_picks.count()}')
-    #     return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
-        # pass
+    else:
+        user_picks = Pick.objects.filter(wk=week)
+        print(f'ALL: Found picks for  {week.week_no} / {week.id} total: {user_picks.count()}')
+        return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
 
 
 @login_required
 def standing_week_prospective(request):
-    wk = get_selected_week(request)
+    week = get_selected_week(request)
 
     # loop and create empty picks for each active user if one doesn't exist
-    # TODO: make this a common function
-    for user in User.objects.all():
-        if user.is_active:
-            try:
-                pick = Pick.objects.get(user=user, wk=wk)
-            except:
-                pick = Pick.objects.create_pick(user=user, week=wk)
+    week.create_picks()
 
-    # if wk.closed:
-        games = Game.objects.filter(week=wk).annotate(
+    if week.closed:
+        games = Game.objects.filter(week=week).annotate(
             h_pick=Count(Case(When(pick_game__team=F('home_team'), then=1), output_field=IntegerField(), ))) \
             .annotate(
             v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
         num_games = games.count() + 1
 
         # score the game as won if it is done (W) or still in prgress (w)
-        user_picks = Pick.objects.filter(wk=wk).annotate(
-            score=Sum(Case(When(pickgame__status__in=('w','W'), then=1), default=0, output_field=IntegerField(), )))
-        # TODO: add something to html to show the game status and highlight winning from won
+        user_picks = Pick.objects.filter(wk=week).annotate(
+            score=Sum(Case(When(pickgame__status__in=('w', 'W'), then=1), default=0, output_field=IntegerField(), )))
         return render(request, 'appmain/standing_week_prospective.html',
                       {'user_picks': user_picks, 'games': games, 'num_games': num_games})
 
     # if week is still open then show users and if picks are saved or not
-    # else:
-    #     user_picks = Pick.objects.filter(wk=wk)
-    #     print(f'ALL: Found picks for  {wk.week_no} / {wk.id} total: {user_picks.count()}')
-    #     return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
+    else:
+        user_picks = Pick.objects.filter(wk=week)
+        print(f'ALL: Found picks for  {week.week_no} / {week.id} total: {user_picks.count()}')
+        return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
 
 
 def standing_koth(request):
-    wk = get_selected_week(request)
-    for user in User.objects.all():
-        if user.is_active:
-            try:
-                pick = Pick.objects.get(user=user, wk=wk)
-            except:
-                pick = Pick.objects.create_pick(user=user, week=wk)
+    week = get_selected_week(request)
+    week.create_picks()
 
-    user_picks = Pick.objects.filter(wk=wk)
-
-    return render(request, 'appmain/standing_koth.html', {'user_picks': user_picks})
+    # TODO: users eliminated count does not include missed picks
+    user_picks = Pick.objects.filter(wk=week)
+    if week.closed:
+        return render(request, 'appmain/standing_koth.html', {'user_picks': user_picks, 'week': week})
+    else:
+        return render(request, 'appmain/standing_koth_open.html', {'user_picks': user_picks, 'week': week})
 
 
 def standing_post(request):
     year = Season.objects.get(current=True)
-    weeks = Week.objects.filter(year=year,gt='POST')
+    weeks = Week.objects.filter(year=year, gt='POST')
     games = Game.objects.filter(week__in=weeks)
 
     for user in User.objects.all():
@@ -566,57 +594,59 @@ def standing_post(request):
             try:
                 pick = PostPick.objects.get(user=user, year=Season.objects.get(current=True))
             except:
+                # TODO: appmain.models.PostPick.DoesNotExist: PostPick matching query does not exist.
+                # TODO: add current season to call below
                 pick = PostPick.objects.create_ps_pick(user=user)
     picks = PostPick.objects.filter(year=Season.objects.get(current=True))
-#TODO: calc score and points remaining for each user
+    # TODO: calc score and points remaining for each user
 
-    return render(request, 'appmain/standing_post.html', {'picks': picks,'games':games})
+    return render(request, 'appmain/standing_post.html', {'picks': picks, 'games': games})
 
 
 def standing_season(request):
+    # TODO: check timing on Season Standings load, what is causing the wait
+    # TODO: don't show all red if there are no winners yet.
+    # season standings not updating correctly
+    logger.debug('Starting standing_season: ' + request.user.username)
     year = Season.objects.get(current=True)
-    weeks = Week.objects.filter(year=year,gt='REG')
+    weeks = Week.objects.filter(year=year, gt='REG')
     curr_week = year.curr_week()
 
     w1 = Week.objects.filter(year=year, gt='REG', week_no__lt=10)
     w2 = Week.objects.filter(year=year, gt='REG', week_no__gt=9)
+    logger.debug('Starting standing_season/got w1 & w2: ' + request.user.username)
 
-    game_cnt = Season.objects.filter(current=True)\
-        .annotate(half1=Count('weeks__game_wk__gsis',filter=Q(weeks__in=w1)))\
-        .annotate(half2=Count('weeks__game_wk__gsis', filter=Q(weeks__in=w2)))\
+    game_cnt = Season.objects.filter(current=True) \
+        .annotate(half1=Count('weeks__game_wk__gsis', filter=Q(weeks__in=w1))) \
+        .annotate(half2=Count('weeks__game_wk__gsis', filter=Q(weeks__in=w2))) \
         .annotate(all=Count('weeks__game_wk__gsis', filter=Q(weeks__in=weeks)))
+    logger.debug('Starting standing_season/got game_cnts: ' + request.user.username)
 
-    users = year.season_scores().annotate(perc1=ExpressionWrapper(F('half1') * float(100.0 / game_cnt[0].half1), output_field=FloatField()))\
-                                .annotate(perc2=ExpressionWrapper(F('half2')*float(100.0/game_cnt[0].half2),output_field=FloatField()))\
-                                .annotate(pall=ExpressionWrapper(F('all')*float(100.0/game_cnt[0].all),output_field=FloatField()))
+    users = year.season_scores().annotate(
+        perc1=ExpressionWrapper(F('half1') * float(100.0 / game_cnt[0].half1), output_field=FloatField())) \
+        .annotate(perc2=ExpressionWrapper(F('half2') * float(100.0 / game_cnt[0].half2), output_field=FloatField())) \
+        .annotate(pall=ExpressionWrapper(F('all') * float(100.0 / game_cnt[0].all), output_field=FloatField()))
+    logger.debug('Starting standing_season/got user subtotals: ' + request.user.username)
 
     winners = year.season_winner()
-    if curr_week.week_no <= 9:
+    if curr_week.week_no == 9:
         winner = winners['half1']
-    else:
+    elif curr_week.week_no == 17:
         winner = winners['half2']
-    # for user in winners['half1']:
-    #     print(f'half1 winner(s): {user.last_name}')
-    #
-    # for user in winners['half2']:
-    #     print(f'half2 winner(s): {user.last_name}')
-    #
-    # for user in winners['all']:
-    #     print(f'overall winner(s): {user.last_name}')
+    else:
+        winner = User.objects.none()
 
     #  first make sure picks exist for every user for every week
-    #  if picks didn't exist then they didn't get counted above, that is ok, but they need to exist even if empty for the page display
-    for user in users:
-        print(f'user: {user.last_name} half1: {user.half1} games: {game_cnt[0].half1} perc1: {user.perc1} ')
-        for week in weeks:
-            # try:
-                p = Pick.objects.filter(user=user,wk=week)
-                if p.count() == 0:
-                    Pick.objects.create_pick(user=user, week=week)
+    #  if picks didn't exist then they didn't get counted above, that is ok,
+    #  but they need to exist even if empty for the page display
+    for week in weeks:
+        week.create_picks()
+    logger.debug('Starting standing_season/created picks: ' + request.user.username)
 
-    user_picks = Pick.objects.filter(wk__in=weeks)\
-            .annotate(score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
+    user_picks = Pick.objects.filter(wk__in=weeks) \
+        .annotate(score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
+    logger.debug('Starting standing_season/got annotated picks: ' + request.user.username)
 
-    # return render(request, 'appmain/standing_season.html', {'weeks': weeks, 'user_picks': user_picks, 'game_cnt': game_cnt,
-    #                'win_subtot1': win_subtot1, 'win_perc1': win_perc1, 'win_subtot2': win_subtot2, 'win_perc2': win_perc2, 'win_total': win_total, 'win_totalperc': win_totalperc})
-    return render(request, 'appmain/standing_season.html', {'weeks': weeks, 'users':users, 'user_picks': user_picks, 'game_cnt': game_cnt, 'winner': winner, 'curr_week': curr_week})
+    return render(request, 'appmain/standing_season.html',
+                  {'weeks': weeks, 'users': users, 'user_picks': user_picks, 'game_cnt': game_cnt, 'winner': winner,
+                   'curr_week': curr_week})

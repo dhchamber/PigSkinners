@@ -37,8 +37,10 @@
                     <font id="ftWeekCombo" name="ftWeekCombo" ><b>Week:&nbsp;{{ user_picks.first.wk }}</b></font>
                 </td>
                 {% for game in games %}
-                    {% if game.visitor_team == game.win_team %}
+                    {% if game.visitor_team == game.game_winner %}
                         <td><div class=winteam onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText('{{ game.visitor_team.short_name }}'));" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
+                    {% elif game.visitor_team == game.win_team %}
+                        <td><div class="winteam bg-info" onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText('{{ game.visitor_team.short_name }}'));" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
                     {% else %}
                         <td><div class=loseteam onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
                     {% endif %}
@@ -49,8 +51,10 @@
             <!--				'Now show the Home Teams-->
             <tr userRow='false'>
                 {% for game in games %}
-                        {% if game.home_team == game.win_team %}
+                        {% if game.home_team == game.game_winner %}
                             <td><div class="winteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
+                        {% elif game.home_team == game.win_team%}
+                            <td><div class="winteam bg-info" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
                         {% else %}
                             <td><div class="loseteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
                         {% endif %}
@@ -73,9 +77,11 @@
                             {% for pgame in pick.pickgame_set.all %}
                                 {% if pgame.team is not NONE %}
                                     {% if pgame.team == pgame.game.win_team %}
-                                        <td class=user_cell_win ><div>{{ pgame.team.short_name }}</div></td>
+                                        <td class="user_cell_win d-table-cell d-lg-none"><div>{{ pgame.team.team_abrev }}</div></td>
+                                        <td class="user_cell_win d-none d-lg-table-cell"><div>{{ pgame.team.short_name }}</div></td>
                                     {% else %}
-                                        <td class=user_cell_lost ><div>{{ pgame.team.short_name }}</div></td>
+                                        <td class="user_cell_lost d-table-cell d-lg-none"><div>{{ pgame.team.team_abrev }}</div></td>
+                                        <td class="user_cell_lost d-none d-lg-table-cell"><div>{{ pgame.team.short_name }}</div></td>
                                     {% endif %}
                                 {% else %}
                                         <td class=user_cell_non ><div>&nbsp;</div></td>
@@ -83,7 +89,7 @@
                             {% endfor %}
                         {% endif %}
                         <td class=pts_game >{{ pick.points }}</td>
-                        <td class=pts_game >{{ pick.score }}</td>
+                        <td class="pts_game score" >{{ pick.score }}</td>
                     </tr>
                 {% endfor %}
         </tbody>

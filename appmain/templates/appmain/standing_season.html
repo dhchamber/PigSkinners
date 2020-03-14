@@ -71,15 +71,12 @@
                         </tr>
                     {% endif %}
     <!--    if half is in progress then show user, if not then highlight winner -->
-<!--                    <tr class=half1 userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}'>-->
                     {% if pick.user in winner %}
                         <tr class=winner userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}'>
-<!--                        style= " BACKGROUND-COLOR: red;">-->
                     {% elif request.user == pick.user %}
                         <tr class=user userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}'>
-<!--                        style= " BACKGROUND-COLOR: yellow;">-->
                     {% else %}
-                        <tr userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}'>
+                        <tr class="none" userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}'>
                     {% endif %}
                     <td class=n_bottom >&nbsp;</td>
                         <td class="l_bottom_right" >{{ pick.user.first_name }} {{ pick.user.last_name }}</td>

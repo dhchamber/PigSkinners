@@ -101,9 +101,9 @@
                             <td class="nonlost d-none d-lg-table-cell">{{ pick_game.game.home_team.team_name }}</td>
                         {% endif %}
                     {% endif %}
-                    <td class="d-table-cell d-md-none">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date|date:"d/j h:s A" }}</td>
-                    <td class="d-none d-md-table-cell d-lg-none">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date|date:"d/j/Y h:s A" }}</td>
-                    <td class="d-none d-lg-table-cell">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.get_date|date:"M d Y h:s A" }}</td>
+                    <td class="d-table-cell d-md-none">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.date_time|date:"d/j h:s A" }}</td>
+                    <td class="d-none d-md-table-cell d-lg-none">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.date_time|date:"d/j/Y h:s A" }}</td>
+                    <td class="d-none d-lg-table-cell">{{ pick_game.game.day }}&nbsp;{{ pick_game.game.date_time|date:"M d Y h:s A" }}</td>
                 </tr>
             {% endfor %}
         <tr>

@@ -1,16 +1,17 @@
-# from django.contrib import admin
 from django.urls import include, path
-from django.contrib.auth import views as auth_views
-from appmain.views import game_list, GameListView, TeamListView  #PickListView
 from . import views
+
+# from django.contrib import admin
+# from django.contrib.auth import views as auth_views
+# from appmain.views import game_list, PickListView, GameListView, TeamListView
 
 
 urlpatterns = [
     path('ps_home/', views.home, name='ps_home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('password/change', views.change_password, name='change_password'),
+    path('user/profile/', views.user_profile, name='profile'),
     path('pick/view/', views.pick_view, name='pick_view'),
-    # path('picks/view/', views.PickListView.as_view(), name='picks_view'),
     path('pick/make/', views.pick_make, name='pick_make'),
     path('pick/make_ps/', views.pick_make_ps, name='pick_make_ps'),
     path('pick/save_ps/', views.pick_save_ps, name='pick_save_ps'),
@@ -23,13 +24,15 @@ urlpatterns = [
     path('standing/post/', views.standing_post, name='standing_post'),
     path('setup/teams/', views.teams_view, name='setup_teams'),
     path('setup/weeks/', views.setup_weeks, name='setup_weeks'),
-    # path('setup/teams/', TeamListView.as_view(), name='setup_teams'),
     path('setup/games/', views.games_view, name='setup_games'),
-    path('setup/game2/', GameListView.as_view(), name='setup_game2'),
-    # path('setup/game2/', game_list, name='setup_game2'),
     path('action/week/', views.action_week, name='action_week'),
     path('action/random/', views.random_picks, name='random_picks'),
 
-    # path('add_pick/', views.add_pick, name='add-pick'),  # \myclub_root\events\urls.py
     path('', views.home, name='home'),
+
+    # path('setup/game2/', GameListView.as_view(), name='setup_game2'),
+    # path('setup/game2/', game_list, name='setup_game2'),
+    # path('setup/teams/', TeamListView.as_view(), name='setup_teams'),
+    # path('picks/view/', views.PickListView.as_view(), name='picks_view'),
+    # path('add_pick/', views.add_pick, name='add-pick'),  # \myclub_root\events\urls.py
 ]

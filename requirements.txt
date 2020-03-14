@@ -1,3 +1,4 @@
+pytz
 pytz=~2019.3
 Django~=3.0
 django-tables2~=2.2.1

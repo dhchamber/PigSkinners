@@ -1,6 +1,10 @@
 from django.template.defaultfilters import register
 from django.template.defaultfilters import floatformat
 
+@register.filter(name='parm')
+def lookup(year, parm):
+    return year.koth_eligible(parm)
+
 @register.filter(name='lookup')
 def lookup(dict, index):
     if index in dict:
