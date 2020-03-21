@@ -2,17 +2,15 @@
 {% load static %}
 {% load tz %}
 {% block title %}Make Post Season Picks{% endblock title %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_make_ps.css' %}?version=3"/>
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>-->
+{% endblock stylesheet %}
+{% block bodyextra %}onload="javascript:return window_onload();" onbeforeunload="javascript:return window_onbeforeunload()"{% endblock bodyextra %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static '/css/pick_make_ps.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}"/>
-
-    <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" onload="javascript:return window_onload();" onbeforeunload="javascript:return window_onbeforeunload()">
     <form id=frmPostPicks method="post" action="/pick/save_ps/">
         {% csrf_token %}
-<!--        {% for pg in pick.post_games.all %}-->
-<!--            <input type=text id="{{ pg.ps_type }}" name="{{ pg.ps_type }}" value="{{ pg.team.id }}">-->
-<!--        {% endfor %}-->
         <input type=hidden id="hidAWC45" name="hidAWC45" value="">
         <input type=hidden id="hidNWC45" name="hidNWC45" value="">
         <input type=hidden id="hidAWC36" name="hidAWC36" value="">
@@ -25,11 +23,8 @@
         <input type=hidden id="hidNCONF" name="hidNCONF" value="">
         <input type=hidden id="hidSB" name="hidSB" value="">
         <input type=hidden id="hidPickID" name="hidPickID" value={{ pick.id }}>
-<!--        <input type="hidden" name="hidWeekNum" id="hidWeekNum" value={{ pick.first.wk.week_no }}>-->
 
-        <table width=100% cellpadding=0 cellspacing=0 border=0>
-<!--    <table class="table table-bordered table-hover table-sm" data-toggle="table">-->
-
+        <table style="border-collapse: separate;" cellpadding=0 cellspacing=0 border=0 width=100% >
             <tr>
                 <td bgcolor=#3399cc align=center colspan=9><font size=+2><b>Playoff Bracket</b></font></td>
             </tr>
@@ -67,8 +62,11 @@
             <tr>
 <!--                this is a seed team so display the game team not the pick -->
                 <td class=bottom_border id=htAWC45 teamID="{{ pick.post_games.all.0.game.home_team.id }}" onclick="pickTeam(this)" >
-                    <img src="{% static pick.post_games.all.0.game.home_team.logo_file_name %}" width=25px>
-                    <br>#4 {{ pick.post_games.all.0.game.home_team }}</td>
+                    <img class="d-none d-md-table-cell" src="{% static pick.post_games.all.0.game.home_team.logo_file_name %}" width=25px><br>
+                    <div class="d-table-cell d-md-none" >#4 {{ pick.post_games.all.0.game.home_team.team_abrev }}</div>
+                    <div class="d-none d-md-table-cell d-lg-none" >#4 {{ pick.post_games.all.0.game.home_team.short_name}}</div>
+                    <div class="d-none d-lg-table-cell" >#4 {{ pick.post_games.all.0.game.home_team }}</div>
+                </td>
                 <td colspan=7>&nbsp;</td>
                 <td class=bottom_border id=htNWC45 teamID="{{ pick.post_games.all.1.game.home_team.id }}" onclick="pickTeam(this)" >
                     <img src="{% static pick.post_games.all.1.game.home_team.logo_file_name %}" width=25px>
@@ -80,7 +78,7 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td align=center>&nbsp;</td>
+                <td class=border_none >{{ pick.post_games.all.0.game.date_time }}</td>
                 <td class=left_bottom_border id=vtADIV1 onclick="pickTeam(this)">
                     {% if pick.post_games.all.4.team == None %} TBD
                     {% else %} <img src="{% static pick.post_games.all.4.team.logo_file_name %}" width=25px> #{{ pick.post_games.all.4.team.cy_seed }} {{ pick.post_games.all.4.team }}
@@ -90,7 +88,7 @@
                     {% if pick.post_games.all.6.team == None %} TBD
                     {% else %} <img src="{% static pick.post_games.all.6.team.logo_file_name %}" width=25px> #{{ pick.post_games.all.6.team.cy_seed }} {{ pick.post_games.all.6.team }}
                     {% endif %} </td>
-                <td align=center>&nbsp;</td>
+                <td class=border_none >{{ pick.post_games.all.1.game.date_time }}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -259,7 +257,7 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td align=center>&nbsp;</td>
+                <td class=right_border >{{ pick.post_games.all.2.game.date_time }}</td>
                 <td class=left_right_bottom_border id=vtADIV2 onclick="pickTeam(this)">
                     {# 2 = AWC36 user picked team as for 36 if 3 seed then it goes here else the 45 team does #}
                     {% if pick.post_games.all.2.team.cy_seed == 3 %}
@@ -278,7 +276,7 @@
                         {% endif %}
                     {% endif %}
                 </td>
-                <td colspan=5>&nbsp;</td>
+                <td class=thead1 colspan=5>&nbsp;</td>
                 <td class=left_right_bottom_border id=vtNDIV2 onclick="pickTeam(this)">
                     {# 3 = NWC36 user picked team as for 36 if 3 seed then it goes here else the 45 team does #}
                     {% if pick.post_games.all.3.team.cy_seed == 3 %}
@@ -297,7 +295,7 @@
                         {% endif %}
                     {% endif %}
                 </td>
-                <td align=center>&nbsp;</td>
+                <td class=left_border >{{ pick.post_games.all.3.game.date_time }}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -313,369 +311,19 @@
                     <img src="{% static pick.post_games.all.3.game.visitor_team.logo_file_name %}" width=25px>
                     <br>#6 {{ pick.post_games.all.3.game.visitor_team }}</td>
             </tr>
+            <tr>
+                <td colspan=9 >&nbsp;</td>
+            </tr>
         </table>
     </form>
-
-<script type="text/javascript" language="Javascript" src="{% static 'appmain/js/picks_make_ps.js' %}" > </script>
-<script language=javascript>
-<!--
-var bClosed;
-var bPicksChanged = false;
-var bAllowPicks = true;
-
-function window_onload()
-{
-	var sMsg;
-
-	//see if there's a message to show the user
-    bAllowPicks = true;
-	sMsg = "<%=sOnOpenMsg%>";
-	if(sMsg != "")
-	{
-		alert(sMsg);
-	}
-
-}
-
-function window_onbeforeunload() {
-	if(bPicksChanged == true) {
-		event.returnValue = "You have unsaved picks.\nNavigating away from the page will cause those picks to be lost.";
-    }
-}
-
-$('form#frmPostPicks').submit(function() {
-   $(window).unbind('beforeunload');
-});
-
-function pickTeam(objTd)
-{
-	var allowPicks = "True";
-	var id = objTd.id;
-	if(allowPicks == "True"){
-		bPicksChanged = true;
-		if(id == "htAWC36"){
-			//if the 3 seed is picked then it plays the 2 seed in DIV (vtADIV2)
-			vtADIV2.innerHTML = objTd.innerHTML;
-			vtADIV2.setAttribute("teamID", htAWC36.getAttribute("teamID"));
-            frmPostPicks.hidAWC36.value =  htAWC36.getAttribute("teamID");
-			//if they changed the winner of this game, we need to clear out the afc picks that come after
-			clearAfcPicks(3);
-
-		}else if(id == "vtAWC36"){
-			//if the 6 seed is picked then it plays the 1 seed in DIV (vtADIV1)
-			vtADIV1.innerHTML = objTd.innerHTML;
-			vtADIV1.setAttribute("teamID", vtAWC36.getAttribute("teamID"));
-			frmPostPicks.hidAWC36.value = vtAWC36.getAttribute("teamID");
-			//if they changed the winner of this game, we need to clear out the afc picks that come after
-			clearAfcPicks(3);
-
-		} else if(id == "htNWC36"){
-			//if the 3 seed is picked then it plays the 2 seed in DIV (vtNDIV2)
-			vtNDIV2.innerHTML = objTd.innerHTML;
-			vtNDIV2.setAttribute("teamID",htNWC36.getAttribute("teamID"));
-			frmPostPicks.hidNWC36.value = htNWC36.getAttribute("teamID");
-			clearNfcPicks(3);
-
-		}else if(id == "vtNWC36"){
-			vtNDIV2.innerHTML = objTd.innerHTML;
-			vtNDIV2.setAttribute("teamID",vtNWC36.getAttribute("teamID"));
-			frmPostPicks.hidNWC36.value = vtNWC36.getAttribute("teamID");
-			clearNfcPicks(3);
-
-		}else if(id == "htAWC45") {
-		    // need to check the AWC36 game, if 6 is picked then the winner plays the 2 seed (vtADIV2)
-		    if(vtADIV1.getAttribute("teamID") == vtAWC36.getAttribute("teamID")){
-			    vtADIV2.innerHTML = objTd.innerHTML;
-			    vtADIV2.setAttribute("teamID", htAWC45.getAttribute("teamID"));
-            }else{
-			    vtADIV1.innerHTML = objTd.innerHTML;
-			    vtADIV1.setAttribute("teamID", htAWC45.getAttribute("teamID"));
-            }
-            frmPostPicks.hidAWC45.value = htAWC45.getAttribute("teamID");
-			//if they changed the winner of this game, we need to clear out the afc picks that come after
-			clearAfcPicks(3);
-
-		}else if(id == "vtAWC45"){
-		    // need to check the AWC36 game, if 6 is picked then the winner plays the 2 seed (vtADIV2)
-		    if(vtADIV1.getAttribute("teamID") == vtAWC36.getAttribute("teamID")){
-    			vtADIV2.innerHTML = objTd.innerHTML;
-    			vtADIV2.setAttribute("teamID", vtAWC45.getAttribute("teamID"));
-            }else{
-    			vtADIV1.innerHTML = objTd.innerHTML;
-    			vtADIV1.setAttribute("teamID", vtAWC45.getAttribute("teamID"));
-            }
-			frmPostPicks.hidAWC45.value = vtAWC45.getAttribute("teamID");
-			//if they changed the winner of this game, we need to clear out the afc picks that come after
-			clearAfcPicks(3);
-
-		}else if(id == "htNWC45"){
-		    // need to check the NWC36 game, if 6 is picked then the winner plays the 2 seed (vtNDIV2)
-		    if(vtNDIV1.getAttribute("teamID") == vtNWC36.getAttribute("teamID")){
-                vtNDIV2.innerHTML = objTd.innerHTML;
-                vtNDIV2.setAttribute("teamID", htNWC45.getAttribute("teamID"));
-            }else{
-                vtNDIV1.innerHTML = objTd.innerHTML;
-                vtNDIV1.setAttribute("teamID", htNWC45.getAttribute("teamID"));
-            }
-			frmPostPicks.hidNWC45.value = htNWC45.getAttribute("teamID");
-			clearNfcPicks(3);
-
-		}else if(id == "vtNWC45"){
-		    if(vtNDIV1.getAttribute("teamID") == vtNWC36.getAttribute("teamID")){
-                vtNDIV2.innerHTML = objTd.innerHTML;
-                vtNDIV2.setAttribute("teamID", vtNWC45.getAttribute("teamID"));
-            }else{
-                vtNDIV1.innerHTML = objTd.innerHTML;
-                vtNDIV1.setAttribute("teamID", vtNWC45.getAttribute("teamID"));
-            }
-			frmPostPicks.hidNWC45.value = vtNWC45.getAttribute("teamID");
-			clearNfcPicks(3);
-
-		} else if(id == "htADIV1") {
-			//they picked this 1 seed to go to the conference championship game
-			htACONF.innerHTML = htADIV1.innerHTML;
-            htACONF.setAttribute("teamID",htADIV1.getAttribute("teamID"));
-			frmPostPicks.hidADIV1.value = htADIV1.getAttribute("teamID");
-
-			//if they changed the winner of this game, we need to clear out the afc picks that come after
-			clearAfcPicks(4);
-
-		} else if(id == "vtADIV1") {
-			//they picked the winner of the 4/5 game to win the next round
-			htACONF.innerHTML = vtADIV1.innerHTML;
-            htACONF.setAttribute("teamID",vtADIV1.getAttribute("teamID"));
-			frmPostPicks.hidADIV1.value = vtADIV1.getAttribute("teamID");
-
-			//if they changed the winner of this game, we need to clear out the afc picks that come after
-			clearAfcPicks(4);
-
-		} else if(id == "htNDIV1") {
-			htNCONF.innerHTML = htNDIV1.innerHTML;
-			htNCONF.setAttribute("teamID",htNDIV1.getAttribute("teamID"));
-			frmPostPicks.hidNDIV1.value = htNDIV1.getAttribute("teamID");
-			clearNfcPicks(4);
-
-		} else if(id == "vtNDIV1") {
-			htNCONF.innerHTML = vtNDIV1.innerHTML;
-			htNCONF.setAttribute("teamID",vtNDIV1.getAttribute("teamID"));
-			frmPostPicks.hidNDIV1.value = vtNDIV1.getAttribute("teamID");
-			clearNfcPicks(4);
-
-		} else if(id == "htADIV2") {
-			vtACONF.innerHTML = htADIV2.innerHTML;
-			vtACONF.setAttribute("teamID",htADIV2.getAttribute("teamID"));
-			frmPostPicks.hidADIV2.value = htADIV2.getAttribute("teamID");
-			clearAfcPicks(4);
-
-		} else if(id == "vtADIV2") {
-			vtACONF.innerHTML = vtADIV2.innerHTML;
-			vtACONF.setAttribute("teamID", htADIV2.getAttribute("teamID"));
-			frmPostPicks.hidADIV2.value = htADIV2.getAttribute("teamID");
-			clearAfcPicks(4);
-
-		} else if(id == "htNDIV2") {
-			vtNCONF.innerHTML = htNDIV2.innerHTML;
-			vtNCONF.setAttribute("teamID", htNDIV2.getAttribute("teamID"));
-			frmPostPicks.hidNDIV2.value = htNDIV2.getAttribute("teamID");
-			clearNfcPicks(4);
-
-		} else if(id == "vtNDIV2") {
-			vtNCONF.innerHTML = vtNDIV2.innerHTML;
-			vtNCONF.setAttribute("teamID", vtNDIV2.getAttribute("teamID"));
-			frmPostPicks.hidNDIV2.value = vtNDIV2.getAttribute("teamID");
-			clearNfcPicks(4);
-
-		} else if(id == "htACONF") {
-			atSB.innerHTML = htACONF.innerHTML;
-			atSB.setAttribute("teamID", htACONF.getAttribute("teamID"));
-			frmPostPicks.hidACONF.value = htACONF.getAttribute("teamID");
-			clearAfcPicks(5);
-
-		} else if(id == "vtACONF") {
-			atSB.innerHTML = vtACONF.innerHTML;
-			atSB.setAttribute("teamID", vtACONF.getAttribute("teamID"));
-			frmPostPicks.hidACONF.value = vtACONF.getAttribute("teamID");
-			clearAfcPicks(5);
-
-		} else if(id == "htNCONF") {
-			ntSB.innerHTML = htNCONF.innerHTML;
-			ntSB.setAttribute("teamID", htNCONF.getAttribute("teamID"));
-			frmPostPicks.hidNCONF.value = htNCONF.getAttribute("teamID");
-			clearNfcPicks(5);
-
-		} else if(id == "vtNCONF") {
-			ntSB.innerHTML = vtNCONF.innerHTML;
-			ntSB.setAttribute("teamID", vtNCONF.getAttribute("teamID"));
-			frmPostPicks.hidNCONF.value = vtNCONF.getAttribute("teamID");
-			clearNfcPicks(5);
-
-		} else if(id == "atSB") {
-			superChamp.innerHTML = atSB.innerHTML;
-			superChamp.setAttribute("teamID", atSB.getAttribute("teamID"));
-			frmPostPicks.hidSB.value = atSB.getAttribute("teamID");
-
-		} else if(id == "ntSB") {
-			superChamp.innerHTML = ntSB.innerHTML;
-			superChamp.setAttribute("teamID", ntSB.getAttribute("teamID"));
-			frmPostPicks.hidSB.value = ntSB.getAttribute("teamID");
-		}
-	}
-}
-function clearAfcPicks(roundNumber){
-	if(roundNumber <= 3){
-		htACONF.innerHTML = "TBD";
-		vtACONF.innerHTML = "TBD";
-		frmPostPicks.hidADIV1.value = "";
-		frmPostPicks.hidADIV2.value = "";
-	}
-
-	if(roundNumber <= 4){
-		atSB.innerHTML = "TBD";
-		frmPostPicks.hidACONF.value = "";
-	}
-
-	//we're always clearing the superbowl rounds
-	superChamp.innerHTML = "TBD";
-	frmPostPicks.bowlPoints.value = "";
-	frmPostPicks.hidSB.value = "";
-}
-
-function clearNfcPicks(roundNumber){
-	if(roundNumber <= 3){
-		htNCONF.innerHTML = "TBD";
-		vtNCONF.innerHTML = "TBD";
-		frmPostPicks.hidNDIV1.value = "";
-		frmPostPicks.hidNDIV2.value = "";
-	}
-
-	if(roundNumber <= 4){
-		ntSB.innerHTML = "TBD";
-		frmPostPicks.hidNCONF.value = "";
-	}
-
-	//we're always clearing the superbowl rounds
-	superChamp.innerHTML = "TBD";
-	frmPostPicks.bowlPoints.value = "";
-	frmPostPicks.hidSB.value = "";
-}
-
-function savePicks(){
-	var bRet;
-	var bPageValid;
-
-	//now validate the page
-	bPageValid = validatePage();
-	bRet = bPageValid;
-	if(bPageValid)
-	{
-		bPicksChanged = false;
-		frmPostPicks.hidMode.value = "save";
-	}
-
-	return bRet;
-}
-
-function validatePage(){
-	//make sure they've made all the picks necessary (and entered points)
-	var bRet = true;
-	var sMsg = "";
-	var afcValid = true;
-	var nfcValid = true;
-	var tempValue1 = "";
-	var tempValue2 = "";
-
-	tempValue1 = frmPostPicks.hidAWC45.value;
-	if(tempValue1 == "" || tempValue1 == "undefined"){
-		afcValid = false;
-		sMsg += "Pick a winner for the AFC #4 vs #5 game\n";
-	}
-
-	tempValue1 = frmPostPicks.hidADIV2.value;
-	if(tempValue1 == "" || tempValue1 == "undefined"){
-		afcValid = false;
-		sMsg += "Pick a winner for the AFC #3 vs #6 game\n";
-	}
-
-	tempValue1 = frmPostPicks.hidNDIV1.value;
-	if(tempValue1 == "" || tempValue1 == "undefined"){
-		nfcValid = false;
-		sMsg += "Pick a winner for the NFC #4 vs #5 game\n";
-	}
-
-	tempValue1 = frmPostPicks.hidNWC36.value;
-	if(tempValue1 == "" || tempValue1 == "undefined"){
-		nfcValid = false;
-		sMsg += "Pick a winner for the NFC #3 vs #6 game\n";
-	}
-
-	if(afcValid){
-		//they've made picks for the first round, so check the next round
-		tempValue1 = frmPostPicks.hidADIV1.value;
-		tempValue2 = frmPostPicks.hidADIV2.value;
-		if(tempValue1 == "" || tempValue1 == "undefined" || tempValue2  == "" || tempValue2 == "undefined"){
-			afcValid = false;
-			sMsg += "Pick winners for the AFC Divisional Playoff games\n";
-		}
-	}
-
-	if(nfcValid){
-		//they've made picks for the first round, so check the next round
-		tempValue1 = frmPostPicks.hidNDIV1.value;
-		tempValue2 = frmPostPicks.hidNDIV2.value;
-		if(tempValue1 == "" || tempValue1 == "undefined" || tempValue2  == "" || tempValue2 == "undefined"){
-			nfcValid = false;
-			sMsg += "Pick winners for the NFC Divisional Playoff games\n";
-		}
-	}
-
-	if(afcValid){
-		//they've made picks for the second round, so check the next round
-		tempValue1 = frmPostPicks.hidACONF.value;
-		if(tempValue1 == "" || tempValue1 == "undefined"){
-			afcValid = false;
-			sMsg += "Pick a winner for the AFC Conference Championship game\n";
-		}
-	}
-
-	if(nfcValid){
-		//they've made picks for the second round, so check the next round
-		tempValue1 = frmPostPicks.hidNCONF.value;
-		if(tempValue1 == "" || tempValue1 == "undefined"){
-			nfcValid = false;
-			sMsg += "Pick a winner for the NFC Conference Championship game\n";
-		}
-	}
-
-	bRet = afcValid && nfcValid;
-
-	//if everything else was good, check that they've picked a super bowl winner and picked points
-	if(bRet){
-		tempValue1 = frmPostPicks.hidSB.value;
-		if(tempValue1 == "" || tempValue1 == "undefined"){
-			bRet = false;
-			sMsg += "Pick a winner for the Super Bowl game\n";
-		}
-
-		if(frmPostPicks.bowlPoints.value == ""){
-			bRet = false;
-			sMsg += "Enter a number for the Total Points of the Super Bowl\n";
-		} else {
-			//also check to make sure that the points game total is a number
-			var nums = /^[0-9]*$/;
-			if (nums.test(frmPostPicks.bowlPoints.value) == false)
-			{
-				sMsg += "Enter a number for the Total Points of the Super Bowl\n";
-				bRet = false;
-			}
-
-		}
-	}
-
-	if(sMsg != ""){
-		alert(sMsg);
-	}
-
-	return bRet;
-}
-</script>
+{% endblock %}
+{% block script %}
+    <script>
+            {% if messages %}
+                {% for message in messages %}
+                    M.toast('{{ message }}', 4000);
+                {% endfor %}
+            {% endif %}
+    </script>
+    <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make_ps.js' %}?version=4" > </script>
 {% endblock %}

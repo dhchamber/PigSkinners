@@ -4,14 +4,14 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate  # new
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Case, When, Sum, F, Q, IntegerField, FloatField, ExpressionWrapper
-from appmain.forms import SignUpForm, ProfileForm
+from appmain.forms import SignUpForm, ProfileForm, PostPick2Form
 from django.contrib.auth.forms import AdminPasswordChangeForm  # PasswordChangeForm requires old password
 from django.contrib.auth import update_session_auth_hash
 from django.utils import timezone
 import pytz
 import logging
 
-from .models import Season, Week, Seed, Pick, Team, Game, PostPick, Profile
+from appmain.models import Season, Week, Seed, Pick, Team, Game, PostPick, Profile, PostPick2 , PostSeason
 from appmain.load_nflgames import load_week, LoadSeason, load_score
 
 logger = logging.getLogger(__name__)
@@ -166,7 +166,7 @@ def get_selected_week(request):
     gt = request.session.get('gt', 'REG')
     try:
         wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
-    except wk.DoesNotExist:
+    except Week.DoesNotExist:
         wk = Week.objects.get(year=year, week_no=1, gt=gt)
 
     return wk
@@ -365,12 +365,12 @@ def pick_view(request):
     if gt == 'PRE' or gt == 'REG':
         try:
             week = Week.objects.get(year=year, week_no=week_no, gt=gt)
-        except:
+        except Week.DoesNotExist:
             week = Week.objects.get(year=year, week_no=1, gt=gt)
 
         try:
             pick = Pick.objects.get(user=request.user, wk=week)
-        except:  # TODO: get exception type
+        except Pick.DoesNotExist:
             pick = Pick.objects.create_pick(user=request.user, week=week)
 
         return render(request, 'appmain/pick_view.html', {'pick': pick})
@@ -404,13 +404,13 @@ def pick_make(request):
         if pick.koth_eligible():
             try:
                 pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
-            except:
+            except Team.DoesNotExist:
                 validated = False
                 messages.warning(request, 'Failed Validate of KOTH Team: {request.POST.get("cboKingOfHillPick")}')
         try:
             pick.koth_game = (Game.objects.filter(week=pick.wk, home_team=pick.koth_team)
                               | Game.objects.filter(week=pick.wk, visitor_team=pick.koth_team)).first()
-        except:
+        except Game.DoesNotExist:
             messages.warning(request, 'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
             validated = False
 
@@ -420,7 +420,7 @@ def pick_make(request):
                 team = Team.objects.get(id=team_id)
                 pg.team = team
                 pg.save()
-            except:
+            except Team.DoesNotExist:
                 messages.warning(request, 'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
                 validated = False
 
@@ -436,7 +436,7 @@ def pick_make(request):
     else:
         try:
             pick = Pick.objects.get(user=request.user, wk=week)
-        except pick.DoesNotExist:
+        except Pick.DoesNotExist:
             pick = Pick.objects.create_pick(user=request.user, week=week)
 
         if 'submitted' in request.GET:
@@ -452,9 +452,9 @@ def pick_make_ps(request):
     weeks = get_postseason_weeks()
 
     try:
-        pick = PostPick.objects.get(user=request.user)
-    except:
-        pick = PostPick.objects.create_ps_pick(user=request.user)
+        pick = PostPick.objects.get(year=year, user=request.user)
+    except PostPick.DoesNotExist:
+        pick = PostPick.objects.create_ps_pick(year=year, user=request.user)
 
     afc = {}
     nfc = {}
@@ -462,9 +462,14 @@ def pick_make_ps(request):
     for seed in seeds:
         if seed.team.conference == "AFC":
             afc[seed.seed] = seed.team
+            print(f'add seed: {seed.seed} team: {seed.team} to AFC')
         else:
             nfc[seed.seed] = seed.team
-    # TODO: add lookup to get game for each seed and add to afc and nfc dicts
+            print(f'add seed: {seed.seed} team: {seed.team} to AFC')
+
+    # TODO: add bootstrap for s,m,l to headings and teams
+    # TODO: on load of saved picks, populated grid and also hidden frm fields
+    messages.info (request, 'Welcome to the Playoffs!')
     return render(request, 'appmain/pick_make_ps.html',
                   {'pick': pick, 'weeks': weeks, 'seeds': seeds, 'afc': afc, 'nfc': nfc})
 
@@ -488,9 +493,13 @@ def pick_save_ps(request):
             print(f'Setting game for: {i} as Type: {ps_type}')
             team_id = request.POST.get('hid' + ps_type)
             print(f'Setting game for: {i} as Team: {team_id}')
-            try:
-                team = Team.objects.get(id=team_id)
-            except:
+            if team_id != "":
+                try:
+                    team = Team.objects.get(id=team_id)
+                except Team.DoesNotExist:
+                    messages.warning(request, 'Failed Validate of Game {i}/team ID: {team_id} on Pick ID: {pick_id}')
+                    print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
+            else:
                 messages.warning(request, 'Failed Validate of Game {i}/team ID: {team_id} on Pick ID: {pick_id}')
                 print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
 
@@ -499,7 +508,43 @@ def pick_save_ps(request):
 
         pick.saved = True
         pick.save()
+        messages.success(request, 'Your Picks have been saved!')
     return redirect('pick_make_ps')
+
+@login_required
+def pick_make_ps2(request):
+    timezone.activate(pytz.timezone('America/Denver'))
+    year = Season.objects.get(current=True)
+    weeks = get_postseason_weeks()
+    post_season = PostSeason.objects.get(year=year)
+    try:
+        post_pick = PostPick2.objects.get(year=year, user=request.user)
+        print(f'Got Pick: {post_pick.id}')
+    except PostPick2.DoesNotExist:
+        post_pick = PostPick2.objects.create_ps_pick(year=year, user=request.user)
+        print(f'Created Pick: {post_pick.id}')
+
+    if request.method == 'POST':
+        print(f'In Post: {post_pick.user.username}')
+        form = PostPick2Form(request.POST, instance=post_pick)
+        form.fields['entered_by'].required = False
+        form.fields['pick_score'].required = False
+        # form.data['updated_by'] = request.user
+        # print(f'Form: {form.data["entered_by"]}')
+        if form.is_valid():
+            # form.fields['saved'].initial = 1
+            form.save()
+            pass  # does nothing, just trigger the validation
+        else:
+            print(f'Form Errors: {form.errors}')
+
+    else:
+        form = PostPick2Form(instance=post_pick, initial={'updated_by': request.user, 'saved': True})
+
+    messages.info (request, 'Welcome to the Playoffs!')
+    return render(request, 'appmain/pick_make_ps2.html',
+                  {'form': form, 'weeks': weeks, 'post_season': post_season})
+
 
 
 @login_required
@@ -593,8 +638,7 @@ def standing_post(request):
         if user.is_active:
             try:
                 pick = PostPick.objects.get(user=user, year=Season.objects.get(current=True))
-            except:
-                # TODO: appmain.models.PostPick.DoesNotExist: PostPick matching query does not exist.
+            except PostPick.DoesNotExist:
                 # TODO: add current season to call below
                 pick = PostPick.objects.create_ps_pick(user=user)
     picks = PostPick.objects.filter(year=Season.objects.get(current=True))
@@ -605,8 +649,6 @@ def standing_post(request):
 
 def standing_season(request):
     # TODO: check timing on Season Standings load, what is causing the wait
-    # TODO: don't show all red if there are no winners yet.
-    # season standings not updating correctly
     logger.debug('Starting standing_season: ' + request.user.username)
     year = Season.objects.get(current=True)
     weeks = Week.objects.filter(year=year, gt='REG')

@@ -100,15 +100,13 @@ class Season(models.Model):
         return str(self.year)
 
     def curr_week(self):
-        # timezone.activate(pytz.timezone('America/Denver'))
-        utc = pytz.UTC
-        print(f'datetime.utcnow {datetime.utcnow()}')
-        print(f'datetime.now {datetime.now()}')
-        print(f'datetime.now {utc.localize(datetime.now())}')
+        # end_dt is start of last game of the week, so add 5 hours to be sure game is over
+        # end_dt and Now are both UTC so they can be compared
         for week in self.weeks.all():
-            print(f'week: {week.week_no}  week.end_dt {week.end_dt()}')
-            if week.end_dt() > utc.localize(datetime.now()):
-                return week
+            if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
+                break
+
+        print(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
         return week
 
     def season_scores(self):
@@ -120,6 +118,7 @@ class Season(models.Model):
         full = Week.objects.filter(year=self, gt='REG')
 
         # TODO: find way to avoid this every time.  it is slow
+        # it is removed and is working so this may not be needed
         # add score fields to model and update
         # for week in self.weeks.all():
         #     for pick in week.pick_wk.all():
@@ -156,30 +155,6 @@ class Season(models.Model):
         winners['all'] = users.filter(all=all_max)
         return winners
 
-    # is the player still eligible for KOTH, no missed picks, no losses
-    # def koth_eligible(self, user):
-    #     weeks = Week.objects.filter(year=self, gt='REG', closed=True)
-    #     picks = Pick.objects.filter(user=user, wk__in=weeks)
-    #     eligible = True
-    #     for week in weeks:
-    #         try:
-    #             pick = Pick.objects.get(user=user, wk=week)
-    #             if pick.koth_game is None or pick.koth_team is None or pick.koth_team == pick.koth_game.game_loser():
-    #                 eligible = False
-    #                 break
-    #         except pick.DoesNotExist:
-    #             eligible = False
-    #             break
-    #
-    #     return eligible
-
-    # return 1 if user won KOTH game, 0 if lost or tied
-    def koth_score(self):
-        if self.koth_team is not None and self.koth_game is not None and self.koth_game.game_winner() == self.koth_team:
-            return 1
-        else:
-            return 0
-
     # def get_absolute_url(self):
     #     return reverse('season_detail',args=[str(self.id)])
 
@@ -203,8 +178,8 @@ class Week(models.Model):
     # TODO: need a way to sort correctly be week and week type, add new model for gt with key 1,2,3 ??
     week_no = models.PositiveSmallIntegerField(
         null=False)  # ? week of the season 1-17, 18-21  must be equal to id for foreign key
-    gt = models.CharField(
-        max_length=3)  # game type REG = Reg Season(1-17); WC = (18); DIV = (19); CON = (20); SB = (22)
+    # game type REG = Reg Season(1-17); WC = (18); DIV = (19); CON = (20); SB = (22)
+    gt = models.CharField(max_length=3)
     closed = models.BooleanField(default=False)
     closed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, default=1)
     date_closed = models.DateTimeField(blank=True, null=True)
@@ -219,7 +194,7 @@ class Week(models.Model):
     forecast_date_closed = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.week_no) + '/' + self.gt
+        return str(self.week_no) + '/' + str(self.gt)
 
     def create_picks(self):
         for user in User.objects.all():
@@ -243,7 +218,8 @@ class Week(models.Model):
         timezone.activate(pytz.timezone('America/Denver'))
         min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
         max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
-
+        print(f'Week: {self.week_no} / min date: {min_date}, max date: {max_date}')
+        print(f'Week: {self.week_no} / min date day: {min_date.strftime("%d") }, max date day: {max_date.strftime("%d") }')
         if min_date.strftime("%d") == max_date.strftime("%d"):
             date_str = min_date.strftime("%b. %d")
         else:
@@ -261,8 +237,9 @@ class Week(models.Model):
         # should this be only if all games are complete?  af
         if self.closed:
             # get max score for the week
-            max_score = self.pick_wk.all().aggregate(max_score=Max('pick_score', default=0, output_field=IntegerField(), ))[
-                'max_score']
+            max_score = \
+                self.pick_wk.all().aggregate(max_score=Max('pick_score', default=0, output_field=IntegerField(), ))[
+                    'max_score']
             picks = Pick.objects.filter(wk=self).annotate(
                 score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
             winners = picks.filter(score=max_score)
@@ -294,7 +271,7 @@ class Week(models.Model):
     def koth_eliminated(self):
         eliminated = 0
         for pick in self.pick_wk.all():
-            if pick.koth_game != None and pick.koth_team == pick.koth_game.game_loser():
+            if pick.koth_game is not None and pick.koth_team == pick.koth_game.game_loser():
                 eliminated += 1
         return eliminated
 
@@ -361,8 +338,8 @@ class Game(TimeStampMixin):
     network = models.CharField(max_length=20, null=True)
     red_zone = models.CharField(max_length=1, null=True)  # ???
     ga = models.CharField(max_length=2, null=True)  # ???
-    gt = models.CharField(max_length=3,
-                          null=True)  # game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Divisional(19); CON = Conference(20); SB = Super Bowl (22)
+    # game type?  REG = Regular Season(1-17); WC = Wild Card(18); DIV = Div(19); CON = Conf(20); SB =  (22)
+    gt = models.CharField(max_length=3, null=True)
     points_game = models.BooleanField(default=False)
 
     def __str__(self):
@@ -437,7 +414,7 @@ class Game(TimeStampMixin):
         # get all the pick games that have a pick for this game and update the status as won or lost
         pgames = self.pick_game.all()
         for pg in pgames:
-            if pg.team != None:
+            if pg.team is not None:
                 if self.status == 'P':
                     if pg.team == self.winner:
                         pg.status = 'w'
@@ -485,6 +462,52 @@ class Seed(models.Model):
         return str(self.seed)
 
 
+#  Table for PostSeason games
+class PostSeason(models.Model):
+    class Meta:
+        verbose_name = 'post season game'
+        verbose_name_plural = 'post season games'
+        indexes = [models.Index(fields=['year'])]
+        ordering = ['year']
+        constraints = [models.UniqueConstraint(fields=['year'], name='ps_year')]
+#
+#     class PSTYPE(Enum):
+#         AWC45 = ('AWC45', 'AFC Wild Card 45')
+#         NWC45 = ('NWC45', 'NFC Wild Card 45')
+#         AWC36 = ('AWC36', 'AFC Wild Card 36')
+#         NWC36 = ('NWC36', 'NFC Wild Card 36')
+#         ADIV1 = ('ADIV1', 'AFC Divisional 1')
+#         ADIV2 = ('ADIV2', 'AFC Divisional 2')
+#         NDIV1 = ('NDIV1', 'NFC Divisional 1')
+#         NDIV2 = ('NDIV2', 'NFC Divisional 2')
+#         ACONF = ('ACONF', 'AFC Conference Champ')
+#         NCONF = ('NCONF', 'AFC Conference Champ')
+#         SB = ('SB', 'Super Bowl')
+#
+#         @classmethod
+#         def get_value(cls, member):
+#             return cls[member].value[0]
+#
+    year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL)
+    AWC45 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='AWC45_game')
+    NWC45 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='NWC45_game')
+    AWC36 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='AWC36_game')
+    NWC36 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='NWC36_game')
+    ADIV1 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='ADIV1_game')
+    ADIV2 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='ADIV2_game')
+    NDIV1 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='NDIV1_game')
+    NDIV2 = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='NDIV2_game')
+    ACONF = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='ACONF_game')
+    NCONF = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='NCONF_game')
+    SB = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='SB_game')
+
+        #     ps_type = models.CharField(max_length=5, choices=[x.value for x in PSTYPE], default=PSTYPE.get_value('AWC45'))
+#     game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='post_game')
+#
+#     def __str__(self):
+#         return str(self.PSTYPE)
+
+
 class PickManager(models.Manager):
     def create_pick(self, user, week):
         pick = self.create(user=user, wk=week, points=0, entered_by=user, updated_by=user)
@@ -523,17 +546,17 @@ class Pick(models.Model):
     # TODO: retrun message with what failed
     def validate_pick(self):
         validate = True
-        if self.points == None or self.points == 0:
+        if self.points is None or self.points == 0:
             validate = False
-        elif self.koth_game == None:
+        elif self.koth_game is None:
             validate = False
-        elif self.koth_team == None:
+        elif self.koth_team is None:
             validate = False
 
         for pg in self.pickgame_set.all():
-            if pg.game == None:
+            if pg.game is None:
                 validate = False
-            elif pg.team == None:
+            elif pg.team is None:
                 validate = False
         return validate
 
@@ -575,7 +598,6 @@ class Pick(models.Model):
                 break
         return eligible
 
-
     # teams that player still has available for KOTH
     def koth_remaining(self):
         year = Season.objects.get(current=True)
@@ -583,7 +605,7 @@ class Pick(models.Model):
         # used_picks = Pick.objects.filter(user=self.user, wk__in=weeks).values_list('koth_team', flat=True)
         home = Team.objects.filter(Q(home__week=self.wk))
         visitor = Team.objects.filter(Q(visitor__week=self.wk))
-        used =  Team.objects.filter(Q(koth_team__wk__in=weeks) & Q(koth_team__user=self.user))
+        used = Team.objects.filter(Q(koth_team__wk__in=weeks) & Q(koth_team__user=self.user))
         teams = home.union(visitor).difference(used).order_by('team_name')
 
         return teams
@@ -617,10 +639,10 @@ class PickGame(models.Model):
 
     pick_head = models.ForeignKey(Pick, on_delete=models.CASCADE)  # ,related_name='pick_head'
     game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_game')
-    team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL,
-                             related_name='pick_team')  # team must be one of 2 teams in the game
-    status = models.CharField(max_length=1,
-                              null=True)  # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
+    # team must be one of 2 teams in the game
+    team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_team')
+    # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
+    status = models.CharField(max_length=1, null=True)
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_game_entered')
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_game_updated')
 
@@ -633,17 +655,17 @@ class PickGame(models.Model):
 
 
 class PostPickManager(models.Manager):
-    def create_ps_pick(self, user):
-        pick = self.create(user=user, entered_by=user, updated_by=user)
+    def create_ps_pick(self, year, user):
+        post_pick = self.create(year=year, user=user, entered_by=user, updated_by=user)
         # year = Season.objects.get(current=True)
         # weeks = Week.objects.filter(year=year, gt='POST')
         # print(f'found weeks for post season: {weeks.count()}')
         # games = Game.objects.filter(week__in=weeks)
         # print(f'found games for post season: {games.count()}')
         # for game in Game.objects.filter(week__in=weeks):
-        pick.set_seed_game(user)
-        pick.save()
-        return pick
+        post_pick.set_seed_game(user)
+        post_pick.save()
+        return post_pick
 
 
 # TODO: add mixin dates
@@ -651,9 +673,9 @@ class PostPick(models.Model):
     class Meta:
         verbose_name = 'post season pick'
         verbose_name_plural = 'post season picks'
-        indexes = [models.Index(fields=['user'])]
-        ordering = ['user']
-        constraints = [models.UniqueConstraint(fields=['user'], name='ps_pick_user')]
+        indexes = [models.Index(fields=['year', 'user'])]
+        ordering = ['year', 'user']
+        constraints = [models.UniqueConstraint(fields=['year', 'user'], name='ps_pick_user')]
 
     year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL, default=3)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post_picks', default=1)
@@ -765,7 +787,7 @@ class PostPick(models.Model):
             game_pick.save()
             print(f'game saved for post season: {game_pick.ps_type}')
 
-
+# TODO: since the games are fixed in Post Season, should this just be all part of the header table?
 class PostPickGame(models.Model):
     class Meta:
         verbose_name = 'post seasin pick game'
@@ -791,8 +813,7 @@ class PostPickGame(models.Model):
     post_pick_head = models.ForeignKey(PostPick, on_delete=models.CASCADE, related_name='post_games')
     ps_type = models.CharField(max_length=5, choices=[x.value for x in PSTYPE], default=PSTYPE.get_value('AWC45'))
     game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='post_pick_game')
-    team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL,
-                             related_name='post_pick_team')  # team must be one of 2 teams in the game
+    team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='post_pick_team')  # team must be one of 2 teams in the game
     status = models.CharField(max_length=1,
                               null=True)  # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
@@ -833,6 +854,78 @@ class PostPickGame(models.Model):
             return 'SB'
         else:
             return 'X'
+
+class PostPick2Manager(models.Manager):
+    def create_ps_pick(self, year, user):
+        post_pick = self.create(year=year, user=user, entered_by=user, updated_by=user)
+        # post_pick.set_seed_game(user)
+        post_pick.save()
+        return post_pick
+
+    def save_pick(self):
+        # if Pick.validate_pick(self):
+        self.saved = True
+        self.save()
+
+
+class PostPick2(models.Model):
+    class Meta:
+        verbose_name = 'post season pick2'
+        verbose_name_plural = 'post season picks2'
+        indexes = [models.Index(fields=['year', 'user'])]
+        ordering = ['year', 'user']
+        constraints = [models.UniqueConstraint(fields=['year', 'user'], name='ps_pick_user2')]
+
+    year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL, default=3)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_post_picks', default=1)
+    points = models.PositiveSmallIntegerField(default=0)
+    AWC45 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='AWC45_team')
+    NWC45 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NWC45_team')
+    AWC36 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='AWC36_team')
+    NWC36 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NWC36_team')
+    AvtDiv1 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='AtDiv1_team')
+    NvtDiv1 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NtDiv1_team')
+    AvtDiv2 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='AtDiv2_team')
+    NvtDiv2 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NtDiv2_team')
+    ADIV1 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='ADIV1_team')
+    ADIV2 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='ADIV2_team')
+    NDIV1 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NDIV1_team')
+    NDIV2 = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NDIV2_team')
+    ACONF = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='ACONF_team')
+    NCONF = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='NCONF_team')
+    SB    = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='SB_team')
+    pick_score = models.PositiveSmallIntegerField(default=0)
+    saved = models.BooleanField(default=False)
+    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post_pick2_entered')
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='post_pick2_updated')
+
+    objects = PostPick2Manager()
+
+    def calc_score(self):
+        sum_score = 0
+        # for pg in self.post_games.all():
+        #     sum_score += int(pg.pick_score())
+        return sum_score
+
+    def points_rem(self):
+        # possible point remaining if game is not defined yet, or
+        # game is not final and you have a team in the game
+        rem = 0
+        print(f'rem: {rem}')
+        # for pg in self.post_games.all():
+        #     if pg.game is None:
+        #         gt = pg.pstype_gt()
+        #         points = PostPoint.objects.get(gt=gt)
+        #         rem += int(points.points)
+        #         print(f'Points {points} for {gt} game not defined yet. rem: {rem}')
+        #     elif pg.game.status == 'P':
+        #         # do you have a team in the game?
+        #         if pg.team == pg.game.home_team or pg.team == pg.game.visitor_team:
+        #             rem += int(pg.pick_score())
+        #     else:
+        #         rem += 0
+        return rem
+
 
 
 class PostPoint(models.Model):

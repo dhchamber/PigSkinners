@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ModelForm, inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Team, Pick, PickGame, Profile
+from .models import Team, Pick, PickGame, Profile, PostPick2
 
 
 class ProfileForm(ModelForm):
@@ -11,13 +11,27 @@ class ProfileForm(ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('user','favorite_team','phone_number','intro_sound','show_graphics','show_video')
+        fields = ('user', 'favorite_team', 'phone_number', 'intro_sound', 'show_graphics', 'show_video')
         widgets = {'user': forms.HiddenInput}
 
     favorite_team = forms.ModelChoiceField(queryset=Team.objects.all(), required=False,
                                            widget=forms.Select(attrs={'style': 'width:250px'}), help_text='Optional.')
-    phone_number =  forms.CharField(max_length=30, required=False,
-                    widget=forms.TextInput(attrs={'style': 'width:250px'}), help_text='Optional. Format: (xxx)xxx-xxxx')
+    phone_number = forms.CharField(max_length=30, required=False,
+                                   widget=forms.TextInput(attrs={'style': 'width:250px'}),
+                                   help_text='Optional. Format: (xxx)xxx-xxxx')
+
+
+class PostPick2Form(ModelForm):
+    class Meta:
+        model = PostPick2
+        # widgets = {'user': forms.HiddenInput, 'AWC45': forms.HiddenInput, 'AWC36': forms.HiddenInput,
+        # 'NWC45': forms.HiddenInput}
+        fields = '__all__'
+
+        def __init__(self, *args, **kwargs):
+            super(PostPick2Form, self).__init__(*args, **kwargs)
+            self.fields['entered_by'].required = False
+
 
 
 class SignUpForm(UserCreationForm):

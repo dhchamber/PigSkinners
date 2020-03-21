@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Season, Week,Team, Game, Seed, PostPoint
+from .models import Season, Week,Team, Game, Seed, PostPoint , PostSeason
 
 
 class SeasonAdmin(admin.ModelAdmin):
@@ -8,6 +8,10 @@ class SeasonAdmin(admin.ModelAdmin):
 
 class SeedAdmin(admin.ModelAdmin):
     list_display = ('year', 'team', 'seed')
+
+
+class PostSeasonAdmin(admin.ModelAdmin):
+    list_display = ('year', 'AWC45', 'NWC45', 'AWC36', 'NWC36', 'ADIV1', 'NDIV1', 'ADIV2', 'NDIV2', 'ACONF', 'NCONF', 'SB')
 
 
 class PostPointAdmin(admin.ModelAdmin):
@@ -27,6 +31,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 admin.site.register(Season, SeasonAdmin)
 admin.site.register(Seed, SeedAdmin)
+admin.site.register(PostSeason, PostSeasonAdmin)
 admin.site.register(PostPoint, PostPointAdmin)
 admin.site.register(Week, WeekAdmin)
 admin.site.register(Team, TeamAdmin)

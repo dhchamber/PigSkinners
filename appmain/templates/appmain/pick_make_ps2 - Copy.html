@@ -1,0 +1,373 @@
+{% extends "appmain/base.html" %}
+{% load static %}
+{% load template_filter %}
+{% load tz %}
+{% block title %}Make Post Season Picks{% endblock title %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_make_ps.css' %}?version=5"/>
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>-->
+{% endblock stylesheet %}
+{% block bodyextra %}onload="javascript:return window_onload();" onbeforeunload="javascript:return window_onbeforeunload()"{% endblock bodyextra %}
+
+{% block content %}
+    <form id=frmPostPicks method="post" action="/pick/make_ps/">
+        {% csrf_token %}
+        {{ form.AWC45 }}
+        {{ form.NWC45 }}
+        {{ form.AWC36 }}
+        {{ form.NWC36 }}
+        {{ form.ADIV1 }}
+        {{ form.NDIV1 }}
+        {{ form.ADIV2 }}
+        {{ form.NDIV2 }}
+        {{ form.ACONF }}
+        {{ form.NCONF }}
+        {{ form.SB }}
+        {{ form.user }}
+        {{ form.year }}
+        {{ form.id }}
+
+        <table style="border-collapse: separate;" cellpadding=0 cellspacing=0 border=0 width=100% >
+            <tr>
+                <td bgcolor=#3399cc align=center colspan=9><font size=+2><b>PLAYoff Bracket</b></font></td>
+            </tr>
+            <tr>
+                <td bgcolor=Gray align=center colspan=3><b>AFC</b></td>
+                <td bgcolor=Gray align=center colspan=3><b>NFL</b></td>
+                <td bgcolor=Gray align=center colspan=3><b>NFC</b></td>
+            </tr>
+            <tr>
+                <td bgcolor=Silver align=center width=14.5%>Wild Card</td>
+                <td bgcolor=Silver align=center width=14.5%>Divisional Playoffs</td>
+                <td bgcolor=Silver align=center width=14.5%>Conference Championship</td>
+                <td bgcolor=Silver colspan=3 align=center width=15%>Super Bowl LI</td>
+                <td bgcolor=Silver align=center width=14.5%>Conference Championship</td>
+                <td bgcolor=Silver align=center width=14.5%>Divisional Playoffs</td>
+                <td bgcolor=Silver align=center width=14.5%>Wild Card</td>
+            </tr>
+            <tr>
+                {% for week in weeks %}
+                    {% if week.week_no == 22 %}
+                        <td align=center colspan=3>{{ week.postseason_week }}</td>
+                    {% else %}
+                        <td align=center>{{ week.postseason_week }}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for week in weeks reversed %}
+                    {% if week.week_no != 22 %}
+                        <td align=center>{{ week.postseason_week }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            <tr>
+                <td colspan=9>&nbsp;</td>
+            </tr>
+            <tr> <!-- Wild Card 45 Game 4 seed-->
+                <td class=bottom_border id=htAWC45 teamID="{{ post_season.AWC45.home_team.id }}" onclick="pickTeam(this)" >
+                    <img class="d-none d-md-table-cell" src="{% static post_season.AWC45.home_team.logo_file_name %}" width=25px><br>
+                    <div class="d-table-cell d-md-none" >#4 {{ post_season.AWC45.home_team.team_abrev }}</div>
+                    <div class="d-none d-md-table-cell d-lg-none" >#4 {{ post_season.AWC45.home_team.short_name}}</div>
+                    <div class="d-none d-lg-table-cell" >#4 {{ post_season.AWC45.home_team }}</div>
+                </td>
+                <td colspan=7>&nbsp;</td>
+                <td class=bottom_border id=htNWC45 teamID="{{ post_season.NWC45.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static post_season.NWC45.home_team.logo_file_name %}" width=25px>
+                    <br>#4 {{ post_season.NWC45.home_team }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan=7 class=left_right_border>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr> <!-- Wild Card 45 Game date/time and Divisional 1 Visitor -->
+                <td class=border_none >{{ post_season.AWC45.date_time }}</td>
+                <td class=left_bottom_border id=vtADIV1 onclick="pickTeam(this)">
+                    {% if form.AWC36.value == None %}
+                        {% if form.AWC45.value == None %}TBD
+                        {% else %}
+                            <img src="{% static form.AWC45.value|team_logo %}" width=25px><br>
+                            #{{ form.AWC45.value|team_seed }} {{ form.AWC45.value|team_name }}
+                        {% endif %}
+                    {% else %}
+                        {% if form.AWC36.value == post_season.AWC36.visitor_team.id %}
+                            <img src="{% static post_season.AWC36.visitor_team.logo_file_name %}" width=25px><br>
+                            #{{ post_season.AWC36.visitor_team.cy_seed }} {{ post_season.AWC36.visitor_team }}
+                        {% else %}
+                            {% if form.AWC45.value == None %}TBD
+                            {% else %}
+                                <img src="{% static form.AWC45.value|team_logo %}" width=25px><br>
+                                #{{ form.AWC45.value|team_seed }} {{ form.AWC45.value|team_name }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td colspan=5>&nbsp;</td>
+                <td class=right_bottom_border id=vtNDIV1 onclick="pickTeam(this)">
+                    {% if form.NWC36.value == None %}
+                        {% if form.NWC45.value == None %}TBD
+                        {% else %}
+                            {% if form.NWC45.value ==  post_season.NWC45.home_team.id %}
+                                <img src="{% static post_season.NWC45.home_team.logo_file_name %}" width=25px><br>
+                                #{{ post_season.NWC45.home_team.cy_seed }} {{ post_season.NWC45.home_team }}
+                            {% else %}
+                                <img src="{% static post_season.NWC45.visitor_team.logo_file_name %}" width=25px><br>
+                                #{{ post_season.NWC45.visitor_team.cy_seed }} {{ post_season.NWC45.visitor_team }}
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if form.NWC36.value == post_season.NWC36.visitor_team.id %}
+                            <img src="{% static post_season.NWC36.visitor_team.logo_file_name %}" width=25px><br>
+                            #{{ post_season.NWC36.visitor_team.cy_seed }} {{ post_season.NWC36.visitor_team }}
+                        {% else %}
+                            {% if form.NWC45.value == None %}TBD
+                            {% else %}
+                                {% if form.NWC45.value ==  post_season.NWC45.home_team.id %}
+                                    <img src="{% static post_season.NWC45.home_team.logo_file_name %}" width=25px><br>
+                                    #{{ post_season.NWC45.home_team.cy_seed }} {{ post_season.NWC45.home_team }}
+                                {% else %}
+                                    <img src="{% static post_season.AWC45.visitor_team.logo_file_name %}" width=25px><br>
+                                    #{{ post_season.NWC45.visitor_team.cy_seed }} {{ post_season.NWC45.visitor_team }}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class=border_none >{{ post_season.NWC45.date_time }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td class=left_right_border>&nbsp;</td>
+                <td colspan=5>&nbsp;</td>
+                <td class=left_right_border>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class=bottom_border id=vtAWC45 teamID="{{ post_season.AWC45.visitor_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static post_season.AWC45.visitor_team.logo_file_name %}" width=25px>
+                    <br>#5 {{ post_season.AWC45.visitor_team }}</td>
+                <td class="left_right_border">{{ post_season.ADIV1.date_time }}</td>
+                <td class=bottom_border id=htACONF onclick="pickTeam(this)">
+                    {# display team user picked as winner of ADIV1 4 #}
+                    {% if form.ADIV1.value == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static form.ADIV1.value|team_logo %}" width=25px>
+                        #{{ form.ADIV1.value|team_seed }} {{ form.ADIV1.value|team_name }}
+                    {% endif %}
+                    </td>
+                <td colspan=3>&nbsp;</td>
+                <td class=bottom_border id=htNCONF onclick="pickTeam(this)">
+                    {# display team user picked as winner of NDIV1 6 #}
+                    {% if form.NDIV1.value == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static form.ADIV1.value|team_logo %}" width=25px>
+                        #{{ form.ADIV1.value|team_seed }} {{ form.ADIV1.value|team_name }}
+                    {% endif %}
+                    </td>
+                <td class=left_right_border >{{ post_season.NDIV1.date_time }}&nbsp;</td>
+                <td class=bottom_border id=vtNWC45 teamID="{{ post_season.NWC45.visitor_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.NWC45.visitor_team.logo_file_name %}" width=25px>
+                    <br>#5 {{ post_season.NWC45.visitor_team }}</td>
+            </tr>
+            <tr>
+                <td colspan=2 class=right_border>&nbsp;</td>
+                <td class=right_border>&nbsp;</td>
+                <td colspan=2 class=bottom_border id="atSB" onclick="pickTeam(this)">
+                    {# display team user picked as winner of ACONF 8 #}
+                    {% if form.ACONF.value == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static form.ACONF.value|team_logo %}" width=25px>
+                        #{{ form.ACONF.value|team_seed }} {{ form.ACONF.value|team_name }}
+                    {% endif %}
+                    </td>
+                <td>&nbsp;</td>
+                <td class=left_border>&nbsp;</td>
+                <td colspan=2 class=left_border>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td class=right_bottom_border id=htADIV1 teamID="{{ post_season.ADIV1.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.ADIV1.home_team.logo_file_name %}" width=25px>
+                    <br>#1 {{ post_season.ADIV1.home_team }}</td>
+                <td class=right_border align=center>&nbsp;</td>
+                <td colspan=3>&nbsp;</td>
+                <td class=left_border align=center>&nbsp;</td>
+                <td class=left_bottom_border id=htNDIV1 teamID="{{ post_season.NDIV1.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.NDIV1.home_team.logo_file_name %}" width=25px>
+                    <br>#1 {{ post_season.NDIV1.home_team }}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan=2>&nbsp;</td>
+                <td class=right_border align=center>{{ post_season.ACONF.date_time }}&nbsp;</td>
+                <td colspan=3 align=center>
+                    <table width="100%" cellpadding="0" cellspacing="0" align=center>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td align=center><b>Super Bowl Winner:</b><br><font id="superChamp">
+                            {# display team user picked as winner of SB 10 #}
+                                {% if form.SB.value == None %}
+                                    TBD
+                                {% else %}
+                                    <img src="{% static form.SB.value|team_logo %}" width=25px>
+                                    #{{ form.SB.value|team_seed }} {{ form.SB.value|team_name }}
+                                {% endif %}
+                            </font></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan=3>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td align=center>{{ form.points }}</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class=left_border align=center>{{ post_season.NCONF.date_time }}&nbsp;</td>
+                <td colspan=2>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td class=bottom_border id=htADIV2 teamID="{{ post_season.ADIV2.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.ADIV2.home_team.logo_file_name %}" width=25px>
+                    <br>#2 {{ post_season.ADIV2.home_team }}</td>
+                <td class=right_border align=center>&nbsp;</td>
+                <td colspan=3>&nbsp;</td>
+                <td class=left_border>&nbsp;</td>
+                <td class=bottom_border id=htNDIV2 teamID="{{ post_season.NDIV2.home_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.NDIV2.home_team.logo_file_name %}" width=25px>
+                    <br>#2 {{ post_season.NDIV2.home_team }}</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan=2 class=right_border>&nbsp;</td>
+                <td class=right_border>&nbsp;</td>
+                <td class=bottom_border>&nbsp;</td>
+                <td class=bottom_border colspan=2 id="ntSB" onclick="pickTeam(this)">
+                    {# display team user picked as winner of NCONF 9 #}
+                    {% if form.NCONF.value == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static form.NCONF.value|team_logo %}" width=25px>
+                        #{{ form.NCONF.value|team_seed }} {{ form.NCONF.value|team_name }}
+                    {% endif %}
+                </td>
+                <td class=left_border>&nbsp;</td>
+                <td colspan=2 class=left_border>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class=bottom_border id=htAWC36 teamID="{{ post_season.AWC36.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static post_season.AWC36.home_team.logo_file_name %}" width=25px>
+                    <br>#3 {{ post_season.AWC36.home_team }}</td>
+                <td class=right_border>{{ post_season.ADIV2.date_time }}&nbsp;</td>
+<!--                fixed up to here so far  can change back to form team not post season team -->
+                <td class=right_bottom_border id=vtACONF onclick="pickTeam(this)">
+                    {# display team user picked as winner of ADIV2 5 #}
+                    {% if form.ADIV2.value == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static form.ADIV2.value|team_logo %}" width=25px>
+                        #{{ form.ADIV2.value|team_seed }} {{ form.ADIV2.value|team_name }}
+                    {% endif %}
+                </td>
+                <td colspan=3 align=center valign=bottom>&nbsp;
+                    <input type=submit onclick="javascript:return savePicks();" value="Save Picks"&nbsp;>
+<!--                    {% if not allowPicks %} disabled-->
+<!--                    {% endif %}>-->
+
+                </td>
+                <td class=left_bottom_border id=vtNCONF onclick="pickTeam(this)">
+                    {# display team user picked as winner of NDIV2 7 #}
+                    {% if form.NDIV2.value == None %}
+                        TBD
+                    {% else %}
+                        <img src="{% static form.NDIV2.value|team_logo %}" width=25px>
+                        #{{ form.NDIV2.value_team_seed }} {{ form.NDIV2.value_team_name }}
+                    {% endif %}
+                </td>
+                <td class=left_border>{{ post_season.NDIV2.date_time }}&nbsp;</td>
+                <td class=bottom_border id=htNWC36 teamID="{{ post_season.NWC36.home_team.id }}" onclick="pickTeam(this)" >
+                    <img src="{% static post_season.NWC36.home_team.logo_file_name %}" width=25px>
+                    <br>#3 {{ post_season.NWC36.home_team }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td class=left_right_border>&nbsp;</td>
+                <td colspan=5>&nbsp;</td>
+                <td class=left_right_border>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class=border_none >{{ post_season.AWC36.date_time }}</td>
+                <td class=left_right_bottom_border id=vtADIV2 onclick="pickTeam(this)">
+                    {# 2 = AWC36 user picked team as for 36 if 3 seed then it goes here else the 45 team does #}
+                    {% if form.AWC36.value == None %}
+                        TBD
+                    {% else %}
+                        {% if form.AWC36.value == post_season.AWC36.visitor_team.id %}
+                            {% if form.AWC45.value == None %}TBD
+                            {% else %}
+                                <img src="{% static form.AWC45.value|team_logo %}" width=25px><br>
+                                #{{ form.AWC45.value|team_seed }} {{ form.AWC45.value|team_name }}
+                            {% endif %}
+                        {% else %}
+                            <img src="{% static form.AWC36.value|team_logo %}" width=25px><br>
+                            #{{ form.AWC36.value|team_seed }} {{ form.AWC36.value|team_name }}
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class=thead1 colspan=5>&nbsp;</td>
+                <td class=left_right_bottom_border id=vtNDIV2 onclick="pickTeam(this)">
+                    {# 3 = NWC36 user picked team as for 36 if 3 seed then it goes here else the 45 team does #}
+                    {% if form.NWC36.value == None %}
+                        TBD
+                    {% else %}
+                        {% if form.NWC36.value == post_season.NWC36.home_team.id %}
+                            <img src="{% static post_season.NWC36.home_team.logo_file_name %}" width=25px>
+                            #{{ post_season.NWC36.home_team.cy_seed }} {{ post_season.NWC36.home_team }}
+                        {% else %}
+                            {% if form.NWC45.value == None %}
+                                TBD
+                            {% else %}
+                                <img src="{% static form.NWC45.value|team_logo %}" width=25px>
+                                #{{ form.NWC45.value|team_seed }} {{ form.NWC45.value_team_name }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class=left_border >{{ post_season.NWC36.date_time }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan=7 class=left_right_border>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class=bottom_border id=vtAWC36 teamID="{{ post_season.AWC36.visitor_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.AWC36.visitor_team.logo_file_name %}" width=25px>
+                    <br>#6 {{ post_season.AWC36.visitor_team }}</td>
+                <td colspan=7 class=left_right_border>&nbsp;</td>
+                <td class=bottom_border id=vtNWC36 teamID="{{ post_season.NWC36.visitor_team.id }}" onclick="pickTeam(this)">
+                    <img src="{% static post_season.NWC36.visitor_team.logo_file_name %}" width=25px>
+                    <br>#6 {{ post_season.NWC36.visitor_team }}</td>
+            </tr>
+            <tr>
+                <td colspan=9 >&nbsp;</td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+{% block script %}
+    <script>
+            {% if messages %}
+                {% for message in messages %}
+                    M.toast('{{ message }}', 4000);
+                {% endfor %}
+            {% endif %}
+    </script>
+    <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make_ps.js' %}?version=6" > </script>
+{% endblock %}

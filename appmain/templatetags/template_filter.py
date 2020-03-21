@@ -1,5 +1,42 @@
 from django.template.defaultfilters import register
 from django.template.defaultfilters import floatformat
+from appmain.models import Team
+
+@register.filter(name='team_logo')
+def team_logo(team_id):
+    if team_id != '':
+        try:
+            team = Team.objects.get(id=team_id)
+            logo = team.logo_file_name
+        except Team.DoesNotExist:
+            logo = ''
+    else:
+        logo = ''
+    return logo
+
+@register.filter(name='team_seed')
+def team_seed(team_id):
+    if team_id != '':
+        try:
+            team = Team.objects.get(id=team_id)
+            seed = team.cy_seed()
+        except Team.DoesNotExist:
+            seed = ''
+    else:
+        seed = ''
+    return seed
+
+@register.filter(name='team_name')
+def team_name(team_id):
+    if team_id != '':
+        try:
+            team = Team.objects.get(id=team_id)
+            name =team.team_name
+        except Team.DoesNotExist:
+            name = ""
+    else:
+        name = ''
+    return name
 
 @register.filter(name='parm')
 def lookup(year, parm):
