@@ -2,27 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0100_auto_20200315_1521.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0101_auto_20200317_0918.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0102_auto_20200317_1425.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0103_delete_postseason.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0104_auto_20200317_1503.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0105_auto_20200320_1142.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make_ps - Copy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps2 - Copy.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make_ps.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make_ps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/css/pick_make_ps.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/pick_make_ps.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make_ps.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

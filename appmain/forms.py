@@ -24,8 +24,13 @@ class ProfileForm(ModelForm):
 class PostPick2Form(ModelForm):
     class Meta:
         model = PostPick2
-        # widgets = {'user': forms.HiddenInput, 'AWC45': forms.HiddenInput, 'AWC36': forms.HiddenInput,
-        # 'NWC45': forms.HiddenInput}
+        widgets = {'user': forms.HiddenInput, 'year': forms.HiddenInput, 'points': forms.HiddenInput,
+                   'saved': forms.HiddenInput, 'entered_by': forms.HiddenInput, 'updated_by': forms.HiddenInput,
+                   'AWC45': forms.HiddenInput, 'AWC36': forms.HiddenInput, 'NWC45': forms.HiddenInput,
+                   'NWC36': forms.HiddenInput, 'AvtDiv1': forms.HiddenInput, 'NvtDiv1': forms.HiddenInput,
+                   'AvtDiv2': forms.HiddenInput, 'NvtDiv2': forms.HiddenInput, 'ADIV1': forms.HiddenInput,
+                   'ADIV2': forms.HiddenInput, 'NDIV1': forms.HiddenInput, 'NDIV2': forms.HiddenInput,
+                   'ACONF': forms.HiddenInput, 'NCONF': forms.HiddenInput, 'SB': forms.HiddenInput}
         fields = '__all__'
 
         def __init__(self, *args, **kwargs):
@@ -62,8 +67,8 @@ class PickGameForm(ModelForm):
 
     class Meta:
         model = PickGame
-        # widgets = {'user': forms.HiddenInput, 'wk': forms.HiddenInput, 'entered_by': forms.HiddenInput,
-        # 'updated_by': forms.HiddenInput}
+        widgets = {'user': forms.HiddenInput, 'wk': forms.HiddenInput, 'entered_by': forms.HiddenInput,
+        'updated_by': forms.HiddenInput}
         fields = '__all__'
 
 

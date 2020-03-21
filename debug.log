@@ -2517,3 +2517,5 @@ Traceback (most recent call last):
   File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\fields\__init__.py", line 1770, in get_prep_value
     raise e.__class__(
 TypeError: Field 'id' expected a number but got <django.forms.boundfield.BoundField object at 0x04F36E50>.
+2020-03-20 18:50:55,920 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\forms.py changed, reloading.
+2020-03-20 18:50:55,942 asyncio      623 DEBUG    Using proactor: IocpProactor
