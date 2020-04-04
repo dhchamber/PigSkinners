@@ -29,6 +29,7 @@ class GameAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('id', 'team_abrev', 'short_name', 'team_name', 'conference', 'division', 'city_name')
 
+
 admin.site.register(Season, SeasonAdmin)
 admin.site.register(Seed, SeedAdmin)
 admin.site.register(PostSeason, PostSeasonAdmin)
@@ -36,4 +37,3 @@ admin.site.register(PostPoint, PostPointAdmin)
 admin.site.register(Week, WeekAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Game, GameAdmin)
-

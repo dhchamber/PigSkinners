@@ -7,7 +7,6 @@ from appmain.models import Season, Week, Team, Game
 import logging
 
 logger = logging.getLogger(__name__)
-
 logging.config.dictConfig({
     'version': 1,
     'disable_existing_loggers': False,
@@ -15,31 +14,33 @@ logging.config.dictConfig({
         'console': {
             'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
         },
-        'file': {
-            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
-        }
+        # 'file': {
+        #     'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
+        # }
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'console'
         },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'formatter': 'file',
-            'filename': 'debug.log'
-        }
+        # 'file': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'formatter': 'file',
+        #     'filename': 'debug.log'
+        # }
     },
     'loggers': {
         'django.request': {
             'level': 'DEBUG',
             'propagate': True,
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            # 'handlers': ['console', 'file'],
         },
         '': {
             'level': 'DEBUG',
-            'handlers': ['console', 'file'],
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
         },
     },
 })
@@ -244,6 +245,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 print(f'Points Game set {game.gsis} {game.eid} Week/Yr {game.week}/{game.year} Winner: {game.winner}')
                 logger.debug(f'Points Game set {game.gsis} {game.eid} Week/Yr {game.week}/{game.year} Winner: {game.winner}')
                 game.save()
+
         # elif child.tag == 'gds':  add else if for gds which has more live score data, dad = down and distance
         #             attributes: gsis, eid, vtol, htol, vot, v4q, v3q, v2q, v1q, hot, h4q, h3q, h2q, h1q,
 

@@ -11,7 +11,6 @@ import pytz
 from datetime import datetime, timedelta
 from django.utils import timezone
 import logging
-
 # from enum import Enum
 # from django.urls import reverse
 
