@@ -9,6 +9,10 @@
 			CURSOR: hand;
 			}
 
+	.startcol {BORDER-LEFT: black 1px solid;
+			CURSOR: hand;
+			}
+
 	.hand {CURSOR: hand;
 			}
 
@@ -26,3 +30,6 @@
 	.wingame {BACKGROUND-COLOR: silver;
 			}
 
+    .home_bottom {
+            BORDER-BOTTOM: black solid;
+    }

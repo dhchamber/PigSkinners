@@ -1,7 +1,11 @@
 {% extends 'appmain/base.html' %}
 {% load static %}
+{% load template_filter %}
 {% load tz %}
 {% block title %}{{ request.user.first_name }}, Welcome to the Football Pool!{% endblock title %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}?version=3"/>
+{% endblock stylesheet %}
 
 {% block content %}
     {% if user.is_authenticated %}
@@ -14,7 +18,7 @@
 
 <!--    <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" LANGUAGE="javascript" onload="return window_onload()">-->
         {% get_current_timezone as TIMEZONE %}
-        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="home_content" id="tblContent" name="tblContent" STYLE="-moz-opacity:1%;filter:alpha(opacity=1)">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="home_content" id="tblContent" name="tblContent">
                     <tr>
                         <td width="15px">&nbsp;</td>
                         <td align="center">
@@ -25,13 +29,24 @@
                                 <tr>
                                     <td width="30%" align="center" valign="top">
                                         <a href='http://www.stlouisrams.com/'><img border='0' src="{% static '/appmain/Helmets/small/v_stl.jpg' %}" height='72px'></a>
-                                        <br>
-                                        <br>
-                                        <font size="+2"><b>Playoff time!</b></font>
-                                        <br>
-                                        <br>
+                                        <br><br>
+                                        <font size="+2"><b>
+                                        {% if week.gt == 'POST' %}
+                                            Playoff time!
+                                        {% elif week.gt == 'PRE' %}
+                                            Current Week:<br>PreSeason Week: {{ week.week_no }}
+                                        {% elif week.gt == 'REG' %}
+                                            Current Week:<br>Regular Season Week: {{ week.week_no }}
+                                        {% endif %}
+                                        </b></font>
+                                        <br><br>
                                         <font size="+1">Pick Status: </font>
-                                        <font size="+2" color="red"><b>CLOSED</b></font>
+                                        {% if week.closed %}
+                                            <font size="+2" color="red"><b>CLOSED</b></font>
+                                        {% else %}
+                                            <font size="+2" color="blue"><b>OPEN</b></font><br>
+                                            <font size="+2" color="blue"><b>Picks will Close: {{ week.forecast_dt_closed }}</b></font>
+                                        {% endif %}
                                     </td>
                                     <td width="40%" align="center">
                                         <font size=-1>All times are in {{ TIMEZONE }}</font>
@@ -71,6 +86,19 @@
                         </td>
                     </tr>
         </table>
+     <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="row">
+           <div class="full">
+              <div class="right-match-time">
+                 <h2>Close Countdown</h2>
+                    <span id="days">Days</span> <span id="hours">Hours</span>
+                    <span id="minutes">Minutes</span>
+                    <span id="seconds">Seconds</span>
+                 </ul>
+              </div>
+           </div>
+        </div>
+     </div>
 
         <!--these are all divs used for the "helmet crashing"-->
         <div id="divExplode" name="divExplode" STYLE="position:absolute;top:100px;left:400px;visibility:hidden;">
@@ -86,11 +114,12 @@
             </table>
         </div>
 
-        <div id="divPointsGameText" name="divPointsGameText" STYLE="position:absolute;visibility:hidden;width=512px;-moz-opacity:1%;filter:alpha(opacity=1)">
+        <div id="divPointsGameText" name="divPointsGameText" STYLE="-moz-opacity:1%;filter:alpha(opacity=1)">
+<!--visibility:hidden;            -->
             <table border="0" cellspacing="0" cellpadding="2" width="100%" class="tblPointsGame">
                 <tr>
                     <td align="center">
-                        This Week's Points Game:
+                        This Week's Points Game: {{ week|ptsgame }}
                     </td>
                 </tr>
                 <tr>
@@ -113,4 +142,32 @@
         </div>
 
 <!--    </body>-->
+<script>
+function makeTimer() {
+   var endTime=new Date({{ week.forecast_dt_closed|date:"U" }} * 1000);
+    endTime = (Date.parse(endTime) / 1000);
+
+        var now = new Date();
+        now = (Date.parse(now) / 1000);
+
+        var timeLeft = endTime - now;
+
+        var days = Math.floor(timeLeft / 86400);
+        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+        if (hours < "10") { hours = "0" + hours; }
+        if (minutes < "10") { minutes = "0" + minutes; }
+        if (seconds < "10") { seconds = "0" + seconds; }
+
+        $("#days").html(days + "<span> Days</span>");
+        $("#hours").html(hours + "<span> Hours</span>");
+        $("#minutes").html(minutes + "<span> Minutes</span>");
+        $("#seconds").html(seconds + "<span> Seconds</span>");
+
+}
+
+setInterval(function() { makeTimer(); }, 1000);
+</script>
 {% endblock %}

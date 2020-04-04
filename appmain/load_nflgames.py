@@ -4,67 +4,63 @@ from datetime import datetime
 import pytz
 import xml.etree.ElementTree as ET
 from appmain.models import Season, Week, Team, Game
-from django.core.exceptions import ObjectDoesNotExist
+import logging
+
+logger = logging.getLogger(__name__)
+
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': 'debug.log'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'level': 'DEBUG',
+            'propagate': True,
+            'handlers': ['console', 'file'],
+        },
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file'],
+        },
+    },
+})
 
 # List of NFL weeks, 4 PreSeason, 17 Regular Season, and 4 Post Season
 nfl_week = [(1, 'PRE'), (2, 'PRE'), (3, 'PRE'), (4, 'PRE'), (1, 'REG'), (2, 'REG'), (3, 'REG'), (4, 'REG'), (5, 'REG'),
             (6, 'REG'), (7, 'REG'), (8, 'REG'), (9, 'REG'), (10, 'REG'), (11, 'REG'), (12, 'REG'), (13, 'REG'),
             (14, 'REG'), (15, 'REG'), (16, 'REG'), (17, 'REG'), (18, 'POST'), (19, 'POST'), (20, 'POST'), (22, 'POST')]
-game_attrib_key = [(1, 'gd'), (2, 'w'), (3, 'y'), (4, 't')]  # gd?, week, year, game type P, R, P
-key = {'eid': 'eid', 'gsis': 'gsis', 'd': 'day', 't': 'time', 'q': 'status', 'h': 'home', 'hnn': 'home_nickname',
-       'htn': 'home_teamname', 'hs': 'home_score', 'v': 'visitor', 'vnn': 'visitor_nickname',
-       'vtn': 'visitor_teamname', 'vs': 'visitor_score', 'n': 'network', 'p': 'p', 'rz': 'red_zone', 'ga': 'ga',
-       'gt': 'gt'}
+# game_attrib_key = [(1, 'gd'), (2, 'w'), (3, 'y'), (4, 't')]  # gd?, week, year, game type P, R, P
+# key = {'eid': 'eid', 'gsis': 'gsis', 'd': 'day', 't': 'time', 'q': 'status', 'h': 'home', 'hnn': 'home_nickname',
+#        'htn': 'home_teamname', 'hs': 'home_score', 'v': 'visitor', 'vnn': 'visitor_nickname',
+#        'vtn': 'visitor_teamname', 'vs': 'visitor_score', 'n': 'network', 'p': 'p', 'rz': 'red_zone', 'ga': 'ga',
+#        'gt': 'gt'}
 
 
-def load_week():
-    # load week objects for a new year.  add this as a method when adding a new year?
-    for season in Season.objects.all():
-        yr = season.year
-        print(f'Loading weeks for {yr} ')
-        for week, gt in nfl_week:
-            week, created = Week.objects.get_or_create(year=season, week_no=week, gt=gt)
-            week.save()
-            print(f'Week # {week} {gt} loaded ')
-
-
-# TODO: add post season, update scores on PickGame, Pick, and PostPick, PostPickGame
-# def update_score(g):
-#     # get all the pick games that have a pick for this game and update the status as won or lost
-#     pgames = g.pick_game.all()
-#     for pg in pgames:
-#         if pg.team != None:
-#             if g.status == 'P':
-#                 if pg.team == g.winner:
-#                     pg.status = 'w'
-#                 elif g.home_score == g.visitor_score:
-#                     pg.status = 't'
-#                 else:
-#                     pg.status = 'l'
-#             else:
-#                 if pg.team == g.winner:
-#                     pg.status = 'W'
-#                 elif g.home_score == g.visitor_score:
-#                     pg.status = 'T'
-#                 else:
-#                     pg.status = 'L'
-#             pg.save()
-#             pg.pick_head.calc_score()
-#             print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
-
-# def set_winner(g):
-#     # set game winner
-#     if g.status[:1] == 'F':
-#         if g.home_score > g.visitor_score:
-#             g.winner = g.home_team
-#         elif g.home_score < g.visitor_score:
-#             g.winner = g.visitor_team
-#         else:
-#             g.winner = None
-#     g.save()
-
+def load_season(season):
+    for week, gt in nfl_week:
+        load_score('WEEK', season, gt, week)
 
 def load_score(url_type, year='2019', week_type='REG', week=1):
+    # https://www.rubydoc.info/gems/nfl_live_update/0.0.1/NFL/LiveUpdate/ScoreStrip/Games
     if url_type == 'LIVE':
         url = 'http://www.nfl.com/liveupdate/scorestrip/ss.xml'
     elif url_type == 'POST':
@@ -74,201 +70,181 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
             week)
     else:
         url = None
-    print(f'URL: {url}')
+        # print(f'Error: invalid URL type entered: {url_type}')
+        logger.error(f'Error: invalid URL type entered: {url_type}')
+
+        return
+
+    # print(f'URL: {url}')
+    logger.debug(f'URL: {url}')
 
     # doc has 3 sections <gms>,  <gds>, <bps>
     # gms has scores for WC, DIV, CON, PRO (Pro Bowl), SB
     # gds has score by qtr and latest down and distance
     # bps has last play for game i.e t. coleman 1 yd. TD run SF
     page = requests.get(url)
-    page_xml = ET.fromstring(page.content)
-    for ss in page_xml:
-        if ss.tag == 'gms':  # add case for gds as well
+    root_xml = ET.fromstring(page.content) # root 'ss' element
+    for child in root_xml:  #children are gms and possibly gds
+        if child.tag == 'gms':  # add case for gds as well
+            # get attributes of element
+            w = y = gd = bph = bf = 0
+            wk_type = ''
+            for name, value in child.attrib.items():
+                if name == 'bph':
+                    bph = value
+                elif name == 'bf':
+                    bf = value
+                elif name == 'gd':
+                    gd = int(value)
+                elif name == 't':  # P for PRE, PreSeason; R for REG, Regular Season; P or POST for PostSeason
+                    wk_type = value
+                elif name == 'y':  # year i.e. 2019
+                    year = value
+                elif name == 'w':  # week i.e. 17
+                    week_no = value
+
             cnt = 0
-            for game_rec in ss:
+            created = False
+            for game_rec in child:  # 1-many g (game) records under gms tag
                 cnt += 1
                 created = False
-                # get existing game record
                 try:
-                    g = Game.objects.get(eid=game_rec.attrib['eid'])  # changed from gsis
-                except ObjectDoesNotExist:
+                    eid = game_rec.attrib['eid']   # changed from gsis
+                except:  # what should the except be?
+                    # print(f'Error: eid attibute is missing')
+                    logger.error('Error: eid attibute is missing from XML.  Unable to continue')
+                    continue  # go to next game_rec
+
+                try:
+                    game = Game.objects.get(eid=eid)  # changed from gsis
+                    created = False
+                except Game.DoesNotExist:
                     if url_type in ('LIVE', 'POST'):
                         # throw error  and stop don't create  the game should have been created by load season
-                        print(f'Game not found for {game_rec.attrib["eid"]}')
+                        # print(f'Game not found for {eid}')
+                        logger.error(f'Game not found for {eid}')
                         continue
                     elif url_type == 'WEEK':
                         # we are loading the schedule so we can create the game if needed
-                        g = Game()
-                        y = Season.objects.get(year=year)
-                        week = Week.objects.get(year=y, week_no=ss.attrib['w'], gt=week_type)
-                        print(f'Game created for Week #{week.week_no}')
-                        g.week = week
+                        game = Game()
+                        season = Season.objects.get(year=year)
+                        print(f'Get Week: year: {season.year} week: {week_no} gt: {week_type}')
+                        week = Week.objects.get(year=season, week_no=week_no, gt=week_type)
+                        # print(f'Game created for Week #{week.week_no}')
+                        logger.debug(f'Game created for Week #{week.week_no}')
+                        game.week = week
                         created = True
-                try:
-                    g.gd = int(ss.attrib['gd'])
-                except KeyError:
-                    print(f'xml rec has no attribute "gd" ')
-                g.wk_no = ss.attrib['w']  # week i.e. 17
-                g.year = ss.attrib['y']  # year i.e. 2019
-                g.t = ss.attrib['t']  # P for PRE, PreSeason; R for REG, Regular Season; P for POST, PostSeason
-                try:
-                    g.bph = ss.attrib['bph']
-                except KeyError:
-                    pass
-                y = ss.attrib['y']
-                w = ss.attrib['w']
 
-                for k, val in key.items():
-                    try:
-                        if k in ('hs', 'vs'):
-                            int_val = int(game_rec.attrib[k])
-                            setattr(g, val, int_val)
-                        elif k in ('h'):
-                            g.home = game_rec.attrib[k]
-                            if game_rec.attrib[k] == 'LA':
-                                team = 'LAR'
-                            else:
-                                team = game_rec.attrib[k]
-                            g.home_team = Team.objects.get(team_abrev=team)
-                        elif k in ('v'):
-                            g.visitor = game_rec.attrib[k]
-                            if game_rec.attrib[k] == 'LA':
-                                team = 'LAR'
-                            else:
-                                team = game_rec.attrib[k]
-                            g.visitor_team = Team.objects.get(team_abrev=team)
-                        elif k in ('htn', 'vtn', 'n') and type == 'reg_live':
-                            pass
-                            # print(f'Skipping {val} for {type}')
-                        else:
-                            setattr(g, val, game_rec.attrib[k])
-                    except KeyError:
-                        pass
-                # end of for k, val in key.items():
-                g.save()
+                game.eid = eid
+                game.wk_no = week_no
+                game.year = year
+                game.t = wk_type
+                game.gd = gd
+                game.bph = bph
+                game.bf = bf
+
+                # get attributes from gms record in for loop
+                for name, value in game_rec.attrib.items():
+                    print(f'name: {name} : value: {value}')
+                    eid = gsis = home_score = visitor_score = red_zone= 0
+                    gt = ga = home = visitor = home_nickname = visitor_nickname = home_teamname = visitor_teamname = ''
+                    if name == 'gsis':      # GSIS (Game Statistics and Information System)
+                        game.gsis = value
+                    elif name == 'gt':
+                        game.gt = value
+                    elif name == 'h':
+                        home = value
+                        game.home = value
+                        # if home == 'LA':
+                        #     home = 'LAR'
+                        try:
+                            game.home_team = Team.objects.get(team_abrev=home)
+                        except Team.DoesNotExist:
+                            team = Team(team_abrev=home, short_name=home, team_name=home)
+                            team.save()
+                            game.home_team = team
+                    elif name == 'hnn':
+                        game.home_nickname = value
+                    elif name == 'htn':
+                        game.home_teamname = value
+                    elif name == 'hs':
+                        game.home_score = int(value)
+                    elif name == 'v':
+                        visitor = value
+                        game.visitor = value
+                        # if visitor == 'LA':
+                        #     visitor = 'LAR'
+                        try:
+                            game.visitor_team = Team.objects.get(team_abrev=visitor)
+                        except Team.DoesNotExist:
+                            team = Team(team_abrev=visitor, short_name=visitor, team_name=visitor)
+                            team.save()
+                            game.visitor_team = team
+                    elif name == 'vnn':
+                        game.visitor_nickname = value
+                    elif name == 'vtn':
+                        game.visitor_teamname = value
+                    elif name == 'vs':
+                        game.visitor_score = int(value)
+                    elif name == 'rz':
+                        game.red_zone = value
+                    elif name == 'ga':
+                        game.ga = value
+                    elif name == 't':
+                        game.time = value
+                    elif name == 'q':
+                        game.status = value
+                    elif name == 'd':
+                        game.day = value
+                    elif name == 'p':
+                        game.p = value
+                    elif name == 'k':
+                        game.k = value
+                    elif name == 'n':
+                        game.network = value
+                # end of for name, value in game_rec.attrib.items():
                 # calculate datetime field of game from eid and time
-                year = int(g.eid[:4])
-                mo = int(g.eid[4:6])
-                day = int(g.eid[6:8])
-                hour, min = g.time.split(':')
+
+                print(f'game EID: {game.eid}')
+                date_yr = int(game.eid[:4])
+                mo = int(game.eid[4:6])
+                day = int(game.eid[6:8])
+                hour, minute = game.time.split(':')
                 if int(hour) < 12:
-                    h = int(hour) + 12
+                    hour = int(hour) + 12
                 else:
-                    h = int(hour)
-                g.date_time = make_aware(datetime(year, mo, day, h, int(min)), pytz.timezone('America/New_York'))
-                g.save()
+                    hour = int(hour)
+                dt = str(date_yr) + '-' + str(mo) + '-' + str(day) + ' ' + str(hour) + ':' + str(minute)
+                dt2 = datetime.strptime(dt,'%Y-%m-%d %H:%M')
+                game.date_time = make_aware(datetime(date_yr, mo, day, hour, int(minute)), pytz.timezone('America/New_York'))
 
-                g.set_winner
-                g.update_score()
-                print(f'Game #{cnt} {g.id} loaded for Week {g.wk_no} for year {g.year} Winner: {g.winner} ')
+                game.save()
+
+                if game.home_nickname is not None and game.home_nickname != '':
+                    game.home_team.short_name = game.home_nickname.capitalize()
+
+                if game.home_teamname is not None and game.home_teamname != '':
+                    game.home_team.team_name = game.home_teamname.capitalize()
+
+                if game.visitor_nickname is not None and game.visitor_nickname != '':
+                    game.visitor_team.short_name = game.visitor_nickname.capitalize()
+
+                if game.visitor_teamname is not None and game.visitor_teamname != '':
+                    game.visitor_team.team_name = game.visitor_teamname.capitalize()
+
+                game.set_winner()
+                game.update_score()
+                # print(f'Game #{cnt} {game.id} loaded for Week {game.wk_no} year {game.year} Winner: {game.winner} ')
+                logger.debug(f'Game #{cnt} {game.id} loaded for Week {game.wk_no} year {game.year} Winner: {game.winner}')
             # end of for game_rec in ss:
-            # set points game true for the last game in the list if this is a regular or pre season game and just created
-            # don't set for post season and don't reset once created
-            if g.week.gt in ('PRE', 'REG') and created == True:
-                g.points_game = True
-                print(
-                    f'Points Game set for  {g.id} {g.gsis} {g.eid} loaded for Week {g.week} for year {g.year} Winner: {g.winner} ')
-                g.save()
-        # elif:  add else if for gds which has more live score data, dad = down and distance
 
+            # set points game for the last game in the list if this is a regular or pre season game and just created
+            if game.week.gt in ('PRE', 'REG') and created == True:
+                game.points_game = True
+                print(f'Points Game set {game.gsis} {game.eid} Week/Yr {game.week}/{game.year} Winner: {game.winner}')
+                logger.debug(f'Points Game set {game.gsis} {game.eid} Week/Yr {game.week}/{game.year} Winner: {game.winner}')
+                game.save()
+        # elif child.tag == 'gds':  add else if for gds which has more live score data, dad = down and distance
+        #             attributes: gsis, eid, vtol, htol, vot, v4q, v3q, v2q, v1q, hot, h4q, h3q, h2q, h1q,
 
-def LoadSeason(season):
-    yr = season
-    # game_first = -4 # start at -4 to get PreSeason games
-    # game_last = 22  # 22 is SB
-    for week, gt in nfl_week:
-        load_score('WEEK', yr, gt, week)
-
-        # # get games and convert to XML
-        # url = 'http://www.nfl.com/ajax/scorestrip?season=' + yr + '&seasonType=' + gt + '&week=' + str(week)
-        # page = requests.get(url)
-        # print(f'Page URL: {url}')
-        # page_xml = ET.fromstring(page.content)
-        #
-        # for gms in page_xml:
-        #    cnt = 0
-        #    for score in gms:
-        #       cnt += 1
-        #       try:
-        #          sch_game = Game.objects.get(eid=score.attrib['eid'])
-        #       except ObjectDoesNotExist:
-        #          sch_game = Game()
-        #          sch_game.gd = gms.attrib['gd']
-        #          sch_game.wk_no = gms.attrib['w']
-        #          sch_game.year = gms.attrib['y']
-        #          sch_game.t = gms.attrib['t']
-        #          y = Season.objects.get(year = yr)
-        #          week = Week.objects.get(year = y, week_no = gms.attrib['w'], gt = gt)
-        #          print(f'Week #{week.week_no} ')
-        #          sch_game.week = week
-        #
-        #       for k in score.attrib.keys():
-        #          if k == 'eid' and sch_game.eid == '':
-        #                sch_game.eid = score.attrib[k]
-        #          elif k == 'gsis' and sch_game.gsis == '':
-        #             sch_game.gsis = score.attrib[k]
-        #          elif k == 'd':
-        #             sch_game.day = score.attrib[k]
-        #          elif k == 't':
-        #             sch_game.time = score.attrib[k]
-        #          elif k == 'q':
-        #             sch_game.status = score.attrib[k]
-        #          elif k == 'k':
-        #             sch_game.k = score.attrib[k]
-        #          elif k == 'h':
-        #             sch_game.home = score.attrib[k]
-        #             if score.attrib[k] == 'LA':
-        #                team = 'LAR'
-        #             else:
-        #                team = score.attrib[k]
-        #             sch_game.home_team = Team.objects.get(team_abrev = team)
-        #          elif k == 'hnn':
-        #             sch_game.home_name = score.attrib[k]
-        #          elif k == 'hs':
-        #             if score.attrib[k].isnumeric():
-        #                sch_game.home_score = score.attrib[k]
-        #          elif k == 'v':
-        #             sch_game.visitor = score.attrib[k]
-        #             if score.attrib[k] == 'LA':
-        #                team = 'LAR'
-        #             else:
-        #                team = score.attrib[k]
-        #             sch_game.visitor_team = Team.objects.get(team_abrev = team)
-        #          elif k == 'vnn':
-        #             sch_game.visitor_name = score.attrib[k]
-        #          elif k == 'vs':
-        #             if score.attrib[k].isnumeric():
-        #                sch_game.visitor_score = score.attrib[k]
-        #          elif k == 'p':
-        #             sch_game.p = score.attrib[k]
-        #          elif k == 'rz':
-        #             sch_game.red_zone = score.attrib[k]
-        #          elif k == 'ga':
-        #             sch_game.ga = score.attrib[k]
-        #          elif k == 'gt':
-        #             sch_game.gt = score.attrib[k]
-        #       #End of for k in score.attrib.keys():
-        #       sch_game.save()
-        #       # calculate datetime field of game from eid and time
-        #       year = int(sch_game.eid[:4])
-        #       mo = int(sch_game.eid[4:6])
-        #       day = int(sch_game.eid[6:8])
-        #       hour, min = sch_game.time.split(':')
-        #       if int(hour) < 12:
-        #          h = int(hour) + 12
-        #       else:
-        #          h = int(hour)
-        #       sch_game.date_time = make_aware(datetime(year, mo, day, h, int(min)), pytz.timezone('America/New_York'))
-        #       sch_game.save()
-        #
-        #       # set game winner
-        #       # update pick scores for picks
-        #       set_winner(sch_game)
-        #       update_score(sch_game)
-        #       print(f'Game #{cnt} {sch_game.id} loaded for Week {week} for year {year} Winner: {sch_game.winner} ')
-        #
-        #    #End of for score in gms:
-        #    print(f'Week # {week} loaded for year {year}')
-        # #End of for gms in page_xml:
-    # End of for i in range(game_first, game_last+1):
-# End of function
+        # elif child.tag == 'bps':  add else if for bps which has more dad = down and distance and last play

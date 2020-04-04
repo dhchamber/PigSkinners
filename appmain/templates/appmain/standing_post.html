@@ -2,14 +2,11 @@
 {% load static %}
 {% block title %}Postseason Standings{% endblock title %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/standing_post.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/standing_post.css' %}?version=4">
 <body>
 <div class="table-responsive">
-    <table class="table  table-bordered table-hover table-sm"
-                id="pick_make"
-                data-toggle="table"
-                data-sortable="true"
-                data-height="400" >
+    <table class="table table-hover table-sm" id="pick_make">
+<!--table-bordered        -->
         <thead class="thead-light">
         <tr userRow='false'>
             <td style="BORDER-TOP: black solid;BORDER-BOTTOM: black solid" colspan='15'><font size=+1><b>Postseason Stats</b></font></td>
@@ -17,8 +14,6 @@
         <tr userRow='false'>
             <td rowspan=3 align=center style="BORDER-RIGHT: black solid;BORDER-BOTTOM: black solid">
                 <font id="ftWeekCombo" name="ftWeekCombo"><b>Playoffs!</b></font></td>
-
-    <!--Loop through the picks recordset and put the info into the dictionary-->
 
     <!--Put in the round groupings-->
     <!--Round 1-->
@@ -39,40 +34,123 @@
         </tr>
     <!--Now show the Visiting teams-->
             <tr userRow='false'>
-                {% for pg in picks.first.post_games.all %}
-                    {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 10 %}
-                        {% if pg.game.visitor_team == pg.game.win_team and pg.v_team != 'TBD' %}
-                            <td class=endcol><div class=winteam>{{ pg.v_team }}</div></td>
+                        {% if games.AWC45 != None and games.AWC45.visitor_team == games.AWC45.game_winner %}
+                            <td><div class=winteam>{{ games.AWC45.visitor_team.short_name }}</div></td>
                         {% else %}
-                            <td class=endcol><div class=hand>{{ pg.v_team }}</div></td>
+                            <td><div class=hand>{{ games.AWC45.visitor_team.short_name }}</div></td>
                         {% endif %}
-                    {% else %}
-                        {% if pg.game.visitor_team == pg.game.win_team and pg.v_team != 'TBD' %}
-                            <td><div class=winteam>{{ pg.v_team }}</div></td>
+                        {% if games.AWC36 != None and games.AWC36.visitor_team == games.AWC36.game_winner %}
+                            <td><div class=winteam>{{ games.AWC36.visitor_team.short_name }}</div></td>
                         {% else %}
-                            <td><div class=hand>{{ pg.v_team }}</div></td>
+                            <td><div class=hand>{{ games.AWC36.visitor_team.short_name }}</div></td>
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
+                        {% if games.NWC45 != None and games.NWC45.visitor_team == games.NWC45.game_winner %}
+                            <td><div class=winteam>{{ games.NWC45.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.NWC45.visitor_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NWC36 != None and games.NWC36.visitor_team == games.NWC36.game_winner %}
+                            <td class=endcol><div class=winteam>{{ games.NWC36.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ games.NWC36.visitor_team.short_name }}</div></td>
+                        {% endif %}
+
+                        {% if games.ADIV1 != None and games.ADIV1.visitor_team == games.ADIV1.game_winner %}
+                            <td><div class=winteam>{{ games.ADIV1.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.ADIV1.visitor_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.ADIV2 != None and games.ADIV2.visitor_team == games.ADIV2.game_winner %}
+                            <td><div class=winteam>{{ games.ADIV2.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.ADIV2.visitor_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NDIV1 != None and games.NDIV1.visitor_team == games.NDIV1.game_winner %}
+                            <td><div class=winteam>{{ games.NDIV1.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.NDIV1.visitor_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NDIV2 != None and games.NDIV2.visitor_team == games.NDIV2.game_winner %}
+                            <td class=endcol><div class=winteam>{{ games.NDIV2.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ games.NDIV2.visitor_team.short_name }}</div></td>
+                        {% endif %}
+
+                        {% if games.ACONF != None and games.ACONF.visitor_team == games.ACONF.game_winner %}
+                            <td><div class=winteam>{{ games.ACONF.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.ACONF.visitor_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NCONF != None and games.NCONF.visitor_team == games.NCONF.game_winner %}
+                            <td class=endcol><div class=winteam>{{ games.NCONF.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ games.NCONF.visitor_team.short_name }}</div></td>
+                        {% endif %}
+
+                        {% if games.SB != None and games.SB.visitor_team == games.SB.game_winner %}
+                            <td><div class=winteam>{{ games.SB.visitor_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.SB.visitor_team.short_name }}</div></td>
+                        {% endif %}
             </tr>
 
     <!--Now show the Home Teams-->
-            <tr userRow='false'>
-                {% for pg in picks.first.post_games.all %}
-                    {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 10 %}
-                        {% if pg.game.home_team == pg.game.win_team and pg.h_team != 'TBD' %}
-                            <td style="BORDER-BOTTOM: black solid;" class=endcol><div class=winteam>{{ pg.h_team }}</div></td>
+            <tr userRow='false' class=home_bottom>
+                        {% if games.AWC45 != None and games.AWC45.home_team == games.AWC45.game_winner %}
+                            <td><div class=winteam>{{ games.AWC45.home_team.short_name }}</div></td>
                         {% else %}
-                            <td style="BORDER-BOTTOM: black solid;" class=endcol><div class=hand>{{ pg.h_team }}</div></td>
+                            <td><div class=hand>{{ games.AWC45.home_team.short_name }}</div></td>
                         {% endif %}
-                    {% else %}
-                        {% if pg.game.home_team == pg.game.win_team and pg.h_team != 'TBD' %}
-                            <td style="BORDER-BOTTOM: black solid;"><div class=winteam>{{ pg.h_team }}</div></td>
+                        {% if games.AWC36 != None and games.AWC36.home_team == games.AWC36.game_winner %}
+                            <td><div class=winteam>{{ games.AWC36.home_team.short_name }}</div></td>
                         {% else %}
-                            <td style="BORDER-BOTTOM: black solid;"><div class=hand>{{ pg.h_team }}</div></td>
+                            <td><div class=hand>{{ games.AWC36.home_team.short_name }}</div></td>
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
+                        {% if games.NWC45 != None and games.NWC45.home_team == games.NWC45.game_winner %}
+                            <td><div class=winteam>{{ games.NWC45.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.NWC45.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NWC36 != None and games.NWC36.home_team == games.NWC36.game_winner %}
+                            <td class=endcol><div class=winteam>{{ games.NWC36.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ games.NWC36.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.ADIV1 != None and games.ADIV1.home_team == games.ADIV1.game_winner %}
+                            <td><div class=winteam>{{ games.ADIV1.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.ADIV1.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.ADIV2 != None and games.ADIV2.home_team == games.ADIV2.game_winner %}
+                            <td><div class=winteam>{{ games.ADIV2.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.ADIV2.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NDIV1 != None and games.NDIV1.home_team == games.NDIV1.game_winner %}
+                            <td><div class=winteam>{{ games.NDIV1.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.NDIV1.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NDIV2 != None and games.NDIV2.home_team == games.NDIV2.game_winner %}
+                            <td class=endcol><div class=winteam>{{ games.NDIV2.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ games.NDIV2.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.ACONF != None and games.ACONF.home_team == games.ACONF.game_winner %}
+                            <td><div class=winteam>{{ games.ACONF.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.ACONF.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.NCONF != None and games.NCONF.home_team == games.NCONF.game_winner %}
+                            <td class=endcol><div class=winteam>{{ games.NCONF.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td class=endcol><div class=hand>{{ games.NCONF.home_team.short_name }}</div></td>
+                        {% endif %}
+                        {% if games.SB != None and games.SB.home_team == games.SB.game_winner %}
+                            <td><div class=winteam>{{ games.SB.home_team.short_name }}</div></td>
+                        {% else %}
+                            <td><div class=hand>{{ games.SB.home_team.short_name }}</div></td>
+                        {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -82,21 +160,62 @@
                 <tr onclick="highlightRow(this)" userRow='true' id = 'tr{{ pick.user.id }}' name = 'tr{{ pick.user.id }}' isCompared='false'>
                     <td class=userrow >{{ pick.user.first_name }}&nbsp;{{ pick.user.last_name }}</td>
     <!--loop through all of this user's picks-->
-                        {% for pgame in pick.post_games.all %}
-                            {% if forloop.counter == 4 or forloop.counter == 8 or forloop.counter == 10 %}
-                                {% if pgame.team == pgame.game.win_team %}
-                                    <td class=userendcol><div class=wingame>{{ pgame.team.short_name }}</div></td>
-                                {% else %}
-                                    <td class=userendcol><div>{{ pgame.team.short_name }}</div></td>
-                                {% endif %}
-                            {% else %}
-                                {% if pgame.team == pgame.game.win_team %}
-                                    <td class=userendcol><div class=wingame>{{ pgame.team.short_name }}</div></td>
-                                {% else %}
-                                    <td class=userendcol><div>{{ pgame.team.short_name }}</div></td>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
+                        {% if pick.AWC45 == games.AWC45.game_winner %}
+                            <td><div class=wingame>{{ pick.AWC45.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.AWC45.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.AWC36 == games.AWC36.game_winner %}
+                            <td><div class=wingame>{{ pick.AWC36.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.AWC36.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.NWC45 == games.NWC45.game_winner %}
+                            <td><div class=wingame>{{ pick.NWC45.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.NWC45.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.NWC36 == games.NWC36.game_winner %}
+                            <td class=userendcol><div class=wingame>{{ pick.NWC36.short_name }}</div></td>
+                        {% else %}
+                            <td class=userendcol><div>{{ pick.NWC36.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.ADIV1 == games.ADIV1.game_winner %}
+                            <td><div class=wingame>{{ pick.ADIV1.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.ADIV1.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.ADIV2 == games.ADIV2.game_winner %}
+                            <td><div class=wingame>{{ pick.ADIV2.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.ADIV2.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.NDIV1 == games.NDIV1.game_winner %}
+                            <td><div class=wingame>{{ pick.NDIV1.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.NDIV1.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.NDIV2 == games.NDIV2.game_winner %}
+                            <td class=userendcol><div class=wingame>{{ pick.NDIV2.short_name }}</div></td>
+                        {% else %}
+                            <td class=userendcol><div>{{ pick.NDIV2.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.ACONF == games.ACONF.game_winner %}
+                            <td><div class=wingame>{{ pick.ACONF.short_name }}</div></td>
+                        {% else %}
+                            <td><div>{{ pick.ACONF.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.NCONF == games.NCONF.game_winner %}
+                            <td class=userendcol><div class=wingame>{{ pick.NCONF.short_name }}</div></td>
+                        {% else %}
+                            <td class=userendcol><div>{{ pick.NCONF.short_name }}</div></td>
+                        {% endif %}
+                        {% if pick.SB == games.SB.game_winner %}
+                            <td class=userendcol><div class=wingame>{{ pick.SB.short_name }}</div></td>
+                        {% else %}
+                            <td class=userendcol><div>{{ pick.SB.short_name }}</div></td>
+                        {% endif %}
+
 
     <!--Put in the points game information-->
                     <td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ pick.points_rem|default:0 }}</td>
@@ -104,6 +223,9 @@
                     <td align=center style="BORDER-LEFT: black solid; sAdditStyle" >{{ pick.calc_score }}</td>
                 </tr>
             {% endfor %}
+            <tr class="home_bottom">
+                <td colspan="15"></td>
+            </tr>
 
     <!--end the stats table-->
         </tbody>

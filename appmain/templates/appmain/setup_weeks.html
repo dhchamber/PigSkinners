@@ -31,7 +31,7 @@
                                         <th width=10px>&nbsp;</th>
                                         <th>Picks Closed</th>
                                         <th width=10px>&nbsp;</th>
-                                        <th>Planned Date Closed</th>
+                                        <th>Forecast Date Closed</th>
                                         <th width=10px>&nbsp;</th>
                                         <th>Actual Date Closed</th>
                                     </tr>
@@ -39,10 +39,10 @@
                                         <td colspan=11><hr></td>
                                     </tr>
                                         {% for week in weeks %}
-                                            <tr weekNum="{{ week.week_no }}" dataRow="true">
-                                                <td align=center>{{ week.week_no }}</td>
+                                            <tr weekNum="{{ week }}" dataRow="true">
+                                                <td align=center>{{ week }}</td>
                                                 <td>&nbsp;</td>
-        										<td><>{{ week.start_dt }}</td>
+        										<td>{{ week.start_dt }}</td>
 		        								<td>&nbsp;</td>
 				        						<td>{{ week.end_dt }}</td>
 						        				<td>&nbsp;</td>

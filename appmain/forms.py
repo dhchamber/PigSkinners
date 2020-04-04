@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ModelForm, inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Team, Pick, PickGame, Profile, PostPick2
+from .models import Season, Week, Team, Pick, PickGame, Profile, PostPick
 
 
 class ProfileForm(ModelForm):
@@ -21,10 +21,11 @@ class ProfileForm(ModelForm):
                                    help_text='Optional. Format: (xxx)xxx-xxxx')
 
 
-class PostPick2Form(ModelForm):
+class PostPickForm(ModelForm):
     class Meta:
-        model = PostPick2
-        widgets = {'user': forms.HiddenInput, 'year': forms.HiddenInput, 'points': forms.HiddenInput,
+        model = PostPick
+        widgets = {'user': forms.HiddenInput, 'year': forms.HiddenInput,
+                   # 'points': forms.HiddenInput,
                    'saved': forms.HiddenInput, 'entered_by': forms.HiddenInput, 'updated_by': forms.HiddenInput,
                    'AWC45': forms.HiddenInput, 'AWC36': forms.HiddenInput, 'NWC45': forms.HiddenInput,
                    'NWC36': forms.HiddenInput, 'AvtDiv1': forms.HiddenInput, 'NvtDiv1': forms.HiddenInput,
@@ -33,9 +34,9 @@ class PostPick2Form(ModelForm):
                    'ACONF': forms.HiddenInput, 'NCONF': forms.HiddenInput, 'SB': forms.HiddenInput}
         fields = '__all__'
 
-        def __init__(self, *args, **kwargs):
-            super(PostPick2Form, self).__init__(*args, **kwargs)
-            self.fields['entered_by'].required = False
+        # def __init__(self, *args, **kwargs):
+        #     super(PostPickForm, self).__init__(*args, **kwargs)
+        #     self.fields['entered_by'].required = False
 
 
 
@@ -77,5 +78,31 @@ class GamePick(ModelForm):
         model = PickGame
         exclude = ()
 
+# GamePickFormSet = inlineformset_factory(Pick, PickGame, form=GamePick, extra=1)
 
-GamePickFormSet = inlineformset_factory(Pick, PickGame, form=GamePick, extra=1)
+class WeekForm(ModelForm):
+    class Meta:
+        model = Week
+        exclude = ('graphics_folder', 'standings_report_ran', 'weekly_standings_html', 'mobile_standings_report_ran', 'mobile_weekly_standings_html')
+
+# class WeekForm(ModelForm):
+#     class Meta:
+#         model = Week
+#         # widgets = {'user': forms.HiddenInput, 'wk': forms.HiddenInput, 'entered_by': forms.HiddenInput,
+#         fields = '__all__'
+#         exclude = ()
+#
+#
+# class SeasonForm(ModelForm):
+#     class Meta:
+#         model = Season
+#         # widgets = {'user': forms.HiddenInput, 'wk': forms.HiddenInput, 'entered_by': forms.HiddenInput,
+#         fields = '__all__'
+#         exclude = ()
+#
+# class WeeksForm(ModelForm):
+#     class Meta:
+#         model = Week
+#         exclude = ('graphics_folder', 'standings_report_ran', 'weekly_standings_html', 'mobile_standings_report_ran', 'mobile_weekly_standings_html')
+#
+# WeekFormSet = inlineformset_factory(Season, Week, form=WeeksForm, fields=['year', 'week_no', 'gt'], extra=1, can_delete=True)

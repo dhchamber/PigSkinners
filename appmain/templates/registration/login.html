@@ -1,0 +1,23 @@
+{% extends "appmain/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Log in to your account</h4>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                <button type="submit" class="btn btn-primary btn-block">Forgot Password</button>
+            </form>
+            <form method="post" action="/'password_reset/">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+<!--                <button type="submit" class="btn btn-primary btn-block">Forgot Password</button>-->
+                 <input type="button" onclick="window.location.href = 'password_reset/';" value="Forgot Password"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}

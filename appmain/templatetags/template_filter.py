@@ -120,3 +120,14 @@ def get_winners(qset, pick):
     else:
         return ''
     return winners
+
+@register.filter(name='ptsgame')
+def ptsgame(week):
+    # print(f'Pts Game: {week.game_wk.filter(points_game=True)}')
+    game = week.game_wk.filter(points_game=True)
+    if game:
+        txt = game[0].home_team.team_name + ' vs. ' + game[0].visitor_team.team_name
+    else:
+        txt = ''
+    return txt
+

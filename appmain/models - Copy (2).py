@@ -1,7 +1,5 @@
 from django.db import models
 from django.db.models import Max, Min, Case, When, Sum, Q, IntegerField
-from django_extensions.db.models import CreationDateTimeField, ModificationDateTimeField
-from django.utils.translation import ugettext_lazy as _  # for TimeStampMixin
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -24,24 +22,10 @@ nfl_week = [(1, 'PRE'), (2, 'PRE'), (3, 'PRE'), (4, 'PRE'), (1, 'REG'), (2, 'REG
 
 
 class TimeStampMixin(models.Model):
-    # TimeStampedModel
-    # https: // github.com / django - extensions / django - extensions / blob / master / django_extensions / db / models.py
-    # An abstract base class model that provides self-managed "created" and
-    # "modified" fields.
-
-    # created = models.DateTimeField(auto_now_add=True)
-    # updated = models.DateTimeField(auto_now=True)
-
-    created = CreationDateTimeField(_('created'))
-    modified = ModificationDateTimeField(_('modified'))
-
-    def save(self, **kwargs):
-        self.update_modified = kwargs.pop('update_modified', getattr(self, 'update_modified', True))
-        super(TimeStampMixin, self).save(**kwargs)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        get_latest_by = 'modified'
-        ordering = ('-modified', '-created',)
         abstract = True
 
 
@@ -51,21 +35,20 @@ class Team(models.Model):
         verbose_name = 'team'
         verbose_name_plural = 'teams'
         indexes = [models.Index(fields=['team_abrev', 'short_name'])]
-        constraints = [models.UniqueConstraint(fields=['team_abrev'], name='abrev_team')]
         # ordering = ['team_name']  # removed so union would work
 
     team_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=50)
     team_abrev = models.CharField(max_length=3)
-    # web_address = models.URLField(max_length=200)
-    # logo = models.CharField(max_length=50)
-    division = models.CharField(max_length=50, default='NA')
-    # logo_file_name = models.CharField(max_length=50)
-    win = models.SmallIntegerField(default=0)
-    lose = models.SmallIntegerField(default=0)
-    tie = models.SmallIntegerField(default=0)
-    conference = models.CharField(max_length=50, default='NA')
-    city_name = models.CharField(max_length=50, default= 'NA')
+    web_address = models.URLField(max_length=200)
+    logo = models.CharField(max_length=50)
+    division = models.CharField(max_length=50)
+    logo_file_name = models.CharField(max_length=50)
+    win = models.SmallIntegerField()
+    lose = models.SmallIntegerField()
+    tie = models.SmallIntegerField()
+    conference = models.CharField(max_length=50)
+    city_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.team_name
@@ -144,15 +127,11 @@ class Season(models.Model):
         # end_dt is start of last game of the week, so add 5 hours to be sure game is over
         # end_dt and Now are both UTC so they can be compared
         for week in self.weeks.all():
-            # if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
-            if week.week_no == 5:
+            if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
                 break
-        if not self.weeks.all():  # there are no weeks in the Season
-            logger.debug(f'There are no weeks in Season {self.year}')
-            week = None
-        else:
-            # print(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
-            logger.debug(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
+
+        # print(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
+        logger.debug(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
         return week
 
     def season_scores(self):
@@ -212,7 +191,7 @@ class Week(models.Model):
 
     year = models.ForeignKey(Season, null=True, blank=True, on_delete=models.SET_NULL, related_name='weeks')
     week_no = models.PositiveSmallIntegerField(null=False)  # ? week of the season 1-17, 18-21
-    gt = models.CharField(max_length=4)
+    gt = models.CharField(max_length=3)
     closed = models.BooleanField(default=False)
     closed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, default=1)
     date_closed = models.DateTimeField(blank=True, null=True)
@@ -253,6 +232,8 @@ class Week(models.Model):
         max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
         # print(f'Week: {self.week_no} / min date: {min_date}, max date: {max_date}')
         logger.debug(f'Week: {self.week_no} / min date: {min_date}, max date: {max_date}')
+        # print(
+        #     f'Week: {self.week_no} / min date day: {min_date.strftime("%d")}, max date day: {max_date.strftime("%d")}')
         logger.debug(f'Week: {self.week_no}/min_date: {min_date.strftime("%d")}/max_date: {max_date.strftime("%d")}')
         if min_date.strftime("%d") == max_date.strftime("%d"):
             date_str = min_date.strftime("%b. %d")
@@ -383,7 +364,7 @@ class Game(TimeStampMixin):
     def points_score(self):
         return self.home_score + self.visitor_score
 
-    # TODO: this is the same code as in load nfl games.  consolidate!
+    # this is the same code as in load nfl games.  consolidate!
     def get_date(self):
         # the time of the game from the game feed is in Eastern time, convert to Mountain
         year = int(self.eid[:4])
@@ -399,7 +380,8 @@ class Game(TimeStampMixin):
         mst_date = est_date.astimezone(pytz.timezone('America/Denver'))  # conver date to MST
         return mst_date
 
-    def pros_win_team(self):
+    # TODO: rename to indicate currently winning team for prospective standings
+    def win_team(self):
         if self.home_score > self.visitor_score:
             return self.home_team
         elif self.home_score < self.visitor_score:
@@ -408,7 +390,7 @@ class Game(TimeStampMixin):
             pass
 
     # changed to just show final games for KOTH standings
-    def pros_lose_team(self):
+    def lose_team(self):
         if self.status == 'F' or self.status == 'FO':
             if self.home_score > self.visitor_score:
                 return self.visitor_team
@@ -470,28 +452,6 @@ class Game(TimeStampMixin):
                 # print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
                 logger.debug(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
 
-        pgames = self.pick_rev_game.all()
-        for pg in pgames:
-            if pg.team is not None:
-                if self.status == 'P':
-                    if pg.team == self.winner:
-                        pg.status = 'w'
-                    elif self.home_score == self.visitor_score:
-                        pg.status = 't'
-                    else:
-                        pg.status = 'l'
-                else:
-                    if pg.team == self.winner:
-                        pg.status = 'W'
-                    elif self.home_score == self.visitor_score:
-                        pg.status = 'T'
-                    else:
-                        pg.status = 'L'
-                pg.save()
-                pg.pickrev_head.calc_score()
-                # print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
-                logger.debug(f'update score on pick revs: {pg.pickrev_head.id} with score: {pg.pickrev_head.calc_score()}')
-
 
     def set_winner(self):
         if self.status[:1] == 'F':
@@ -543,43 +503,6 @@ class PostSeason(models.Model):
     ACONF = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='ACONF_game')
     NCONF = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='NCONF_game')
     SB = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='SB_game')
-
-    def get_losers(self):
-        losers = []
-        if self.AWC45 is not None and self.AWC45.status[:1] == 'F':
-            losers.append(self.AWC45.game_loser())
-
-        if self.NWC45 is not None and self.NWC45.status[:1] == 'F':
-            losers.append(self.NWC45.game_loser())
-
-        if self.AWC36 is not None and self.AWC36.status[:1] == 'F':
-            losers.append(self.AWC36.game_loser())
-
-        if self.NWC36 is not None and self.NWC36.status[:1] == 'F':
-            losers.append(self.NWC36.game_loser())
-
-        if self.ADIV1 is not None and self.ADIV1.status[:1] == 'F':
-            losers.append(self.ADIV1.game_loser())
-
-        if self.ADIV2 is not None and self.ADIV2.status[:1] == 'F':
-            losers.append(self.ADIV2.game_loser())
-
-        if self.NDIV1 is not None and self.NDIV1.status[:1] == 'F':
-            losers.append(self.NDIV1.game_loser())
-
-        if self.NDIV2 is not None and self.NDIV2.status[:1] == 'F':
-            losers.append(self.NDIV2.game_loser())
-
-        if self.ACONF is not None and self.ACONF.status[:1] == 'F':
-            losers.append(self.ACONF.game_loser())
-
-        if self.NCONF is not None and self.NCONF.status[:1] == 'F':
-            losers.append(self.NCONF.game_loser())
-
-        if self.SB is not None and self.SB.status[:1] == 'F':
-            losers.append(self.SB.game_loser())
-
-        return losers
 
     def set_games(self):
         year = Season.objects.get(current=True)
@@ -685,13 +608,13 @@ class PickManager(models.Manager):
             self.save()
 
 
-class Pick(TimeStampMixin):
+class Pick(models.Model):
     class Meta:
         verbose_name = 'pick'
         verbose_name_plural = 'picks'
         indexes = [models.Index(fields=['user', 'wk'])]
         ordering = ['user', 'wk']
-        constraints = [models.UniqueConstraint(fields=['user', 'wk'], name='pick_user_wk')]
+        constraints = [models.UniqueConstraint(fields=['user', 'wk'], name='pick_uweser_wk')]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='picks', default=1)
     wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_wk')
@@ -724,6 +647,18 @@ class Pick(TimeStampMixin):
 
     def pick_year(self):
         return self.wk.year
+
+    # def koth_eligible(self):
+    #     year = Season.objects.get(current=True)
+    #     weeks = Week.objects.filter(year=year, gt='REG', closed=True)
+    #     picks = Pick.objects.filter(user=self.user, wk__in=weeks)
+    #     eligible = True
+    #     for pick in picks:
+    #         if pick.koth_game:  # remove this.  if week is closed and no pick then eliminated
+    #             if pick.koth_team == pick.koth_game.game_loser():
+    #                 eligible = False
+    #                 break
+    #     return eligible
 
     # return 1 if user won KOTH game, 0 if lost or tied
     def koth_score(self):
@@ -782,7 +717,7 @@ class Pick(TimeStampMixin):
         return self.user.capitalize()
 
 
-class PickGame(TimeStampMixin):
+class PickGame(models.Model):
     class Meta:
         verbose_name = 'pick game'
         verbose_name_plural = 'pick games'
@@ -803,73 +738,6 @@ class PickGame(TimeStampMixin):
         else:
             return 0
 
-
-class PickRevisionManager(models.Manager):
-    def create_rev(self, pick):
-        print(f'In Create Rev')
-        pick_revs = PickRevision.objects.filter(user=pick.user, wk=pick.wk)
-        print(f'Got Revs: {pick_revs.count()}')
-        if pick_revs:
-            new_rev = pick_revs.aggregate(max_rev=Max('revision', default=0, output_field=IntegerField(), ))['max_rev'] + 1
-        else:
-            new_rev = 1
-        pick_rev = self.create(revision=new_rev, user=pick.user, wk=pick.wk, points=pick.points, koth_game=pick.koth_game, koth_team=pick.koth_team, pick_score=pick.pick_score, saved=pick.saved, entered_by=pick.entered_by, updated_by=pick.updated_by)
-        for pick_game in pick.pickgame_set.all():
-            rev_game = PickRevGame.objects.create(pickrev_head=pick_rev, game=pick_game.game, team=pick_game.team, status=pick_game.status, entered_by=pick_game.entered_by, updated_by=pick_game.updated_by)
-            rev_game.save()
-        pick.save()
-        return pick
-
-
-class PickRevision(models.Model):
-    class Meta:
-        verbose_name = 'pick revision'
-        verbose_name_plural = 'pick revisions'
-        indexes = [models.Index(fields=['revision', 'user', 'wk'])]
-        ordering = ['user', 'wk']
-        constraints = [models.UniqueConstraint(fields=['revision', 'user', 'wk'], name='pickrev_user_wk')]
-
-    revision = models.PositiveSmallIntegerField(default=1)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_revs', default=1)
-    wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_wk')
-    points = models.PositiveSmallIntegerField()
-    koth_game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_koth_game')
-    koth_team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_koth_team')
-    pick_score = models.PositiveSmallIntegerField(default=0)
-    saved = models.BooleanField(default=False)
-    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_entered')
-    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_updated')
-
-    objects = PickRevisionManager()
-
-    def calc_score(self):
-        sum_score = 0
-        for pg in self.pickrevgame_set.all():
-            sum_score += pg.pick_score()
-        self.pick_score = sum_score
-        self.save()
-
-        return sum_score
-
-class PickRevGame(models.Model):
-    class Meta:
-        verbose_name = 'pick game'
-        verbose_name_plural = 'pick games'
-
-    pickrev_head = models.ForeignKey(PickRevision, on_delete=models.CASCADE)  # ,related_name='pick_head'
-    game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_game')
-    # team must be one of 2 teams in the game
-    team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_team')
-    # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
-    status = models.CharField(max_length=1, null=True)
-    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_game_entered')
-    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_game_updated')
-
-    def pick_score(self):
-        if self.game.game_winner() == self.team:  # change from win_team to game_winner
-            return 1
-        else:
-            return 0
 
 class PostPickManager(models.Manager):
     def create_ps_pick(self, user, year):
@@ -973,59 +841,107 @@ class PostPick(models.Model):
         return score
 
     def points_rem(self):
+        # possible point remaining if game is not defined yet, or
+        # game is not final and you have a team in the game
+        # TODO: if team in the pick has lost in a previous game then no point remaining for that
+        # add function to get post season losers, from PostSeason model
+        # then compare each users pick to losers
         rem = 0
         year = Season.objects.get(current=True)
         games = PostSeason.objects.get(year=year)
         points = PostPoint.objects.all().order_by('id')
 
-        if games.get_losers():  # only process if there are at least 1 loser so far
-            if self.AWC45 is not None and (games.AWC45 is None or games.AWC45.status[:1] != 'F'):
-                rem += points[0].points  # add WC points
+        # TODO: so here in WC round no change
+        if games.AWC45 is None or games.AWC45.status[:1] != 'F':
+            rem += points[0].points  # add WC points
 
-            if self.AWC36 is not None and (games.AWC36 is None or games.AWC36.status[:1] != 'F'):
-                rem += points[0].points  # add WC points
+        if games.AWC36 is None or games.AWC36.status[:1] != 'F':
+            rem += points[0].points  # add WC points
 
-            if self.NWC45 is not None and (games.NWC45 is None or games.NWC45.status[:1] != 'F'):
-                rem += points[0].points  # add WC points
+        if games.NWC45 is None or games.NWC45.status[:1] != 'F':
+            rem += points[0].points  # add WC points
 
-            if self.NWC36 is not None and (games.NWC36 is None or games.NWC36.status[:1] != 'F'):
-                rem += points[0].points  # add WC points
+        if games.NWC36 is None or games.NWC36.status[:1] != 'F':
+            rem += points[0].points  # add WC points
 
-            if self.ADIV1 is not None and (games.ADIV1 is None or games.ADIV1.status[:1] != 'F'):
-                if self.ADIV1 not in games.get_losers():
+        # TODO: if ADIV1 team is a loser in AWC36 or 45 then no point
+        if games.ADIV1 is None:
+            rem += points[1].points  # add DIV points
+        else:
+            if self.ADIV1 in (
+                    games.ADIV1.home_team, games.ADIV1.visitor_team, games.ADIV2.home_team, games.ADIV2.visitor_team):
+                if games.ADIV1.status[:1] != 'F':
                     rem += points[1].points  # add DIV points
 
-            if self.ADIV2 is not None and (games.ADIV2 is None or games.ADIV2.status[:1] != 'F'):
-                if self.ADIV2 not in games.get_losers():
+        if games.ADIV2 is None:
+            rem += points[1].points  # add DIV points
+        else:
+            if self.ADIV2 in (
+                    games.ADIV1.home_team, games.ADIV1.visitor_team, games.ADIV2.home_team, games.ADIV2.visitor_team):
+                if games.ADIV2.status[:1] != 'F':
                     rem += points[1].points  # add DIV points
 
-            if self.NDIV1 is not None and (games.NDIV1 is None or games.NDIV1.status[:1] != 'F'):
-                if self.NDIV1 not in games.get_losers():
+        if games.NDIV1 is None:
+            rem += points[1].points  # add DIV points
+        else:
+            if self.NDIV1 in (
+                    games.NDIV1.home_team, games.NDIV1.visitor_team, games.NDIV2.home_team, games.NDIV2.visitor_team):
+                if games.NDIV1.status[:1] != 'F':
                     rem += points[1].points  # add DIV points
 
-            if self.NDIV2 is not None and (games.NDIV2 is None or games.NDIV2.status[:1] != 'F'):
-                if self.NDIV2 not in games.get_losers():
+        if games.NDIV2 is None:
+            rem += points[1].points  # add DIV points
+        else:
+            if self.NDIV2 in (
+                    games.NDIV1.home_team, games.NDIV1.visitor_team, games.NDIV2.home_team, games.NDIV2.visitor_team):
+                if games.NDIV2.status[:1] != 'F':
                     rem += points[1].points  # add DIV points
 
-            if self.ACONF is not None and (games.ACONF is None or games.ACONF.status[:1] != 'F'):
-                if self.ACONF not in games.get_losers():
-                    rem += points[2].points  # add DIV points
+        if games.ACONF is None:
+            if games.ADIV1 is None or games.ADIV2 is None:
+                rem += points[2].points  # add CONF points
+            elif self.ADIV1 in (
+                    games.ADIV1.home_team, games.ADIV1.visitor_team, games.ADIV2.home_team,games.ADIV2.visitor_team) \
+                    or self.ADIV2 in (
+                    games.ADIV1.home_team, games.ADIV1.visitor_team, games.ADIV2.home_team, games.ADIV2.visitor_team):
+                rem += points[2].points  # add CONF points
+            rem += points[2].points  # add CONF points
+        else:
+            if self.ACONF in (games.ACONF.home_team, games.ACONF.visitor_team):
+                if games.ACONF.status[:1] != 'F':
+                    rem += points[2].points  # add CONF points
 
-            if self.NCONF is not None and (games.NCONF is None or games.NCONF.status[:1] != 'F'):
-                if self.NCONF not in games.get_losers():
-                    rem += points[2].points  # add DIV points
+        if games.NCONF is None:  # if CONF is not defined yet, you only have possible points if you have a team in DIV
+            if games.NDIV1 is None or games.NDIV2 is None:
+                rem += points[2].points  # add CONF points
+            elif self.NDIV1 in (
+                    games.NDIV1.home_team, games.NDIV1.visitor_team, games.NDIV2.home_team,games.NDIV2.visitor_team) \
+                    or self.NDIV2 in (
+                    games.NDIV1.home_team, games.NDIV1.visitor_team, games.NDIV2.home_team, games.NDIV2.visitor_team):
+                rem += points[2].points  # add CONF points
+        else:
+            if self.NCONF in (games.NCONF.home_team, games.NCONF.visitor_team):
+                if games.NCONF.status[:1] != 'F':
+                    rem += points[2].points  # add CONF points
 
-            if self.SB is not None and (games.SB is None or games.SB.status[:1] != 'F'):
-                if self.SB not in games.get_losers():
-                    rem += points[3].points  # add DIV points
+        if games.SB is None:  # if SB is not defined yet, you only have possible points if you have a team in CONF
+            if games.ACONF is None or games.NCONF is None:
+                rem += points[3].points  # add SB points
+            elif self.NCONF in (games.NCONF.home_team, games.NCONF.visitor_team) \
+                    or self.ACONF in (games.ACONF.home_team, games.ACONF.visitor_team):
+                rem += points[3].points  # add SB points
+        else:
+            if self.SB in (games.SB.home_team, games.SB.visitor_team):
+                if games.SB.status[:1] != 'F':
+                    rem += points[3].points  # add SB points
 
         return rem
 
 
 class PostPoint(models.Model):
     class Meta:
-        verbose_name = 'post season point'
-        verbose_name_plural = 'post season points'
+        verbose_name = 'point'
+        verbose_name_plural = 'points'
         indexes = [models.Index(fields=['gt'])]
         ordering = ['gt']
         constraints = [models.UniqueConstraint(fields=['gt'], name='gt_pts')]
@@ -1035,3 +951,34 @@ class PostPoint(models.Model):
 
     def __str__(self):
         return str(self.points)
+
+# class Game(models.Model):  (from Pigskinners script)
+#     Year_id = models.PositiveSmallIntegerField()
+#     wk = models.ForeignKey(Week,null=True,blank=True,on_delete=models.SET_NULL,related_name='game_wk')
+#     game_number = models.PositiveSmallIntegerField()
+#     game_date = models.DateField()
+#     home_team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='home_team')
+#     visitor_team = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='visitor_team')
+#     points_game = models.BooleanField(default=False)
+#     tv_network = models.CharField(max_length=10)
+
+
+# class Result(models.Model):
+#     schedule_id = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='result_game')
+#     visitor_team_score = models.PositiveSmallIntegerField()
+#     home_team_score = models.PositiveSmallIntegerField()
+#     loser_team_id = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='reuslt_loser')
+#   winner_team_id = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='result_winner')
+#     tie = models.BinaryField()
+#     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+#     updated_time = models.DateTimeField(default=datetime.now)
+
+# class PostResult(models.Model):
+#     schedule_id = models.ForeignKey(Game,null=True,blank=True,on_delete=models.SET_NULL,related_name='post_game')
+#     visitor_team_score = models.PositiveSmallIntegerField()
+#     home_team_score = models.PositiveSmallIntegerField()
+#     loser_team_id = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='post_loser')
+#     winner_team_id = models.ForeignKey(Team,null=True,blank=True,on_delete=models.SET_NULL,related_name='post_winner')
+#     tie = models.BinaryField()
+#     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+#     updated_time = models.DateTimeField(default=datetime.now)

@@ -1,0 +1,4 @@
+    .home_content {
+        -moz-opacity:1%;
+        filter: alpha(opacity=1);
+    }

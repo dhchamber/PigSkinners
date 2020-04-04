@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+# import djcelery  #https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
+# djcelery.setup_loader()
+# BROKER_URL = 'django://'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,10 +40,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',      # django session management, session values
     'django.contrib.messages',      # django messages in request to return errors
     'django.contrib.staticfiles',
+    'django_extensions',
+    'debug_toolbar',
+    'werkzeug',
     'django_tables2',
     'crispy_forms',
+    # 'djcelery',                     # https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
+    # 'kombu.transport.django',
+    'background_task',              # https://django-background-tasks.readthedocs.io/en/latest/
+    # 'rest_framework',
+    # 'channels',                    # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
     'appmain',
 ]
+
+# https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
+# CHANNEL_LAYERS = {
+#       'default': {
+#       'BACKEND': 'asgi_redis.RedisChannelLayer',
+#       'CONFIG': {
+#          'hosts': [('localhost', 6379)],  # redis_host
+#     },
+#     'ROUTING': 'routing.application',
+#    },
+# }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -54,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', # Associates users with requests using sessions
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'PigSkinners.urls'
@@ -87,7 +110,16 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pigskinners',
+        'USER': 'postgres',
+        'PASSWORD': 'New1User',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

@@ -1,0 +1,25 @@
+{% extends "appmain/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load tz %}
+{% block title %}Weeks{% endblock title %}
+{% block content %}
+
+    <h2>Here are all seasons: </h2>
+    <div>
+        <ul>
+            {% for week in object_list %}
+                <li>{{ week.week_no }} {{ week.gt }} |
+<!--                    <a href="{% url 'season-update' season.pk %}">edit</a>-->
+                    <a href="{% url 'season-delete' season.pk %}">delete</a>
+                </li>
+            {% empty %}
+                <li>No weeks exist.</li>
+            {% endfor %}
+
+        </ul>
+        <p>
+            <a href="{% url 'season-add' %}">add Season</a>
+        </p>
+    </div>
+{% endblock %}

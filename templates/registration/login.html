@@ -1,23 +1,19 @@
-<!-- templates/registration/login.html -->
+<!--https://hackernoon.com/django-authentication-login-logout-and-password-change-reset-a5f3d9313cd5-->
 {% extends 'appmain/base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
-    <div class="container">
-		    <div class="row">
-                <div class="col" id="divMenuLogo" name="divMenuLogo" >
-		            <div class="row justify-content-md-center">
-                        <a align="center"><b><font size="+3" face="garamond">Football Fun For The Whole Family!</font></b></a>
-                    </div>
-                </div>
-            </div>
-		    <div class="row">
+    <div class="card">
+        <div class="card-body">
                 <div class="col" id="divLoginContent" name="divLoginContent" >
 		            <div class="row justify-content-md-center">
                         <form method="post">
                             {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="submit" >Login</button>
+                            {{ form|crispy }}
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+<!--                            <button type="submit" class="btn btn-primary btn-block">Forgot Password</button>-->
+                            <button class="btn btn-primary btn-block" onclick="window.location.href = '/password_reset/';">Forgot Password!</button>
                         </form>
                     </div>
                 </div>

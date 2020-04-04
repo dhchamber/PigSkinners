@@ -6,6 +6,7 @@
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/pick_make.css' %}?version=2"/>
 {% endblock stylesheet %}
+{% block bodyextra %}onload="javascript:return window_onload();"{% endblock bodyextra %}
 {% block content %}
     {% if submitted %}
         <p class="success">Your pick was submitted successfully. Thank you.</p>
@@ -22,7 +23,9 @@
                 <table id="pick_make" class="table table-bordered table-hover table-sm" data-sortable="true">
                     <thead class="thead-light">
                     <tr dataRow="false">
-                        <td colspan="6" align="center"><font size="+1" ><b>Picks for week:  {{ pick.wk.gt }} {{ pick.wk.week_no }}
+                        <td colspan="6" align="center">
+                            <font size="+1">
+                            <b>Picks for week:  {{ pick.wk.gt }} {{ pick.wk.week_no }}
                             <br>Picks are:
                             {% if pick.wk.closed %}
                                 <a class="closed">CLOSED</a>
@@ -175,6 +178,6 @@
     {% endif %}
 
     {% block script %}
-        <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make.js' %}?version=7"></script>
+        <script type="text/javascript" language="Javascript" src="{% static 'appmain/js/pick_make.js' %}?version=2"></script>
     {% endblock %}
 {% endblock content %}

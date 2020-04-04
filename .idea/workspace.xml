@@ -2,8 +2,67 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/appmain/load_nflgames - Copy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/logging.cfg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0106_auto_20200320_2111.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0107_auto_20200321_0623.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0108_auto_20200325_0730.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0109_auto_20200328_0724.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0110_auto_20200328_0728.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0111_auto_20200328_1028.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0112_auto_20200331_1023.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0113_auto_20200331_1037.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0114_auto_20200331_1042.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/migrations/0115_auto_20200403_1656.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/models - Copy (2).py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/models - Copy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/jquery.formset.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/password_reset.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/static/css/pick_revision.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/task.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_confirm_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/setup_season.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post - Copy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dumpdata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_done.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_email.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_subject.txt.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/static/css/standing_post.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/standing_post.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/game_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/game_view_OLD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/new_games.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/new_games_OLD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/post_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/setup_weeks.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/setup_weeks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,11 +97,14 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/appmain/templates/registration" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/penv/Lib/site-packages/django/contrib/admin/static/admin/css/base.css" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.23336746" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\static\css" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\templates\registration" />
       <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\templates\appmain" />
@@ -131,14 +193,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="559" y="201" key="#Inspections/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583333035300" />
-    <state x="698" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1578453036219">
+    <state x="698" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585336396452">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="698" y="349" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578453036219" />
-    <state x="740" y="297" key="FileChooserDialogImpl" timestamp="1582232129126">
+    <state x="698" y="349" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585336396452" />
+    <state x="740" y="297" key="FileChooserDialogImpl" timestamp="1585436987529">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="740" y="297" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1582232129126" />
+    <state x="740" y="297" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585436987529" />
     <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1578695855921">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -159,14 +221,18 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="794" y="260" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580420900743" />
-    <state x="517" y="127" key="SettingsEditor" timestamp="1583463862225">
+    <state x="570" y="143" key="SettingsEditor" timestamp="1585783961771">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="517" y="127" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583463862225" />
+    <state x="570" y="143" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585783961771" />
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1584557923452">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584557923452" />
+    <state x="771" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584829455486">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="771" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584829455485" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1583942098292">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -180,9 +246,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/appmain/models.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/appmain/urls.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/appmain/urls.py</url>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

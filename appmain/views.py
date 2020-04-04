@@ -3,16 +3,35 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate  # new
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count, Case, When, Sum, F, Q, IntegerField, FloatField, ExpressionWrapper
-from appmain.forms import SignUpForm, ProfileForm, PostPick2Form
+from appmain.forms import SignUpForm, ProfileForm, PostPickForm, WeekForm
 from django.contrib.auth.forms import AdminPasswordChangeForm  # PasswordChangeForm requires old password
 from django.contrib.auth import update_session_auth_hash
 from django.utils import timezone
+from .tables import SeasonTable
+from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
+from django.views.generic import ListView, CreateView, DeleteView, ListView, UpdateView
+from django.urls import reverse, reverse_lazy
+from django.db import transaction
 import pytz
 import logging
 
-from appmain.models import Season, Week, Seed, Pick, Team, Game, PostPick, Profile, PostPick2 , PostSeason
-from appmain.load_nflgames import load_week, LoadSeason, load_score
+from appmain.models import Season, Week, Pick, Team, Game, Profile, PostPick, PostSeason, PickRevision
+from appmain.load_nflgames import load_season, load_score
+from appmain.task import load_scores
+
+# from django.conf import settings
+# from django.core.exceptions import ObjectDoesNotExist
+# from django.contrib.auth.forms import UserCreationForm  # new
+# from django.http import HttpResponseRedirect, HttpResponse
+# from django.urls import reverse, reverse_lazy
+# from django.views.generic import ListView, CreateView
+# from django.db import transaction
+# from django.template.defaultfilters import floatformat
+# from .tables import TeamTable, GameTable, PickGameTable
+# from django.template.defaultfilters import floatformat
 
 logger = logging.getLogger(__name__)
 
@@ -51,19 +70,6 @@ logging.config.dictConfig({
         },
     },
 })
-
-
-# from django.conf import settings
-# from django.core.exceptions import ObjectDoesNotExist
-# from django.contrib.auth.forms import UserCreationForm  # new
-# from django.http import HttpResponseRedirect, HttpResponse
-# from django.urls import reverse, reverse_lazy
-# from django.views.generic import ListView, CreateView
-# from django.db import transaction
-# from django.template.defaultfilters import floatformat
-# from .tables import TeamTable, GameTable, PickGameTable
-# from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
-# from django.template.defaultfilters import floatformat
 
 
 @login_required
@@ -124,46 +130,11 @@ def signup(request):
     return render(request, 'appmain/signup.html', {'form': form})
 
 
-# @login_required
-# def update_profile(request, user_id):
-#     user = User.objects.get(pk=user_id)
-#     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
-#     user.save()
-
-
-# tutorial page 1
-# class GameListView(SingleTableView):
-#     model = Game
-#     table_class = GameTable
-#     template_name = 'appmain/game_view.html'
-#
-#     def get_recordset(self):
-#         # week = get_selected_week(request)
-#         # week = Week.objects.get(week=wk)
-#         year = Season.objects.get(current=True)
-#         week = Week.objects.get(year=year, week_no=22, gt="REG")
-#         return Game.objects.filter(week=week)
-
-
-# tutorial/views.py
-# class GameListView(SingleTableView):
-#    model = Game
-#    table_class = GameTable
-#    template_name = 'appmain/game.html'
-
-
-# class TeamListView(SingleTableView):
-#     model = Team
-#     table_class = TeamTable
-#     template_name = 'appmain/team.html'
-
-
-# django-tables2 readthedocs.io
-
 def get_selected_week(request):
     year = Season.objects.get(current=True)
-    week_no = request.session.get('week', 1)
-    gt = request.session.get('gt', 'REG')
+    curr_week = year.current_week()
+    week_no = request.session.get('week', curr_week.week_no)
+    gt = request.session.get('gt', curr_week.gt)
     try:
         wk = Week.objects.get(year=year, week_no=week_no, gt=gt)
     except Week.DoesNotExist:
@@ -259,47 +230,32 @@ def random_picks(request):
     return redirect(url)
 
 
-# tutorial page 2 - QuerySets
-# takes table GameTable based on model Game
-# @login_required
-# def game_list(request):
-#     if request.method == 'POST' and 'btnLoadSeason' in request.POST:
-#         LoadSeason((request.POST.get('txtYear')))
-#     elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
-#         load_week()
-#     elif request.method == 'POST' and 'btnLoadLive' in request.POST:
-#         load_score('REG')
-#     else:
-#         # week = Week.objects.get(week_no=15)
-#         # table = GameTable(Game.objects.filter(week=week))
-#         # table = GameTable(Game.objects.all())
-#         # return render(request, "appmain/game.html",{"table" : table})
-#
-#     return redirect('setup_games')
-
-
 # setup/games
-@login_required
+@staff_member_required
 def games_view(request):
     timezone.activate(pytz.timezone('America/Denver'))
     if request.method == 'POST' and 'btnLoadSeason' in request.POST:
-        LoadSeason((request.POST.get('txtYear')))
+        load_season((request.POST.get('txtYear')))
         request.method = 'GET'
-        return redirect(games_view)
+        # return redirect(games_view)
+        return redirect('setup_games')
 
     elif request.method == 'POST' and 'btnLoadWeeks' in request.POST:
-        load_week()
+        year = Season.objects.get(year=request.POST.get('txtYear'))
+        year.set_season_weeks()
         return redirect('setup_games')
 
     elif request.method == 'POST' and 'btnLoadLive' in request.POST:
         load_score('LIVE')
         return redirect('setup_games')
-
     elif request.method == 'POST' and 'btnLoadWeek' in request.POST:
         year = Season.objects.get(current=True)
         week_no = request.session.get('week', 1)
         gt = request.session.get('gt', 'REG')
         load_score('WEEK', year, gt, week_no)
+        return redirect('setup_games')
+    elif request.method == 'POST' and 'btntask' in request.POST:
+        load_scores('LIVE')
         return redirect('setup_games')
     else:
         year = Season.objects.get(current=True)
@@ -311,51 +267,81 @@ def games_view(request):
         return render(request, 'appmain/games_view.html', {'games': games})
 
 
-# @login_required
-# def post_list(request):
-#     return render(request, 'appmain/post_list.html', {})
-
-
 @login_required
 def home(request):
+    # TODO: what do do if there are no weeks?  replace home page with different stripped down page?
     timezone.activate(pytz.timezone('America/Denver'))
-    year = Season.objects.get(current=True)
-    # TODO: get week from session, default to current week
-    weeks = Week.objects.filter(year=year, gt='REG')
-    return render(request, 'appmain/home.html', {'weeks': weeks})
+    try:
+        year = Season.objects.get(current=True)
+        week = year.current_week()
+    except Season.DoesNotExist:
+        week = None
 
-
-# @login_required
-# def picks_view(request):
-#    games = Game.objects.filter(wk_id=1).order_by('gsis')
-#    return render(request, 'appmain/pick_view.html', {'games': games})
-
-# remove replace with form view and html
-# def picks_make(request):
-#     return render(request, 'appmain/pick_make.html', {})
+    return render(request, 'appmain/home.html', {'week': week})
 
 
 @login_required
 def pick_revision(request):
-    # if not request.user.is_authenticated:
-    #    return redirect('%s?next=%s' %(settings.LOGIN_URL, request.path))
-    return render(request, 'appmain/pick_revision.html', {})
+    week = get_selected_week(request)
+
+    # what if no pick revisions exist?  is that a problem?
+    # week.create_picks()
+
+    games = Game.objects.filter(week=week).annotate(
+        h_pick=Count(Case(When(pick_game__team=F('home_team'), then=1), output_field=IntegerField(), ))) \
+        .annotate(
+        v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
+    num_games = games.count() + 1
+
+    user_picks = PickRevision.objects.filter(wk=week,user=request.user).annotate(
+        score=Sum(Case(When(pickrevgame__status='W', then=1), default=0, output_field=IntegerField(), )))
+
+    return render(request, 'appmain/pick_revision.html', {'user_picks': user_picks, 'games': games, 'num_games': num_games})
 
 
-@login_required
+
+@staff_member_required
 def teams_view(request):
     teams = Team.objects.all()
     return render(request, 'appmain/teams_view.html', {'teams': teams})
 
 
-@login_required
+# @login_required
+# def setup_weeks(request):
+#     year = Season.objects.get(current=True)
+#     weeks = Week.objects.filter(year=year)
+#     if request.method == 'POST':
+#         for week in weeks:
+#             closed = request.POST.get('chkClosed' + str(week.week_no))
+#             if closed == 'on':
+#                 closed = True
+#             else:
+#                 closed = False
+#             print(f'Week: {week.week_no} {week.closed}')
+#             week.closed = closed
+#             week.save()
+#
+#     return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
+
+
+@staff_member_required
 def setup_weeks(request):
     year = Season.objects.get(current=True)
     weeks = Week.objects.filter(year=year)
-    return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
+    if request.method == 'POST':
+        form = WeekForm(request.POST, instance=weeks)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Week successfully updated!')
+            return redirect('setup_weeks')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = WeekForm(instance=weeks.first)
+    return render(request, 'appmain/setup_weeks.html', {'form': form})
 
 
-# @login_required
+@login_required
 def pick_view(request):
     timezone.activate(pytz.timezone('America/Denver'))
 
@@ -427,11 +413,12 @@ def pick_make(request):
         if validated:
             pick.saved = True
             pick.save()
+            PickRevision.objects.create_rev(pick)
             messages.success(request, 'Your Picks have been saved!')
         else:
             pick.saved = False
             messages.warning(request, 'Please correct the errors below:')
-
+            pick.save()
         return redirect('pick_make')
     else:
         try:
@@ -450,83 +437,17 @@ def pick_make_ps(request):
     timezone.activate(pytz.timezone('America/Denver'))
     year = Season.objects.get(current=True)
     weeks = get_postseason_weeks()
-
-    try:
-        pick = PostPick.objects.get(year=year, user=request.user)
-    except PostPick.DoesNotExist:
-        pick = PostPick.objects.create_ps_pick(year=year, user=request.user)
-
-    afc = {}
-    nfc = {}
-    seeds = Seed.objects.filter(year=year)
-    for seed in seeds:
-        if seed.team.conference == "AFC":
-            afc[seed.seed] = seed.team
-            print(f'add seed: {seed.seed} team: {seed.team} to AFC')
-        else:
-            nfc[seed.seed] = seed.team
-            print(f'add seed: {seed.seed} team: {seed.team} to AFC')
-
-    # TODO: add bootstrap for s,m,l to headings and teams
-    # TODO: on load of saved picks, populated grid and also hidden frm fields
-    messages.info (request, 'Welcome to the Playoffs!')
-    return render(request, 'appmain/pick_make_ps.html',
-                  {'pick': pick, 'weeks': weeks, 'seeds': seeds, 'afc': afc, 'nfc': nfc})
-
-
-@login_required
-def pick_save_ps(request):
-    if request.method == 'POST':
-        # TODO: validate pick data is complete and return message if not
-        pick_id = request.POST.get("hidPickID")
-        print(f'Pick ID: {pick_id}')
-        pick = PostPick.objects.get(id=pick_id)
-        pick.updated_by = request.user
-        try:
-            pts = int(request.POST.get("bowlPoints"))
-            assert pts > 0
-            pick.points = pts
-        except AssertionError:
-            messages.warning(request, 'Invalid value for points game. Must be greater than zero.')
-        for i, game in enumerate(pick.post_games.all(), start=1):
-            ps_type = game.ps_type[7:]
-            print(f'Setting game for: {i} as Type: {ps_type}')
-            team_id = request.POST.get('hid' + ps_type)
-            print(f'Setting game for: {i} as Team: {team_id}')
-            if team_id != "":
-                try:
-                    team = Team.objects.get(id=team_id)
-                except Team.DoesNotExist:
-                    messages.warning(request, 'Failed Validate of Game {i}/team ID: {team_id} on Pick ID: {pick_id}')
-                    print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
-            else:
-                messages.warning(request, 'Failed Validate of Game {i}/team ID: {team_id} on Pick ID: {pick_id}')
-                print(f'Failed Validate of Game {i} on Pick ID: {request.POST.get("hidPickID")}')
-
-            game.team = team
-            game.save()
-
-        pick.saved = True
-        pick.save()
-        messages.success(request, 'Your Picks have been saved!')
-    return redirect('pick_make_ps')
-
-@login_required
-def pick_make_ps2(request):
-    timezone.activate(pytz.timezone('America/Denver'))
-    year = Season.objects.get(current=True)
-    weeks = get_postseason_weeks()
     post_season = PostSeason.objects.get(year=year)
     try:
-        post_pick = PostPick2.objects.get(year=year, user=request.user)
+        post_pick = PostPick.objects.get(year=year, user=request.user)
         print(f'Got Pick: {post_pick.id}')
-    except PostPick2.DoesNotExist:
-        post_pick = PostPick2.objects.create_ps_pick(year=year, user=request.user)
+    except PostPick.DoesNotExist:
+        post_pick = PostPick.objects.create_ps_pick(year=year, user=request.user)
         print(f'Created Pick: {post_pick.id}')
 
     if request.method == 'POST':
         print(f'In Post: {post_pick.user.username}')
-        form = PostPick2Form(request.POST, instance=post_pick)
+        form = PostPickForm(request.POST, instance=post_pick)
         form.fields['entered_by'].required = False
         form.fields['pick_score'].required = False
         # form.data['updated_by'] = request.user
@@ -539,12 +460,11 @@ def pick_make_ps2(request):
             print(f'Form Errors: {form.errors}')
 
     else:
-        form = PostPick2Form(instance=post_pick, initial={'updated_by': request.user, 'saved': True})
+        form = PostPickForm(instance=post_pick, initial={'updated_by': request.user, 'saved': True})
 
-    messages.info (request, 'Welcome to the Playoffs!')
+    messages.info(request, 'Welcome to the Playoffs!')
     return render(request, 'appmain/pick_make_ps2.html',
                   {'form': form, 'weeks': weeks, 'post_season': post_season})
-
 
 
 @login_required
@@ -617,11 +537,11 @@ def standing_week_prospective(request):
         return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
 
 
+@login_required
 def standing_koth(request):
     week = get_selected_week(request)
     week.create_picks()
 
-    # TODO: users eliminated count does not include missed picks
     user_picks = Pick.objects.filter(wk=week)
     if week.closed:
         return render(request, 'appmain/standing_koth.html', {'user_picks': user_picks, 'week': week})
@@ -629,30 +549,29 @@ def standing_koth(request):
         return render(request, 'appmain/standing_koth_open.html', {'user_picks': user_picks, 'week': week})
 
 
+@login_required
 def standing_post(request):
+    timezone.activate(pytz.timezone('America/Denver'))
     year = Season.objects.get(current=True)
-    weeks = Week.objects.filter(year=year, gt='POST')
-    games = Game.objects.filter(week__in=weeks)
+    games = PostSeason.objects.get(year=year)
 
     for user in User.objects.all():
         if user.is_active:
             try:
-                pick = PostPick.objects.get(user=user, year=Season.objects.get(current=True))
+                pick = PostPick.objects.get(user=user, year=year)
             except PostPick.DoesNotExist:
-                # TODO: add current season to call below
-                pick = PostPick.objects.create_ps_pick(user=user)
+                pick = PostPick.objects.create_ps_pick(user=user, year=year)
     picks = PostPick.objects.filter(year=Season.objects.get(current=True))
-    # TODO: calc score and points remaining for each user
 
     return render(request, 'appmain/standing_post.html', {'picks': picks, 'games': games})
 
 
+@login_required
 def standing_season(request):
-    # TODO: check timing on Season Standings load, what is causing the wait
     logger.debug('Starting standing_season: ' + request.user.username)
     year = Season.objects.get(current=True)
     weeks = Week.objects.filter(year=year, gt='REG')
-    curr_week = year.curr_week()
+    current_week = year.current_week()
 
     w1 = Week.objects.filter(year=year, gt='REG', week_no__lt=10)
     w2 = Week.objects.filter(year=year, gt='REG', week_no__gt=9)
@@ -671,9 +590,9 @@ def standing_season(request):
     logger.debug('Starting standing_season/got user subtotals: ' + request.user.username)
 
     winners = year.season_winner()
-    if curr_week.week_no == 9:
+    if current_week.week_no == 9:
         winner = winners['half1']
-    elif curr_week.week_no == 17:
+    elif current_week.week_no == 17:
         winner = winners['half2']
     else:
         winner = User.objects.none()
@@ -691,4 +610,187 @@ def standing_season(request):
 
     return render(request, 'appmain/standing_season.html',
                   {'weeks': weeks, 'users': users, 'user_picks': user_picks, 'game_cnt': game_cnt, 'winner': winner,
-                   'curr_week': curr_week})
+                   'curr_week': current_week})
+
+
+# read only view of seasons with button to
+class SeasonListView(LoginRequiredMixin, SingleTableView):
+    model = Season
+    table_class = SeasonTable
+    login_required = True
+    template_name = 'appmain/setup_season.html'
+
+# class SeasonCreate(CreateView):
+#     model = Season
+#     template_name = 'appmain/season_create.html'
+#     form_class = SeasonForm1
+#     # fields = ['year', 'current', 'start_date', 'end_date']
+#     success_url = None
+#
+#     def get_context_data(self, **kwargs):
+#         data = super(SeasonCreate, self).get_context_data(**kwargs)
+#         if self.request.POST:
+#             data['weeks'] = WeekFormSet(self.request.POST)
+#         else:
+#             data['weeks'] = WeekFormSet()
+#         return data
+#
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         weeks = context['weeks']
+#         with transaction.atomic():
+#             form.instance.created_by = self.request.user
+#             self.object = form.save()
+#             if weeks.is_valid():
+#                 weeks.instance = self.object
+#                 weeks.save()
+#         return super(SeasonCreate, self).form_valid(form)
+#
+#     def get_success_url(self):
+#         return reverse_lazy('appmain:season_detail', kwargs={'pk': self.object.pk})
+#
+#
+# class SeasonUpdate(UpdateView):
+#     model = Season
+#     # success_url = '/'
+#     # fields = ['year', 'current', 'start_date', 'end_date']
+#     # template_name = 'appmain/season_create.html'
+#     template_name = 'appmain/season_form.html'
+#     form_class = SeasonForm
+#     success_url = None
+#
+#     def get_context_data(self, **kwargs):
+#         data = super(SeasonUpdate, self).get_context_data(**kwargs)
+#         if self.request.POST:
+#             data['weeks'] = WeekFormSet(self.request.POST, instance=self.object)
+#         else:
+#             data['weeks'] = WeekFormSet(instance=self.object)
+#         return data
+#
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         weeks = context['weeks']
+#         with transaction.atomic():
+#             form.instance.created_by = self.request.user
+#             self.object = form.save()
+#             if weeks.is_valid():
+#                 weeks.instance = self.object
+#                 weeks.save()
+#         return super(SeasonUpdate, self).form_valid(form)
+#
+#     def get_success_url(self):
+#         return reverse_lazy('appmain:season_detail', kwargs={'pk': self.object.pk})
+#
+#
+# class SeasonWeekCreate(CreateView):
+#     model = Season
+#     fields = ['year', 'current', 'start_date', 'end_date']
+#     success_url = reverse_lazy('season-list')
+#
+#     def get_context_data(self, **kwargs):
+#         data = super(SeasonWeekCreate, self).get_context_data(**kwargs)
+#         if self.request.POST:
+#             data['weeks'] = WeekFormSet(self.request.POST)
+#         else:
+#             data['weeks'] = WeekFormSet()
+#         return data
+#
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         weeks = context['weeks']
+#         with transaction.atomic():
+#             self.object = form.save()
+#
+#             if weeks.is_valid():
+#                 weeks.instance = self.object
+#                 weeks.save()
+#         return super(SeasonWeekCreate, self).form_valid(form)
+#
+#
+# class SeasonWeekUpdate(UpdateView):
+#     model = Season
+#     fields = ['year', 'current', 'start_date', 'end_date']
+#     success_url = reverse_lazy('season-list')
+#
+#     def get_context_data(self, **kwargs):
+#         data = super(SeasonWeekUpdate, self).get_context_data(**kwargs)
+#         if self.request.POST:
+#             data['weeks'] = WeekFormSet(self.request.POST, instance=self.object)
+#         else:
+#             data['weeks'] = WeekFormSet(instance=self.object)
+#         return data
+#
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         weeks = context['weeks']
+#         with transaction.atomic():
+#             self.object = form.save()
+#
+#             if weeks.is_valid():
+#                 weeks.instance = self.object
+#                 weeks.save()
+#         return super(SeasonWeekUpdate, self).form_valid(form)
+#
+#
+# class SeasonDelete(DeleteView):
+#     model = Season
+#     success_url = reverse_lazy('season-list')
+
+
+# class SeasonList(ListView):
+#     model = Season
+
+
+# replaced by Class SeasonListView
+# @login_required
+# def setup_season(request):
+#     submitted = False
+#     # profile = Season.objects.get(user=request.user)
+#     years = Season.objects.all()
+#     if request.method == 'POST':
+#         print(f'POST:', request.POST)
+#         form = SeasonForm(request.POST, instance=years)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/user/profile/?submitted=True')
+#     else:
+#         years = Season.objects.all()
+#         form = SeasonForm(years)
+#         if 'submitted' in request.GET:
+#             submitted = True
+#
+#     return render(request, 'appmain/setup_season.html', {'form': form})
+
+
+# 'submitted': submitted
+
+
+# @login_required
+# def update_profile(request, user_id):
+#     user = User.objects.get(pk=user_id)
+#     user.profile.bio = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
+#     user.save()
+
+# tutorial/views.py
+# class GameListView(SingleTableView):
+#    model = Game
+#    table_class = GameTable
+#    template_name = 'appmain/game.html'
+
+
+# class TeamListView(SingleTableView):
+#     model = Team
+#     table_class = TeamTable
+#     template_name = 'appmain/team.html'
+
+
+# django-tables2 readthedocs.io
+
+# @login_required
+# def picks_view(request):
+#    games = Game.objects.filter(wk_id=1).order_by('gsis')
+#    return render(request, 'appmain/pick_view.html', {'games': games})
+
+# remove replace with form view and html
+# def picks_make(request):
+#     return render(request, 'appmain/pick_make.html', {})

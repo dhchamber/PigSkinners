@@ -1,0 +1,62 @@
+    .border_top_bottom {
+            BORDER-TOP: black solid;
+            BORDER-BOTTOM: black solid;
+            text-align: center;
+    }
+    .border_bottom_right {
+            BORDER-RIGHT: black solid;
+            BORDER-BOTTOM: black solid;
+            text-align: center;
+    }
+    .user_row {
+            BORDER-RIGHT: black solid;
+            BORDER-BOTTOM: silver solid thin;
+            text-align: center;
+            font-size: small;
+    }
+    .user_cell_win {
+            BORDER-BOTTOM: silver solid thin;
+            BACKGROUND-COLOR: silver;
+    }
+    .user_cell_lost {
+            BORDER-BOTTOM: silver solid thin;
+            COLOR: silver;
+    }
+    .user_cell_non {
+            BORDER-BOTTOM: silver solid thin;
+            COLOR: black;
+    }
+    .winteam {
+            CURSOR: grab;
+            BORDER-TOP: black thin solid;
+            BORDER-BOTTOM: black thin solid;
+            BORDER-LEFT: black thin solid;
+            BORDER-RIGHT: black thin solid;
+            text-align: center;
+    }
+    .prosteam {
+            CURSOR: grab;
+            BACKGROUND-COLOR: light-gray;
+            text-align: center;
+    }
+    .loseteam {
+            CURSOR: grab;
+            text-align: center;
+    }
+    .pts_game_head {
+            CURSOR: hand;
+            text-align: center;
+            BORDER-LEFT: black solid;
+            BORDER-BOTTOM: black solid;
+    }
+    .pts_game {
+            text-align: center;
+            BORDER-LEFT: black solid;
+            BORDER-BOTTOM: silver solid thin;
+    }
+    .curr_user{
+            BACKGROUND-COLOR: yellow;
+    }
+    .week_winner{
+            BACKGROUND-COLOR: red;
+    }

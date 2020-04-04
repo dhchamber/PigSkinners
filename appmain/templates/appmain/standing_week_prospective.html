@@ -39,7 +39,7 @@
                 {% for game in games %}
                     {% if game.visitor_team == game.game_winner %}
                         <td><div class=winteam onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText('{{ game.visitor_team.short_name }}'));" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
-                    {% elif game.visitor_team == game.win_team %}
+                    {% elif game.visitor_team == game.pros_win_team %}
                         <td><div class="winteam bg-info" onmouseover="javascript:this.T_STATIC=true;return escape(TooltipText('{{ game.visitor_team.short_name }}'));" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
                     {% else %}
                         <td><div class=loseteam onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.visitor_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.v_pick }}</font></div></td>
@@ -53,7 +53,7 @@
                 {% for game in games %}
                         {% if game.home_team == game.game_winner %}
                             <td><div class="winteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
-                        {% elif game.home_team == game.win_team%}
+                        {% elif game.home_team == game.pros_win_team%}
                             <td><div class="winteam bg-info" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
                         {% else %}
                             <td><div class="loseteam" onclick="sortTable({{ forloop.counter }})" ><font size='-1'>{{ game.home_team.team_abrev }}</font><font size='-2'>&nbsp;{{ game.h_pick }}</font></div></td>
@@ -76,7 +76,7 @@
                         {% if num_games > 0 %}
                             {% for pgame in pick.pickgame_set.all %}
                                 {% if pgame.team is not NONE %}
-                                    {% if pgame.team == pgame.game.win_team %}
+                                    {% if pgame.team == pgame.game.pros_win_team %}
                                         <td class="user_cell_win d-table-cell d-lg-none"><div>{{ pgame.team.team_abrev }}</div></td>
                                         <td class="user_cell_win d-none d-lg-table-cell"><div>{{ pgame.team.short_name }}</div></td>
                                     {% else %}

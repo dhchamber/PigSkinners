@@ -1,0 +1,30 @@
+{% extends "appmain/base.html" %}
+{% load render_table from django_tables2 %}
+{% load static %}
+{% block title %}Seasons{% endblock title %}
+{% block stylesheet %}
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'css/pick_make.css' %}?version=2"/>-->
+{% endblock stylesheet %}
+
+{% block content %}
+
+<h1><div align="center">Seasons</div></h1>
+    {% if submitted %}
+          <p class="success">
+            Your message was submitted successfully. Thank you.
+         </p>
+    {% else %}
+        <div align="center"
+            {% render_table table %}
+        </div>
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="Load Weeks"></td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+{% endblock content %}

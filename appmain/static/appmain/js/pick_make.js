@@ -155,6 +155,15 @@ $(function () {
     });
 });
 
+function window_onload() {
+    var x = document.getElementsByClassName("closed");
+
+    if(x.length > 0){
+// week is closed so disable the buttons
+        document.getElementById("btnRandom").disable
+    }
+}
+
 function selectRandomPicks() {
 var i;
 var sel;
