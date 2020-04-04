@@ -84,7 +84,7 @@ class WeekForm(ModelForm):
     class Meta:
         model = Week
         exclude = ('graphics_folder', 'standings_report_ran', 'weekly_standings_html', 'mobile_standings_report_ran', 'mobile_weekly_standings_html')
-
+        # fields = ('year', 'week_no', 'gt')
 # class WeekForm(ModelForm):
 #     class Meta:
 #         model = Week

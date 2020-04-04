@@ -337,7 +337,7 @@ def setup_weeks(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = WeekForm(instance=weeks.first)
+        form = WeekForm(instance=weeks.first())
     return render(request, 'appmain/setup_weeks.html', {'form': form})
 
 

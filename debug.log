@@ -9404,3 +9404,49 @@ AttributeError: 'NoneType' object has no attribute 'game_wk'
 2020-04-04 10:32:16,961 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-04 10:34:27,225 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\admin.py changed, reloading.
 2020-04-04 10:34:27,227 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 14:22:46,707 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-04 14:22:46,732 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 17:35:16,684 django.request 222 ERROR    Internal Server Error: /setup/weeks/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 340, in setup_weeks
+    form = WeekForm(instance=weeks.first)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\forms\models.py", line 293, in __init__
+    object_data = model_to_dict(instance, opts.fields, opts.exclude)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\forms\models.py", line 84, in model_to_dict
+    opts = instance._meta
+AttributeError: 'function' object has no attribute '_meta'
+2020-04-04 17:37:20,570 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\forms.py changed, reloading.
+2020-04-04 17:37:20,571 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 17:38:50,461 django.request 222 ERROR    Internal Server Error: /setup/weeks/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 340, in setup_weeks
+    form = WeekForm(instance=weeks.first)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\forms\models.py", line 293, in __init__
+    object_data = model_to_dict(instance, opts.fields, opts.exclude)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\forms\models.py", line 84, in model_to_dict
+    opts = instance._meta
+AttributeError: 'function' object has no attribute '_meta'
+2020-04-04 17:40:42,979 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-04 17:40:42,981 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 17:40:51,129 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-04 17:40:51,205 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-04 17:41:17,805 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\forms.py changed, reloading.
+2020-04-04 17:41:17,806 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 17:41:19,920 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-04 17:41:19,977 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
