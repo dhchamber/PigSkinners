@@ -9400,3 +9400,5 @@ AttributeError: 'NoneType' object has no attribute 'game_wk'
 2020-04-03 21:15:11,752 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-04 10:15:36,695 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-04 10:15:44,915 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 10:32:16,957 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-04 10:32:16,961 asyncio      623 DEBUG    Using proactor: IocpProactor

@@ -2,67 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appmain/load_nflgames - Copy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/logging.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0106_auto_20200320_2111.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0107_auto_20200321_0623.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0108_auto_20200325_0730.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0109_auto_20200328_0724.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0110_auto_20200328_0728.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0111_auto_20200328_1028.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0112_auto_20200331_1023.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0113_auto_20200331_1037.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0114_auto_20200331_1042.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/migrations/0115_auto_20200403_1656.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/models - Copy (2).py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/models - Copy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/appmain/js/jquery.formset.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/home.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/password_reset.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/static/css/pick_revision.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/task.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_confirm_delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/season_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/setup_season.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post - Copy.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/templates/registration/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dumpdata.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_complete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_confirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_done.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_email.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_subject.txt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/appmain/js/pick_make.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/static/css/standing_post.css" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/static/css/standing_post.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tables.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base_nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/game_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/game_view_OLD.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/games_view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/new_games.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/new_games_OLD.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/post_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/setup_weeks.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/setup_weeks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/standing_week_prospective.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
