@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.countdown.css' %}?version=1"/>
       <style type="text/css">
          body > iframe { display: none; }
-         #defaultCountdown { width: 240px; height: 45px; }
+         #closeCountdown { width: 240px; height: 85px; }
       </style>
 {% endblock stylesheet %}
 {% block content %}
@@ -80,8 +80,8 @@
                                             <font size="+2" color="blue"><b>Picks will Close: {{ week.forecast_dt_closed }}</b></font>
                                         {% endif %}
                                         <br>&nbsp;
-                                        <p>Counting down to {{ week.forecast_dt_closed|date:'M d' }} <span id="year">2014</span>.</p>
-                                        <div id="defaultCountdown"></div>
+<!--                                        <p>Week will close in:</p>-->
+                                        <div id="closeCountdown"></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -157,10 +157,13 @@
          $(function () {
             var close_dt = new Date();
             console.log (close_dt);
-            close_dt = new Date(close_dt.getFullYear(), {{ week.forecast_dt_closed|date:"n" }} - 1, {{ week.forecast_dt_closed|date:"d" }});
+//            close_dt = new Date(close_dt.getFullYear(), {{ week.forecast_dt_closed|date:"n" }} - 1, {{ week.forecast_dt_closed|date:"d" }});
+            console.log ("{{ week.forecast_dt_closed|date:'d F Y G:i:s e' }}" );
+//(09 April 2020 16:30:00 MDT);
+            close_dt = new Date('{{ week.forecast_dt_closed|date:"d F Y G:i:s e" }}' );
             console.log (close_dt);
-            $('#defaultCountdown').countdown({until: close_dt, format: 'dHMS'});
-            $('#year').text(close_dt.getFullYear());
+            $('#closeCountdown').countdown({until: close_dt, format: 'dHMS', description: 'Week will close in:', timezone: -6});
+//            $('#year').text(close_dt.getFullYear());
          });
     </script>
 {% endblock %}

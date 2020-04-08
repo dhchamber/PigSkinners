@@ -307,6 +307,12 @@ class Week(models.Model):
         else:
             return 'na'
 
+    def curr_overall_leader(self):
+        if self.gt == 'REG':
+            if self.week_no <= 9:
+                return self.year.season_winner()['half1']
+            elif self.week_no <= 17:
+                return self.year.season_winner()['half2']
 
     # number of players remaining in KOTH this week
     def koth_remaining(self):
