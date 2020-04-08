@@ -114,7 +114,7 @@
                             <td class="tdHomeContent"><img width="25px" src="{% static pick_game.game.home_team.logo_file_name %}"></td>
                             <td class="d-table-cell d-md-none" align="center">{{ pick_game.game.get_date|date:"D m/d h:s A" }}
                             <td class="d-none d-md-table-cell d-lg-none" align="center">{{ pick_game.game.get_date|date:"D m/d/Y h:s A" }}
-                            <td class="d-none d-lg-table-cell" align="center">{{ pick_game.game.get_date|date:"D M d, Y h:s A" }} }}
+                            <td class="d-none d-lg-table-cell" align="center">{{ pick_game.game.get_date|date:"D M d, Y h:s A" }}
                             <input type="hidden" name="Selected{{ forloop.counter }}" id="Selected{{ forloop.counter }}" style="color: blue;" value="{{ pick_game.team.id }}"></td>
                         </tr>
                     {% endfor %}

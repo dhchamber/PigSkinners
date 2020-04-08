@@ -56,13 +56,15 @@ class Team(models.Model):
     team_name = models.CharField(max_length=50)
     short_name = models.CharField(max_length=50)
     team_abrev = models.CharField(max_length=3)
-    # web_address = models.URLField(max_length=200)
+    web_address = models.URLField(max_length=200)
     # logo = models.CharField(max_length=50)
     division = models.CharField(max_length=50, default='NA')
-    # logo_file_name = models.CharField(max_length=50)
-    win = models.SmallIntegerField(default=0)
-    lose = models.SmallIntegerField(default=0)
-    tie = models.SmallIntegerField(default=0)
+    logo_file_name = models.CharField(max_length=50)
+    home_file_name = models.CharField(max_length=50, null=True, blank=True)
+    visitor_file_name = models.CharField(max_length=50, null=True, blank=True)
+    # win = models.SmallIntegerField(default=0)
+    # lose = models.SmallIntegerField(default=0)
+    # tie = models.SmallIntegerField(default=0)
     conference = models.CharField(max_length=50, default='NA')
     city_name = models.CharField(max_length=50, default= 'NA')
 
@@ -144,7 +146,7 @@ class Season(models.Model):
         # end_dt and Now are both UTC so they can be compared
         for week in self.weeks.all():
             # if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
-            if week.week_no == 5:
+            if week.week_no == 1 and week.gt == 'REG':
                 break
         if not self.weeks.all():  # there are no weeks in the Season
             logger.debug(f'There are no weeks in Season {self.year}')
@@ -237,10 +239,14 @@ class Week(models.Model):
                     pick = Pick.objects.create_pick(user=user, week=self)
 
     def start_dt(self):
-        return self.game_wk.aggregate(mind=Min('date_time'))['mind']
+        start_dt = self.game_wk.aggregate(mind=Min('date_time'))['mind']
+        corrected_dt = start_dt + timedelta(days=945)
+        return corrected_dt
 
     def end_dt(self):
-        return self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
+        end_dt = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
+        corrected_dt = end_dt + timedelta(days=945)
+        return
 
     def forecast_dt_closed(self):
         if self.start_dt():
@@ -259,8 +265,13 @@ class Week(models.Model):
             date_str = min_date.strftime("%b. %d") + '-' + max_date.strftime("%d")
         return date_str
 
+    def prev_week(self):
+        if self.week_no > 1:
+            prev_week = Week.objects.get(id=self.id - 1)
+            return prev_week
+
+    # determine winner or winners for the week
     def week_winner(self):
-        # determine winner or winners for the week
         # update pick scores for all picks for the week
         for pick in self.pick_wk.all():
             pick.pick_score = pick.pickgame_set.all().aggregate(
@@ -289,6 +300,13 @@ class Week(models.Model):
         else:
             winners = Pick.objects.none()
         return winners
+
+    def prev_week_winner(self):
+        if self.prev_week() is not None:
+            return self.prev_week().week_winner
+        else:
+            return 'na'
+
 
     # number of players remaining in KOTH this week
     def koth_remaining(self):
@@ -324,6 +342,11 @@ class Week(models.Model):
     def update_score(self):
         for game in self.game_wk.all():
             game.update_score()
+
+    def pts_game(self):
+        game = self.game_wk.filter(points_game=True)
+        txt = game[0].visitor_team.team_name + ' at ' + game[0].home_team.team_name
+        return txt
 
     # def date_range(self):
     #     min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']

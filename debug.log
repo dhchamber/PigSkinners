@@ -9450,3 +9450,419 @@ AttributeError: 'function' object has no attribute '_meta'
 2020-04-04 17:41:17,806 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-04 17:41:19,920 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
 2020-04-04 17:41:19,977 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-04 18:01:12,859 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-04 18:01:12,860 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-04 18:02:03,644 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-04 18:02:03,645 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-05 20:24:47,917 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 02:24:47.917741
+2020-04-05 20:24:50,728 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 02:24:50.727578
+2020-04-05 20:25:52,586 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 02:25:52.586151
+2020-04-05 20:27:02,841 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 02:27:02.841221
+2020-04-05 20:27:06,774 appmain.views 369 DEBUG    Starting pick_make: footballpool
+2020-04-05 20:27:06,786 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 02:27:06.786687
+2020-04-05 20:27:08,538 appmain.views 369 DEBUG    Starting pick_make: footballpool
+2020-04-05 20:27:08,553 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 02:27:08.553966
+2020-04-05 20:31:32,696 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-05 20:31:32,697 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-05 20:31:55,625 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-05 20:31:55,626 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-05 20:34:36,049 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-05 20:34:36,051 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:08:28,464 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:08:28.464578
+2020-04-06 15:24:30,848 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-06 15:24:30,859 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:25:50,011 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-06 15:25:50,013 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:26:17,407 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:26:17.407584
+2020-04-06 15:26:17,576 django.request 222 WARNING  Not Found: /images/blank.jpg
+2020-04-06 15:26:17,579 django.request 222 WARNING  Not Found: /images/Helmets/h_h_min.gif
+2020-04-06 15:26:17,581 django.request 222 WARNING  Not Found: /images/counter/dgc.gif
+2020-04-06 15:26:17,586 django.request 222 WARNING  Not Found: /includes/styles.css
+2020-04-06 15:26:17,589 django.request 222 WARNING  Not Found: /images/HomePage/explosion.gif
+2020-04-06 15:29:34,329 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-06 15:29:34,330 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:31:42,641 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-06 15:31:42,642 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:36:34,604 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:36:34.604790
+2020-04-06 15:36:34,660 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 280, in home
+    if user_profile.favorite_team is not None:
+AttributeError: 'function' object has no attribute 'favorite_team'
+2020-04-06 15:37:27,727 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-06 15:37:27,728 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:37:45,673 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-06 15:37:45,675 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-06 15:37:47,876 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:37:47.876420
+2020-04-06 15:38:34,188 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:38:34.188068
+2020-04-06 15:40:05,561 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:40:05.561127
+2020-04-06 15:40:41,734 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:40:41.734040
+2020-04-06 15:45:30,327 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:45:30.327839
+2020-04-06 15:46:55,029 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:46:55.029022
+2020-04-06 15:46:57,891 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:46:57.891061
+2020-04-06 15:47:24,023 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:47:24.023904
+2020-04-06 15:56:31,716 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:56:31.716711
+2020-04-06 15:56:33,280 appmain.models 154 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-06 21:56:33.280477
+2020-04-07 07:55:19,091 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 07:55:19,093 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 07:56:51,732 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 07:57:37,563 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 08:00:01,102 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 08:00:01,130 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 10:59:50,362 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-07 10:59:50,364 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 10:59:57,728 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:00:45,792 django.request 222 ERROR    Internal Server Error: /admin/appmain/team/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column appmain_team.home_file_name does not exist
+LINE 1: ...eam"."division", "appmain_team"."logo_file_name", "appmain_t...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "appmain_team.logo_file_name".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\options.py", line 607, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\decorators\cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\sites.py", line 231, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\admin\options.py", line 1796, in changelist_view
+    'selection_note': _('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 258, in __len__
+    self._fetch_all()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 1137, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column appmain_team.home_file_name does not exist
+LINE 1: ...eam"."division", "appmain_team"."logo_file_name", "appmain_t...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "appmain_team.logo_file_name".
+
+2020-04-07 11:02:41,290 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-07 11:02:41,291 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:02:44,932 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:02:51,459 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:08:53,790 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 11:08:53,791 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:09:03,255 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 17:09:03.255972
+2020-04-07 11:12:50,058 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 11:12:50,060 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:13:03,269 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 17:13:03.268392
+2020-04-07 11:14:15,637 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 11:14:15,638 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:15:05,424 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 11:15:05,425 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:16:39,840 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 11:16:39,841 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 11:16:45,360 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 17:16:45.360266
+2020-04-07 11:17:06,505 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 17:17:06.505151
+2020-04-07 11:17:28,683 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 17:17:28.683820
+2020-04-07 12:33:48,719 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:33:48.719833
+2020-04-07 12:34:06,730 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:34:06.730147
+2020-04-07 12:34:35,045 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:34:35.045267
+2020-04-07 12:38:26,988 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:38:26.988402
+2020-04-07 12:38:38,697 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:38:38.697662
+2020-04-07 12:39:19,172 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:39:19.172114
+2020-04-07 12:47:37,791 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 12:47:37,792 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 12:47:42,947 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:47:42.947746
+2020-04-07 12:47:45,316 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:47:45.316688
+2020-04-07 12:49:04,212 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:49:04.212910
+2020-04-07 12:50:27,499 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 12:50:27,500 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 12:50:30,429 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:50:30.429429
+2020-04-07 12:52:34,822 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 12:52:34,824 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 12:52:36,974 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:52:36.974826
+2020-04-07 12:55:00,527 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 12:55:00,529 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 12:55:05,944 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:55:05.944016
+2020-04-07 12:56:12,781 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 12:56:12,782 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 12:56:16,318 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:56:16.318652
+2020-04-07 12:59:27,350 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 12:59:27,352 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 12:59:33,764 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 18:59:33.764811
+2020-04-07 13:01:10,528 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 13:01:10,530 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:02:44,109 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:02:44.109358
+2020-04-07 13:09:23,538 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 13:09:23,540 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:09:27,104 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:09:27.104038
+2020-04-07 13:09:27,146 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 283, in home
+    fav_team is None
+UnboundLocalError: local variable 'fav_team' referenced before assignment
+2020-04-07 13:10:19,879 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 13:10:19,880 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:10:22,061 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:10:22.061463
+2020-04-07 13:10:22,112 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 289, in home
+    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game})
+UnboundLocalError: local variable 'fav_team' referenced before assignment
+2020-04-07 13:10:46,241 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 13:10:46,242 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:10:48,419 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:10:48.419704
+2020-04-07 13:11:05,417 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-07 13:11:05,418 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:11:07,551 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:11:07.551719
+2020-04-07 13:11:21,966 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:11:21.966206
+2020-04-07 13:12:47,859 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:12:47.859353
+2020-04-07 13:13:00,227 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:13:00.227678
+2020-04-07 13:14:20,924 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:14:20.924223
+2020-04-07 13:14:42,154 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:14:42.154940
+2020-04-07 13:17:29,428 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-07 13:17:29,429 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:17:43,807 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:17:43.807480
+2020-04-07 13:18:02,130 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:18:02.130838
+2020-04-07 13:19:03,747 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:19:03.747661
+2020-04-07 13:20:17,756 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:21:41,525 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-07 13:21:41,527 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:21:44,559 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:21:51,921 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-07 13:21:51,922 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:22:41,327 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-07 13:22:41,329 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:23:07,142 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-07 13:23:21,642 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:23:21.642169
+2020-04-07 13:23:48,323 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 19:23:48.323004
+2020-04-07 14:49:41,996 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 20:49:41.996317
+2020-04-07 14:52:06,368 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 20:52:06.368771
+2020-04-07 14:53:39,923 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 20:53:39.923260
+2020-04-07 15:00:06,210 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:00:06.210790
+2020-04-07 15:01:19,693 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:01:19.693720
+2020-04-07 15:03:13,134 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:03:13.134800
+2020-04-07 15:06:00,150 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:06:00.150478
+2020-04-07 15:09:08,683 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:09:08.683901
+2020-04-07 15:09:35,456 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:09:35.456638
+2020-04-07 15:17:31,524 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:17:31.524681
+2020-04-07 15:20:02,615 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:20:02.615128
+2020-04-07 15:20:09,488 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:20:09.488220
+2020-04-07 15:20:56,258 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:20:56.258066
+2020-04-07 15:22:22,226 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:22:22.226311
+2020-04-07 15:24:33,955 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:24:33.955814
+2020-04-07 15:26:01,713 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:26:01.713133
+2020-04-07 15:26:25,985 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:26:25.985552
+2020-04-07 15:27:50,932 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:27:50.932196
+2020-04-07 15:31:09,991 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:31:09.991926
+2020-04-07 15:31:10,150 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 290, in home
+    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game})
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 266, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 209, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 448, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 446, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 562, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 661, in __init__
+    raise TemplateSyntaxError("Could not parse the remainder: '%s' "
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' 'M d"' from 'week.forecast_dt_closed|date 'M d"'
+2020-04-07 15:31:22,608 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:31:22.608693
+2020-04-07 15:31:22,679 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 290, in home
+    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game})
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 266, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 209, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 448, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 446, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 562, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 661, in __init__
+    raise TemplateSyntaxError("Could not parse the remainder: '%s' "
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' 'M d'' from 'week.forecast_dt_closed|date 'M d''
+2020-04-07 15:31:52,682 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:31:52.682734
+2020-04-07 15:33:53,013 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-07 21:33:53.013873
+2020-04-08 04:53:17,780 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-08 10:53:17.780222
+2020-04-08 04:54:21,298 appmain.models 156 DEBUG    week: 5/REG  week.end_dt 2017-10-10 00:30:00+00:00 Now: 2020-04-08 10:54:21.298374
+2020-04-08 04:57:17,917 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 04:57:17,919 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:00:08,354 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 277, in home
+    week = year.current_week()
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 156, in current_week
+    logger.debug(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 248, in end_dt
+    corrected_dt = end_dt + datetime.timedelta(days=700)
+AttributeError: type object 'datetime.datetime' has no attribute 'timedelta'
+2020-04-08 05:00:43,195 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:00:43,196 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:01:17,678 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:01:17,680 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:01:19,783 appmain.models 156 DEBUG    week: 1/PRE  week.end_dt None Now: 2020-04-08 11:01:19.783686
+2020-04-08 05:03:13,675 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:03:13,676 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:08:51,754 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:08:51,756 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:08:53,950 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:08:53.950679
+2020-04-08 05:10:57,880 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-08 05:10:57,881 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:13:07,821 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:13:07.821011
+2020-04-08 05:13:50,622 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:13:50.622364
+2020-04-08 05:14:42,362 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:14:42.362600
+2020-04-08 05:14:46,696 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:14:46.696065
+2020-04-08 05:15:52,783 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:15:52.783781
+2020-04-08 05:18:09,200 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:18:09.199755
+2020-04-08 05:26:39,298 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:26:39,299 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:27:46,106 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:27:46,109 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:27:51,697 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:28:04,137 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:28:04.137189
+2020-04-08 05:30:00,623 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:30:00,625 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:30:30,076 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:31:05,388 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:31:05.388059
+2020-04-08 05:31:32,526 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 05:31:32,528 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 05:33:16,525 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:33:16.525593
+2020-04-08 05:33:28,048 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:33:28.047569
+2020-04-08 05:34:00,345 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:34:00.345002
+2020-04-08 05:34:14,725 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:34:14.725102
+2020-04-08 05:35:44,862 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 11:35:44.862601
+2020-04-08 06:31:25,745 asyncio      623 DEBUG    Using proactor: IocpProactor

@@ -5,8 +5,12 @@
 {% block title %}{{ request.user.first_name }}, Welcome to the Football Pool!{% endblock title %}
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}?version=3"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.countdown.css' %}?version=1"/>
+      <style type="text/css">
+         body > iframe { display: none; }
+         #defaultCountdown { width: 240px; height: 45px; }
+      </style>
 {% endblock stylesheet %}
-
 {% block content %}
     {% if user.is_authenticated %}
 		<div class="container">
@@ -22,13 +26,17 @@
                     <tr>
                         <td width="15px">&nbsp;</td>
                         <td align="center">
-                            <table cellpadding="0" cellspacing="0" border="0" bgcolor="white" width="100%">
+                            <table cellpadding="0" cellspacing="0" border="1" bgcolor="white" width="100%">
                                 <tr>
                                     <td colspan=3 align=center>Welcome {{request.user.first_name }} {{request.user.last_name }}</td>
                                 </tr>
                                 <tr>
                                     <td width="30%" align="center" valign="top">
-                                        <a href='http://www.stlouisrams.com/'><img border='0' src="{% static '/appmain/Helmets/small/v_stl.jpg' %}" height='72px'></a>
+                                        {% if fav_team == None %}
+                                            <a href={{ pts_game.visitor_team.web_address }}><img border='0' src="{% static pts_game.visitor_team.visitor_file_name %}" height='72px'></a>
+                                        {% else %}
+                                            <a href={{ fav_team.web_address }}><img border='0' src="{% static fav_team.visitor_file_name %}" height='72px'></a>
+                                        {% endif %}
                                         <br><br>
                                         <font size="+2"><b>
                                         {% if week.gt == 'POST' %}
@@ -40,6 +48,30 @@
                                         {% endif %}
                                         </b></font>
                                         <br><br>
+                                    </td>
+                                    <td width="40%" align="center">
+                                        <font size=-1>All times are in {{ TIMEZONE }}</font>
+                                        <br>
+                                        <img class="imgLogo" id="imgLogo" name="imgLogo" src="{% static '/appmain/Logo/Pigskinners_logo.gif' %}" WIDTH="367" HEIGHT="196">
+                                        <br>
+                                        {% if week.prev_week_winner != 'na' %}
+                                            <div align="center">Congratulations to last week's winner:<br>{{ week.prev_week_winner }}</div>
+                                        {% endif %}
+                                        {% if week.curr_overall_winner != 'na' %}
+                                            <div align="center">Current Overall Leader:<br>{{ week.prev_week_winner }}</div>
+                                        {% endif %}
+
+                                        <!--this is to make sure the gif is downloaded by the time we need it-->
+<!--                                        <img id="hidExplode" name="hidExplode" width="0px" src="{% static '/appmain/HomePage/explosion.gif' %}" style="visibility:hidden">-->
+                                    </td>
+                                    <td width="30%" align="center" valign="top">
+                                        {% if fav_team == None %}
+                                            <a href={{ pts_game.home_team.web_address }}><img border='0' src="{% static pts_game.home_team.home_file_name %}" height='72px'></a>
+                                        {% else %}
+                                            <a href={{ fav_team.web_address }}><img border='0' src="{% static fav_team.home_file_name %}" height='72px'></a>
+                                        {% endif %}
+                                        <br>
+                                        <br>&nbsp;
                                         <font size="+1">Pick Status: </font>
                                         {% if week.closed %}
                                             <font size="+2" color="red"><b>CLOSED</b></font>
@@ -47,34 +79,9 @@
                                             <font size="+2" color="blue"><b>OPEN</b></font><br>
                                             <font size="+2" color="blue"><b>Picks will Close: {{ week.forecast_dt_closed }}</b></font>
                                         {% endif %}
-                                    </td>
-                                    <td width="40%" align="center">
-                                        <font size=-1>All times are in {{ TIMEZONE }}</font>
-                                        <br>
-                                        <img class="imgLogo" id="imgLogo" name="imgLogo" src="{% static '/appmain/Logo/Pigskinners_logo.gif' %}" WIDTH="367" HEIGHT="196">
-                                        <br>
-                                        <!--this is to make sure the gif is downloaded by the time we need it-->
-                                        <img id="hidExplode" name="hidExplode" width="0px" src="{% static '/appmain/HomePage/explosion.gif' %}" style="visibility:hidden">
-                                    </td>
-                                    <td width="30%" align="center" valign="top">
-                                        <a href='http://www.stlouisrams.com/'><img border='0' src="{% static '/appmain/Helmets/small/h_stl.jpg' %}" height='72px'></a>
-                                        <br>
                                         <br>&nbsp;
-                                        <div id="countdown" style="visibility: hidden">
-                                            <table cellpadding="0" cellspacing="0" class="countdown_clock_newyears">
-                                                <tr>
-                                                    <td colspan="3">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="5px">&nbsp;</td>
-                                                    <td><img id="counter_day1" /><img id="counter_day2" /><img id="counter_divider1" src="{% static '/appmain/counter/dgc.gif' %}" /><img id="counter_hour1" /><img id="counter_hour2" /><img id="counter_divider2" src="{% static '/appmain/counter/dgc.gif' %}" /><img id="counter_minute1" /><img id="counter_minute2" /><img id="counter_divider3" src="{% static '/appmain/counter/dgc.gif' %}" /><img id="counter_second1" /><img id="counter_second2" /></td>
-                                                    <td width="5px">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="3">&nbsp;</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                        <p>Counting down to {{ week.forecast_dt_closed|date:'M d' }} <span id="year">2014</span>.</p>
+                                        <div id="defaultCountdown"></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -86,19 +93,19 @@
                         </td>
                     </tr>
         </table>
-     <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="row">
-           <div class="full">
-              <div class="right-match-time">
-                 <h2>Close Countdown</h2>
-                    <span id="days">Days</span> <span id="hours">Hours</span>
-                    <span id="minutes">Minutes</span>
-                    <span id="seconds">Seconds</span>
-                 </ul>
-              </div>
-           </div>
-        </div>
-     </div>
+<!--     <div class="col-md-6 col-sm-6 col-xs-12">-->
+<!--        <div class="row">-->
+<!--           <div class="full">-->
+<!--              <div class="right-match-time">-->
+<!--                 <h2>Close Countdown</h2>-->
+<!--                    <span id="days">Days</span> <span id="hours">Hours</span>-->
+<!--                    <span id="minutes">Minutes</span>-->
+<!--                    <span id="seconds">Seconds</span>-->
+<!--                 </ul>-->
+<!--              </div>-->
+<!--           </div>-->
+<!--        </div>-->
+<!--     </div>-->
 
         <!--these are all divs used for the "helmet crashing"-->
         <div id="divExplode" name="divExplode" STYLE="position:absolute;top:100px;left:400px;visibility:hidden;">
@@ -119,7 +126,7 @@
             <table border="0" cellspacing="0" cellpadding="2" width="100%" class="tblPointsGame">
                 <tr>
                     <td align="center">
-                        This Week's Points Game: {{ week|ptsgame }}
+                        This Week's Points Game: <b>{{ week.pts_game }}</b>
                     </td>
                 </tr>
                 <tr>
@@ -142,32 +149,18 @@
         </div>
 
 <!--    </body>-->
-<script>
-function makeTimer() {
-   var endTime=new Date({{ week.forecast_dt_closed|date:"U" }} * 1000);
-    endTime = (Date.parse(endTime) / 1000);
-
-        var now = new Date();
-        now = (Date.parse(now) / 1000);
-
-        var timeLeft = endTime - now;
-
-        var days = Math.floor(timeLeft / 86400);
-        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
-        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
-
-        if (hours < "10") { hours = "0" + hours; }
-        if (minutes < "10") { minutes = "0" + minutes; }
-        if (seconds < "10") { seconds = "0" + seconds; }
-
-        $("#days").html(days + "<span> Days</span>");
-        $("#hours").html(hours + "<span> Hours</span>");
-        $("#minutes").html(minutes + "<span> Minutes</span>");
-        $("#seconds").html(seconds + "<span> Seconds</span>");
-
-}
-
-setInterval(function() { makeTimer(); }, 1000);
-</script>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jquery.plugin.js' %}?version=3" ></script>
+    <script type="text/javascript" src="{% static 'js/jquery.countdown.js' %}?version=3" ></script>
+    <script>
+         $(function () {
+            var close_dt = new Date();
+            console.log (close_dt);
+            close_dt = new Date(close_dt.getFullYear(), {{ week.forecast_dt_closed|date:"n" }} - 1, {{ week.forecast_dt_closed|date:"d" }});
+            console.log (close_dt);
+            $('#defaultCountdown').countdown({until: close_dt, format: 'dHMS'});
+            $('#year').text(close_dt.getFullYear());
+         });
+    </script>
 {% endblock %}

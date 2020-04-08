@@ -271,13 +271,23 @@ def games_view(request):
 def home(request):
     # TODO: what do do if there are no weeks?  replace home page with different stripped down page?
     timezone.activate(pytz.timezone('America/Denver'))
+    fav_team = pts_game = None
     try:
         year = Season.objects.get(current=True)
         week = year.current_week()
     except Season.DoesNotExist:
         week = None
+    if Profile.objects.get(user=request.user).favorite_team is not None:
+        fav_team = Profile.objects.get(user=request.user).favorite_team
+    elif week is not None and Game.objects.get(week=week, points_game=True) is not None:
+        pts_game = Game.objects.get(week=week, points_game=True)
+    else:
+        fav_team = Team.objects.get(team_abrev='DEN')
 
-    return render(request, 'appmain/home.html', {'week': week})
+    if week is None:
+        return render(request, 'appmain/home_frame.html')
+    else:
+        return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game})
 
 
 @login_required
@@ -372,9 +382,9 @@ def pick_make(request):
     week = get_selected_week(request)
 
     validated = True
-    # if not week.closed:
-    #    close = week.close_week(request.user)
-    # print(f'Week closed for week ID: {week.id}')
+    if not week.closed:
+       close = week.close_week(request.user)
+    print(f'Week closed for week ID: {week.id}')
 
     if request.method == 'POST':
         pick_id = request.POST.get("hidPickID")
