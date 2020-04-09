@@ -338,7 +338,7 @@ def setup_weeks(request):
     return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
 
 
-@staff_member_required
+# @staff_member_required
 # def setup_weeks(request):
 #     year = Season.objects.get(current=True)
 #     weeks = Week.objects.filter(year=year)

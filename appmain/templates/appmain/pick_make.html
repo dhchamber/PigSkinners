@@ -71,7 +71,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for pick_game in pick.pickgame_set.all %}
+                    {% for pick_game in pick.sorted_gameset %}
                         {% if pick_game.game.points_game %}
                             {% ifchanged pick_game.game.day  %}
                                 {% if forloop.first %}

@@ -10845,3 +10845,21 @@ AttributeError: 'Week' object has no attribute 'is_started'
 2020-04-09 15:02:25,014 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:25.014152
 2020-04-09 15:02:25,029 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:25.029163
 2020-04-09 15:02:25,066 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-09 15:03:11,877 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 15:03:11,917 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:04:12,054 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:05:12,092 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:06:12,131 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:07:12,178 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:08:12,216 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:09:12,256 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:10:12,295 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:11:12,435 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 15:12:12,484 background_task.tasks 257 INFO     Running appmain.task.close_curr_week
+2020-04-09 15:12:12,504 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:12:12.504948
+2020-04-09 15:12:12,519 background_task.tasks 52 INFO     Ran task and deleting appmain.task.close_curr_week
+2020-04-09 15:12:12,596 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 17:02:19,744 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:02:19.744993
+2020-04-09 17:03:33,694 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 17:03:33,695 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 17:03:38,943 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:03:38.943611
