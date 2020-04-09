@@ -20,7 +20,7 @@ import logging
 
 from appmain.models import Season, Week, Pick, Team, Game, Profile, PostPick, PostSeason, PickRevision
 from appmain.load_nflgames import load_season, load_score
-from appmain.task import load_scores
+from appmain.task import load_scores, close_curr_week
 
 # from django.conf import settings
 # from django.core.exceptions import ObjectDoesNotExist
@@ -257,6 +257,9 @@ def games_view(request):
     elif request.method == 'POST' and 'btntask' in request.POST:
         load_scores('LIVE')
         return redirect('setup_games')
+    elif request.method == 'POST' and 'btnCloseWeek' in request.POST:
+        close_curr_week(repeat=60)
+        return redirect('setup_games')
     else:
         year = Season.objects.get(current=True)
         week_no = request.session.get('week', 1)
@@ -317,39 +320,39 @@ def teams_view(request):
     return render(request, 'appmain/teams_view.html', {'teams': teams})
 
 
-# @login_required
-# def setup_weeks(request):
-#     year = Season.objects.get(current=True)
-#     weeks = Week.objects.filter(year=year)
-#     if request.method == 'POST':
-#         for week in weeks:
-#             closed = request.POST.get('chkClosed' + str(week.week_no))
-#             if closed == 'on':
-#                 closed = True
-#             else:
-#                 closed = False
-#             print(f'Week: {week.week_no} {week.closed}')
-#             week.closed = closed
-#             week.save()
-#
-#     return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
-
-
 @staff_member_required
 def setup_weeks(request):
     year = Season.objects.get(current=True)
     weeks = Week.objects.filter(year=year)
     if request.method == 'POST':
-        form = WeekForm(request.POST, instance=weeks)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Week successfully updated!')
-            return redirect('setup_weeks')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = WeekForm(instance=weeks.first())
-    return render(request, 'appmain/setup_weeks.html', {'form': form})
+        for week in weeks:
+            closed = request.POST.get('chkClosed' + str(week.week_no))
+            if closed == 'on':
+                closed = True
+            else:
+                closed = False
+            print(f'Week: {week.week_no} {week.closed}')
+            week.closed = closed
+            week.save()
+
+    return render(request, 'appmain/setup_weeks.html', {'weeks': weeks})
+
+
+@staff_member_required
+# def setup_weeks(request):
+#     year = Season.objects.get(current=True)
+#     weeks = Week.objects.filter(year=year)
+#     if request.method == 'POST':
+#         form = WeekForm(request.POST, instance=weeks)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Week successfully updated!')
+#             return redirect('setup_weeks')
+#         else:
+#             messages.error(request, 'Please correct the error below.')
+#     else:
+#         form = WeekForm(instance=weeks.first())
+#     return render(request, 'appmain/setup_weeks.html', {'form': form})
 
 
 @login_required

@@ -10399,3 +10399,449 @@ AttributeError: 'Week' object has no attribute 'is_started'
 2020-04-09 11:07:44,556 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:07:44.556006
 2020-04-09 11:08:08,154 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-09 11:08:12,654 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:08:12.654851
+2020-04-09 11:09:30,691 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:09:30.691121
+2020-04-09 11:09:31,869 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:09:31.869231
+2020-04-09 11:09:33,225 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:09:33.225429
+2020-04-09 11:10:24,910 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:10:24.910639
+2020-04-09 13:28:19,593 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 19:28:19.593970
+2020-04-09 13:47:01,080 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 13:47:01,102 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:48:25,493 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 13:48:25,494 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:48:40,435 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:48:54,168 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 19:48:54.168685
+2020-04-09 13:51:21,524 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 13:51:21,526 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:52:48,983 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 13:52:48,985 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:52:57,179 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:53:21,698 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 19:53:21.698301
+2020-04-09 13:54:59,329 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 13:54:59,331 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:55:19,631 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 19:55:19.630696
+2020-04-09 13:56:06,969 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 13:56:11,639 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 19:56:11.639157
+2020-04-09 13:56:59,811 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 19:56:59.810262
+2020-04-09 13:58:44,930 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 13:58:44,931 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:08:32,498 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:13:05,792 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:13:05,835 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:10,877 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:15,917 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:20,954 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:25,991 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:31,029 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:36,168 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:41,205 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:46,253 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:51,289 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:13:56,323 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:01,405 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:06,442 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:11,522 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:16,609 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:21,684 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:26,719 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:31,756 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:36,792 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:41,830 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:46,867 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:51,904 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:14:56,942 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:01,978 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:07,014 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:12,051 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:17,089 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:22,125 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:27,161 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:32,196 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:37,231 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:42,267 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:47,304 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:52,366 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:15:57,401 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:02,543 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:07,621 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:12,673 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:17,717 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:22,753 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:27,789 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:32,925 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:37,959 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:42,999 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:48,035 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:53,071 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:16:58,108 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:03,144 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:08,181 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:13,317 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:18,354 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:23,434 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:28,512 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:33,547 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:38,635 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:43,689 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:48,726 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:53,763 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:17:58,799 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:03,834 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:08,871 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:13,906 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:18,942 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:23,980 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:29,017 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:34,051 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:39,087 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:44,124 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:49,163 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:54,199 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:18:59,239 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:04,275 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:09,310 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:14,376 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:19,446 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:24,525 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:29,611 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:34,691 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:39,727 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:44,766 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:49,802 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:54,839 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:19:59,876 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:04,919 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:09,955 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:14,991 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:20,028 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:25,064 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:30,101 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:35,143 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:40,178 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:45,215 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:50,252 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:20:55,288 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:00,325 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:05,383 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:10,450 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:15,485 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:20,527 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:25,606 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:30,670 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:35,720 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:40,855 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:45,891 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:50,927 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:21:55,963 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:01,002 background_task.tasks 257 INFO     Running appmain.task.close_curr_week
+2020-04-09 14:22:01,018 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:22:01.018912
+2020-04-09 14:22:01,032 background_task.tasks 52 INFO     Ran task and deleting appmain.task.close_curr_week
+2020-04-09 14:22:01,045 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:06,083 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:11,120 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:16,155 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:21,196 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:26,233 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:31,270 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:36,306 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:41,342 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:46,425 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:51,477 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:22:56,560 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:01,638 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:06,701 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:11,736 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:16,773 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:21,808 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:26,845 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:31,882 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:36,920 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:42,054 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:47,093 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:52,130 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:23:57,172 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:02,211 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:07,346 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:12,408 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:17,477 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:22,519 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:27,588 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:32,681 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:37,735 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:42,870 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:47,907 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:52,943 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:24:57,981 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:03,118 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:08,155 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:13,191 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:18,226 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:23,261 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:28,300 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:33,338 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:38,401 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:43,481 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:48,515 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:53,583 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:25:58,670 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:03,717 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:08,752 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:13,786 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:18,823 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:23,860 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:28,897 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:33,933 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:38,969 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:44,010 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:49,045 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:54,080 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:26:59,121 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:04,158 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:09,199 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:14,335 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:19,405 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:24,478 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:29,567 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:34,657 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:39,800 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:44,835 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:49,871 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:27:54,913 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:00,051 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:05,088 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:10,226 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:15,263 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:20,298 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:25,435 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:30,510 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:35,546 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:40,616 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:45,681 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:50,734 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:28:55,773 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:00,808 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:05,846 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:10,881 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:15,921 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:20,958 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:25,993 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:31,033 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:36,074 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:41,116 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:46,160 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:51,199 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:29:56,235 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:01,271 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:06,306 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:11,441 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:16,530 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:21,606 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:26,645 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:31,721 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:36,858 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:41,895 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:46,933 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:51,971 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:30:57,007 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:02,043 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:07,079 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:12,114 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:17,151 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:22,188 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:27,224 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:32,263 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:37,297 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:42,336 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:47,409 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:52,498 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:31:57,577 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:02,614 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:07,715 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:12,750 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:17,787 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:22,829 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:27,864 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:32,904 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:37,943 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:42,978 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:48,015 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:53,052 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:32:58,090 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:03,225 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:08,265 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:13,301 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:18,338 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:23,374 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:28,451 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:33,487 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:38,639 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:43,705 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:48,767 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:53,803 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:33:58,840 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:03,875 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:08,910 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:13,948 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:18,984 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:24,025 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:29,161 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:34,298 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:39,333 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:44,407 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:49,478 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:54,555 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:34:59,645 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:04,681 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:09,830 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:14,867 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:19,902 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:24,938 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:29,974 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:35,010 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:40,046 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:45,181 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:50,218 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:35:55,253 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:00,296 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:05,331 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:10,367 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:15,430 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:20,508 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:25,545 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:30,637 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:35,673 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:40,722 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:45,760 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:50,796 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:36:55,831 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:00,871 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:05,908 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:10,942 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:15,977 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:21,115 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:26,149 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:31,184 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:36,221 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:41,359 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:46,395 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:51,474 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:37:56,561 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:01,637 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:06,674 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:11,752 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:16,788 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:21,829 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:26,864 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:31,900 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:36,936 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:41,973 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:47,011 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:52,045 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:38:57,084 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:02,122 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:07,158 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:12,295 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:17,432 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:22,468 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:27,556 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:32,636 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:37,679 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:42,749 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:47,784 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:52,820 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:39:57,883 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:02,926 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:07,967 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:13,008 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:18,145 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:23,182 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:28,218 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:33,256 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:38,296 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:43,335 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:52,793 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:40:57,831 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:41:09,321 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:41:14,362 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:41:19,399 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:41:24,435 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:41:29,474 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:41:34,513 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:46:05,862 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:46:05.862879
+2020-04-09 14:46:09,918 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-09 14:48:10,456 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:48:10,495 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:49:10,533 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:50:06,530 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 14:50:06,532 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:50:10,573 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:50:13,668 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:50:13.668465
+2020-04-09 14:50:17,341 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-09 14:51:10,611 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:52:10,652 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:53:10,693 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:54:10,733 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:55:10,771 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:56:10,813 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:56:30,546 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 14:56:30,547 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:56:32,553 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.553021
+2020-04-09 14:56:32,571 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.571012
+2020-04-09 14:56:32,587 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.587003
+2020-04-09 14:56:32,600 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.600995
+2020-04-09 14:56:32,615 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.615986
+2020-04-09 14:56:32,629 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.629979
+2020-04-09 14:56:32,643 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.643971
+2020-04-09 14:56:32,657 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.657964
+2020-04-09 14:56:32,671 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.671956
+2020-04-09 14:56:32,685 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.685948
+2020-04-09 14:56:32,699 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.699941
+2020-04-09 14:56:32,717 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.717931
+2020-04-09 14:56:32,734 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.734921
+2020-04-09 14:56:32,748 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.748914
+2020-04-09 14:56:32,762 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.762906
+2020-04-09 14:56:32,777 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.777898
+2020-04-09 14:56:32,790 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.790892
+2020-04-09 14:56:32,804 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.804900
+2020-04-09 14:56:32,817 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.817876
+2020-04-09 14:56:32,831 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.831886
+2020-04-09 14:56:32,844 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.844861
+2020-04-09 14:56:32,857 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.857854
+2020-04-09 14:56:32,870 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.870846
+2020-04-09 14:56:32,883 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.883839
+2020-04-09 14:56:32,896 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 20:56:32.896833
+2020-04-09 14:56:32,934 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css
+2020-04-09 14:57:10,851 background_task.management.commands.process_tasks 108 DEBUG    waiting for tasks
+2020-04-09 14:58:53,055 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 14:58:53,057 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 14:59:33,533 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 14:59:33,535 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 15:01:22,584 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 15:02:09,709 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 15:02:09,710 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 15:02:17,509 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:17.509961
+2020-04-09 15:02:24,688 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.688735
+2020-04-09 15:02:24,706 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.706727
+2020-04-09 15:02:24,723 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.723715
+2020-04-09 15:02:24,737 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.737708
+2020-04-09 15:02:24,750 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.750701
+2020-04-09 15:02:24,764 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.764693
+2020-04-09 15:02:24,777 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.776687
+2020-04-09 15:02:24,790 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.790679
+2020-04-09 15:02:24,804 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.803275
+2020-04-09 15:02:24,816 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.816261
+2020-04-09 15:02:24,830 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.830253
+2020-04-09 15:02:24,844 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.844246
+2020-04-09 15:02:24,857 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.857238
+2020-04-09 15:02:24,872 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.872232
+2020-04-09 15:02:24,885 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.885223
+2020-04-09 15:02:24,899 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.899226
+2020-04-09 15:02:24,913 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.913208
+2020-04-09 15:02:24,927 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.927218
+2020-04-09 15:02:24,941 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.941194
+2020-04-09 15:02:24,955 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.955202
+2020-04-09 15:02:24,970 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.970195
+2020-04-09 15:02:24,984 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.984171
+2020-04-09 15:02:24,998 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:24.998174
+2020-04-09 15:02:25,014 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:25.014152
+2020-04-09 15:02:25,029 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 21:02:25.029163
+2020-04-09 15:02:25,066 django.request 222 WARNING  Not Found: /setup/weeks/includes/styles.css

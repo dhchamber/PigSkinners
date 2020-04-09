@@ -39,7 +39,9 @@
                                         <td colspan=11><hr></td>
                                     </tr>
                                         {% for week in weeks %}
-                                            <tr weekNum="{{ week }}" dataRow="true">
+                                            <tr weekNum="{{ week }}" dataRow="true"
+                                                {% if week.is_current %} style = "BACKGROUND-COLOR: yellow" {% endif %}
+                                            >
                                                 <td align=center>{{ week }}</td>
                                                 <td>&nbsp;</td>
         										<td>{{ week.start_dt }}</td>

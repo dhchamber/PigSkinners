@@ -159,6 +159,12 @@ class Season(models.Model):
             logger.debug(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
         return week
 
+    def close_curr_week(self):
+        user = User.objects.get(id=1)
+        week = self.current_week()
+        print(f'Close week: {week.week_no}')
+        week.close_week(user)
+
     def season_scores(self):
         # determine winner or winners for the week
         # update pick scores for each pick for each week for the season
@@ -255,6 +261,12 @@ class Week(models.Model):
         if self.start_dt():
             return self.start_dt() - timedelta(hours=2)
 
+    def is_current(self):
+        if self == Season.objects.get(current=True).current_week():
+            return True
+        else:
+            return False
+
     def postseason_week(self):
         timezone.activate(pytz.timezone('America/Denver'))
         min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
@@ -344,9 +356,14 @@ class Week(models.Model):
 
     # get current time (in UTC timezone) if after forecast close (which is alos in UTC) then close the week
     def close_week(self, user):
+        print(f'Close week: {self.week_no} {user}')
         if self.start_dt():
+            print(f'Close week: {self.start_dt()}')
+            print(f'time_now: {timezone.now()}')
+            print(f'forcast dt closed: {self.forecast_dt_closed()}')
             if timezone.now() > self.forecast_dt_closed():
                 self.closed = True
+                print(f'CloseD week: {self.closed}')
                 self.date_closed = timezone.now()
                 self.closed_by = user
                 self.save()
