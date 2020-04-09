@@ -24,7 +24,7 @@ nfl_week = [(1, 'PRE'), (2, 'PRE'), (3, 'PRE'), (4, 'PRE'), (1, 'REG'), (2, 'REG
 
 class TimeStampMixin(models.Model):
     # TimeStampedModel
-    # https: // github.com / django - extensions / django - extensions / blob / master / django_extensions / db / models.py
+    # https:/github.com/django-extensions/django-extensions/blob/master/django_extensions/db/models.py
     # An abstract base class model that provides self-managed "created" and
     # "modified" fields.
 
@@ -124,6 +124,16 @@ class Season(models.Model):
     def __str__(self):
         return str(self.year)
 
+    def is_started(self):
+        try:
+            week1 = Week.objects.get(year=self, gt='REG', week_no=1)
+            if week1.closed:
+                return True
+            else:
+                return False
+        except:
+            return False
+
     def set_season_weeks(self):
         # load week objects for a new year.
         # print(f'Loading weeks for {self} ')
@@ -134,19 +144,12 @@ class Season(models.Model):
             # print(f'Week # {week} {gt} loaded ')
             logger.debug(f'Week # {week} {gt} loaded ')
 
-    # def load_games(self):
-    #     # yr = season
-    #     # game_first = -4 # start at -4 to get PreSeason games
-    #     # game_last = 22  # 22 is SB
-    #     for week, gt in nfl_week:
-    #         load_score('WEEK', self, gt, week)
-
     def current_week(self):
         # end_dt is start of last game of the week, so add 5 hours to be sure game is over
         # end_dt and Now are both UTC so they can be compared
         for week in self.weeks.all():
-            # if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
-            if week.week_no == 1 and week.gt == 'REG':
+            if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
+            # if week.week_no == 1 and week.gt == 'REG':
                 break
         if not self.weeks.all():  # there are no weeks in the Season
             logger.debug(f'There are no weeks in Season {self.year}')
@@ -246,7 +249,7 @@ class Week(models.Model):
     def end_dt(self):
         end_dt = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
         corrected_dt = end_dt + timedelta(days=945)
-        return
+        return corrected_dt
 
     def forecast_dt_closed(self):
         if self.start_dt():
@@ -308,11 +311,17 @@ class Week(models.Model):
             return 'na'
 
     def curr_overall_leader(self):
-        if self.gt == 'REG':
-            if self.week_no <= 9:
-                return self.year.season_winner()['half1']
-            elif self.week_no <= 17:
-                return self.year.season_winner()['half2']
+        year = Season.objects.get(current=True)
+        print(f'curr year: {year.year}')
+        # print(f'is started: {yea}')
+        if year.is_started():
+            if self.gt == 'REG':
+                if self.week_no <= 9:
+                    return self.year.season_winner()['half1']
+                elif self.week_no <= 17:
+                    return self.year.season_winner()['half2']
+        else:
+            return 'na'
 
     # number of players remaining in KOTH this week
     def koth_remaining(self):
@@ -741,6 +750,10 @@ class Pick(TimeStampMixin):
 
     objects = PickManager()
 
+    @property
+    def sorted_gameset(self):
+        return self.pickgame_set.all().order_by('game__eid')
+
     # TODO: retrun message with what failed
     def validate_pick(self):
         validate = True
@@ -857,6 +870,7 @@ class PickRevisionManager(models.Manager):
         return pick
 
 
+
 class PickRevision(TimeStampMixin):
     class Meta:
         verbose_name = 'pick revision'
@@ -877,6 +891,10 @@ class PickRevision(TimeStampMixin):
     updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_updated')
 
     objects = PickRevisionManager()
+
+    @property
+    def sorted_revgameset(self):
+        return self.pickrevgame_set.all().order_by('game__eid')
 
     def calc_score(self):
         sum_score = 0
@@ -913,6 +931,14 @@ class PostPickManager(models.Manager):
         # post_pick.set_seed_game(user)
         post_pick.save()
         return post_pick
+
+    def get_or_create(self, user, year):
+        try:
+            pick = PostPick.objects.get(user=user, year=year)
+        except PostPick.DoesNotExist:
+            pick = self.create_ps_pick(user, year)
+
+        return pick
 
     def save_pick(self):
         # if Pick.validate_pick(self):

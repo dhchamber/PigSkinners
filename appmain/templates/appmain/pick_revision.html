@@ -70,7 +70,7 @@
                     {% endif %}
                         <td class=user_row >{{ pick.revision }}</td>
                         {% if num_games > 0 %}
-                            {% for pgame in pick.pickrevgame_set.all %}
+                            {% for pgame in pick.sorted_revgameset %}
                                 {% if pgame.team is not NONE %}
                                     {% if pgame.team == pgame.game.game_winner %}
                                         <td class="user_cell_win d-table-cell d-lg-none"><div>{{ pgame.team.team_abrev }}</div></td>

@@ -365,10 +365,11 @@ def pick_view(request):
         except Week.DoesNotExist:
             week = Week.objects.get(year=year, week_no=1, gt=gt)
 
-        try:
-            pick = Pick.objects.get(user=request.user, wk=week)
-        except Pick.DoesNotExist:
-            pick = Pick.objects.create_pick(user=request.user, week=week)
+        pick = Pick.objects.get_or_create(request.user, week)
+        # try:
+        #     pick = Pick.objects.get(user=request.user, wk=week)
+        # except Pick.DoesNotExist:
+        #     pick = Pick.objects.create_pick(user=request.user, week=week)
 
         return render(request, 'appmain/pick_view.html', {'pick': pick})
     elif gt == 'POST':
@@ -432,10 +433,11 @@ def pick_make(request):
             pick.save()
         return redirect('pick_make')
     else:
-        try:
-            pick = Pick.objects.get(user=request.user, wk=week)
-        except Pick.DoesNotExist:
-            pick = Pick.objects.create_pick(user=request.user, week=week)
+        pick = Pick.objects.get_or_create(request.user, week)
+        # try:
+        #     pick = Pick.objects.get(user=request.user, wk=week)
+        # except Pick.DoesNotExist:
+        #     pick = Pick.objects.create_pick(user=request.user, week=week)
 
         if 'submitted' in request.GET:
             submitted = True
@@ -449,12 +451,14 @@ def pick_make_ps(request):
     year = Season.objects.get(current=True)
     weeks = get_postseason_weeks()
     post_season = PostSeason.objects.get(year=year)
-    try:
-        post_pick = PostPick.objects.get(year=year, user=request.user)
-        print(f'Got Pick: {post_pick.id}')
-    except PostPick.DoesNotExist:
-        post_pick = PostPick.objects.create_ps_pick(year=year, user=request.user)
-        print(f'Created Pick: {post_pick.id}')
+    post_pick = PostPick.objects.get_or_create(request.user, year)
+
+    # try:
+    #     post_pick = PostPick.objects.get(year=year, user=request.user)
+    #     print(f'Got Pick: {post_pick.id}')
+    # except PostPick.DoesNotExist:
+    #     post_pick = PostPick.objects.create_ps_pick(year=year, user=request.user)
+    #     print(f'Created Pick: {post_pick.id}')
 
     if request.method == 'POST':
         print(f'In Post: {post_pick.user.username}')
@@ -564,15 +568,21 @@ def standing_koth(request):
 def standing_post(request):
     timezone.activate(pytz.timezone('America/Denver'))
     year = Season.objects.get(current=True)
-    games = PostSeason.objects.get(year=year)
+    # TODO: if no games are loaded then display error view
+    try:
+        games = PostSeason.objects.get(year=year)
+    except PostSeason.DoesNotExist:
+        return render(request, 'appmain/standing_post.html')
 
     for user in User.objects.all():
         if user.is_active:
-            try:
-                pick = PostPick.objects.get(user=user, year=year)
-            except PostPick.DoesNotExist:
-                pick = PostPick.objects.create_ps_pick(user=user, year=year)
-    picks = PostPick.objects.filter(year=Season.objects.get(current=True))
+            pick = PostPick.objects.get_or_create(request.user, year)
+
+            # try:
+            #     pick = PostPick.objects.get(user=user, year=year)
+            # except PostPick.DoesNotExist:
+            #     pick = PostPick.objects.create_ps_pick(user=user, year=year)
+    picks = PostPick.objects.filter(year=year)
 
     return render(request, 'appmain/standing_post.html', {'picks': picks, 'games': games})
 

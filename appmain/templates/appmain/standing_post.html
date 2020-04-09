@@ -32,6 +32,7 @@
             <td sOnClick  rowspan=3 width="100px" align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid" ><b>Super Bowl Points</b></td>
             <td sOnClick2 rowspan=3 align=center valign=center style="CURSOR: hand;BORDER-LEFT: black solid;BORDER-BOTTOM: black solid" ><b>Score</b></td>
         </tr>
+        {% if games %}
     <!--Now show the Visiting teams-->
             <tr userRow='false'>
                         {% if games.AWC45 != None and games.AWC45.visitor_team == games.AWC45.game_winner %}
@@ -152,6 +153,11 @@
                             <td><div class=hand>{{ games.SB.home_team.short_name }}</div></td>
                         {% endif %}
             </tr>
+        {% else %}
+            <tr userRow='false' class=home_bottom>
+                <td colspan=11 align="center" style="color:red"><b>Post Season Games are not loaded yet</b></td>
+            </tr>
+        {% endif %}
         </thead>
         <tbody>
 

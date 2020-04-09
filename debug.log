@@ -10032,3 +10032,370 @@ TypeError: create_pick() takes 3 positional arguments but 4 were given
 2020-04-08 16:05:33,905 appmain.views 380 DEBUG    Starting pick_make: mbenage
 2020-04-08 16:05:33,917 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:33.917008
 2020-04-08 16:05:39,580 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:39.580559
+2020-04-08 19:34:49,390 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 01:34:49.390485
+2020-04-08 21:10:02,315 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:10:02.315098
+2020-04-08 21:10:06,112 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:10:06.112897
+2020-04-08 21:10:17,867 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:10:17.867969
+2020-04-08 21:10:21,588 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:10:21.588714
+2020-04-08 21:10:23,242 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:10:23.242081
+2020-04-08 21:13:02,306 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:02.306239
+2020-04-08 21:13:06,421 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:06.421306
+2020-04-08 21:13:08,928 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:08.928435
+2020-04-08 21:13:14,489 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:14.489341
+2020-04-08 21:13:16,921 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:16.921908
+2020-04-08 21:13:18,987 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:18.987790
+2020-04-08 21:13:23,752 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 21:13:23,762 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:23.762356
+2020-04-08 21:13:46,062 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 21:13:46,074 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:46.074543
+2020-04-08 21:13:46,477 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 21:13:46,494 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:46.494576
+2020-04-08 21:13:52,730 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 21:13:52,742 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:52.742611
+2020-04-08 21:13:52,940 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 21:13:52,955 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:52.955494
+2020-04-08 21:13:56,353 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:13:56.353442
+2020-04-08 21:14:01,316 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:14:01.316190
+2020-04-08 21:14:09,279 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 21:14:09,291 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 03:14:09.291330
+2020-04-08 21:19:33,263 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 21:19:33,264 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 21:20:27,096 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 21:20:27,097 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 21:20:34,431 django.request 222 ERROR    Internal Server Error: /pick/view/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 373, in pick_view
+    return render(request, 'appmain/pick_view.html', {'pick': pick})
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\test\utils.py", line 95, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\test\utils.py", line 95, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 166, in render
+    len_values = len(values)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 258, in __len__
+    self._fetch_all()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 1124, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 483, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 52, in pre_sql_setup
+    order_by = self.get_order_by()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 334, in get_order_by
+    order_by.extend(self.find_ordering_name(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 713, in find_ordering_name
+    field, targets, alias, joins, path, opts, transform_function = self._setup_joins(pieces, opts, alias)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 748, in _setup_joins
+    field, targets, opts, joins, path, transform_function = self.query.setup_joins(pieces, opts, alias)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\query.py", line 1556, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\query.py", line 1472, in names_to_path
+    raise FieldError("Cannot resolve keyword '%s' into field. "
+django.core.exceptions.FieldError: Cannot resolve keyword 'eid' into field. Choices are: created, entered_by, entered_by_id, game, game_id, id, modified, pick_head, pick_head_id, status, team, team_id, updated_by, updated_by_id
+2020-04-08 21:22:58,182 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 21:22:58,183 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 21:23:11,375 django.request 222 ERROR    Internal Server Error: /pick/view/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedTable: missing FROM-clause entry for table "game"
+LINE 1: ...E "appmain_pickgame"."pick_head_id" = 6 ORDER BY ("game".eid...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 373, in pick_view
+    return render(request, 'appmain/pick_view.html', {'pick': pick})
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\test\utils.py", line 95, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\test\utils.py", line 95, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 166, in render
+    len_values = len(values)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 258, in __len__
+    self._fetch_all()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\compiler.py", line 1137, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: missing FROM-clause entry for table "game"
+LINE 1: ...E "appmain_pickgame"."pick_head_id" = 6 ORDER BY ("game".eid...
+                                                             ^
+
+2020-04-08 21:26:17,448 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 21:29:43,107 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 21:29:43,110 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 08:33:47,094 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 08:33:47,096 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 08:33:55,545 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:33:55.545859
+2020-04-09 08:42:41,827 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 08:42:41,828 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 08:42:50,214 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:42:50.214920
+2020-04-09 08:42:52,497 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:42:52.497910
+2020-04-09 08:42:54,913 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:42:54.913255
+2020-04-09 08:42:57,976 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:42:57.976587
+2020-04-09 08:43:01,332 appmain.views 588 DEBUG    Starting standing_season: mbenage
+2020-04-09 08:43:01,345 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:43:01.345289
+2020-04-09 08:43:01,346 appmain.views 595 DEBUG    Starting standing_season/got w1 & w2: mbenage
+2020-04-09 08:43:01,348 appmain.views 601 DEBUG    Starting standing_season/got game_cnts: mbenage
+2020-04-09 08:43:01,362 appmain.views 607 DEBUG    Starting standing_season/got user subtotals: mbenage
+2020-04-09 08:43:01,387 appmain.models 189 DEBUG    1st half max: 0  2nd half max: None overall max: 0
+2020-04-09 08:43:04,277 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 14:43:04.277410
+2020-04-09 08:43:05,511 appmain.views 622 DEBUG    Starting standing_season/created picks: mbenage
+2020-04-09 08:43:05,512 appmain.views 626 DEBUG    Starting standing_season/got annotated picks: mbenage
+2020-04-09 08:43:09,021 django.request 222 ERROR    Internal Server Error: /standing/post/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 571, in standing_post
+    games = PostSeason.objects.get(year=year)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 415, in get
+    raise self.model.DoesNotExist(
+appmain.models.PostSeason.DoesNotExist: PostSeason matching query does not exist.
+2020-04-09 08:45:16,568 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 08:45:16,571 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 10:36:38,348 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-09 10:36:38,350 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 10:44:34,868 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:44:34.868770
+2020-04-09 10:47:30,217 django.request 222 WARNING  Not Found: /Standings_Post.asp
+2020-04-09 10:48:20,442 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:48:20.442043
+2020-04-09 10:48:20,588 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 469, in parse
+    compile_func = self.tags[command]
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 291, in home
+    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game, 'pick': pick})
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 156, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 194, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 266, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 209, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 477, in parse
+    raise self.error(token, e)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 475, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 966, in do_if
+    nodelist = parser.parse(('endif',))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 471, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 521, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 161: 'endblock', expected 'endif'. Did you forget to register or load this tag?
+2020-04-09 10:48:57,421 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:48:57.421770
+2020-04-09 10:49:00,177 django.request 222 WARNING  Not Found: /Standings_Season
+2020-04-09 10:50:09,839 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:50:09.839265
+2020-04-09 10:50:12,517 django.request 222 WARNING  Not Found: /standing_season
+2020-04-09 10:50:32,356 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:50:32.356905
+2020-04-09 10:50:34,050 appmain.views 592 DEBUG    Starting standing_season: mbenage
+2020-04-09 10:50:34,066 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:50:34.066960
+2020-04-09 10:50:34,067 appmain.views 599 DEBUG    Starting standing_season/got w1 & w2: mbenage
+2020-04-09 10:50:34,068 appmain.views 605 DEBUG    Starting standing_season/got game_cnts: mbenage
+2020-04-09 10:50:34,083 appmain.views 611 DEBUG    Starting standing_season/got user subtotals: mbenage
+2020-04-09 10:50:34,212 appmain.models 189 DEBUG    1st half max: 0  2nd half max: 0 overall max: 0
+2020-04-09 10:50:34,354 appmain.views 626 DEBUG    Starting standing_season/created picks: mbenage
+2020-04-09 10:50:34,355 appmain.views 630 DEBUG    Starting standing_season/got annotated picks: mbenage
+2020-04-09 10:52:41,819 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 10:52:41,820 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 10:53:22,641 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-09 16:53:22.641067
+2020-04-09 10:53:38,896 appmain.models 189 DEBUG    1st half max: 0  2nd half max: 0 overall max: 0
+2020-04-09 11:03:22,454 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 11:03:22,456 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 11:03:28,333 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:03:28.333410
+2020-04-09 11:03:28,461 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 291, in home
+    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game, 'pick': pick})
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\test\utils.py", line 95, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\test\utils.py", line 95, in instrumented_test_render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 309, in render
+    return nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 986, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 670, in resolve
+    obj = self.var.resolve(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 795, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 857, in _resolve_lookup
+    current = current()
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 314, in curr_overall_leader
+    if self.is_started:
+AttributeError: 'Week' object has no attribute 'is_started'
+2020-04-09 11:04:30,916 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 11:04:30,917 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 11:04:36,738 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:04:36.738486
+2020-04-09 11:04:36,889 appmain.models 192 DEBUG    1st half max: 0  2nd half max: 0 overall max: 0
+2020-04-09 11:05:07,025 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 11:05:52,387 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:05:52.387114
+2020-04-09 11:06:04,793 appmain.models 192 DEBUG    1st half max: 0  2nd half max: 0 overall max: 0
+2020-04-09 11:07:42,455 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 11:07:42,456 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 11:07:44,556 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:07:44.556006
+2020-04-09 11:08:08,154 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 11:08:12,654 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 17:08:12.654851
