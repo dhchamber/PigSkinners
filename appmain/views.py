@@ -277,6 +277,10 @@ def home(request):
         week = year.current_week()
     except Season.DoesNotExist:
         week = None
+        return render(request, 'appmain/home_frame.html')
+
+    pick = Pick.objects.get_or_create(request.user, week)
+
     if Profile.objects.get(user=request.user).favorite_team is not None:
         fav_team = Profile.objects.get(user=request.user).favorite_team
     elif week is not None and Game.objects.get(week=week, points_game=True) is not None:
@@ -284,10 +288,7 @@ def home(request):
     else:
         fav_team = Team.objects.get(team_abrev='DEN')
 
-    if week is None:
-        return render(request, 'appmain/home_frame.html')
-    else:
-        return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game})
+    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game, 'pick': pick})
 
 
 @login_required

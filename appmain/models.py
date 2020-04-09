@@ -707,6 +707,14 @@ class PickManager(models.Manager):
         pick.save()
         return pick
 
+    def get_or_create(self, user, week):
+        try:
+            pick = Pick.objects.get(user=user, wk=week)
+        except Pick.DoesNotExist:
+            pick = self.create_pick(user, week)
+
+        return pick
+
     def save_pick(self):
         if Pick.validate_pick(self):
             self.saved = True
@@ -849,7 +857,7 @@ class PickRevisionManager(models.Manager):
         return pick
 
 
-class PickRevision(models.Model):
+class PickRevision(TimeStampMixin):
     class Meta:
         verbose_name = 'pick revision'
         verbose_name_plural = 'pick revisions'
@@ -879,7 +887,7 @@ class PickRevision(models.Model):
 
         return sum_score
 
-class PickRevGame(models.Model):
+class PickRevGame(TimeStampMixin):
     class Meta:
         verbose_name = 'pick game'
         verbose_name_plural = 'pick games'
@@ -912,7 +920,7 @@ class PostPickManager(models.Manager):
         self.save()
 
 
-class PostPick(models.Model):
+class PostPick(TimeStampMixin):
     class Meta:
         verbose_name = 'post season pick2'
         verbose_name_plural = 'post season picks2'

@@ -46,8 +46,14 @@
                                         {% elif week.gt == 'REG' %}
                                             Current Week:<br>Regular Season Week: {{ week.week_no }}
                                         {% endif %}
-                                        </b></font>
-                                        <br><br>
+                                        </b></font><br><br><b>
+                                            {{request.user.first_name }}, Your Picks for the current week are:
+                                        {% if pick.saved %}
+                                            <p style="color:blue">SAVED</p>
+                                        {% else %}
+                                            <p style="color:red">NOT Saved</p>
+                                        {% endif %}
+                                        </b>
                                     </td>
                                     <td width="40%" align="center">
                                         <font size=-1>All times are in {{ TIMEZONE }}</font>

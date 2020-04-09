@@ -9886,3 +9886,149 @@ AttributeError: type object 'datetime.datetime' has no attribute 'timedelta'
 2020-04-08 07:14:16,408 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 13:14:16.408541
 2020-04-08 07:14:47,369 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 13:14:47.369517
 2020-04-08 07:16:08,963 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 13:16:08.963737
+2020-04-08 09:52:45,805 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 15:52:45.805308
+2020-04-08 09:53:08,424 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 15:53:08.424353
+2020-04-08 09:53:49,210 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 15:53:49.210545
+2020-04-08 10:03:01,631 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:03:01.631841
+2020-04-08 10:04:14,388 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:04:14.388974
+2020-04-08 10:05:20,848 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:05:20.848744
+2020-04-08 10:05:40,164 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:05:40.164457
+2020-04-08 10:06:51,559 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:06:51.559635
+2020-04-08 10:07:04,758 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:07:04.758268
+2020-04-08 10:08:52,806 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 16:08:52.806828
+2020-04-08 13:39:36,079 appmain.views 379 DEBUG    Starting pick_make: kstone
+2020-04-08 13:39:36,091 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 19:39:36.091647
+2020-04-08 13:39:42,509 appmain.views 379 DEBUG    Starting pick_make: kstone
+2020-04-08 13:39:42,522 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 19:39:42.522278
+2020-04-08 13:39:42,719 appmain.views 379 DEBUG    Starting pick_make: kstone
+2020-04-08 13:39:42,732 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 19:39:42.732745
+2020-04-08 13:39:56,771 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 19:39:56.771068
+2020-04-08 15:23:28,240 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:23:28.240760
+2020-04-08 15:28:45,811 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 15:28:45,812 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 15:37:02,123 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:37:02.123395
+2020-04-08 15:37:02,246 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 712, in get_or_create
+    pick = self.objects.get(user=user, wk=week)
+AttributeError: 'PickManager' object has no attribute 'objects'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 282, in home
+    pick = Pick.objects.get_or_create(request.user, week)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 713, in get_or_create
+    except self.DoesNotExist:
+AttributeError: 'PickManager' object has no attribute 'DoesNotExist'
+2020-04-08 15:37:43,129 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 15:37:43,130 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 15:37:45,273 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:37:45.273336
+2020-04-08 15:37:45,309 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 282, in home
+    pick = Pick.objects.get_or_create(request.user, week)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 712, in get_or_create
+    pick = self.objects.get(user=user, wk=week)
+AttributeError: 'PickManager' object has no attribute 'objects'
+2020-04-08 15:38:00,087 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 15:38:00,088 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 15:38:02,231 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:38:02.231742
+2020-04-08 15:38:36,547 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:38:36.547998
+2020-04-08 15:39:30,503 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:39:30.503772
+2020-04-08 15:39:42,429 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:39:42.429456
+2020-04-08 15:39:42,522 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 712, in get_or_create
+    pick = Pick.objects.get(user=user, wk=week)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 415, in get
+    raise self.model.DoesNotExist(
+appmain.models.Pick.DoesNotExist: Pick matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 282, in home
+    pick = Pick.objects.get_or_create(request.user, week)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 714, in get_or_create
+    pick = Pick.create_pick(self, user, week)
+AttributeError: type object 'Pick' has no attribute 'create_pick'
+2020-04-08 15:40:13,698 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 15:40:13,699 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 15:40:17,659 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:40:17.659167
+2020-04-08 15:40:17,713 django.request 222 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 712, in get_or_create
+    pick = Pick.objects.get(user=user, wk=week)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 415, in get
+    raise self.model.DoesNotExist(
+appmain.models.Pick.DoesNotExist: Pick matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 282, in home
+    pick = Pick.objects.get_or_create(request.user, week)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 714, in get_or_create
+    pick = self.create_pick(self, user, week)
+TypeError: create_pick() takes 3 positional arguments but 4 were given
+2020-04-08 15:41:49,911 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 15:41:49,913 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 15:41:52,007 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:41:52.007963
+2020-04-08 15:42:02,845 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 15:42:02,859 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:42:02.859904
+2020-04-08 15:42:06,347 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 15:42:06,361 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:42:06.361204
+2020-04-08 15:42:06,603 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 15:42:06,614 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:42:06.614062
+2020-04-08 15:58:38,728 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:58:38.728742
+2020-04-08 15:59:25,279 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 15:59:25,292 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 21:59:25.292230
+2020-04-08 16:01:52,519 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-08 16:01:52,520 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 16:02:02,769 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 16:02:28,093 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-08 16:05:20,698 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 16:05:20,828 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:20.828138
+2020-04-08 16:05:21,081 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 16:05:21,093 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:21.093990
+2020-04-08 16:05:25,328 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:25.328766
+2020-04-08 16:05:33,905 appmain.views 380 DEBUG    Starting pick_make: mbenage
+2020-04-08 16:05:33,917 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:33.917008
+2020-04-08 16:05:39,580 appmain.models 156 DEBUG    week: 1/REG  week.end_dt None Now: 2020-04-08 22:05:39.580559
