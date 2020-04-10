@@ -174,7 +174,7 @@ class Season(models.Model):
         full = Week.objects.filter(year=self, gt='REG')
 
         # exclude #1 - footballpool/Random Picks
-        user_scores = User.objects.filter(id!=1).annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
+        user_scores = User.objects.all().annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
             .annotate(half2=Sum('picks__pick_score', filter=Q(picks__wk__in=half2))) \
             .annotate(all=Sum('picks__pick_score', filter=Q(picks__wk__in=full)))
         return user_scores

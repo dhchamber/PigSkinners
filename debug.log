@@ -10881,3 +10881,65 @@ AttributeError: 'Week' object has no attribute 'is_started'
 2020-04-09 20:32:41,631 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:32:41.631192
 2020-04-09 20:34:31,507 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
 2020-04-09 20:34:31,509 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:34:44,196 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:35:09,712 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:35:09.712662
+2020-04-09 20:35:49,960 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-09 20:35:50,024 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-09 20:35:50,098 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-09 20:35:50,164 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-09 20:35:50,228 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-09 20:35:58,619 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:35:58.619269
+2020-04-09 20:36:03,396 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:36:03.396005
+2020-04-09 20:43:51,803 appmain.views 595 DEBUG    Starting standing_season: kstone
+2020-04-09 20:43:51,824 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:43:51.824869
+2020-04-09 20:43:51,825 appmain.views 602 DEBUG    Starting standing_season/got w1 & w2: kstone
+2020-04-09 20:43:51,827 appmain.views 608 DEBUG    Starting standing_season/got game_cnts: kstone
+2020-04-09 20:43:51,901 django.request 222 ERROR    Internal Server Error: /standing/season/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 610, in standing_season
+    users = year.season_scores().annotate(
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\models.py", line 177, in season_scores
+    user_scores = User.objects.filter(id!=1).annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 904, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\query.py", line 923, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\query.py", line 1340, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\query.py", line 1367, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\db\models\sql\query.py", line 1237, in build_filter
+    arg, value = filter_expr
+TypeError: cannot unpack non-iterable bool object
+2020-04-09 20:44:50,387 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:44:50,388 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:44:53,168 appmain.views 595 DEBUG    Starting standing_season: kstone
+2020-04-09 20:44:53,188 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:44:53.188460
+2020-04-09 20:44:53,189 appmain.views 602 DEBUG    Starting standing_season/got w1 & w2: kstone
+2020-04-09 20:44:53,191 appmain.views 608 DEBUG    Starting standing_season/got game_cnts: kstone
+2020-04-09 20:44:53,203 appmain.views 614 DEBUG    Starting standing_season/got user subtotals: kstone
+2020-04-09 20:44:53,340 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-09 20:44:53,487 appmain.views 629 DEBUG    Starting standing_season/created picks: kstone
+2020-04-09 20:44:53,488 appmain.views 633 DEBUG    Starting standing_season/got annotated picks: kstone
+2020-04-09 20:46:08,979 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:46:08,980 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:46:15,802 appmain.views 595 DEBUG    Starting standing_season: kstone
+2020-04-09 20:46:15,821 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:46:15.821874
+2020-04-09 20:46:15,823 appmain.views 602 DEBUG    Starting standing_season/got w1 & w2: kstone
+2020-04-09 20:46:15,825 appmain.views 608 DEBUG    Starting standing_season/got game_cnts: kstone
+2020-04-09 20:46:15,837 appmain.views 614 DEBUG    Starting standing_season/got user subtotals: kstone
+2020-04-09 20:46:15,980 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-09 20:46:16,138 appmain.views 629 DEBUG    Starting standing_season/created picks: kstone
+2020-04-09 20:46:16,140 appmain.views 633 DEBUG    Starting standing_season/got annotated picks: kstone
+2020-04-09 20:46:46,916 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:46:46,917 asyncio      623 DEBUG    Using proactor: IocpProactor
