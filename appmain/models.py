@@ -173,7 +173,8 @@ class Season(models.Model):
         half2 = Week.objects.filter(year=self, gt='REG', week_no__gt=9)
         full = Week.objects.filter(year=self, gt='REG')
 
-        user_scores = User.objects.all().annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
+        # exclude #1 - footballpool/Random Picks
+        user_scores = User.objects.filter(id!=1).annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
             .annotate(half2=Sum('picks__pick_score', filter=Q(picks__wk__in=half2))) \
             .annotate(all=Sum('picks__pick_score', filter=Q(picks__wk__in=full)))
         return user_scores
@@ -556,6 +557,13 @@ class Game(TimeStampMixin):
             else:
                 self.winner = None
         self.save()
+
+    # tool for testing mode
+    def game_final(self):
+        self.status = 'F'
+        self.save()
+        self.set_winner()
+        self.update_score()
 
 
 #  Table for PostSeason seeds

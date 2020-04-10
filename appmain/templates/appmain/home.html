@@ -64,7 +64,11 @@
                                             <div align="center">Congratulations to last week's winner:<br>{{ week.prev_week_winner }}</div>
                                         {% endif %}
                                         {% if week.curr_overall_leader != 'na' %}
-                                            <div align="center">Current Overall Leader:<br>{{ week.curr_overall_leader }}</div>
+                                            <div align="center">Current Overall Leader:<br>
+                                                {% for leader in week.curr_overall_leader %}
+                                                {{ leader.first_name }} {{ leader.last_name }}<br>
+                                                {% endfor %}
+                                            </div>
                                         {% endif %}
 
                                         <!--this is to make sure the gif is downloaded by the time we need it-->

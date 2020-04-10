@@ -10863,3 +10863,21 @@ AttributeError: 'Week' object has no attribute 'is_started'
 2020-04-09 17:03:33,694 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
 2020-04-09 17:03:33,695 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-09 17:03:38,943 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:03:38.943611
+2020-04-09 17:05:10,980 appmain.views 384 DEBUG    Starting pick_make: kstone
+2020-04-09 17:05:11,000 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:05:11.000898
+2020-04-09 17:12:28,189 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:12:28.189718
+2020-04-09 17:12:49,431 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:12:49.431063
+2020-04-09 17:16:41,285 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-09 23:16:41.285356
+2020-04-09 17:16:41,435 appmain.models 198 DEBUG    1st half max: 0  2nd half max: 0 overall max: 0
+2020-04-09 17:16:41,559 appmain.models 198 DEBUG    1st half max: 0  2nd half max: 0 overall max: 0
+2020-04-09 20:23:02,504 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:23:02.504597
+2020-04-09 20:29:07,172 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:29:07,174 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:29:29,625 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:30:51,867 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:30:51,868 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:32:39,557 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:32:39,559 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:32:41,631 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:32:41.631192
+2020-04-09 20:34:31,507 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-09 20:34:31,509 asyncio      623 DEBUG    Using proactor: IocpProactor
