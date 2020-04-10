@@ -15,8 +15,8 @@
         <thead class="thead-light">
             <tr class="thead1">
                 <th colspan="2" align="center">Picks for week: {{ pick.wk }}<br>
-                    {% if pick.wk.closed %} CLOSED
-                    {% else %} OPEN {% endif %}
+                    {% if pick.wk.closed %}<div style="color:red">CLOSED</div>
+                    {% else %}<div style="color:blue">OPEN</div>{% endif %}
                 </th>
                 <th class="d-table-cell d-md-none" colspan="2" align="center">{{ pick.wk.start_dt|date:"m/d" }} TO {{ pick.wk.end_dt|date:"m/d" }}<br>
                 <th class="d-none d-md-table-cell d-lg-none" colspan="2" align="center">{{ pick.wk.start_dt|date:"m/d/y" }} TO {{ pick.wk.end_dt|date:"m/d/y" }}<br>

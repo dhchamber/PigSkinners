@@ -294,7 +294,7 @@ class Week(models.Model):
                 score=Sum(Case(When(status='W', then=1), default=0, output_field=IntegerField(), )))['score']
 
         #  only return winners if the week is closed
-        # should this be only if all games are complete?  af
+        # should this be only if all games are complete?
         if self.closed:
             # get max score for the week
             max_score = \
@@ -436,7 +436,8 @@ class Game(TimeStampMixin):
         return self.gsis
 
     def points_score(self):
-        return self.home_score + self.visitor_score
+        if self.status[:1] == 'F':
+            return self.home_score + self.visitor_score
 
     # TODO: this is the same code as in load nfl games.  consolidate!
     def get_date(self):

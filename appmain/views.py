@@ -387,9 +387,11 @@ def pick_make(request):
     week = get_selected_week(request)
 
     validated = True
-    if not week.closed:
-       close = week.close_week(request.user)
-    print(f'Week closed for week ID: {week.id}')
+    if week.closed:
+        return redirect('pick_view')
+    else:
+        close = week.close_week(request.user)
+        print(f'Week closed for week ID: {week.id}')
 
     if request.method == 'POST':
         pick_id = request.POST.get("hidPickID")

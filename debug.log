@@ -10943,3 +10943,33 @@ TypeError: cannot unpack non-iterable bool object
 2020-04-09 20:46:16,140 appmain.views 633 DEBUG    Starting standing_season/got annotated picks: kstone
 2020-04-09 20:46:46,916 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
 2020-04-09 20:46:46,917 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-09 20:46:49,027 appmain.views 595 DEBUG    Starting standing_season: kstone
+2020-04-09 20:46:49,047 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 02:46:49.047871
+2020-04-09 20:46:49,048 appmain.views 602 DEBUG    Starting standing_season/got w1 & w2: kstone
+2020-04-09 20:46:49,050 appmain.views 608 DEBUG    Starting standing_season/got game_cnts: kstone
+2020-04-09 20:46:49,062 appmain.views 614 DEBUG    Starting standing_season/got user subtotals: kstone
+2020-04-09 20:46:49,197 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-09 20:46:49,346 appmain.views 629 DEBUG    Starting standing_season/created picks: kstone
+2020-04-09 20:46:49,347 appmain.views 633 DEBUG    Starting standing_season/got annotated picks: kstone
+2020-04-10 08:08:50,479 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 14:08:50.479017
+2020-04-10 08:08:50,638 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-10 08:08:50,767 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-10 08:08:54,491 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 14:08:54.491330
+2020-04-10 10:13:01,045 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-10 10:13:01,047 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-10 10:13:17,945 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-10 10:13:17,947 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-10 10:16:20,648 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-10 10:16:20,650 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-10 10:16:27,116 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 16:16:27.116199
+2020-04-10 10:16:27,285 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-10 10:16:27,408 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-10 10:16:37,585 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 16:16:37.585674
+2020-04-10 12:24:44,458 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 18:24:44.458151
+2020-04-10 14:04:03,380 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-10 14:04:03,381 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-10 14:04:23,639 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:04:23.639828
+2020-04-10 14:04:23,814 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-10 14:04:23,940 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-10 14:04:30,177 appmain.views 384 DEBUG    Starting pick_make: kstone
+2020-04-10 14:04:30,195 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:04:30.195029

@@ -12,114 +12,91 @@
       </style>
 {% endblock stylesheet %}
 {% block content %}
-    {% if user.is_authenticated %}
-		<div class="container">
-        </div>
-    {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a>
-    {% endif %}
+    {% get_current_timezone as TIMEZONE %}
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="home_content" id="tblContent" name="tblContent">
+                <tr>
+                    <td width="15px">&nbsp;</td>
+                    <td align="center">
+                        <table cellpadding="0" cellspacing="0" border="1" bgcolor="white" width="100%">
+                            <tr>
+                                <td colspan=3 align=center>Welcome {{request.user.first_name }} {{request.user.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td width="30%" align="center" valign="top">
+                                    {% if fav_team == None %}
+                                        <a href={{ pts_game.visitor_team.web_address }}><img border='0' src="{% static pts_game.visitor_team.visitor_file_name %}" height='72px'></a>
+                                    {% else %}
+                                        <a href={{ fav_team.web_address }}><img border='0' src="{% static fav_team.visitor_file_name %}" height='72px'></a>
+                                    {% endif %}
+                                    <br><br>
+                                    <font size="+2"><b>
+                                    {% if week.gt == 'POST' %}
+                                        Playoff time!
+                                    {% elif week.gt == 'PRE' %}
+                                        Current Week:<br>PreSeason Week: {{ week.week_no }}
+                                    {% elif week.gt == 'REG' %}
+                                        Current Week:<br>Regular Season Week: {{ week.week_no }}
+                                    {% endif %}
+                                    </b></font><br><br><b>
+                                        {{request.user.first_name }}, Your Picks for the current week are:
+                                    {% if pick.saved %}
+                                        <p style="color:blue">SAVED</p>
+                                    {% else %}
+                                        <p style="color:red">NOT Saved</p>
+                                    {% endif %}
+                                    </b>
+                                </td>
+                                <td width="40%" align="center">
+                                    <font size=-1>All times are in {{ TIMEZONE }}</font>
+                                    <br>
+                                    <img class="imgLogo d-none d-lg-table-cell" id="imgLogo" name="imgLogo" src="{% static '/appmain/Logo/Pigskinners_logo.gif' %}" WIDTH="367" HEIGHT="196">
+                                    <br>
+                                    {% if week.prev_week_winner != 'na' %}
+                                        <div align="center">Congratulations to last week's winner:<br>{{ week.prev_week_winner }}</div>
+                                    {% endif %}
+                                    {% if week.curr_overall_leader != 'na' %}
+                                        <div align="center">Current Overall Leader:<br>
+                                            {% for leader in week.curr_overall_leader %}
+                                            {{ leader.first_name }} {{ leader.last_name }}<br>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
 
-<!--    <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" LANGUAGE="javascript" onload="return window_onload()">-->
-        {% get_current_timezone as TIMEZONE %}
-        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="home_content" id="tblContent" name="tblContent">
-                    <tr>
-                        <td width="15px">&nbsp;</td>
-                        <td align="center">
-                            <table cellpadding="0" cellspacing="0" border="1" bgcolor="white" width="100%">
-                                <tr>
-                                    <td colspan=3 align=center>Welcome {{request.user.first_name }} {{request.user.last_name }}</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" align="center" valign="top">
-                                        {% if fav_team == None %}
-                                            <a href={{ pts_game.visitor_team.web_address }}><img border='0' src="{% static pts_game.visitor_team.visitor_file_name %}" height='72px'></a>
-                                        {% else %}
-                                            <a href={{ fav_team.web_address }}><img border='0' src="{% static fav_team.visitor_file_name %}" height='72px'></a>
-                                        {% endif %}
-                                        <br><br>
-                                        <font size="+2"><b>
-                                        {% if week.gt == 'POST' %}
-                                            Playoff time!
-                                        {% elif week.gt == 'PRE' %}
-                                            Current Week:<br>PreSeason Week: {{ week.week_no }}
-                                        {% elif week.gt == 'REG' %}
-                                            Current Week:<br>Regular Season Week: {{ week.week_no }}
-                                        {% endif %}
-                                        </b></font><br><br><b>
-                                            {{request.user.first_name }}, Your Picks for the current week are:
-                                        {% if pick.saved %}
-                                            <p style="color:blue">SAVED</p>
-                                        {% else %}
-                                            <p style="color:red">NOT Saved</p>
-                                        {% endif %}
-                                        </b>
-                                    </td>
-                                    <td width="40%" align="center">
-                                        <font size=-1>All times are in {{ TIMEZONE }}</font>
-                                        <br>
-                                        <img class="imgLogo d-none d-lg-table-cell" id="imgLogo" name="imgLogo" src="{% static '/appmain/Logo/Pigskinners_logo.gif' %}" WIDTH="367" HEIGHT="196">
-                                        <br>
-                                        {% if week.prev_week_winner != 'na' %}
-                                            <div align="center">Congratulations to last week's winner:<br>{{ week.prev_week_winner }}</div>
-                                        {% endif %}
-                                        {% if week.curr_overall_leader != 'na' %}
-                                            <div align="center">Current Overall Leader:<br>
-                                                {% for leader in week.curr_overall_leader %}
-                                                {{ leader.first_name }} {{ leader.last_name }}<br>
-                                                {% endfor %}
-                                            </div>
-                                        {% endif %}
-
-                                        <!--this is to make sure the gif is downloaded by the time we need it-->
+                                    <!--this is to make sure the gif is downloaded by the time we need it-->
 <!--                                        <img id="hidExplode" name="hidExplode" width="0px" src="{% static '/appmain/HomePage/explosion.gif' %}" style="visibility:hidden">-->
-                                    </td>
-                                    <td width="30%" align="center" valign="top">
-                                        {% if fav_team == None %}
-                                            <a href={{ pts_game.home_team.web_address }}><img border='0' src="{% static pts_game.home_team.home_file_name %}" height='72px'></a>
-                                        {% else %}
-                                            <a href={{ fav_team.web_address }}><img border='0' src="{% static fav_team.home_file_name %}" height='72px'></a>
-                                        {% endif %}
-                                        <br>
-                                        <br>&nbsp;
-                                        <font size="+1">Pick Status: </font>
-                                        {% if week.closed %}
-                                            <font size="+2" color="red"><b>CLOSED</b></font>
-                                        {% else %}
-                                            <font size="+2" color="blue"><b>OPEN</b></font><br>
-                                            <font size="+2" color="blue"><b>Picks will Close: {{ week.forecast_dt_closed }}</b></font>
-                                        {% endif %}
+                                </td>
+                                <td width="30%" align="center" valign="top">
+                                    {% if fav_team == None %}
+                                        <a href={{ pts_game.home_team.web_address }}><img border='0' src="{% static pts_game.home_team.home_file_name %}" height='72px'></a>
+                                    {% else %}
+                                        <a href={{ fav_team.web_address }}><img border='0' src="{% static fav_team.home_file_name %}" height='72px'></a>
+                                    {% endif %}
+                                    <br>
+                                    <br>&nbsp;
+                                    <font size="+1">Pick Status: </font>
+                                    {% if week.closed %}
+                                        <font size="+2" color="red"><b>CLOSED</b></font>
+                                    {% else %}
+                                        <font size="+2" color="blue"><b>OPEN</b></font><br>
+                                        <font size="+2" color="blue"><b>Picks will Close: {{ week.forecast_dt_closed }}</b></font>
                                         <br>&nbsp;
                                         <div id="closeCountdown"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan=3 align=center>
-                                    {% if week.week_no > 17 %}
-                                        <br><br><a href='standing/post/'><font size='+2' color='darkgreen'>Click here to see the Postseason Standings!</font></a>
-                                    {% else %}
-                                        <br><br><a href='standing/season'><font size='+2' color='darkgreen'>Click here to see the Season Standings!</font></a>
                                     {% endif %}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-        </table>
-<!--     <div class="col-md-6 col-sm-6 col-xs-12">-->
-<!--        <div class="row">-->
-<!--           <div class="full">-->
-<!--              <div class="right-match-time">-->
-<!--                 <h2>Close Countdown</h2>-->
-<!--                    <span id="days">Days</span> <span id="hours">Hours</span>-->
-<!--                    <span id="minutes">Minutes</span>-->
-<!--                    <span id="seconds">Seconds</span>-->
-<!--                 </ul>-->
-<!--              </div>-->
-<!--           </div>-->
-<!--        </div>-->
-<!--     </div>-->
-
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=3 align=center>
+                                {% if week.week_no > 17 %}
+                                    <br><br><a href='standing/post/'><font size='+2' color='darkgreen'>Click here to see the Postseason Standings!</font></a>
+                                {% else %}
+                                    <br><br><a href='standing/season'><font size='+2' color='darkgreen'>Click here to see the Season Standings!</font></a>
+                                {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+    </table>
         <!--these are all divs used for the "helmet crashing"-->
         <div id="divExplode" name="divExplode" STYLE="position:absolute;top:100px;left:400px;visibility:hidden;">
             <img src id="imgExplode" name="imgExplode" loop="1" width="95px">
@@ -133,7 +110,6 @@
                 </tr>
             </table>
         </div>
-
         <div id="divPointsGameText" name="divPointsGameText" STYLE="-moz-opacity:1%;filter:alpha(opacity=1)">
 <!--visibility:hidden;            -->
             <table border="0" cellspacing="0" cellpadding="2" width="100%" class="tblPointsGame">

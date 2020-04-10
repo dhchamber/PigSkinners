@@ -25,7 +25,7 @@
                         {% if request.user == pick.user %}
                             {% if pick.koth_game != None and pick.koth_team == pick.koth_game.game_winner %}
                                 <tr class="winteam curr_user">
-                            {% elif pick.koth_game.status == 'F' or pick.koth_game.status == 'FO' %}
+                            {% elif pick.koth_game.status == 'F' or pick.koth_game.status == 'FO' or pick.koth_game == None %}
                                 <tr class="loseteam curr_user">
                             {% else %}
                                 <tr class=curr_user>
@@ -33,7 +33,7 @@
                         {% else %}
                             {% if pick.koth_game != None and pick.koth_team == pick.koth_game.game_winner %}
                                 <tr class=winteam>
-                            {% elif pick.koth_game.status == 'F' or pick.koth_game.status == 'FO' %}
+                            {% elif pick.koth_game.status == 'F' or pick.koth_game.status == 'FO' or pick.koth_game == None %}
                                 <tr class=loseteam>
                             {% else %}
                                 <tr>
