@@ -10973,3 +10973,10 @@ TypeError: cannot unpack non-iterable bool object
 2020-04-10 14:04:23,940 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
 2020-04-10 14:04:30,177 appmain.views 384 DEBUG    Starting pick_make: kstone
 2020-04-10 14:04:30,195 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:04:30.195029
+2020-04-10 14:06:49,610 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:06:49.610105
+2020-04-10 14:06:49,753 appmain.models 199 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-10 14:06:49,879 appmain.models 199 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-10 14:10:14,595 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:10:14.595204
+2020-04-10 14:10:16,903 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:10:16.903998
+2020-04-10 14:43:21,901 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-10 14:43:21,902 asyncio      623 DEBUG    Using proactor: IocpProactor

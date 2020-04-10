@@ -847,8 +847,11 @@ class Pick(TimeStampMixin):
     def points_delta(self):
         pts_game = Game.objects.filter(week=self.wk, points_game=True)
         if pts_game.count() > 0:
-            pts = pts_game[0].points_score()
-            pts_delta = abs(self.points - pts)
+            if pts_game[0].points_score() is not None:
+                pts = pts_game[0].points_score()
+                pts_delta = abs(self.points - pts)
+            else:
+                pts_delta = None
         else:
             pts_delta = None
         return pts_delta

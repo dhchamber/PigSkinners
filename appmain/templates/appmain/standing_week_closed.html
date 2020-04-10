@@ -61,7 +61,7 @@
         </thead>
         <tbody>
                 {% for pick in user_picks %}
-                    {% if pick in pick.wk.week_winner %}
+                    {% if pick == pick.wk.week_winner %}
                         <tr class=week_winner onclick="highlightRow(this)" userRow="true" id = "tr{{ pick.user.id }}" name = "tr{{ pick.user.last_name }}" isCompared="false">
                     {% elif request.user == pick.user %}
                         <tr class=curr_user onclick="highlightRow(this)" userRow="true" id = "tr{{ pick.user.id }}" name = "tr{{ pick.user.last_name }}" isCompared="false">
