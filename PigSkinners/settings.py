@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',      # django messages in request to return errors
     'django.contrib.staticfiles',
     'django_extensions',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'werkzeug',
     'django_tables2',
     'crispy_forms',
@@ -115,7 +115,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware', # Associates users with requests using sessions
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'PigSkinners.urls'

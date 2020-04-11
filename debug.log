@@ -11008,3 +11008,91 @@ TypeError: cannot unpack non-iterable bool object
 2020-04-11 15:47:14,042 appmain.models 199 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
 2020-04-11 15:47:14,182 appmain.views 596 DEBUG    Starting standing_season/created picks: kstone
 2020-04-11 15:47:14,183 appmain.views 600 DEBUG    Starting standing_season/got annotated picks: kstone
+2020-04-11 15:57:53,626 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-11 15:57:53,628 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 15:57:54,826 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 16:06:42,193 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-11 16:06:42,195 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 16:06:43,836 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 16:11:57,248 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:11:57.248431
+2020-04-11 16:11:59,828 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:11:59.828438
+2020-04-11 16:14:19,459 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:14:19.459264
+2020-04-11 16:18:54,804 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:54,863 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:54,927 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:54,987 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:55,047 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:55,112 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:55,211 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:55,272 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:55,330 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:55,391 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:55,453 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:55,515 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:55,579 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:55,640 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:55,701 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:55,762 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:55,822 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:55,880 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:55,944 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:56,005 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:56,067 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:56,126 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:56,187 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:56,250 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:56,308 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:56,368 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:56,425 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:56,487 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:56,555 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:56,619 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:56,683 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:56,743 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:56,804 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:56,863 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:56,923 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:56,983 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:57,043 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:57,098 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:57,157 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:57,213 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:57,274 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:57,331 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:57,390 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:57,454 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:57,514 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:57,574 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:57,630 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:57,689 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:57,749 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:57,808 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:57,870 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:57,931 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:57,993 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:58,053 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:58,113 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:58,176 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:58,235 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:58,294 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:58,357 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:58,416 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:58,478 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:58,540 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:58,601 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:58,660 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:58,719 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:58,777 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:58,839 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:58,894 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:58,955 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:59,015 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:18:59,080 appmain.models 526 DEBUG    update score on pick: 3 with score: 1
+2020-04-11 16:18:59,157 appmain.models 526 DEBUG    update score on pick: 6 with score: 0
+2020-04-11 16:18:59,218 appmain.models 548 DEBUG    update score on pick revs: 1 with score: 1
+2020-04-11 16:18:59,280 appmain.models 548 DEBUG    update score on pick revs: 4 with score: 1
+2020-04-11 16:18:59,340 appmain.models 548 DEBUG    update score on pick revs: 5 with score: 0
+2020-04-11 16:19:07,199 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:19:07.199631
+2020-04-11 16:19:12,535 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:19:12.535318
+2020-04-11 16:20:15,404 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:20:15.404340
+2020-04-11 16:20:16,642 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:20:16.642352

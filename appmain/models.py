@@ -163,6 +163,7 @@ class Season(models.Model):
         user = User.objects.get(id=1)
         week = self.current_week()
         print(f'Close week: {week.week_no}')
+        logger.info(f'Close_Curr_Week: {user.last_name} / {week}')
         week.close_week(user)
 
     def season_scores(self):
@@ -361,16 +362,21 @@ class Week(models.Model):
     # get current time (in UTC timezone) if after forecast close (which is alos in UTC) then close the week
     def close_week(self, user):
         print(f'Close week: {self.week_no} {user}')
+        logger.info(f'Close week START: {self.week_no} {user}')
         if self.start_dt():
             print(f'Close week: {self.start_dt()}')
+            logger.info(f'Close week: {self.start_dt()}')
             print(f'time_now: {timezone.now()}')
+            logger.info(f'time_now: {timezone.now()}')
             print(f'forcast dt closed: {self.forecast_dt_closed()}')
+            logger.info(f'forcast dt closed: {self.forecast_dt_closed()}')
             if timezone.now() > self.forecast_dt_closed():
                 self.closed = True
-                print(f'CloseD week: {self.closed}')
                 self.date_closed = timezone.now()
                 self.closed_by = user
                 self.save()
+                print(f'CloseD week: {self.closed}')
+                logger.info(f'CloseD week: {self.week_no} {user} {self.closed}')
                 return True
         return False
 
