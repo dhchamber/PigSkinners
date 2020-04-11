@@ -10980,3 +10980,31 @@ TypeError: cannot unpack non-iterable bool object
 2020-04-10 14:10:16,903 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-10 20:10:16.903998
 2020-04-10 14:43:21,901 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
 2020-04-10 14:43:21,902 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-10 14:55:11,460 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-10 14:55:11,462 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 15:39:55,401 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\load_nflgames.py changed, reloading.
+2020-04-11 15:39:55,403 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 15:42:10,090 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 15:42:23,553 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 21:42:23.553786
+2020-04-11 15:42:23,768 appmain.models 199 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-11 15:42:23,893 appmain.models 199 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-11 15:44:42,300 appmain.views 348 DEBUG    Starting pick_make: kstone
+2020-04-11 15:44:42,319 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 21:44:42.319176
+2020-04-11 15:44:55,868 appmain.views 348 DEBUG    Starting pick_make: kstone
+2020-04-11 15:44:55,884 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 21:44:55.884558
+2020-04-11 15:44:55,891 appmain.views 359 ERROR    Week closed for week ID: 6
+2020-04-11 15:46:51,433 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-11 15:46:51,435 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 15:46:52,759 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 15:47:03,437 appmain.views 348 DEBUG    Starting pick_make: kstone
+2020-04-11 15:47:03,543 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 21:47:03.543585
+2020-04-11 15:47:03,551 appmain.views 359 DEBUG    Week closed for week ID: 6
+2020-04-11 15:47:08,085 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 21:47:08.085535
+2020-04-11 15:47:13,873 appmain.views 562 DEBUG    Starting standing_season: kstone
+2020-04-11 15:47:13,893 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 21:47:13.893226
+2020-04-11 15:47:13,895 appmain.views 569 DEBUG    Starting standing_season/got w1 & w2: kstone
+2020-04-11 15:47:13,896 appmain.views 575 DEBUG    Starting standing_season/got game_cnts: kstone
+2020-04-11 15:47:13,910 appmain.views 581 DEBUG    Starting standing_season/got user subtotals: kstone
+2020-04-11 15:47:14,042 appmain.models 199 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-11 15:47:14,182 appmain.views 596 DEBUG    Starting standing_season/created picks: kstone
+2020-04-11 15:47:14,183 appmain.views 600 DEBUG    Starting standing_season/got annotated picks: kstone

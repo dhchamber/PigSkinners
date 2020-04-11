@@ -7,43 +7,43 @@ from appmain.models import Season, Week, Team, Game
 import logging
 
 logger = logging.getLogger(__name__)
-logging.config.dictConfig({
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'console': {
-            'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
-        },
-        # 'file': {
-        #     'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
-        # }
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'console'
-        },
-        # 'file': {
-        #     'level': 'DEBUG',
-        #     'class': 'logging.FileHandler',
-        #     'formatter': 'file',
-        #     'filename': 'debug.log'
-        # }
-    },
-    'loggers': {
-        'django.request': {
-            'level': 'DEBUG',
-            'propagate': True,
-            'handlers': ['console'],
-            # 'handlers': ['console', 'file'],
-        },
-        '': {
-            'level': 'DEBUG',
-            # 'handlers': ['console', 'file'],
-            'handlers': ['console'],
-        },
-    },
-})
+# logging.config.dictConfig({
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'console': {
+#             'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
+#         },
+#         # 'file': {
+#         #     'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
+#         # }
+#     },
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'console'
+#         },
+#         # 'file': {
+#         #     'level': 'DEBUG',
+#         #     'class': 'logging.FileHandler',
+#         #     'formatter': 'file',
+#         #     'filename': 'debug.log'
+#         # }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'level': 'DEBUG',
+#             'propagate': True,
+#             'handlers': ['console'],
+#             # 'handlers': ['console', 'file'],
+#         },
+#         '': {
+#             'level': 'DEBUG',
+#             # 'handlers': ['console', 'file'],
+#             'handlers': ['console'],
+#         },
+#     },
+# })
 
 # List of NFL weeks, 4 PreSeason, 17 Regular Season, and 4 Post Season
 nfl_week = [(1, 'PRE'), (2, 'PRE'), (3, 'PRE'), (4, 'PRE'), (1, 'REG'), (2, 'REG'), (3, 'REG'), (4, 'REG'), (5, 'REG'),

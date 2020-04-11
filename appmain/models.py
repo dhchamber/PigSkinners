@@ -307,10 +307,13 @@ class Week(models.Model):
             if winners.count() > 1:
                 min_delta = 100
                 win_ids = []
+                # TODO: change this to aggregate
                 for pick in winners:
-                    min_delta = min(min_delta, pick.points_delta())
+                    if pick.points_delta() is not None:
+                        min_delta = min(min_delta, pick.points_delta())
+
                 for pick in winners:
-                    if pick.points_delta() == min_delta:
+                    if pick.points_delta() is not  None and pick.points_delta() == min_delta:
                         win_ids.append(pick.id)
                 winners = winners.filter(id__in=win_ids)
         else:

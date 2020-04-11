@@ -35,42 +35,6 @@ from appmain.task import load_scores, close_curr_week
 
 logger = logging.getLogger(__name__)
 
-logging.config.dictConfig({
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'console': {
-            'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
-        },
-        'file': {
-            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
-        }
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'console'
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'formatter': 'file',
-            'filename': 'debug.log'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'level': 'DEBUG',
-            'propagate': True,
-            'handlers': ['console', 'file'],
-        },
-        '': {
-            'level': 'DEBUG',
-            'handlers': ['console', 'file'],
-        },
-    },
-})
-
 
 @login_required
 def change_password(request):
@@ -392,6 +356,7 @@ def pick_make(request):
     else:
         close = week.close_week(request.user)
         print(f'Week closed for week ID: {week.id}')
+        logger.debug(f'Week closed for week ID: {week.id}')
 
     if request.method == 'POST':
         pick_id = request.POST.get("hidPickID")

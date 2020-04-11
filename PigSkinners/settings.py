@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import logging
+import logging.config
 # import djcelery  #https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
 # djcelery.setup_loader()
 # BROKER_URL = 'django://'
@@ -63,6 +65,43 @@ INSTALLED_APPS = [
 #     'ROUTING': 'routing.application',
 #    },
 # }
+
+# logger = logging.getLogger(__name__)
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(lineno)d %(message)s'
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': 'debug.log'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'level': 'DEBUG',
+            'propagate': True,
+            'handlers': ['console', 'file'],
+        },
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console', 'file'],
+        },
+    },
+})
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -164,3 +203,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, "appmain/static")
 # login tutorial
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
+
