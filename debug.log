@@ -11096,3 +11096,951 @@ TypeError: cannot unpack non-iterable bool object
 2020-04-11 16:19:12,535 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:19:12.535318
 2020-04-11 16:20:15,404 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:20:15.404340
 2020-04-11 16:20:16,642 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-11 22:20:16.642352
+2020-04-11 20:55:47,911 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-11 20:55:47,912 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 20:55:49,145 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 20:57:34,616 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-11 20:57:34,617 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 20:57:35,311 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 21:05:02,397 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 21:05:17,977 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 69, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 734, in login
+    raise last_exception
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 723, in login
+    (code, resp) = self.auth(
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 646, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials c17sm2413017ilj.72 - gsmtp')
+2020-04-11 21:06:26,444 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-11 21:06:26,445 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 21:06:27,621 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 21:06:33,391 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 69, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 700, in login
+    raise SMTPNotSupportedError(
+smtplib.SMTPNotSupportedError: SMTP AUTH extension not supported by server.
+2020-04-11 21:08:37,910 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-11 21:08:37,912 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 21:08:39,038 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 21:08:59,078 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 62, in open
+    self.connection = self.connection_class(self.host, self.port, **connection_params)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 253, in __init__
+    (code, msg) = self.connect(host, port)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 341, in connect
+    (code, msg) = self.getreply()
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 398, in getreply
+    raise SMTPServerDisconnected("Connection unexpectedly closed")
+smtplib.SMTPServerDisconnected: Connection unexpectedly closed
+2020-04-11 21:12:21,685 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-11 21:12:21,687 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-11 21:12:22,844 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-11 21:12:32,493 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 69, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 734, in login
+    raise last_exception
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 723, in login
+    (code, resp) = self.auth(
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 646, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials n23sm2080714ioh.6 - gsmtp')
+2020-04-12 07:18:36,398 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 69, in open
+    self.connection.login(self.username, self.password)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 734, in login
+    raise last_exception
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 723, in login
+    (code, resp) = self.auth(
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 646, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials r10sm2454598iom.42 - gsmtp')
+2020-04-12 07:20:49,157 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 07:20:49,159 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 07:20:50,487 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 07:21:09,147 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 62, in open
+    self.connection = self.connection_class(self.host, self.port, **connection_params)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 253, in __init__
+    (code, msg) = self.connect(host, port)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 341, in connect
+    (code, msg) = self.getreply()
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 398, in getreply
+    raise SMTPServerDisconnected("Connection unexpectedly closed")
+smtplib.SMTPServerDisconnected: Connection unexpectedly closed
+2020-04-12 07:21:29,493 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 07:21:29,494 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 07:21:30,689 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 07:21:50,236 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 102, in send_messages
+    new_conn_created = self.open()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\backends\smtp.py", line 62, in open
+    self.connection = self.connection_class(self.host, self.port, **connection_params)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 253, in __init__
+    (code, msg) = self.connect(host, port)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 341, in connect
+    (code, msg) = self.getreply()
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\smtplib.py", line 398, in getreply
+    raise SMTPServerDisconnected("Connection unexpectedly closed")
+smtplib.SMTPServerDisconnected: Connection unexpectedly closed
+2020-04-12 07:25:18,823 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 07:25:18,824 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 07:25:20,056 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 07:26:05,321 django.request 222 ERROR    Internal Server Error: /accounts/reset/done/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 143, in _get_response
+    response = response.render()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\urls\resolvers.py", line 677, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'signin' not found. 'signin' is not a valid view function or pattern name.
+2020-04-12 09:35:22,275 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\urls.py changed, reloading.
+2020-04-12 09:35:22,276 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 09:35:23,838 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 09:35:44,797 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\urls.py changed, reloading.
+2020-04-12 09:35:44,798 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 09:35:45,940 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 09:35:54,765 django.request 222 ERROR    Internal Server Error: /accounts/reset/done/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 143, in _get_response
+    response = response.render()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\urls\resolvers.py", line 677, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'signin' not found. 'signin' is not a valid view function or pattern name.
+2020-04-12 09:39:25,084 django.request 222 ERROR    Internal Server Error: /accounts/reset/done/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 145, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 143, in _get_response
+    response = response.render()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\response.py", line 105, in render
+    self.content = self.rendered_content
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 936, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\base.py", line 903, in render_annotated
+    return self.render(context)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\template\defaulttags.py", line 443, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\urls\resolvers.py", line 677, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'signin' not found. 'signin' is not a valid view function or pattern name.
+2020-04-12 09:41:43,030 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\urls.py changed, reloading.
+2020-04-12 09:41:43,032 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 09:41:44,227 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 09:42:29,725 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 15:42:29.725983
+2020-04-12 09:42:29,908 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 09:42:30,029 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 09:42:40,681 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 15:42:40.681243
+2020-04-12 09:42:40,833 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 09:42:40,956 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 09:42:45,184 appmain.views 348 DEBUG    Starting pick_make: kstone
+2020-04-12 09:42:45,202 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 15:42:45.202052
+2020-04-12 09:44:16,104 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\urls.py changed, reloading.
+2020-04-12 09:44:16,105 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 09:44:17,293 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:01:53,912 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 10:01:53,914 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:01:55,130 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:02:34,744 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 10:02:34,746 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:02:35,894 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:05:38,726 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 10:05:38,727 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:05:39,895 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:06:13,764 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 10:06:13,766 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:06:14,063 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:10:23,820 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:10:31,766 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 16:10:31.766529
+2020-04-12 10:10:31,939 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:10:32,064 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:10:40,168 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 20, in import_string
+    return getattr(module, class_name)
+AttributeError: module 'django.core.mail.backends.console' has no attribute 'EmailBackend'  # During development only'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 22, in import_string
+    raise ImportError('Module "%s" does not define a "%s" attribute/class' % (
+ImportError: Module "django.core.mail.backends.console" does not define a "EmailBackend'  # During development only" attribute/class
+2020-04-12 10:11:25,208 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 16:11:25.208907
+2020-04-12 10:11:25,356 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:11:25,479 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:11:31,922 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 20, in import_string
+    return getattr(module, class_name)
+AttributeError: module 'django.core.mail.backends.console' has no attribute 'EmailBackend'  # During development only'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 22, in import_string
+    raise ImportError('Module "%s" does not define a "%s" attribute/class' % (
+ImportError: Module "django.core.mail.backends.console" does not define a "EmailBackend'  # During development only" attribute/class
+2020-04-12 10:11:47,958 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 16:11:47.958367
+2020-04-12 10:11:48,108 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:11:48,232 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:12:03,749 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 20, in import_string
+    return getattr(module, class_name)
+AttributeError: module 'django.core.mail.backends.console' has no attribute 'EmailBackend'  # During development only'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 22, in import_string
+    raise ImportError('Module "%s" does not define a "%s" attribute/class' % (
+ImportError: Module "django.core.mail.backends.console" does not define a "EmailBackend'  # During development only" attribute/class
+2020-04-12 10:12:16,002 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:12:19,157 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 16:12:19.157724
+2020-04-12 10:12:19,336 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:12:19,466 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:12:26,453 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 20, in import_string
+    return getattr(module, class_name)
+AttributeError: module 'django.core.mail.backends.console' has no attribute 'EmailBackend''
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 22, in import_string
+    raise ImportError('Module "%s" does not define a "%s" attribute/class' % (
+ImportError: Module "django.core.mail.backends.console" does not define a "EmailBackend'" attribute/class
+2020-04-12 10:13:50,045 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 10:13:50,046 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:13:51,215 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:16:04,407 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 10:16:04,408 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:16:09,431 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:17:02,274 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:17:12,072 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 16:17:12.072521
+2020-04-12 10:17:12,244 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:17:12,375 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:17:17,605 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 17, in import_string
+    module = import_module(module_path)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\importlib\__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named "'django"
+2020-04-12 10:20:37,611 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\urls.py changed, reloading.
+2020-04-12 10:20:37,612 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:20:38,779 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:20:53,149 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 17, in import_string
+    module = import_module(module_path)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\importlib\__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named "'django"
+2020-04-12 10:21:24,570 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\urls.py changed, reloading.
+2020-04-12 10:21:24,571 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 10:21:25,746 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:21:32,739 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 17, in import_string
+    module = import_module(module_path)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\importlib\__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named "'django"
+2020-04-12 10:22:01,387 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 10:22:14,893 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 16:22:14.893841
+2020-04-12 10:22:15,083 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:22:15,216 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 10:22:19,773 django.request 222 ERROR    Internal Server Error: /password_reset/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 222, in dispatch
+    return super().dispatch(*args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\base.py", line 97, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\views\generic\edit.py", line 142, in post
+    return self.form_valid(form)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\views.py", line 235, in form_valid
+    form.save(**opts)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 322, in save
+    self.send_mail(
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\forms.py", line 272, in send_mail
+    email_message.send()
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 276, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\message.py", line 233, in get_connection
+    self.connection = get_connection(fail_silently=fail_silently)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\mail\__init__.py", line 34, in get_connection
+    klass = import_string(backend or settings.EMAIL_BACKEND)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\utils\module_loading.py", line 17, in import_string
+    module = import_module(module_path)
+  File "C:\Users\DOUG\AppData\Local\Programs\Python\Python38-32\lib\importlib\__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named "'django"
+2020-04-12 12:07:30,894 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:07:30.894382
+2020-04-12 12:07:31,054 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:07:31,187 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:09:20,535 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:09:20,537 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:09:20,821 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:18:06,943 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:19:08,139 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:19:08,142 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:19:09,314 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:20:13,882 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:20:13,885 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:20:15,048 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:20:44,500 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:22:50,696 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:22:50,697 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:22:51,868 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:23:04,690 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:23:58,526 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:23:58,529 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:23:59,696 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:24:32,428 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:24:32,430 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:24:33,584 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:26:33,637 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:26:56,786 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:26:56,787 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:26:57,966 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:27:06,998 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:27:07,000 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:27:08,252 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:27:19,348 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:37:12,135 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:40:04,255 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:40:04.255436
+2020-04-12 12:40:04,427 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:04,557 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:06,910 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:40:06.910328
+2020-04-12 12:40:07,064 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:07,190 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:15,229 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:40:15.229539
+2020-04-12 12:40:15,380 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:15,507 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:18,613 appmain.views 348 DEBUG    Starting pick_make: kstone
+2020-04-12 12:40:18,633 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:40:18.633237
+2020-04-12 12:40:21,108 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:40:21.108566
+2020-04-12 12:40:21,252 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:40:21,372 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:42:03,929 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\PigSkinners\settings.py changed, reloading.
+2020-04-12 12:42:03,930 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-12 12:42:05,062 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-12 12:42:05,620 django.security.SuspiciousSession 124 WARNING  Session data corrupted
+2020-04-12 12:42:05,696 django.security.SuspiciousSession 124 WARNING  Session data corrupted
+2020-04-12 12:42:14,084 django.security.SuspiciousSession 124 WARNING  Session data corrupted
+2020-04-12 12:42:14,272 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:42:14.272679
+2020-04-12 12:42:14,416 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:42:14,539 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:42:30,904 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:42:30.903494
+2020-04-12 12:42:31,060 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:42:31,189 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:42:33,749 appmain.views 562 DEBUG    Starting standing_season: kstone
+2020-04-12 12:42:33,770 appmain.models 159 DEBUG    week: 1/REG  week.end_dt 2020-04-14 02:20:00+00:00 Now: 2020-04-12 18:42:33.770590
+2020-04-12 12:42:33,770 appmain.views 569 DEBUG    Starting standing_season/got w1 & w2: kstone
+2020-04-12 12:42:33,772 appmain.views 575 DEBUG    Starting standing_season/got game_cnts: kstone
+2020-04-12 12:42:33,785 appmain.views 581 DEBUG    Starting standing_season/got user subtotals: kstone
+2020-04-12 12:42:33,908 appmain.models 200 DEBUG    1st half max: 17  2nd half max: 0 overall max: 17
+2020-04-12 12:42:34,047 appmain.views 596 DEBUG    Starting standing_season/created picks: kstone
+2020-04-12 12:42:34,048 appmain.views 600 DEBUG    Starting standing_season/got annotated picks: kstone

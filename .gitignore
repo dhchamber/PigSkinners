@@ -4,4 +4,5 @@
 __pycache__
 penv
 db.sqlite3
+settings.ini
 .DS_Store

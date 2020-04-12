@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import logging
+from decouple import config, Csv
+# import logging
 import logging.config
 # import djcelery  #https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
 # djcelery.setup_loader()
@@ -20,21 +21,20 @@ import logging.config
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jv(x+^91=0bnlr60f*hw53nzmx)u9y^vv29+)%7vcg3x8&ow5p'
+SECRET_KEY = config('SECRET_KEY')
+    # 'jv(x+^91=0bnlr60f*hw53nzmx)u9y^vv29+)%7vcg3x8&ow5p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["localhost","dhchamber.pythonanywhere.com","127.0.0.1","40.78.11.78"]
-
+# DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+# ALLOWED_HOSTS = ["localhost","dhchamber.pythonanywhere.com","127.0.0.1","40.78.11.78"]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',          # Core authentication framework and its default models
@@ -105,7 +105,15 @@ logging.config.dictConfig({
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # for production
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -152,10 +160,10 @@ WSGI_APPLICATION = 'PigSkinners.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pigskinners',
-        'USER': 'postgres',
-        'PASSWORD': 'New1User',
-        'HOST': 'localhost',
+        'NAME': config('DATABASENAME'),
+        'USER': config('DATABASEUSER'),
+        'PASSWORD': config('DATABASEPWD'),
+        'HOST': config('DATABASEHOST'),
         'PORT': '',
     }
 }
@@ -183,13 +191,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -197,7 +201,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, "appmain/static")
 
 # login tutorial
