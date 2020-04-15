@@ -276,7 +276,7 @@ class Week(models.Model):
     def koth_remaining(self):
         remaining = 0
         for pick in self.pick_wk.all():
-            if pick.koth_eligible():
+            if pick.is_koth_eligible():
                 remaining += 1
                 # print(f'koth eligible:', pick.user.first_name, remaining)
                 logger.debug(f'koth eligible:', pick.user.first_name, remaining)

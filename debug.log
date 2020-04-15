@@ -12820,3 +12820,200 @@ django.core.exceptions.PermissionDenied
 2020-04-14 15:21:27,977 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
 2020-04-14 15:21:28,078 asyncio      623 DEBUG    Using proactor: IocpProactor
 2020-04-14 15:21:29,618 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-14 19:44:30,015 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 01:44:30.015598
+2020-04-14 19:44:30,383 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-14 19:44:30,639 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-14 19:44:30,897 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-14 19:44:48,531 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 01:44:48.531646
+2020-04-14 19:44:48,922 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-14 19:44:49,180 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-14 19:44:49,430 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-14 19:46:09,705 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 01:46:09.705888
+2020-04-15 08:21:45,517 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-15 08:21:45,519 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 08:21:49,346 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 08:24:00,432 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-15 08:24:00,433 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 08:24:01,980 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 08:26:24,714 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 08:26:24,735 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 08:26:26,952 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 08:28:49,325 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 08:28:49,326 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 08:28:50,942 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 08:32:53,513 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 08:32:53,521 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 08:32:55,396 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 08:34:30,108 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-15 08:34:30,110 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 08:34:32,554 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 09:28:37,179 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 09:28:37,180 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 09:28:38,628 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 09:28:44,646 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 15:28:44.646119
+2020-04-15 09:28:45,276 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 09:28:45,545 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 09:28:45,809 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 09:28:51,020 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 15:28:51.020381
+2020-04-15 09:28:51,120 django.request 222 ERROR    Internal Server Error: /standing/koth/
+Traceback (most recent call last):
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\penv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\DOUG\Django\PigSkinners\appmain\views.py", line 527, in standing_koth
+    user_picks = Pick.koth_eligible(week)
+AttributeError: type object 'Pick' has no attribute 'koth_eligible'
+2020-04-15 09:29:32,306 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 09:29:43,863 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 15:29:43.863000
+2020-04-15 09:31:07,519 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 09:31:07,520 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 09:31:08,649 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 09:31:17,589 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 09:31:22,634 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 15:31:22.634088
+2020-04-15 09:32:25,106 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-15 09:32:25,108 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 09:32:26,271 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 09:32:27,022 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 15:32:27.022160
+2020-04-15 09:32:30,064 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 15:32:30.064923
+2020-04-15 09:33:55,494 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 09:33:55,541 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 09:33:57,481 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 12:19:05,518 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 12:19:05,519 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 12:19:06,699 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 12:33:22,110 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 12:33:22,111 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 12:33:23,618 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 12:33:27,019 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:33:27.019283
+2020-04-15 12:33:27,448 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:33:27,770 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:33:28,048 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:33:31,952 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:33:31.952469
+2020-04-15 12:33:35,102 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:33:35.102385
+2020-04-15 12:33:37,605 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:33:37.605357
+2020-04-15 12:33:42,902 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:33:42.902317
+2020-04-15 12:33:51,370 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:33:51.370560
+2020-04-15 12:34:26,040 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:34:26.040023
+2020-04-15 12:34:26,397 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:34:26,646 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:34:26,904 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:34:31,166 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:34:31,184 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:34:31.184693
+2020-04-15 12:34:31,186 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:34:31,188 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:34:31,189 appmain.models 368 INFO     time_now: 2020-04-15 18:34:31.189690+00:00
+2020-04-15 12:34:31,192 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:34:31,195 appmain.views 355 DEBUG    Week closed for week ID: 6
+2020-04-15 12:34:43,439 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:34:43.439085
+2020-04-15 12:34:48,287 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:34:48.287277
+2020-04-15 12:34:51,843 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:34:51.843184
+2020-04-15 12:35:10,133 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:35:10,150 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:35:10.150704
+2020-04-15 12:35:10,152 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:35:10,155 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:35:10,155 appmain.models 368 INFO     time_now: 2020-04-15 18:35:10.155701+00:00
+2020-04-15 12:35:10,160 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:35:10,162 appmain.views 355 DEBUG    Week closed for week ID: 6
+2020-04-15 12:35:17,230 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:35:17,252 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:35:17.252933
+2020-04-15 12:35:17,255 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:35:17,257 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:35:17,258 appmain.models 368 INFO     time_now: 2020-04-15 18:35:17.258936+00:00
+2020-04-15 12:35:17,262 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:35:17,264 appmain.views 355 DEBUG    Week closed for week ID: 6
+2020-04-15 12:36:46,045 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-15 12:36:46,046 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 12:36:47,422 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 12:40:06,544 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:40:06,647 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:40:06.647049
+2020-04-15 12:40:06,649 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:40:06,653 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:40:06,653 appmain.models 368 INFO     time_now: 2020-04-15 18:40:06.653047+00:00
+2020-04-15 12:40:06,657 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:40:06,659 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:40:54,853 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:40:54,871 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:40:54.871507
+2020-04-15 12:40:54,872 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:40:54,875 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:40:54,876 appmain.models 368 INFO     time_now: 2020-04-15 18:40:54.875505+00:00
+2020-04-15 12:40:54,879 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:40:54,881 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:44:31,937 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:44:31,957 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:44:31.957244
+2020-04-15 12:44:31,960 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:44:31,964 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:44:31,965 appmain.models 368 INFO     time_now: 2020-04-15 18:44:31.965239+00:00
+2020-04-15 12:44:31,970 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:44:31,973 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:44:34,272 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:44:34,296 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:44:34.296627
+2020-04-15 12:44:34,298 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:44:34,301 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:44:34,301 appmain.models 368 INFO     time_now: 2020-04-15 18:44:34.301625+00:00
+2020-04-15 12:44:34,306 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:44:34,310 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:45:14,811 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:45:14,827 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:45:14.827737
+2020-04-15 12:45:14,829 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:45:14,832 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:45:14,832 appmain.models 368 INFO     time_now: 2020-04-15 18:45:14.832735+00:00
+2020-04-15 12:45:14,835 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:45:14,837 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:50:32,638 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:50:32.638759
+2020-04-15 12:50:33,006 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:50:33,272 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:50:33,539 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:50:36,761 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:50:36,779 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:50:36.779015
+2020-04-15 12:50:36,781 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:50:36,784 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:50:36,784 appmain.models 368 INFO     time_now: 2020-04-15 18:50:36.784012+00:00
+2020-04-15 12:50:36,788 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:50:36,790 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:50:40,548 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:50:40,567 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:50:40.567040
+2020-04-15 12:50:40,570 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:50:40,574 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:50:40,574 appmain.models 368 INFO     time_now: 2020-04-15 18:50:40.574036+00:00
+2020-04-15 12:50:40,577 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:50:40,580 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:51:16,927 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:51:16,947 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:51:16.947216
+2020-04-15 12:51:16,949 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:51:16,952 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:51:16,953 appmain.models 368 INFO     time_now: 2020-04-15 18:51:16.953213+00:00
+2020-04-15 12:51:16,956 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:51:16,958 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:51:24,668 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:51:24.668065
+2020-04-15 12:51:25,005 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:51:25,254 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:51:25,398 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:51:25.398987
+2020-04-15 12:51:25,617 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:51:25,837 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:51:26,093 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:51:26,347 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:51:28,567 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:51:28,586 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:51:28.586488
+2020-04-15 12:51:28,589 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:51:28,591 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:51:28,592 appmain.models 368 INFO     time_now: 2020-04-15 18:51:28.592485+00:00
+2020-04-15 12:51:28,596 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:51:28,598 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 12:56:57,757 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:56:57.757443
+2020-04-15 12:56:58,208 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:56:58,465 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:56:58,727 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 12:57:01,599 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 12:57:01,616 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 18:57:01.616199
+2020-04-15 12:57:01,618 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 12:57:01,621 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 12:57:01,621 appmain.models 368 INFO     time_now: 2020-04-15 18:57:01.621195+00:00
+2020-04-15 12:57:01,624 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 12:57:01,627 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 13:00:11,492 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-15 13:00:11,493 asyncio      623 DEBUG    Using proactor: IocpProactor

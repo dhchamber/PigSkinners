@@ -54,17 +54,17 @@
                                     {% if week.prev_week_winner != 'na' %}
                                         <div align="center">Congratulations to last week's winner
                                             {% if week.prev_week_winner.count > 1 %}s{% endif %}:
-                                            {% for winner in week.prev_week_winner %}
+                                            <b>{% for winner in week.prev_week_winner %}
                                                 <br>{{ winner.user.get_full_name }}
-                                            {% endfor %}
+                                                {% endfor %}</b>
                                         </div>
                                     {% endif %}
                                     {% if week.curr_overall_leader != 'na' %}
                                         <div align="center">Current Overall Leader
                                             {% if week.curr_overall_leader.count > 1 %}s{% endif %}:
-                                            {% for leader in week.curr_overall_leader %}
+                                            <b>{% for leader in week.curr_overall_leader %}
                                                 <br>{{ leader.first_name }} {{ leader.last_name }}
-                                            {% endfor %}
+                                                {% endfor %}</b>
                                         </div>
                                     {% endif %}
 

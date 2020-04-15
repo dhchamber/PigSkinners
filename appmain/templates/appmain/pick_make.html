@@ -44,7 +44,7 @@
                                 {% if pick.wk.closed %}disabled{% endif %}>
                         </td>
                         <td colspan="3" align="center">
-                            <input type="button" name="btnValidPicks" id="btnValodPicks" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.koth_eligible }}');" value="Save Picks"
+                            <input type="button" name="btnValidPicks" id="btnValodPicks" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.is_koth_eligible }}');" value="Save Picks"
                                 {% if pick.wk.closed %}disabled{% endif %}>
                             <input type="submit" name="btnSavePicks" id="btnSavePicks1" type="submit" value="Save Picks">
                         </td>
@@ -128,12 +128,12 @@
                             >
                         </td>
                     </tr>
-                    {% if pick.koth_eligible %}
+                    {% if pick.is_koth_eligible %}
                         <tr dataRow="false">
                             <td colspan="9" align="center"><font size="+1"><b>King of the Hill pick:</b></font></td>
                         </tr>
                         <tr dataRow="false">
-                            <td class = "cboKingOfHillPick" kothEligible = "{{ pick.koth_eligible }}" colspan="9" align="center">
+                            <td class = "cboKingOfHillPick" kothEligible = "{{ pick.is_koth_eligible }}" colspan="9" align="center">
                             {% if pick.wk.closed %}
                                 <input type="text" name="txtPointsTotal" style="color: blue;" value="{{ pick.koth_team.team_name }}" readonly >
                             {% else %}
@@ -162,7 +162,7 @@
                     </tr>
                     <tr dataRow="false">
                         <td colspan="6" style="color: blue;" align="center">
-                            <input type="button" name="btnSavePicks" id="btnSavePicks2" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.koth_eligible }}');"  value="Save Picks"
+                            <input type="button" name="btnSavePicks" id="btnSavePicks2" onclick="javascript:return savePicks('{{ pick.wk.closed }}','{{ pick.is_koth_eligible }}');"  value="Save Picks"
                         {% if pick.wk.closed %}
                             disabled
                         {% endif %}

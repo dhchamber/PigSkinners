@@ -351,8 +351,7 @@ def pick_make(request):
         return redirect('pick_view')
     else:
         close = week.close_week(request.user)
-        print(f'Week closed for week ID: {week.id}')
-        logger.debug(f'Week closed for week ID: {week.id}')
+        logger.debug(f'Week closed for week ID: {week.id} {close}')
 
     if request.method == 'POST':
         pick_id = request.POST.get("hidPickID")
@@ -365,7 +364,7 @@ def pick_make(request):
             messages.warning(request, 'Invalid value for points game. Must be greater than zero.')
             validated = False
 
-        if pick.koth_eligible():
+        if pick.is_koth_eligible():
             try:
                 pick.koth_team = Team.objects.get(id=request.POST.get("cboKingOfHillPick"))
             except Team.DoesNotExist:
@@ -523,7 +522,8 @@ def standing_koth(request):
     week = get_selected_week(request)
     week.create_picks()
 
-    user_picks = Pick.objects.filter(wk=week)
+    # user_picks = Pick.objects.filter(wk=week)
+    user_picks = Pick.objects.koth_eligible(week)
     if week.closed:
         return render(request, 'appmain/standing_koth.html', {'user_picks': user_picks, 'week': week})
     else:

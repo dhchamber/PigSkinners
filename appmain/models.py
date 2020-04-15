@@ -343,7 +343,7 @@ class Week(models.Model):
     def koth_remaining(self):
         remaining = 0
         for pick in self.pick_wk.all():
-            if pick.koth_eligible():
+            if pick.is_koth_eligible():
                 remaining += 1
                 logger.debug(f'koth eligible:', pick.user.first_name, remaining)
 
@@ -762,7 +762,17 @@ class PickManager(models.Manager):
             self.saved = True
             self.save()
 
+    def koth_eligible(self, week):
+        koth_active_ids = []
 
+        for pick in Pick.objects.filter(wk=week):
+            if pick.is_koth_eligible(week):
+                koth_active_ids.append(pick.id)
+
+        return Pick.objects.filter(id__in=koth_active_ids)
+
+# TODO: add admin function and page to delete pick for user
+# also why does random pick not work if pick is partially saved
 class Pick(TimeStampMixin):
     class Meta:
         verbose_name = 'pick'
@@ -815,11 +825,14 @@ class Pick(TimeStampMixin):
             return 0
 
     # is the player still eligible for KOTH, no missed picks, no losses
-    def koth_eligible(self):
+    def is_koth_eligible(self, to_week=None):
         year = Season.objects.get(current=True)
         weeks = Week.objects.filter(year=year, gt='REG', closed=True)
         eligible = True
         for week in weeks:
+            if to_week is not None and week.week_no == to_week.week_no:
+                break
+
             try:
                 pick = Pick.objects.get(user=self.user, wk=week)
                 if pick.koth_game is None or pick.koth_team is None or pick.koth_team == pick.koth_game.game_loser():

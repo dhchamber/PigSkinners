@@ -44,7 +44,7 @@ def team_name(team_id):
 
 @register.filter(name='parm')
 def lookup(year, parm):
-    return year.koth_eligible(parm)
+    return year.is_koth_eligible(parm)
 
 
 @register.filter(name='lookup')
