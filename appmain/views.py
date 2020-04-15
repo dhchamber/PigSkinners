@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate  # new
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Case, When, Sum, F, Q, IntegerField, FloatField, ExpressionWrapper
 from appmain.forms import SignUpForm, ProfileForm, PostPickForm, WeekForm
 from django.contrib.auth.forms import AdminPasswordChangeForm  # PasswordChangeForm requires old password
 from django.contrib.auth import update_session_auth_hash
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from .tables import SeasonTable
 from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
 from django.views.generic import ListView, CreateView, DeleteView, ListView, UpdateView
@@ -58,16 +59,13 @@ def change_password(request):
 def user_profile(request):
     submitted = False
     profile = Profile.objects.get(user=request.user)
-    print(f'request.method', request.method)
     if request.method == 'POST':
-        print(f'POST:', request.POST)
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
             return redirect('/user/profile/?submitted=True')
     else:
         user = User.objects.get(pk=request.user.id)
-        print(f'user:', user.id, user.first_name)
         form = ProfileForm(instance=profile)
         if 'submitted' in request.GET:
             submitted = True
@@ -185,7 +183,6 @@ def action_week(request):
         request.session['gt'] = 'POST'
 
     url = request.GET.get('next', '/')
-    print(f'NEXT: from GET: {url}')
     return redirect(url)
 
 
@@ -230,13 +227,11 @@ def games_view(request):
         gt = request.session.get('gt', 'REG')
         weeks = Week.objects.filter(year=year, week_no=week_no, gt=gt)
         games = Game.objects.filter(week__in=weeks)
-        print(f'Found games # {games.count()} ')
         return render(request, 'appmain/games_view.html', {'games': games})
 
 
 @login_required
 def home(request):
-    # TODO: what do do if there are no weeks?  replace home page with different stripped down page?
     timezone.activate(pytz.timezone('America/Denver'))
     fav_team = pts_game = None
     try:
@@ -295,7 +290,8 @@ def setup_weeks(request):
                 closed = True
             else:
                 closed = False
-            print(f'Week: {week.week_no} {week.closed}')
+
+            logger.debug(f'Week: {week.week_no} {week.closed}')
             week.closed = closed
             week.save()
 
@@ -538,7 +534,6 @@ def standing_koth(request):
 def standing_post(request):
     timezone.activate(pytz.timezone('America/Denver'))
     year = Season.objects.get(current=True)
-    # TODO: if no games are loaded then display error view
     try:
         games = PostSeason.objects.get(year=year)
     except PostSeason.DoesNotExist:
@@ -572,13 +567,13 @@ def standing_season(request):
         .annotate(half1=Count('weeks__game_wk__gsis', filter=Q(weeks__in=w1))) \
         .annotate(half2=Count('weeks__game_wk__gsis', filter=Q(weeks__in=w2))) \
         .annotate(all=Count('weeks__game_wk__gsis', filter=Q(weeks__in=weeks)))
-    logger.debug('Starting standing_season/got game_cnts: ' + request.user.username)
+    logger.debug(f'Starting standing_season/got game_cnts: {request.user.username} {game_cnt[0].half1}')
 
     users = year.season_scores().annotate(
         perc1=ExpressionWrapper(F('half1') * float(100.0 / game_cnt[0].half1), output_field=FloatField())) \
         .annotate(perc2=ExpressionWrapper(F('half2') * float(100.0 / game_cnt[0].half2), output_field=FloatField())) \
         .annotate(pall=ExpressionWrapper(F('all') * float(100.0 / game_cnt[0].all), output_field=FloatField()))
-    logger.debug('Starting standing_season/got user subtotals: ' + request.user.username)
+    logger.debug(f'Starting standing_season/got user subtotals: {users[0].perc1}')
 
     winners = year.season_winner()
     if current_week.week_no == 9:
@@ -597,14 +592,14 @@ def standing_season(request):
 
     user_picks = Pick.objects.filter(wk__in=weeks) \
         .annotate(score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
-    logger.debug('Starting standing_season/got annotated picks: ' + request.user.username)
+    logger.debug(f'Starting standing_season/got annotated picks: {user_picks}')
 
     return render(request, 'appmain/standing_season.html',
                   {'weeks': weeks, 'users': users, 'user_picks': user_picks, 'game_cnt': game_cnt, 'winner': winner,
                    'curr_week': current_week})
 
 
-# read only view of seasons with button to
+@method_decorator(staff_member_required, name='dispatch')
 class SeasonListView(LoginRequiredMixin, SingleTableView):
     model = Season
     table_class = SeasonTable

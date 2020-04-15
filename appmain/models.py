@@ -166,33 +166,32 @@ class Season(models.Model):
         logger.info(f'Close_Curr_Week: {user.last_name} / {week}')
         week.close_week(user)
 
+    # get sub-total scores by user for 1st half, 2nd half and season
     def season_scores(self):
-        # determine winner or winners for the week
-        # update pick scores for each pick for each week for the season
-
         half1 = Week.objects.filter(year=self, gt='REG', week_no__lt=10)
         half2 = Week.objects.filter(year=self, gt='REG', week_no__gt=9)
         full = Week.objects.filter(year=self, gt='REG')
 
-        # exclude #1 - footballpool/Random Picks
         user_scores = User.objects.all().annotate(half1=Sum('picks__pick_score', filter=Q(picks__wk__in=half1))) \
             .annotate(half2=Sum('picks__pick_score', filter=Q(picks__wk__in=half2))) \
             .annotate(all=Sum('picks__pick_score', filter=Q(picks__wk__in=full)))
         return user_scores
 
+    # determine winner or winners for the 1st half, 2nd half and overall
     def season_winner(self):
-        # determine winner or winners for the 1st half, 2nd half and overall
-        # update pick scores for all picks for all the weeks of the regular season
-
         winners = {}
-        year = Season.objects.get(current=True)
-        weeks = Week.objects.filter(year=year, gt='REG')
+        weeks = Week.objects.filter(year=self, gt='REG')
+
+        # update pick scores for all picks for all the weeks of the regular season
         for pick in Pick.objects.filter(wk__in=weeks):
             pick.pick_score = pick.pickgame_set.all().aggregate(
                 score=Sum(Case(When(status='W', then=1), default=0, output_field=IntegerField(), )))['score']
+            pick.save()
+
+        # Random picks (id = 1) cannot be the overall winner
+        users = self.season_scores().exclude(id=1)
 
         # get max scores for the Season
-        users = self.season_scores()
         half1_max = users.aggregate(max_score=Max('half1', default=0, output_field=IntegerField(), ))['max_score']
         half2_max = users.aggregate(max_score=Max('half2', default=0, output_field=IntegerField(), ))['max_score']
         all_max = users.aggregate(max_score=Max('all', default=0, output_field=IntegerField(), ))['max_score']
@@ -293,17 +292,18 @@ class Week(models.Model):
         for pick in self.pick_wk.all():
             pick.pick_score = pick.pickgame_set.all().aggregate(
                 score=Sum(Case(When(status='W', then=1), default=0, output_field=IntegerField(), )))['score']
+            pick.save()
 
         #  only return winners if the week is closed
         # should this be only if all games are complete?
         if self.closed:
-            # get max score for the week
+            # get max score for the week Exclude Random Picks id=1
             max_score = \
-                self.pick_wk.all().aggregate(max_score=Max('pick_score', default=0, output_field=IntegerField(), ))[
+                self.pick_wk.exclude(user=1).aggregate(max_score=Max('pick_score', default=0, output_field=IntegerField(), ))[
                     'max_score']
             picks = Pick.objects.filter(wk=self).annotate(
                 score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
-            winners = picks.filter(score=max_score)
+            winners = picks.filter(score=max_score).exclude(user=1)
 
             if winners.count() > 1:
                 min_delta = 100
@@ -323,14 +323,13 @@ class Week(models.Model):
 
     def prev_week_winner(self):
         if self.prev_week() is not None:
-            return self.prev_week().week_winner
+            return self.prev_week().week_winner()
         else:
-            return 'na'
+            return Pick.objects.none()
 
     def curr_overall_leader(self):
         year = Season.objects.get(current=True)
         print(f'curr year: {year.year}')
-        # print(f'is started: {yea}')
         if year.is_started():
             if self.gt == 'REG':
                 if self.week_no <= 9:
@@ -346,7 +345,6 @@ class Week(models.Model):
         for pick in self.pick_wk.all():
             if pick.koth_eligible():
                 remaining += 1
-                # print(f'koth eligible:', pick.user.first_name, remaining)
                 logger.debug(f'koth eligible:', pick.user.first_name, remaining)
 
         return remaining
@@ -846,6 +844,8 @@ class Pick(TimeStampMixin):
 
     def calc_score(self):
         sum_score = 0
+
+        # can't aggregate over function so use for loop instead
         for pg in self.pickgame_set.all():
             sum_score += pg.pick_score()
         self.pick_score = sum_score
@@ -908,7 +908,6 @@ class PickRevisionManager(models.Manager):
         return pick
 
 
-
 class PickRevision(TimeStampMixin):
     class Meta:
         verbose_name = 'pick revision'
@@ -936,6 +935,7 @@ class PickRevision(TimeStampMixin):
 
     def calc_score(self):
         sum_score = 0
+
         for pg in self.pickrevgame_set.all():
             sum_score += pg.pick_score()
         self.pick_score = sum_score

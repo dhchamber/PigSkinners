@@ -2,6 +2,7 @@ from django.template.defaultfilters import register
 from django.template.defaultfilters import floatformat
 from appmain.models import Team
 
+
 @register.filter(name='team_logo')
 def team_logo(team_id):
     if team_id != '':
@@ -13,6 +14,7 @@ def team_logo(team_id):
     else:
         logo = ''
     return logo
+
 
 @register.filter(name='team_seed')
 def team_seed(team_id):
@@ -26,27 +28,31 @@ def team_seed(team_id):
         seed = ''
     return seed
 
+
 @register.filter(name='team_name')
 def team_name(team_id):
     if team_id != '':
         try:
             team = Team.objects.get(id=team_id)
-            name =team.team_name
+            name = team.team_name
         except Team.DoesNotExist:
             name = ""
     else:
         name = ''
     return name
 
+
 @register.filter(name='parm')
 def lookup(year, parm):
     return year.koth_eligible(parm)
+
 
 @register.filter(name='lookup')
 def lookup(dict, index):
     if index in dict:
         return dict[index]
     return ''
+
 
 @register.filter(name='get_half1')
 def get_half1(qset, user_id):
@@ -56,6 +62,7 @@ def get_half1(qset, user_id):
         half1 = ""
     return half1
 
+
 @register.filter(name='get_half2')
 def get_half2(qset, user_id):
     try:
@@ -64,53 +71,60 @@ def get_half2(qset, user_id):
         half2 = ""
     return half2
 
+
 @register.filter(name='get_all')
-def get_half1(qset, user_id):
+def get_all(qset, user_id):
     try:
         all = qset.filter(id=user_id).values('all')[0].get('all')
     except:
         all = ""
     return all
 
+
 @register.filter(name='get_perc1')
-def get_half1(qset, user_id):
+def get_perc1(qset, user_id):
     try:
-        perc1 = floatformat(qset.filter(id=user_id).values('perc1')[0].get('perc1'),1)
+        perc1 = floatformat(qset.filter(id=user_id).values('perc1')[0].get('perc1'), 1)
     except:
         perc1 = ""
     return perc1
 
+
 @register.filter(name='get_perc2')
-def get_half1(qset, user_id):
+def get_perc2(qset, user_id):
     try:
-        perc2 = floatformat(qset.filter(id=user_id).values('perc2')[0].get('perc2'),1)
+        perc2 = floatformat(qset.filter(id=user_id).values('perc2')[0].get('perc2'), 1)
     except:
         perc2 = ""
     return perc2
 
+
 @register.filter(name='get_pall')
 def get_all(qset, user_id):
     try:
-        pall = floatformat(qset.filter(id=user_id).values('pall')[0].get('pall'),1)
+        pall = floatformat(qset.filter(id=user_id).values('pall')[0].get('pall'), 1)
     except:
         pall = ""
     return pall
 
+
 @register.filter(name='win_half1')
 def win_half1(dict, user):
-    users =  dict['half1']
+    users = dict['half1']
     if user in users:
         return user
     else:
         return ''
 
+
 @register.filter(name='win_half2')
 def win_half1(dict, user):
-    users =  dict['half2']
+    users = dict['half2']
     if user in users:
         return user
     else:
         return ''
+
 
 @register.filter(name='get_winners')
 def get_winners(qset, pick):
@@ -121,6 +135,7 @@ def get_winners(qset, pick):
         return ''
     return winners
 
+
 @register.filter(name='ptsgame')
 def ptsgame(week):
     # print(f'Pts Game: {week.game_wk.filter(points_game=True)}')
@@ -130,4 +145,3 @@ def ptsgame(week):
     else:
         txt = ''
     return txt
-
