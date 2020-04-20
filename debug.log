@@ -13017,3 +13017,40 @@ AttributeError: type object 'Pick' has no attribute 'koth_eligible'
 2020-04-15 12:57:01,627 appmain.views 354 DEBUG    Week closed for week ID: 6 False
 2020-04-15 13:00:11,492 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
 2020-04-15 13:00:11,493 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-15 13:00:12,827 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-15 13:00:20,727 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 13:00:23,005 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 19:00:23.005546
+2020-04-15 13:00:23,007 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 13:00:23,010 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 13:00:23,010 appmain.models 368 INFO     time_now: 2020-04-15 19:00:23.010544+00:00
+2020-04-15 13:00:23,015 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 13:00:23,017 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 13:00:23,268 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-15 13:00:23,286 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 19:00:23.286535
+2020-04-15 13:00:23,288 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-15 13:00:23,290 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-15 13:00:23,291 appmain.models 368 INFO     time_now: 2020-04-15 19:00:23.291531+00:00
+2020-04-15 13:00:23,295 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-15 13:00:23,298 appmain.views 354 DEBUG    Week closed for week ID: 6 False
+2020-04-15 13:00:29,707 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 19:00:29.707179
+2020-04-15 13:00:39,695 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 19:00:39.695394
+2020-04-15 13:00:41,644 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 19:00:41.644662
+2020-04-15 16:39:01,352 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 22:39:01.352226
+2020-04-15 16:39:04,742 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-15 22:39:04.742541
+2020-04-15 16:39:05,083 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 16:39:05,326 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-15 16:39:05,584 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-18 08:06:10,891 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-18 08:06:19,973 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-18 08:06:23,387 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-18 14:06:23.387797
+2020-04-18 08:06:23,396 appmain.models 363 INFO     Close week START: 2 mbenage
+2020-04-18 08:06:23,399 appmain.models 366 INFO     Close week: 2020-04-17 00:25:00+00:00
+2020-04-18 08:06:23,399 appmain.models 368 INFO     time_now: 2020-04-18 14:06:23.399788+00:00
+2020-04-18 08:06:23,404 appmain.models 370 INFO     forcast dt closed: 2020-04-16 22:25:00+00:00
+2020-04-18 08:06:23,613 appmain.models 377 INFO     CloseD week: 2 mbenage True
+2020-04-18 08:06:23,614 appmain.views 354 DEBUG    Week closed for week ID: 6 True
+2020-04-18 08:06:24,702 django.request 222 WARNING  Not Found: /favicon.ico
+2020-04-18 08:06:26,588 appmain.models 159 DEBUG    week: 2/REG  week.end_dt 2020-04-21 00:30:00+00:00 Now: 2020-04-18 14:06:26.588471
+2020-04-18 08:06:27,427 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-18 08:06:27,686 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-18 08:06:28,075 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1

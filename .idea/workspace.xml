@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/~$tting up Django on Windows IIS Server _ Nitin Nain.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models - Copy (2).py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models - Copy (2).py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models - Copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models - Copy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_make.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templatetags/template_filter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,14 +168,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="794" y="260" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580420900743" />
-    <state x="570" y="143" key="SettingsEditor" timestamp="1586707298896">
+    <state x="570" y="143" key="SettingsEditor" timestamp="1587067360860">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="570" y="143" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586707298896" />
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1584557923452">
+    <state x="570" y="143" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587067360860" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1587067330209">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1584557923452" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587067330209" />
     <state x="771" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584829455486">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -189,9 +184,5 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="600" height="424" key="javadoc.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583942098292" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1578021715940">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578021715940" />
   </component>
 </project>

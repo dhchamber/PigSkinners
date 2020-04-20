@@ -1,7 +1,8 @@
 pytz
-pytz=~2019.3
+pytz~=2019.3
 Django~=3.0
 django-tables2~=2.2.1
 django-crispy-forms~=1.8.1
 requests~=2.22.0
 django-background-tasks==1.2.5
+wfastcgi~=3.0.0
