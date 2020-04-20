@@ -5,3 +5,4 @@ django-crispy-forms~=1.8.1
 requests~=2.22.0
 django-background-tasks==1.2.5
 wfastcgi~=3.0.0
+python-decouple~=3.3
