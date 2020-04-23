@@ -13054,3 +13054,297 @@ AttributeError: type object 'Pick' has no attribute 'koth_eligible'
 2020-04-18 08:06:27,427 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
 2020-04-18 08:06:27,686 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
 2020-04-18 08:06:28,075 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:46:06,856 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 11:46:18,601 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:46:18.601851
+2020-04-23 11:46:19,256 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:46:19,499 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:46:19,820 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:50:04,399 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:04.399950
+2020-04-23 11:50:09,854 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:09.854432
+2020-04-23 11:50:12,893 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:12.893538
+2020-04-23 11:50:19,011 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-23 11:50:19,029 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:19.029431
+2020-04-23 11:50:19,031 appmain.models 363 INFO     Close week START: 3 mbenage
+2020-04-23 11:50:19,034 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:19,035 appmain.models 368 INFO     time_now: 2020-04-23 17:50:19.035415+00:00
+2020-04-23 11:50:19,039 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:19,041 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:21,450 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-23 11:50:21,470 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:21.470161
+2020-04-23 11:50:21,472 appmain.models 363 INFO     Close week START: 3 mbenage
+2020-04-23 11:50:21,475 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:21,476 appmain.models 368 INFO     time_now: 2020-04-23 17:50:21.476159+00:00
+2020-04-23 11:50:21,480 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:21,482 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:21,981 appmain.views 344 DEBUG    Starting pick_make: mbenage
+2020-04-23 11:50:22,000 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:22.000012
+2020-04-23 11:50:22,003 appmain.models 363 INFO     Close week START: 3 mbenage
+2020-04-23 11:50:22,008 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:22,009 appmain.models 368 INFO     time_now: 2020-04-23 17:50:22.009006+00:00
+2020-04-23 11:50:22,013 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:22,015 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:30,595 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:30.595151
+2020-04-23 11:50:31,527 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:50:31,771 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:50:32,022 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:50:36,987 appmain.views 344 DEBUG    Starting pick_make: dchamber
+2020-04-23 11:50:37,007 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:37.007471
+2020-04-23 11:50:37,009 appmain.models 363 INFO     Close week START: 3 dchamber
+2020-04-23 11:50:37,012 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:37,013 appmain.models 368 INFO     time_now: 2020-04-23 17:50:37.013468+00:00
+2020-04-23 11:50:37,018 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:37,020 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:41,195 appmain.views 344 DEBUG    Starting pick_make: dchamber
+2020-04-23 11:50:41,213 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:41.213044
+2020-04-23 11:50:41,215 appmain.models 363 INFO     Close week START: 3 dchamber
+2020-04-23 11:50:41,218 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:41,219 appmain.models 368 INFO     time_now: 2020-04-23 17:50:41.219040+00:00
+2020-04-23 11:50:41,224 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:41,226 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:41,885 appmain.views 344 DEBUG    Starting pick_make: dchamber
+2020-04-23 11:50:41,907 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:41.907088
+2020-04-23 11:50:41,909 appmain.models 363 INFO     Close week START: 3 dchamber
+2020-04-23 11:50:41,914 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:41,914 appmain.models 368 INFO     time_now: 2020-04-23 17:50:41.914084+00:00
+2020-04-23 11:50:41,919 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:41,922 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:46,529 appmain.views 344 DEBUG    Starting pick_make: dchamber
+2020-04-23 11:50:46,548 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:46.548128
+2020-04-23 11:50:46,550 appmain.models 363 INFO     Close week START: 3 dchamber
+2020-04-23 11:50:46,555 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:46,555 appmain.models 368 INFO     time_now: 2020-04-23 17:50:46.555125+00:00
+2020-04-23 11:50:46,559 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:46,561 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:46,759 appmain.views 344 DEBUG    Starting pick_make: dchamber
+2020-04-23 11:50:46,776 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:46.776999
+2020-04-23 11:50:46,780 appmain.models 363 INFO     Close week START: 3 dchamber
+2020-04-23 11:50:46,782 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:50:46,782 appmain.models 368 INFO     time_now: 2020-04-23 17:50:46.782996+00:00
+2020-04-23 11:50:46,789 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:50:46,791 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:50:49,933 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:49.933763
+2020-04-23 11:50:57,606 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:50:57.606564
+2020-04-23 11:50:58,118 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:50:58,370 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:50:58,619 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:01,218 appmain.views 344 DEBUG    Starting pick_make: dcota
+2020-04-23 11:51:01,237 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:01.237982
+2020-04-23 11:51:01,238 appmain.models 363 INFO     Close week START: 3 dcota
+2020-04-23 11:51:01,241 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:01,241 appmain.models 368 INFO     time_now: 2020-04-23 17:51:01.241979+00:00
+2020-04-23 11:51:01,244 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:01,246 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:03,621 appmain.views 344 DEBUG    Starting pick_make: dcota
+2020-04-23 11:51:03,639 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:03.639083
+2020-04-23 11:51:03,641 appmain.models 363 INFO     Close week START: 3 dcota
+2020-04-23 11:51:03,644 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:03,644 appmain.models 368 INFO     time_now: 2020-04-23 17:51:03.644081+00:00
+2020-04-23 11:51:03,648 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:03,649 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:03,857 appmain.views 344 DEBUG    Starting pick_make: dcota
+2020-04-23 11:51:03,878 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:03.878551
+2020-04-23 11:51:03,879 appmain.models 363 INFO     Close week START: 3 dcota
+2020-04-23 11:51:03,883 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:03,883 appmain.models 368 INFO     time_now: 2020-04-23 17:51:03.883549+00:00
+2020-04-23 11:51:03,889 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:03,892 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:11,691 appmain.views 344 DEBUG    Starting pick_make: dcota
+2020-04-23 11:51:11,709 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:11.709678
+2020-04-23 11:51:11,711 appmain.models 363 INFO     Close week START: 3 dcota
+2020-04-23 11:51:11,715 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:11,715 appmain.models 368 INFO     time_now: 2020-04-23 17:51:11.715675+00:00
+2020-04-23 11:51:11,721 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:11,723 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:11,918 appmain.views 344 DEBUG    Starting pick_make: dcota
+2020-04-23 11:51:11,937 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:11.937849
+2020-04-23 11:51:11,939 appmain.models 363 INFO     Close week START: 3 dcota
+2020-04-23 11:51:11,943 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:11,943 appmain.models 368 INFO     time_now: 2020-04-23 17:51:11.943836+00:00
+2020-04-23 11:51:11,947 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:11,949 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:16,487 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:16.487214
+2020-04-23 11:51:25,242 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:25.242550
+2020-04-23 11:51:25,932 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:26,179 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:26,429 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:28,535 appmain.views 344 DEBUG    Starting pick_make: dharriso
+2020-04-23 11:51:28,554 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:28.554444
+2020-04-23 11:51:28,555 appmain.models 363 INFO     Close week START: 3 dharriso
+2020-04-23 11:51:28,558 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:28,558 appmain.models 368 INFO     time_now: 2020-04-23 17:51:28.558447+00:00
+2020-04-23 11:51:28,562 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:28,564 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:31,432 appmain.views 344 DEBUG    Starting pick_make: dharriso
+2020-04-23 11:51:31,452 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:31.452484
+2020-04-23 11:51:31,454 appmain.models 363 INFO     Close week START: 3 dharriso
+2020-04-23 11:51:31,457 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:31,457 appmain.models 368 INFO     time_now: 2020-04-23 17:51:31.457481+00:00
+2020-04-23 11:51:31,461 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:31,463 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:31,670 appmain.views 344 DEBUG    Starting pick_make: dharriso
+2020-04-23 11:51:31,692 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:31.691355
+2020-04-23 11:51:31,694 appmain.models 363 INFO     Close week START: 3 dharriso
+2020-04-23 11:51:31,696 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:31,697 appmain.models 368 INFO     time_now: 2020-04-23 17:51:31.697346+00:00
+2020-04-23 11:51:31,701 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:31,703 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:36,162 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:36.162457
+2020-04-23 11:51:47,608 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:47.608626
+2020-04-23 11:51:48,049 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:48,377 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:48,635 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:51:51,430 appmain.views 344 DEBUG    Starting pick_make: kstone
+2020-04-23 11:51:51,447 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:51.447970
+2020-04-23 11:51:51,450 appmain.models 363 INFO     Close week START: 3 kstone
+2020-04-23 11:51:51,453 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:51,454 appmain.models 368 INFO     time_now: 2020-04-23 17:51:51.454966+00:00
+2020-04-23 11:51:51,457 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:51,459 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:54,136 appmain.views 344 DEBUG    Starting pick_make: kstone
+2020-04-23 11:51:54,154 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:54.154804
+2020-04-23 11:51:54,155 appmain.models 363 INFO     Close week START: 3 kstone
+2020-04-23 11:51:54,158 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:54,158 appmain.models 368 INFO     time_now: 2020-04-23 17:51:54.158795+00:00
+2020-04-23 11:51:54,163 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:54,166 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:54,371 appmain.views 344 DEBUG    Starting pick_make: kstone
+2020-04-23 11:51:54,390 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:54.390650
+2020-04-23 11:51:54,392 appmain.models 363 INFO     Close week START: 3 kstone
+2020-04-23 11:51:54,395 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:54,395 appmain.models 368 INFO     time_now: 2020-04-23 17:51:54.395664+00:00
+2020-04-23 11:51:54,399 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:54,402 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:55,609 appmain.views 344 DEBUG    Starting pick_make: kstone
+2020-04-23 11:51:55,627 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:55.627590
+2020-04-23 11:51:55,629 appmain.models 363 INFO     Close week START: 3 kstone
+2020-04-23 11:51:55,633 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:55,633 appmain.models 368 INFO     time_now: 2020-04-23 17:51:55.633586+00:00
+2020-04-23 11:51:55,637 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:55,639 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:56,170 appmain.views 344 DEBUG    Starting pick_make: kstone
+2020-04-23 11:51:56,190 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:56.190834
+2020-04-23 11:51:56,192 appmain.models 363 INFO     Close week START: 3 kstone
+2020-04-23 11:51:56,195 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:51:56,196 appmain.models 368 INFO     time_now: 2020-04-23 17:51:56.196847+00:00
+2020-04-23 11:51:56,201 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:51:56,203 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:51:58,740 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:51:58.740780
+2020-04-23 11:52:06,184 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:06.184224
+2020-04-23 11:52:06,691 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:52:06,944 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:52:07,197 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:52:09,768 appmain.views 344 DEBUG    Starting pick_make: jpking
+2020-04-23 11:52:09,786 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:09.786007
+2020-04-23 11:52:09,788 appmain.models 363 INFO     Close week START: 3 jpking
+2020-04-23 11:52:09,791 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:52:09,791 appmain.models 368 INFO     time_now: 2020-04-23 17:52:09.791004+00:00
+2020-04-23 11:52:09,795 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:52:09,798 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:52:18,681 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:18.681404
+2020-04-23 11:52:19,127 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:52:19,376 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:52:19,700 appmain.models 199 DEBUG    1st half max: 1  2nd half max: 0 overall max: 1
+2020-04-23 11:52:22,016 appmain.views 344 DEBUG    Starting pick_make: footballpool
+2020-04-23 11:52:22,033 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:22.033549
+2020-04-23 11:52:22,035 appmain.models 363 INFO     Close week START: 3 footballpool
+2020-04-23 11:52:22,038 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:52:22,038 appmain.models 368 INFO     time_now: 2020-04-23 17:52:22.038547+00:00
+2020-04-23 11:52:22,042 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:52:22,044 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:52:24,760 appmain.views 344 DEBUG    Starting pick_make: footballpool
+2020-04-23 11:52:24,779 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:24.779860
+2020-04-23 11:52:24,781 appmain.models 363 INFO     Close week START: 3 footballpool
+2020-04-23 11:52:24,784 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:52:24,784 appmain.models 368 INFO     time_now: 2020-04-23 17:52:24.784874+00:00
+2020-04-23 11:52:24,788 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:52:24,791 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:52:25,152 appmain.views 344 DEBUG    Starting pick_make: footballpool
+2020-04-23 11:52:25,171 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:25.171188
+2020-04-23 11:52:25,174 appmain.models 363 INFO     Close week START: 3 footballpool
+2020-04-23 11:52:25,177 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:52:25,177 appmain.models 368 INFO     time_now: 2020-04-23 17:52:25.177176+00:00
+2020-04-23 11:52:25,183 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:52:25,185 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:52:28,504 appmain.views 344 DEBUG    Starting pick_make: footballpool
+2020-04-23 11:52:28,522 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:28.522809
+2020-04-23 11:52:28,524 appmain.models 363 INFO     Close week START: 3 footballpool
+2020-04-23 11:52:28,527 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:52:28,527 appmain.models 368 INFO     time_now: 2020-04-23 17:52:28.527814+00:00
+2020-04-23 11:52:28,531 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:52:28,534 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:52:28,723 appmain.views 344 DEBUG    Starting pick_make: footballpool
+2020-04-23 11:52:28,742 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:28.742617
+2020-04-23 11:52:28,744 appmain.models 363 INFO     Close week START: 3 footballpool
+2020-04-23 11:52:28,747 appmain.models 366 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 11:52:28,747 appmain.models 368 INFO     time_now: 2020-04-23 17:52:28.747617+00:00
+2020-04-23 11:52:28,752 appmain.models 370 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 11:52:28,754 appmain.views 354 DEBUG    Week closed for week ID: 7 False
+2020-04-23 11:52:31,364 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 17:52:31.364208
+2020-04-23 13:15:42,925 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 13:15:50,435 appmain.models 159 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 19:15:50.435165
+2020-04-23 13:26:21,474 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-23 13:26:21,475 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 13:26:22,857 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 13:26:23,645 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 19:26:23.645042
+2020-04-23 13:26:37,658 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 19:26:37.658409
+2020-04-23 13:28:35,718 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-23 13:28:35,719 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 13:28:37,089 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 13:28:41,923 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 19:28:41.923358
+2020-04-23 13:29:17,504 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 19:29:17.504560
+2020-04-23 13:30:36,534 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 19:30:36.534981
+2020-04-23 13:35:05,875 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\models.py changed, reloading.
+2020-04-23 13:35:05,876 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 13:35:07,096 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 14:08:46,578 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:08:46.578911
+2020-04-23 14:21:08,263 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\appmain\views.py changed, reloading.
+2020-04-23 14:21:08,264 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 14:21:09,528 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 14:24:11,569 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:24:11.569324
+2020-04-23 14:24:15,711 appmain.views 345 DEBUG    Starting pick_make: footballpool
+2020-04-23 14:24:17,284 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:24:17.284824
+2020-04-23 14:24:17,286 appmain.models 365 INFO     Close week START: 3 footballpool
+2020-04-23 14:24:17,289 appmain.models 368 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 14:24:17,290 appmain.models 370 INFO     time_now: 2020-04-23 20:24:17.290823+00:00
+2020-04-23 14:24:17,295 appmain.models 372 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 14:24:17,298 appmain.views 355 DEBUG    Week closed for week ID: 7 False
+2020-04-23 14:25:06,771 appmain.views 345 DEBUG    Starting pick_make: footballpool
+2020-04-23 14:25:06,790 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:25:06.790503
+2020-04-23 14:25:06,791 appmain.models 365 INFO     Close week START: 3 footballpool
+2020-04-23 14:25:06,794 appmain.models 368 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 14:25:06,795 appmain.models 370 INFO     time_now: 2020-04-23 20:25:06.795489+00:00
+2020-04-23 14:25:06,800 appmain.models 372 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 14:25:06,802 appmain.views 355 DEBUG    Week closed for week ID: 7 False
+2020-04-23 14:25:40,352 appmain.views 345 DEBUG    Starting pick_make: footballpool
+2020-04-23 14:25:40,373 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:25:40.373426
+2020-04-23 14:25:40,374 appmain.models 365 INFO     Close week START: 3 footballpool
+2020-04-23 14:25:40,377 appmain.models 368 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 14:25:40,378 appmain.models 370 INFO     time_now: 2020-04-23 20:25:40.378431+00:00
+2020-04-23 14:25:40,381 appmain.models 372 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 14:25:40,384 appmain.views 355 DEBUG    Week closed for week ID: 7 False
+2020-04-23 14:25:48,027 appmain.views 345 DEBUG    Starting pick_make: footballpool
+2020-04-23 14:25:48,046 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:25:48.046052
+2020-04-23 14:25:48,048 appmain.models 365 INFO     Close week START: 3 footballpool
+2020-04-23 14:25:48,053 appmain.models 368 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 14:25:48,053 appmain.models 370 INFO     time_now: 2020-04-23 20:25:48.053049+00:00
+2020-04-23 14:25:48,056 appmain.models 372 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 14:25:48,058 appmain.views 355 DEBUG    Week closed for week ID: 7 False
+2020-04-23 14:25:48,262 appmain.views 345 DEBUG    Starting pick_make: footballpool
+2020-04-23 14:25:48,284 appmain.models 160 DEBUG    week: 3/REG  week.end_dt 2020-04-28 00:30:00+00:00 Now: 2020-04-23 20:25:48.284377
+2020-04-23 14:25:48,286 appmain.models 365 INFO     Close week START: 3 footballpool
+2020-04-23 14:25:48,288 appmain.models 368 INFO     Close week: 2020-04-24 00:25:00+00:00
+2020-04-23 14:25:48,289 appmain.models 370 INFO     time_now: 2020-04-23 20:25:48.289371+00:00
+2020-04-23 14:25:48,292 appmain.models 372 INFO     forcast dt closed: 2020-04-23 22:25:00+00:00
+2020-04-23 14:25:48,294 appmain.views 355 DEBUG    Week closed for week ID: 7 False
+2020-04-23 14:36:54,847 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django_tables2\columns\filecolumn.py changed, reloading.
+2020-04-23 14:36:54,849 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 14:36:56,195 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 14:38:36,669 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\crispy_forms\helper.py changed, reloading.
+2020-04-23 14:38:36,671 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 14:38:38,006 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 14:40:19,816 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\requests\hooks.py changed, reloading.
+2020-04-23 14:40:19,817 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 14:40:21,007 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader
+2020-04-23 14:41:27,860 django.utils.autoreload 222 INFO     C:\Users\DOUG\Django\PigSkinners\penv\Lib\site-packages\django_extensions\admin\widgets.py changed, reloading.
+2020-04-23 14:41:27,861 asyncio      623 DEBUG    Using proactor: IocpProactor
+2020-04-23 14:41:29,222 django.utils.autoreload 598 INFO     Watching for file changes with StatReloader

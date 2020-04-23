@@ -11,6 +11,7 @@ import pytz
 from datetime import datetime, timedelta
 from django.utils import timezone
 import logging
+
 # from enum import Enum
 # from django.urls import reverse
 
@@ -66,7 +67,7 @@ class Team(models.Model):
     # lose = models.SmallIntegerField(default=0)
     # tie = models.SmallIntegerField(default=0)
     conference = models.CharField(max_length=50, default='NA')
-    city_name = models.CharField(max_length=50, default= 'NA')
+    city_name = models.CharField(max_length=50, default='NA')
 
     def __str__(self):
         return self.team_name
@@ -149,7 +150,7 @@ class Season(models.Model):
         # end_dt and Now are both UTC so they can be compared
         for week in self.weeks.all():
             if week.end_dt() + timedelta(hours=5) > make_aware(datetime.utcnow(), pytz.utc):
-            # if week.week_no == 1 and week.gt == 'REG':
+                # if week.week_no == 1 and week.gt == 'REG':
                 break
         if not self.weeks.all():  # there are no weeks in the Season
             logger.debug(f'There are no weeks in Season {self.year}')
@@ -299,7 +300,8 @@ class Week(models.Model):
         if self.closed:
             # get max score for the week Exclude Random Picks id=1
             max_score = \
-                self.pick_wk.exclude(user=1).aggregate(max_score=Max('pick_score', default=0, output_field=IntegerField(), ))[
+                self.pick_wk.exclude(user=1).aggregate(
+                    max_score=Max('pick_score', default=0, output_field=IntegerField(), ))[
                     'max_score']
             picks = Pick.objects.filter(wk=self).annotate(
                 score=Sum(Case(When(pickgame__status='W', then=1), default=0, output_field=IntegerField(), )))
@@ -314,7 +316,7 @@ class Week(models.Model):
                         min_delta = min(min_delta, pick.points_delta())
 
                 for pick in winners:
-                    if pick.points_delta() is not  None and pick.points_delta() == min_delta:
+                    if pick.points_delta() is not None and pick.points_delta() == min_delta:
                         win_ids.append(pick.id)
                 winners = winners.filter(id__in=win_ids)
         else:
@@ -553,8 +555,8 @@ class Game(TimeStampMixin):
                 pg.save()
                 pg.pickrev_head.calc_score()
                 # print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
-                logger.debug(f'update score on pick revs: {pg.pickrev_head.id} with score: {pg.pickrev_head.calc_score()}')
-
+                logger.debug(
+                    f'update score on pick revs: {pg.pickrev_head.id} with score: {pg.pickrev_head.calc_score()}')
 
     def set_winner(self):
         if self.status[:1] == 'F':
@@ -771,6 +773,7 @@ class PickManager(models.Manager):
 
         return Pick.objects.filter(id__in=koth_active_ids)
 
+
 # TODO: add admin function and page to delete pick for user
 # also why does random pick not work if pick is partially saved
 class Pick(TimeStampMixin):
@@ -910,12 +913,17 @@ class PickRevisionManager(models.Manager):
         pick_revs = PickRevision.objects.filter(user=pick.user, wk=pick.wk)
         print(f'Got Revs: {pick_revs.count()}')
         if pick_revs:
-            new_rev = pick_revs.aggregate(max_rev=Max('revision', default=0, output_field=IntegerField(), ))['max_rev'] + 1
+            new_rev = pick_revs.aggregate(max_rev=Max('revision', default=0, output_field=IntegerField(), ))[
+                          'max_rev'] + 1
         else:
             new_rev = 1
-        pick_rev = self.create(revision=new_rev, user=pick.user, wk=pick.wk, points=pick.points, koth_game=pick.koth_game, koth_team=pick.koth_team, pick_score=pick.pick_score, saved=pick.saved, entered_by=pick.entered_by, updated_by=pick.updated_by)
-        for pick_game in pick.pickgame_set.all():
-            rev_game = PickRevGame.objects.create(pickrev_head=pick_rev, game=pick_game.game, team=pick_game.team, status=pick_game.status, entered_by=pick_game.entered_by, updated_by=pick_game.updated_by)
+        pick_rev = self.create(revision=new_rev, user=pick.user, wk=pick.wk, points=pick.points,
+                               koth_game=pick.koth_game, koth_team=pick.koth_team, pick_score=pick.pick_score,
+                               saved=pick.saved, entered_by=pick.entered_by, updated_by=pick.updated_by)
+        for pick_game in pick.sorted_gameset:
+            rev_game = PickRevGame.objects.create(pickrev_head=pick_rev, game=pick_game.game, team=pick_game.team,
+                                                  status=pick_game.status, entered_by=pick_game.entered_by,
+                                                  updated_by=pick_game.updated_by)
             rev_game.save()
         pick.save()
         return pick
@@ -933,8 +941,10 @@ class PickRevision(TimeStampMixin):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_revs', default=1)
     wk = models.ForeignKey(Week, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_wk')
     points = models.PositiveSmallIntegerField()
-    koth_game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_koth_game')
-    koth_team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_koth_team')
+    koth_game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.SET_NULL,
+                                  related_name='pick_rev_koth_game')
+    koth_team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL,
+                                  related_name='pick_rev_koth_team')
     pick_score = models.PositiveSmallIntegerField(default=0)
     saved = models.BooleanField(default=False)
     entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_entered')
@@ -956,6 +966,7 @@ class PickRevision(TimeStampMixin):
 
         return sum_score
 
+
 class PickRevGame(TimeStampMixin):
     class Meta:
         verbose_name = 'pick game'
@@ -967,14 +978,17 @@ class PickRevGame(TimeStampMixin):
     team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL, related_name='pick_rev_team')
     # W = won, w= Pending win, L = Lost, l= pending loss, T= Tie, t=pending tie
     status = models.CharField(max_length=1, null=True)
-    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_game_entered')
-    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='pick_rev_game_updated')
+    entered_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                   related_name='pick_rev_game_entered')
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                   related_name='pick_rev_game_updated')
 
     def pick_score(self):
         if self.game.game_winner() == self.team:  # change from win_team to game_winner
             return 1
         else:
             return 0
+
 
 class PostPickManager(models.Manager):
     def create_ps_pick(self, user, year):

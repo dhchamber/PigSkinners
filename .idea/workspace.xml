@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dumpdata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nfl score xml.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nfl week score xml.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/pick_revision.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,34 +150,18 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="740" y="297" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1585436987529" />
-    <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1578695855921">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
-    <state width="1899" height="295" key="GridCell.Tab.0.center" timestamp="1578695855921">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
-    <state width="1899" height="295" key="GridCell.Tab.0.left" timestamp="1578695855921">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
-    <state width="1899" height="295" key="GridCell.Tab.0.right" timestamp="1578695855921">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1578695855921" />
     <state x="794" y="260" key="RollbackChangesDialog" timestamp="1580420900743">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="794" y="260" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580420900743" />
-    <state x="570" y="143" key="SettingsEditor" timestamp="1587592063576">
+    <state x="570" y="143" key="SettingsEditor" timestamp="1587674574410">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="570" y="143" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587592063576" />
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1587067330209">
+    <state x="570" y="143" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587674574410" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1587673872834">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587067330209" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587673872834" />
     <state x="771" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584829455486">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -250,7 +250,8 @@ def home(request):
     else:
         fav_team = Team.objects.get(team_abrev='DEN')
 
-    return render(request, 'appmain/home.html', {'week': week, 'fav_team': fav_team, 'pts_game': pts_game, 'pick': pick})
+    return render(request, 'appmain/home.html',
+                  {'week': week, 'fav_team': fav_team, 'pts_game': pts_game, 'pick': pick})
 
 
 @login_required
@@ -266,11 +267,11 @@ def pick_revision(request):
         v_pick=Count(Case(When(pick_game__team=F('visitor_team'), then=1), output_field=IntegerField(), )))
     num_games = games.count() + 1
 
-    user_picks = PickRevision.objects.filter(wk=week,user=request.user).annotate(
+    user_picks = PickRevision.objects.filter(wk=week, user=request.user).annotate(
         score=Sum(Case(When(pickrevgame__status='W', then=1), default=0, output_field=IntegerField(), )))
 
-    return render(request, 'appmain/pick_revision.html', {'user_picks': user_picks, 'games': games, 'num_games': num_games})
-
+    return render(request, 'appmain/pick_revision.html',
+                  {'user_picks': user_picks, 'games': games, 'num_games': num_games})
 
 
 @staff_member_required
@@ -377,7 +378,7 @@ def pick_make(request):
             messages.warning(request, 'Failed Validate of KOTH Game on Pick ID: {request.POST.get("hidPickID")}')
             validated = False
 
-        for i, pg in enumerate(pick.pickgame_set.all(), start=1):
+        for i, pg in enumerate(pick.sorted_gameset, start=1):
             team_id = request.POST.get("Selected" + str(i))
             try:
                 team = Team.objects.get(id=team_id)
