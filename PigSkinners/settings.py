@@ -26,13 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
-    # 'jv(x+^91=0bnlr60f*hw53nzmx)u9y^vv29+)%7vcg3x8&ow5p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
-# ALLOWED_HOSTS = ["localhost","dhchamber.pythonanywhere.com","127.0.0.1","40.78.11.78"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -105,8 +102,6 @@ logging.config.dictConfig({
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # for production
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
@@ -201,7 +196,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "appmain/static")
+STATIC_ROOT = os.path.join(BASE_DIR, "PigSkinners/static")
 
 # login tutorial
 LOGIN_REDIRECT_URL = 'home'
