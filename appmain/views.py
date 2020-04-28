@@ -13,6 +13,9 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from .tables import SeasonTable
 from django_tables2 import SingleTableView  # django-tables2 readthedocs.io
+from django_filters .views import FilterView
+from django_tables2.views import SingleTableMixin
+
 from django.views.generic import ListView, CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse, reverse_lazy
 from django.db import transaction
@@ -346,12 +349,12 @@ def pick_make(request):
     timezone.activate(pytz.timezone('America/Denver'))
     submitted = False
     week = get_selected_week(request)
+    close = week.close_week(request.user)
 
     validated = True
     if week.closed:
         return redirect('pick_view')
     else:
-        close = week.close_week(request.user)
         logger.debug(f'Week closed for week ID: {week.id} {close}')
 
     if request.method == 'POST':
@@ -601,7 +604,8 @@ def standing_season(request):
 
 
 @method_decorator(staff_member_required, name='dispatch')
-class SeasonListView(LoginRequiredMixin, SingleTableView):
+# class SeasonListView(LoginRequiredMixin, SingleTableView):
+class SeasonListView(SingleTableMixin, FilterView):
     model = Season
     table_class = SeasonTable
     login_required = True

@@ -135,9 +135,8 @@ class Season(models.Model):
         except:
             return False
 
+    # create week objects for a new year.
     def set_season_weeks(self):
-        # load week objects for a new year.
-        # print(f'Loading weeks for {self} ')
         logger.debug(f'Loading weeks for {self} ')
         for week, gt in nfl_week:
             week, created = Week.objects.get_or_create(year=self, week_no=week, gt=gt)

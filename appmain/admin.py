@@ -23,7 +23,7 @@ class WeekAdmin(admin.ModelAdmin):
 
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('eid', 'gsis', 'gt', 'wk_no', 'day', 'time', 'status', 'home', 'home_score', 'visitor', 'visitor_score','points_game')
+    list_display = ('eid', 'gsis', 'year', 'gt', 'wk_no', 'week', 'day', 'time', 'status', 'home', 'home_score', 'visitor', 'visitor_score','points_game')
 
 
 class TeamAdmin(admin.ModelAdmin):

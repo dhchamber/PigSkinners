@@ -33,6 +33,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 INSTALLED_APPS = [
+    'grappelli',                    # https://django-grappelli.readthedocs.io/en/latest/quickstart.html#installation
     'django.contrib.admin',
     'django.contrib.auth',          # Core authentication framework and its default models
     'django.contrib.contenttypes',  # Django content type system (allows permissions to be associated with models)
@@ -42,13 +43,18 @@ INSTALLED_APPS = [
     'django_extensions',
     # 'debug_toolbar',
     'werkzeug',
-    'django_tables2',
+    'django_tables2',               # https://django-tables2.readthedocs.io/en/latest/pages/filtering.html
+    'django_filters',               # https://pypi.org/project/django-filter/
+    'bootstrap3',                   # https://django-bootstrap3.readthedocs.io/en/latest/installation.html
     'crispy_forms',
-    # 'djcelery',                     # https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
+    # 'djcelery',                   # https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
     # 'kombu.transport.django',
     'background_task',              # https://django-background-tasks.readthedocs.io/en/latest/
+    'hijack',                       # https://django-hijack.readthedocs.io/en/stable/
+    'compat',
+    'hijack_admin',                 # https://github.com/arteria/django-hijack-admin
     # 'rest_framework',
-    # 'channels',                    # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
+    # 'channels',                   # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
     'appmain',
 ]
 
@@ -182,9 +188,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# https://django-grappelli.readthedocs.io/en/latest/customization.html
+#  Django Grappelli Settings
+GRAPPELLI_ADMIN_TITLE = 'PigSkinners Administration'
+GRAPPELLI_SWITCH_USER = True
+
+# https://django-hijack.readthedocs.io/en/stable/
+# Django-Hijack
+HIJACK_LOGIN_REDIRECT_URL = '/ps_home/'   # Where admins are redirected to after hijacking a user
+HIJACK_LOGOUT_REDIRECT_URL = '/ps_home/'  # Where admins are redirected to after releasing a user
+HIJACK_ALLOW_GET_REQUESTS = True
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
