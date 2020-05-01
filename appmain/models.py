@@ -362,7 +362,7 @@ class Week(models.Model):
     def close_week(self, user):
         print(f'Close week: {self.week_no} {user}')
         logger.info(f'Close week START: {self.week_no} {user}')
-        if self.start_dt():
+        if self.start_dt() and not self.closed:
             print(f'Close week: {self.start_dt()}')
             logger.info(f'Close week: {self.start_dt()}')
             print(f'time_now: {timezone.now()}')

@@ -24,7 +24,7 @@ import logging
 
 from appmain.models import Season, Week, Pick, Team, Game, Profile, PostPick, PostSeason, PickRevision
 from appmain.load_nflgames import load_season, load_score
-from appmain.task import load_scores, close_curr_week
+from appmain.tasks import load_scores, close_curr_week
 
 # from django.conf import settings
 # from django.core.exceptions import ObjectDoesNotExist

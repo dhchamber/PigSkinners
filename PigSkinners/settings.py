@@ -12,16 +12,19 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from decouple import config, Csv
-# import logging
 import logging.config
-# import djcelery  #https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
-# djcelery.setup_loader()
-# BROKER_URL = 'django://'
+
+# https://github.com/tornadoweb/tornado/issues/2751
+import sys
+import asyncio
+
+# per issue listed above this is needed to run tornado, a component of flower, on windows
+if sys.platform == 'win32':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -47,12 +50,12 @@ INSTALLED_APPS = [
     'django_filters',               # https://pypi.org/project/django-filter/
     'bootstrap3',                   # https://django-bootstrap3.readthedocs.io/en/latest/installation.html
     'crispy_forms',
-    # 'djcelery',                   # https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/
-    # 'kombu.transport.django',
     'background_task',              # https://django-background-tasks.readthedocs.io/en/latest/
     'hijack',                       # https://django-hijack.readthedocs.io/en/stable/
     'compat',
     'hijack_admin',                 # https://github.com/arteria/django-hijack-admin
+    'django_celery_beat',           # https://github.com/celery/django-celery-beat
+    # 'flower',
     # 'rest_framework',
     # 'channels',                   # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
     'appmain',
@@ -69,7 +72,6 @@ INSTALLED_APPS = [
 #    },
 # }
 
-# logger = logging.getLogger(__name__)
 logging.config.dictConfig({
     'version': 1,
     'disable_existing_loggers': False,
@@ -152,12 +154,15 @@ WSGI_APPLICATION = 'PigSkinners.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# for sqlite database
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+# for PostgresSql database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -169,9 +174,8 @@ DATABASES = {
     }
 }
 
-# Password validation
+# Password validation - these can be removed in dev if needed
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -198,6 +202,16 @@ GRAPPELLI_SWITCH_USER = True
 HIJACK_LOGIN_REDIRECT_URL = '/ps_home/'   # Where admins are redirected to after hijacking a user
 HIJACK_LOGOUT_REDIRECT_URL = '/ps_home/'  # Where admins are redirected to after releasing a user
 HIJACK_ALLOW_GET_REQUESTS = True
+
+# celery
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Denver'
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-time-limit
+CELERY_TASK_TRACK_STARTED = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

@@ -2,23 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Install PigSkinners on Windows.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/GameTest/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/GameTest/game_tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/UserTest/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/appmain/UserTest/user_tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PigSkinners/celery.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dir" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat.pid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames - Copy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models - Copy (2).py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/models - Copy.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/templates/appmain/setup_season.html" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/templates/appmain/setup_season.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$tting up Django on Windows IIS Server _ Nitin Nain.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,9 +151,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="698" y="349" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586706782645" />
-    <state x="93" y="102" width="1732" height="885" key="DiffContextDialog" timestamp="1586643844193">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="93" y="99" width="1732" height="861" key="DiffContextDialog" timestamp="1588345432829">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="93" y="99" width="1732" height="861" key="DiffContextDialog/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1588345432829" />
     <state x="93" y="102" width="1732" height="885" key="DiffContextDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1586643844193" />
     <state x="740" y="297" key="FileChooserDialogImpl" timestamp="1585436987529">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -165,14 +164,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="794" y="260" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580420900743" />
-    <state x="456" y="103" key="SettingsEditor" timestamp="1587763759767">
+    <state x="456" y="103" key="SettingsEditor" timestamp="1588129644930">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="456" y="103" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587763759767" />
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1587673872834">
+    <state x="456" y="103" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1588129644930" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1588196703198">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1587673872834" />
+    <state x="668" y="367" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1588196703198" />
     <state x="771" y="458" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584829455486">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
