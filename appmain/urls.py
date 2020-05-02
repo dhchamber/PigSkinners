@@ -44,11 +44,13 @@ urlpatterns = [
     # path('season/update/<int:pk>', views.SeasonWeekUpdate.as_view(), name='season-update'),
     # path('season/delete/<int:pk>', views.SeasonDelete.as_view(), name='season-delete'),
 
+    path('user_list/', views.user_list, name='user_list'),
     path('', views.home, name='home'),
+]
 
     # path('setup/game2/', GameListView.as_view(), name='setup_game2'),
     # path('setup/game2/', game_list, name='setup_game2'),
     # path('setup/teams/', TeamListView.as_view(), name='setup_teams'),
     # path('picks/view/', views.PickListView.as_view(), name='picks_view'),
     # path('add_pick/', views.add_pick, name='add-pick'),  # \myclub_root\events\urls.py
-]
+

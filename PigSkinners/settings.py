@@ -36,41 +36,47 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 INSTALLED_APPS = [
-    'grappelli',                    # https://django-grappelli.readthedocs.io/en/latest/quickstart.html#installation
+    'chat',             # https://channels.readthedocs.io/en/latest/tutorial/part_1.html
+    'grappelli',        # https://django-grappelli.readthedocs.io/en/latest/quickstart.html#installation
     'django.contrib.admin',
-    'django.contrib.auth',          # Core authentication framework and its default models
+    'django.contrib.auth',  # Core authentication framework and its default models
     'django.contrib.contenttypes',  # Django content type system (allows permissions to be associated with models)
-    'django.contrib.sessions',      # django session management, session values
-    'django.contrib.messages',      # django messages in request to return errors
+    'django.contrib.sessions',  # django session management, session values
+    'django.contrib.messages',  # django messages in request to return errors
     'django.contrib.staticfiles',
     'django_extensions',
     # 'debug_toolbar',
     'werkzeug',
-    'django_tables2',               # https://django-tables2.readthedocs.io/en/latest/pages/filtering.html
-    'django_filters',               # https://pypi.org/project/django-filter/
-    'bootstrap3',                   # https://django-bootstrap3.readthedocs.io/en/latest/installation.html
+    'django_tables2',  # https://django-tables2.readthedocs.io/en/latest/pages/filtering.html
+    'django_filters',  # https://pypi.org/project/django-filter/
+    'bootstrap3',  # https://django-bootstrap3.readthedocs.io/en/latest/installation.html
     'crispy_forms',
-    'background_task',              # https://django-background-tasks.readthedocs.io/en/latest/
-    'hijack',                       # https://django-hijack.readthedocs.io/en/stable/
+    'background_task',  # https://django-background-tasks.readthedocs.io/en/latest/
+    'hijack',  # https://django-hijack.readthedocs.io/en/stable/
     'compat',
-    'hijack_admin',                 # https://github.com/arteria/django-hijack-admin
-    'django_celery_beat',           # https://github.com/celery/django-celery-beat
+    'hijack_admin',  # https://github.com/arteria/django-hijack-admin
+    'django_celery_beat',  # https://github.com/celery/django-celery-beat
     # 'flower',
     # 'rest_framework',
-    # 'channels',                   # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
+    'channels',  # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
+    # https://realpython.com/getting-started-with-django-channels/
+    # https://channels.readthedocs.io/en/latest/tutorial/part_1.html
     'appmain',
 ]
 
+# https://channels.readthedocs.io/en/latest/tutorial/part_1.html
+ASGI_APPLICATION = 'PigSkinners.routing.application'
+
 # https://medium.com/@9cv9official/simple-chat-app-using-django-channel-ed5032b79b9c
-# CHANNEL_LAYERS = {
-#       'default': {
-#       'BACKEND': 'asgi_redis.RedisChannelLayer',
-#       'CONFIG': {
-#          'hosts': [('localhost', 6379)],  # redis_host
-#     },
-#     'ROUTING': 'routing.application',
-#    },
-# }
+# https://realpython.com/getting-started-with-django-channels/
+CHANNEL_LAYERS = {
+     'default': {
+         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+         'CONFIG': {
+             'hosts': [('localhost', 6379)],  # redis_host
+         },
+     },
+ }
 
 logging.config.dictConfig({
     'version': 1,
@@ -117,13 +123,12 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',    # Manages sessions across requests
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Manages sessions across requests
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware', # Associates users with requests using sessions
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Associates users with requests using sessions
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -149,7 +154,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'PigSkinners.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -191,7 +195,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # https://django-grappelli.readthedocs.io/en/latest/customization.html
 #  Django Grappelli Settings
 GRAPPELLI_ADMIN_TITLE = 'PigSkinners Administration'
@@ -199,7 +202,7 @@ GRAPPELLI_SWITCH_USER = True
 
 # https://django-hijack.readthedocs.io/en/stable/
 # Django-Hijack
-HIJACK_LOGIN_REDIRECT_URL = '/ps_home/'   # Where admins are redirected to after hijacking a user
+HIJACK_LOGIN_REDIRECT_URL = '/ps_home/'  # Where admins are redirected to after hijacking a user
 HIJACK_LOGOUT_REDIRECT_URL = '/ps_home/'  # Where admins are redirected to after releasing a user
 HIJACK_ALLOW_GET_REQUESTS = True
 
@@ -221,7 +224,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -231,4 +233,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "PigSkinners/static")
 # login tutorial
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
-

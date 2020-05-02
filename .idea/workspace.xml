@@ -2,20 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863e6d00-354c-4df3-9477-8759ebc47aa4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/PigSkinners/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dir" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat.pid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PigSkinners/routing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/consumers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appmain/templates/appmain/user_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/consumers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/routing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/templates/chat/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/templates/chat/room.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PigSkinners/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PigSkinners/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames - Copy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models - Copy (2).py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models - Copy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appmain/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PigSkinners/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/PigSkinners/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/load_nflgames.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/load_nflgames.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appmain/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appmain/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/appmain/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/celerybeat.pid" beforeDir="false" afterPath="$PROJECT_DIR$/celerybeat.pid" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,12 +66,13 @@
     <property name="settings.editor.splitter.proportion" value="0.23336746" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\static\css" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DOUG\Django\PigSkinners\chat\templates\chat" />
       <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\templates\registration" />
       <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\templates\appmain" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DOUG\Django\PigSkinners\appmain\static\css" />
     </key>
   </component>
   <component name="RunManager" selected="Python.load_nflgames">
@@ -164,9 +175,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="794" y="260" key="RollbackChangesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1580420900743" />
-    <state x="456" y="103" key="SettingsEditor" timestamp="1588129644930">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="456" y="100" key="SettingsEditor" timestamp="1588428758274">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="456" y="100" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1080@0.0.1920.1050" timestamp="1588428758274" />
     <state x="456" y="103" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1588129644930" />
     <state x="668" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1588196703198">
       <screen x="0" y="0" width="1920" height="1080" />

@@ -611,6 +611,11 @@ class SeasonListView(SingleTableMixin, FilterView):
     login_required = True
     template_name = 'appmain/setup_season.html'
 
+# https://realpython.com/getting-started-with-django-channels/
+def user_list(request):
+    return render(request, 'appmain/user_list.html')
+
+
 # class SeasonCreate(CreateView):
 #     model = Season
 #     template_name = 'appmain/season_create.html'

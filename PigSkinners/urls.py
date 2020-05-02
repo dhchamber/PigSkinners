@@ -28,5 +28,6 @@ urlpatterns = [
     # path('signup/', appmain_views.signup, name='signup'),
     path('', include('appmain.urls')),
     path('hijack/', include('hijack.urls', namespace='hijack')),
+    path('chat/', include('chat.urls')),
 #    path('', TemplateView.as_view(template_name='home.html'), name='home'), # new
 ]

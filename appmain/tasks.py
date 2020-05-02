@@ -1,5 +1,5 @@
-from celery import task, shared_task
-from background_task import background
+from celery import shared_task
+# from background_task import background
 from django.contrib.auth.models import User
 from appmain.load_nflgames import load_score
 from appmain.models import Season
@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 # @background(schedule=60)    # this decorator is for background-tasks app
 # def load_scores(url_type, repeat=60):
-@task
+@shared_task()
 def load_scores(url_type):
     load_score(url_type='LIVE')
 

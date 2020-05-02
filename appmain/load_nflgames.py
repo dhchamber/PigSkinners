@@ -84,6 +84,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
     # gds has score by qtr and latest down and distance
     # bps has last play for game i.e t. coleman 1 yd. TD run SF
     page = requests.get(url)
+    print(f'{page.content}')
     root_xml = ET.fromstring(page.content) # root 'ss' element
     for child in root_xml:  #children are gms and possibly gds
         if child.tag == 'gms':  # add case for gds as well
