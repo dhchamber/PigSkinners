@@ -424,24 +424,21 @@ def pick_make_ps(request):
 
     # try:
     #     post_pick = PostPick.objects.get(year=year, user=request.user)
-    #     print(f'Got Pick: {post_pick.id}')
     # except PostPick.DoesNotExist:
     #     post_pick = PostPick.objects.create_ps_pick(year=year, user=request.user)
-    #     print(f'Created Pick: {post_pick.id}')
 
     if request.method == 'POST':
-        print(f'In Post: {post_pick.user.username}')
+        logger.debug(f'In Post: {post_pick.user.username}')
         form = PostPickForm(request.POST, instance=post_pick)
         form.fields['entered_by'].required = False
         form.fields['pick_score'].required = False
         # form.data['updated_by'] = request.user
-        # print(f'Form: {form.data["entered_by"]}')
         if form.is_valid():
             # form.fields['saved'].initial = 1
             form.save()
             pass  # does nothing, just trigger the validation
         else:
-            print(f'Form Errors: {form.errors}')
+            logger.debug(f'Form Errors: {form.errors}')
 
     else:
         form = PostPickForm(instance=post_pick, initial={'updated_by': request.user, 'saved': True})
@@ -490,7 +487,7 @@ def standing_week(request, detail):
     # if week is still open then show users and if picks are saved or not
     else:
         user_picks = Pick.objects.filter(wk=week)
-        print(f'ALL: Found picks for  {week.week_no} / {week.id} total: {user_picks.count()}')
+        logger.debug(f'ALL: Found picks for  {week.week_no} / {week.id} total: {user_picks.count()}')
         return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
 
 
@@ -517,7 +514,7 @@ def standing_week_prospective(request):
     # if week is still open then show users and if picks are saved or not
     else:
         user_picks = Pick.objects.filter(wk=week)
-        print(f'ALL: Found picks for  {week.week_no} / {week.id} total: {user_picks.count()}')
+        logger.debug(f'ALL: Found picks for  {week.week_no} / {week.id} total: {user_picks.count()}')
         return render(request, 'appmain/standing_week_open.html', {'user_picks': user_picks})
 
 
@@ -610,10 +607,6 @@ class SeasonListView(SingleTableMixin, FilterView):
     table_class = SeasonTable
     login_required = True
     template_name = 'appmain/setup_season.html'
-
-# https://realpython.com/getting-started-with-django-channels/
-def user_list(request):
-    return render(request, 'appmain/user_list.html')
 
 
 # class SeasonCreate(CreateView):
@@ -744,7 +737,6 @@ def user_list(request):
 #     # profile = Season.objects.get(user=request.user)
 #     years = Season.objects.all()
 #     if request.method == 'POST':
-#         print(f'POST:', request.POST)
 #         form = SeasonForm(request.POST, instance=years)
 #         if form.is_valid():
 #             form.save()

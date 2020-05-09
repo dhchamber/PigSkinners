@@ -44,7 +44,6 @@ urlpatterns = [
     # path('season/update/<int:pk>', views.SeasonWeekUpdate.as_view(), name='season-update'),
     # path('season/delete/<int:pk>', views.SeasonDelete.as_view(), name='season-delete'),
 
-    path('user_list/', views.user_list, name='user_list'),
     path('', views.home, name='home'),
 ]
 

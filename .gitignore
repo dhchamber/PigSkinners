@@ -3,6 +3,7 @@
 /.vscode
 __pycache__
 penv
+celerybeat.pid
 db.sqlite3
 settings.ini
 debug.log

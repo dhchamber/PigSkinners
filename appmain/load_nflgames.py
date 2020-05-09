@@ -71,20 +71,23 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
             week)
     else:
         url = None
-        # print(f'Error: invalid URL type entered: {url_type}')
         logger.error(f'Error: invalid URL type entered: {url_type}')
 
         return
 
-    # print(f'URL: {url}')
     logger.debug(f'URL: {url}')
 
     # doc has 3 sections <gms>,  <gds>, <bps>
     # gms has scores for WC, DIV, CON, PRO (Pro Bowl), SB
     # gds has score by qtr and latest down and distance
     # bps has last play for game i.e t. coleman 1 yd. TD run SF
-    page = requests.get(url)
-    print(f'{page.content}')
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/81.0.4044.129 Safari/537.36'}
+    page = requests.get(url, headers=headers)
+#    if page.status_code == 200:
+    logger.debug(f'{page.status_code}')
+    logger.debug(f'{page.content}')
     root_xml = ET.fromstring(page.content) # root 'ss' element
     for child in root_xml:  #children are gms and possibly gds
         if child.tag == 'gms':  # add case for gds as well
@@ -113,7 +116,6 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 try:
                     eid = game_rec.attrib['eid']   # changed from gsis
                 except:  # what should the except be?
-                    # print(f'Error: eid attibute is missing')
                     logger.error('Error: eid attibute is missing from XML.  Unable to continue')
                     continue  # go to next game_rec
 
@@ -123,16 +125,14 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 except Game.DoesNotExist:
                     if url_type in ('LIVE', 'POST'):
                         # throw error  and stop don't create  the game should have been created by load season
-                        # print(f'Game not found for {eid}')
                         logger.error(f'Game not found for {eid}')
                         continue
                     elif url_type == 'WEEK':
                         # we are loading the schedule so we can create the game if needed
                         game = Game()
                         season = Season.objects.get(year=year)
-                        print(f'Get Week: year: {season.year} week: {week_no} gt: {week_type}')
+                        logger.debug(f'Get Week: year: {season.year} week: {week_no} gt: {week_type}')
                         week = Week.objects.get(year=season, week_no=week_no, gt=week_type)
-                        # print(f'Game created for Week #{week.week_no}')
                         logger.debug(f'Game created for Week #{week.week_no}')
                         game.week = week
                         created = True
@@ -147,7 +147,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
 
                 # get attributes from gms record in for loop
                 for name, value in game_rec.attrib.items():
-                    print(f'name: {name} : value: {value}')
+                    logger.debug(f'name: {name} : value: {value}')
                     eid = gsis = home_score = visitor_score = red_zone= 0
                     gt = ga = home = visitor = home_nickname = visitor_nickname = home_teamname = visitor_teamname = ''
                     if name == 'gsis':      # GSIS (Game Statistics and Information System)
@@ -207,7 +207,7 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
                 # end of for name, value in game_rec.attrib.items():
                 # calculate datetime field of game from eid and time
 
-                print(f'game EID: {game.eid}')
+                logger.debug(f'game EID: {game.eid}')
                 date_yr = int(game.eid[:4])
                 mo = int(game.eid[4:6])
                 day = int(game.eid[6:8])
@@ -236,14 +236,12 @@ def load_score(url_type, year='2019', week_type='REG', week=1):
 
                 game.set_winner()
                 game.update_score()
-                # print(f'Game #{cnt} {game.id} loaded for Week {game.wk_no} year {game.year} Winner: {game.winner} ')
                 logger.debug(f'Game #{cnt} {game.id} loaded for Week {game.wk_no} year {game.year} Winner: {game.winner}')
             # end of for game_rec in ss:
 
             # set points game for the last game in the list if this is a regular or pre season game and just created
             if game.week.gt in ('PRE', 'REG') and created == True:
                 game.points_game = True
-                print(f'Points Game set {game.gsis} {game.eid} Week/Yr {game.week}/{game.year} Winner: {game.winner}')
                 logger.debug(f'Points Game set {game.gsis} {game.eid} Week/Yr {game.week}/{game.year} Winner: {game.winner}')
                 game.save()
 

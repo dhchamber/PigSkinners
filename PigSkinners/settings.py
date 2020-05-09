@@ -169,7 +169,7 @@ WSGI_APPLICATION = 'PigSkinners.wsgi.application'
 # for PostgresSql database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': config('DATABASEENGINE'),
         'NAME': config('DATABASENAME'),
         'USER': config('DATABASEUSER'),
         'PASSWORD': config('DATABASEPWD'),

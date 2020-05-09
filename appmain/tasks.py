@@ -25,6 +25,6 @@ def close_curr_week():
     user = User.objects.get(id=1)
     logger.info(f'TASK: Close week by: {user.last_name}')
     close = week.close_week(user)
-    print(f'Close week has been run: {close}')
+    logger.debug(f'Close week has been run: {close}')
     return close
 

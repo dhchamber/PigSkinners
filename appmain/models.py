@@ -141,7 +141,6 @@ class Season(models.Model):
         for week, gt in nfl_week:
             week, created = Week.objects.get_or_create(year=self, week_no=week, gt=gt)
             week.save()
-            # print(f'Week # {week} {gt} loaded ')
             logger.debug(f'Week # {week} {gt} loaded ')
 
     def current_week(self):
@@ -155,14 +154,12 @@ class Season(models.Model):
             logger.debug(f'There are no weeks in Season {self.year}')
             week = None
         else:
-            # print(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
             logger.debug(f'week: {week}  week.end_dt {week.end_dt()} Now: {datetime.utcnow()}')
         return week
 
     def close_curr_week(self):
         user = User.objects.get(id=1)
         week = self.current_week()
-        print(f'Close week: {week.week_no}')
         logger.info(f'Close_Curr_Week: {user.last_name} / {week}')
         week.close_week(user)
 
@@ -195,7 +192,6 @@ class Season(models.Model):
         half1_max = users.aggregate(max_score=Max('half1', default=0, output_field=IntegerField(), ))['max_score']
         half2_max = users.aggregate(max_score=Max('half2', default=0, output_field=IntegerField(), ))['max_score']
         all_max = users.aggregate(max_score=Max('all', default=0, output_field=IntegerField(), ))['max_score']
-        # print(f'1st half max: {half1_max}  2nd half max: {half2_max} overall max: {all_max}')
         logger.debug(f'1st half max: {half1_max}  2nd half max: {half2_max} overall max: {all_max}')
 
         # get 1st and 2nd half and overall winner(s)
@@ -272,7 +268,6 @@ class Week(models.Model):
         timezone.activate(pytz.timezone('America/Denver'))
         min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
         max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
-        # print(f'Week: {self.week_no} / min date: {min_date}, max date: {max_date}')
         logger.debug(f'Week: {self.week_no} / min date: {min_date}, max date: {max_date}')
         logger.debug(f'Week: {self.week_no}/min_date: {min_date.strftime("%d")}/max_date: {max_date.strftime("%d")}')
         if min_date.strftime("%d") == max_date.strftime("%d"):
@@ -330,7 +325,7 @@ class Week(models.Model):
 
     def curr_overall_leader(self):
         year = Season.objects.get(current=True)
-        print(f'curr year: {year.year}')
+        logger.debug(f'curr year: {year.year}')
         if year.is_started():
             if self.gt == 'REG':
                 if self.week_no <= 9:
@@ -360,21 +355,21 @@ class Week(models.Model):
 
     # get current time (in UTC timezone) if after forecast close (which is alos in UTC) then close the week
     def close_week(self, user):
-        print(f'Close week: {self.week_no} {user}')
+        logger.debug(f'Close week: {self.week_no} {user}')
         logger.info(f'Close week START: {self.week_no} {user}')
         if self.start_dt() and not self.closed:
-            print(f'Close week: {self.start_dt()}')
+            logger.debug(f'Close week: {self.start_dt()}')
             logger.info(f'Close week: {self.start_dt()}')
-            print(f'time_now: {timezone.now()}')
+            logger.debug(f'time_now: {timezone.now()}')
             logger.info(f'time_now: {timezone.now()}')
-            print(f'forcast dt closed: {self.forecast_dt_closed()}')
+            logger.debug(f'forcast dt closed: {self.forecast_dt_closed()}')
             logger.info(f'forcast dt closed: {self.forecast_dt_closed()}')
             if timezone.now() > self.forecast_dt_closed():
                 self.closed = True
                 self.date_closed = timezone.now()
                 self.closed_by = user
                 self.save()
-                print(f'CloseD week: {self.closed}')
+                logger.debug(f'CloseD week: {self.closed}')
                 logger.info(f'CloseD week: {self.week_no} {user} {self.closed}')
                 return True
         return False
@@ -392,7 +387,6 @@ class Week(models.Model):
     # def date_range(self):
     #     min_date = self.game_wk.aggregate(mind=Min('date_time'))['mind']
     #     max_date = self.game_wk.all().aggregate(maxd=Max('date_time'))['maxd']
-    #     print(f'{min_date.strftime("%m-%d-%Y")} to {max_date.strftime("%m-%d-%Y")}')
     #     return min_date.strftime('%m-%d-%Y') + ' to ' + max_date.strftime('%m-%d-%Y')
 
 
@@ -531,7 +525,6 @@ class Game(TimeStampMixin):
                         pg.status = 'L'
                 pg.save()
                 pg.pick_head.calc_score()
-                # print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
                 logger.debug(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
 
         pgames = self.pick_rev_game.all()
@@ -553,7 +546,6 @@ class Game(TimeStampMixin):
                         pg.status = 'L'
                 pg.save()
                 pg.pickrev_head.calc_score()
-                # print(f'update score on pick: {pg.pick_head.id} with score: {pg.pick_head.calc_score()}')
                 logger.debug(
                     f'update score on pick revs: {pg.pickrev_head.id} with score: {pg.pickrev_head.calc_score()}')
 
@@ -908,9 +900,7 @@ class PickGame(TimeStampMixin):
 
 class PickRevisionManager(models.Manager):
     def create_rev(self, pick):
-        print(f'In Create Rev')
         pick_revs = PickRevision.objects.filter(user=pick.user, wk=pick.wk)
-        print(f'Got Revs: {pick_revs.count()}')
         if pick_revs:
             new_rev = pick_revs.aggregate(max_rev=Max('revision', default=0, output_field=IntegerField(), ))[
                           'max_rev'] + 1
