@@ -19,6 +19,6 @@ python-decouple~=3.3
 pytest~=5.4.1
 pytest-django~=3.9.0
 pytz~=2019.3
-redis==3.4.1
+redis==4.5.3
 requests~=2.23.0
 wfastcgi~=3.0.0
